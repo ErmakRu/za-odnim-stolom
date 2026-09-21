@@ -1,0 +1,39 @@
+"""Package only distributable build/project files; verify every ZIP entry."""
+import hashlib, json, zipfile
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+OUTPUT = ROOT / 'output'
+BUILD = ROOT / 'Builds/Windows-v0.1.0'
+required = ['ZaOdnimStolom.exe', 'UnityPlayer.dll', 'steam_appid.txt',
+            'ZaOdnimStolom_Data/Plugins/x86_64/steam_api64.dll',
+            'Cards-and-rules-RU.pdf', 'READ-ME-RU.txt', 'THIRD-PARTY.txt']
+for name in required:
+    assert (BUILD / name).is_file(), f'Missing build dependency: {name}'
+assert (BUILD / 'steam_appid.txt').read_text().strip() == '480'
+assert len(list((ROOT/'SummonersTable/Assets/Resources/Art').glob('*.png'))) == 33
+
+def package(path, items):
+    with zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED, compresslevel=6) as z:
+        for source, archive_name in sorted(items, key=lambda item:item[1]):
+            z.write(source, archive_name)
+    with zipfile.ZipFile(path) as z:
+        assert z.testzip() is None, 'Corrupt archive: '+str(path)
+        count=len(z.namelist())
+    return dict(file=path.name, bytes=path.stat().st_size, entries=count,
+                sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+
+build_items=[(p, 'ZaOdnimStolom/'+p.relative_to(BUILD).as_posix()) for p in BUILD.rglob('*') if p.is_file()]
+project_items=[]
+for folder in ['SummonersTable/Assets','SummonersTable/Packages','SummonersTable/ProjectSettings','docs','tools','output/tests','output/pdf']:
+    for p in (ROOT/folder).rglob('*'):
+        if p.is_file() and '__pycache__' not in p.parts:
+            project_items.append((p,'ZaOdnimStolom-Unity/'+p.relative_to(ROOT).as_posix()))
+for name in ['README.md','.gitignore','.gitattributes','SummonersTable/steam_appid.txt']:
+    project_items.append((ROOT/name,'ZaOdnimStolom-Unity/'+name))
+manifest={'version':'0.1.0','steamAppId':480,'unity':'6000.3.21f1','artAssets':33,'uniqueCards':30,
+          'artMode':'built-in image_gen','pdfPages':22,'archives':[
+    package(OUTPUT/'ZaOdnimStolom-Windows-v0.1.0.zip',build_items),
+    package(OUTPUT/'ZaOdnimStolom-Unity-v0.1.0.zip',project_items)]}
+(OUTPUT/'release-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
+print(json.dumps(manifest,ensure_ascii=False,indent=2))

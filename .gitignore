@@ -1,0 +1,29 @@
+SummonersTable/[Ll]ibrary/
+SummonersTable/[Tt]emp/
+SummonersTable/[Oo]bj/
+SummonersTable/[Ll]ogs/
+SummonersTable/[Uu]ser[Ss]ettings/
+SummonersTable/.vs/
+SummonersTable/*.csproj
+SummonersTable/*.sln*
+Builds/
+SummonersTable/[Bb]uild/
+SummonersTable/[Bb]uilds/
+SummonersTable/[Mm]emoryCaptures/
+SummonersTable/[Rr]ecordings/
+SummonersTable/.idea/
+SummonersTable/.gradle/
+logs/
+tmp/
+tools/__pycache__/
+*.user
+
+# Downloadable packages live in GitHub Releases, not in Git history.
+output/*.zip
+
+# Local credentials and editor/system files.
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db

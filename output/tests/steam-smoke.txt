@@ -1,0 +1,7 @@
+PASS Steam API Init, App ID 480
+PASS private lobby creation, ownership, 4-seat capacity
+PASS deck/ready metadata roundtrip
+PASS prevents a one-player start
+Private test lobby left after test.
+Not tested: cross-account lobby discovery/join or SteamNetworkingMessages delivery.
+UTC: 2026-09-21T10:59:43.5658912Z
