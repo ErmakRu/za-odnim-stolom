@@ -18,10 +18,10 @@ namespace SummonersTable.Editor
         {var h=new HandCard{uid="fixture"+(++serial),cardId=id};g.State.players[seat].hand.Add(h);return h;}
         static UnitState Unit(GameEngine g,int seat,string id,int slot=0)
         {var u=new UnitState{uid="unit"+(++serial),cardId=id,hp=catalog.Card(id).health,slot=slot};g.State.players[seat].units.Add(u);return u;}
-        static CommandResult Send(GameEngine g,int seat,GameCommand cmd,double time=0)
-        {cmd.seq=++serial;return g.Submit(seat,cmd,time);}
-        static void Play(GameEngine g,int seat,string id,int target=1,string unit="",int slot=0)
-        {var h=Give(g,seat,id);Check(Send(g,seat,new GameCommand{kind="play",cardUid=h.uid,targetSeat=target,targetUnit=unit,slot=slot}).ok,"play "+id);}
+        static CommandResult Send(GameEngine g,int seat,GameCommand cmd,double time=-1)
+        {cmd.seq=++serial;return g.Submit(seat,cmd,time<0?g.State.serverTime:time);}
+        static void Play(GameEngine g,int seat,string id,int target=1,string unit="",int slot=0,bool startQte=true)
+        {var h=Give(g,seat,id);Check(Send(g,seat,new GameCommand{kind="play",cardUid=h.uid,targetSeat=target,targetUnit=unit,slot=slot}).ok,"play "+id);if(startQte)g.Tick(g.State.cast.revealUntil);}
         static void Success(GameEngine g)
         {
             int safety=20;
@@ -29,17 +29,11 @@ namespace SummonersTable.Editor
             {var q=g.State.qte;Check(Send(g,q.owner,new GameCommand{kind="key",phaseId=q.id,key=q.sequence[q.index].ToString()}).ok,"QTE key");}
             Check(safety>0,"QTE completes");
         }
-        static void PassAll(GameEngine g)
-        {
-            int guard=30;while(g.State.phase=="reaction"&&guard-->0)
-            {var a=g.State.pending;var p=g.State.players.First(x=>!a.responded.Contains(x.seat));Check(Send(g,p.seat,new GameCommand{kind="pass",phaseId=a.id}).ok,"reaction pass");}
-            Check(guard>0,"reaction settles");
-        }
         static void Test(string name,Action body){body();results.Add("PASS "+name);Debug.Log("PASS "+name);}
         public static void Run()
         {
             asserts=0;serial=0;results.Clear();catalog=JsonUtility.FromJson<Catalog>(Resources.Load<TextAsset>("Data/catalog").text);catalog.Validate();
-            Test("catalog / all faction roles / 3 x 30 cards",()=>{Check(catalog.cards.Count==30,"unique cards");Check(catalog.decks.All(d=>d.entries.Sum(e=>e.count)==30),"deck size");});
+            Test("catalog / all faction roles / 3 x 30 cards",()=>{Check(catalog.cards.Count==30,"unique cards");Check(catalog.decks.All(d=>d.entries.Sum(e=>e.count)==30),"deck size");Check(catalog.decks.All(d=>d.entries.Where(e=>catalog.Card(e.cardId).kind=="reaction").Sum(e=>e.count)==3),"reactions reduced to 3 of 30");});
             Test("2-4 seats, private hands, ownership and replay protection",()=>{
                 for(int n=2;n<=4;n++)
                 {
@@ -59,7 +53,7 @@ namespace SummonersTable.Editor
             });
             Test("unassigned attacks choose enemy heroes, never creatures",()=>{
                 for(int n=2;n<=4;n++)
-                {var g=New(n);Clean(g);Unit(g,0,"C03");var u=Unit(g,1,"C01");Send(g,0,new GameCommand{kind="end"});PassAll(g);
+                {var g=New(n);Clean(g);Unit(g,0,"C03");var u=Unit(g,1,"C01");Send(g,0,new GameCommand{kind="end"});
                     Check(u.hp==3,"unit ignored by automatic attack");Check(g.State.players.Skip(1).Sum(p=>p.hp)==30*(n-1)-4,"one enemy hero damaged");}
             });
             Test("three QTE misses transfer exact card and end creature turn",()=>{
@@ -77,18 +71,59 @@ namespace SummonersTable.Editor
                 var g=New();Clean(g);Unit(g,1,"C10");Unit(g,1,"C02",1);Unit(g,1,"C09",2);Play(g,0,"S01");Success(g);Check(g.State.players[1].hp==29,"guard capped at 3");
                 var goose=Unit(g,0,"C03");var raccoon=Unit(g,0,"C01",1);Check(g.Attack(0,goose)==4&&g.Attack(0,raccoon)==3,"attack aura other units only");
             });
-            Test("reactions have no QTE, shared window, reduce and reflect",()=>{
-                var g=New(3);Clean(g);var reaction=Give(g,1,"R01");var rescue=Give(g,2,"R02");Play(g,0,"S01");Success(g);
-                Check(g.State.phase=="reaction"&&g.State.qte==null,"reaction window");var a=g.State.pending;
-                Check(Send(g,1,new GameCommand{kind="react",cardUid=reaction.uid,phaseId=a.id,targetSeat=1}).ok,"reduce");
-                Check(!Send(g,1,new GameCommand{kind="react",cardUid=reaction.uid,phaseId=a.id,targetSeat=1}).ok,"one reaction only");
-                Check(Send(g,2,new GameCommand{kind="react",cardUid=rescue.uid,phaseId=a.id,targetSeat=1}).ok,"ally rescue");Check(g.State.players[1].hp==30,"combined reduction");
-                var g2=New();Clean(g2);var reflect=Give(g2,1,"R03");Play(g2,0,"S01");Success(g2);
-                Send(g2,1,new GameCommand{kind="react",cardUid=reflect.uid,phaseId=g2.State.pending.id,targetSeat=1});Check(g2.State.players[0].hp==28&&g2.State.players[1].hp==26,"reflect after damage");
+            Test("three-second reveal, private QTE, reactions during casting only",()=>{
+                var g=New(3);Clean(g);var reaction=Give(g,1,"R01");var rescue=Give(g,2,"R02");
+                Play(g,0,"S01",1,"",0,false);string cast=g.State.cast.id;
+                Check(g.State.phase=="reveal"&&g.State.cast.revealUntil==3,"three second announcement");
+                Check(g.View(0,0).qte==null&&g.View(1,0).qte==null,"keys hidden during reveal even from caster");
+                Check(!Send(g,0,new GameCommand{kind="key",phaseId=cast,key="A"},2.5).ok,"keys blocked before reveal ends");
+                Check(Send(g,1,new GameCommand{kind="react",cardUid=reaction.uid,phaseId=cast,targetSeat=1},2.6).ok,"reaction in reveal");
+                Check(g.State.phase=="reveal"&&g.State.players[1].hp==30,"reaction does not resolve cast early");
+                Check(g.View(2,2.6).tableReactions.Count==1,"reaction immediately visible on table");
+                g.Tick(3);Check(g.State.phase=="qte","QTE starts after three seconds");
+                var owner=g.View(0,3);var other=g.View(1,3);
+                Check(owner.qte!=null&&other.qte==null&&other.deadline==0,"QTE keys progress and timer private");
+                Check(Send(g,2,new GameCommand{kind="react",cardUid=rescue.uid,phaseId=cast,targetSeat=1}).ok,"reaction during QTE");
+                Check(!Send(g,1,new GameCommand{kind="react",cardUid=reaction.uid,phaseId=cast,targetSeat=1}).ok,"only one reaction");
+                Success(g);Check(g.State.players[1].hp==30&&g.State.phase=="action","combined shields apply immediately after QTE");
+                Check(!Send(g,2,new GameCommand{kind="pass",phaseId=cast}).ok,"no reaction window after success");
             });
-            Test("deny only protects its owner's part of area spell",()=>{
-                var g=New(3);Clean(g);var h=Give(g,1,"R04");Play(g,0,"S03",-1);Success(g);
-                Send(g,1,new GameCommand{kind="react",cardUid=h.uid,phaseId=g.State.pending.id,targetSeat=1});Check(g.State.players[1].hp==30&&g.State.players[2].hp==28,"one target denied");
+            Test("reflect and spell denial preserve defensive effects",()=>{
+                var g=New();Clean(g);var reflect=Give(g,1,"R03");Play(g,0,"S01");
+                Send(g,1,new GameCommand{kind="react",cardUid=reflect.uid,phaseId=g.State.cast.id,targetSeat=1});Success(g);
+                Check(g.State.players[0].hp==28&&g.State.players[1].hp==26,"reflection on cast damage");
+                g=New(3);Clean(g);var deny=Give(g,1,"R04");Play(g,0,"S03",-1);
+                Send(g,1,new GameCommand{kind="react",cardUid=deny.uid,phaseId=g.State.cast.id,targetSeat=1});Success(g);
+                Check(g.State.players[1].hp==30&&g.State.players[2].hp==28,"deny only own part of area spell");
+            });
+            Test("no reactions on board attacks; failed casts spend reactions",()=>{
+                var g=New();Clean(g);Unit(g,0,"C03");var h=Give(g,1,"R01");Send(g,0,new GameCommand{kind="end"});
+                Check(g.State.phase=="action"&&g.State.players[1].hp==26,"board attack resolves without interruption");
+                Check(g.State.players[1].hand.Any(x=>x.uid==h.uid),"reaction not consumed by board attack");
+                g=New();Clean(g);h=Give(g,1,"R01");Play(g,0,"C02");
+                Send(g,1,new GameCommand{kind="react",cardUid=h.uid,phaseId=g.State.cast.id,targetSeat=1});
+                g.Tick(g.State.qte.deadline+1);
+                Check(g.State.players[1].hp==30&&g.State.players[0].units.Count==0,"failed cast no damage or summon");
+                Check(!g.State.players[1].hand.Any(x=>x.uid==h.uid)&&g.State.tableReactions.Count==1,"played reaction spent and visible");
+            });
+            Test("persistent attack plans and random center targeting",()=>{
+                var g=New(3);Clean(g);var u=Unit(g,0,"C01");
+                Check(Send(g,0,new GameCommand{kind="target",unitUid=u.uid,targetSeat=2}).ok,"assign target");
+                Send(g,0,new GameCommand{kind="end"});Send(g,1,new GameCommand{kind="end"});Send(g,2,new GameCommand{kind="end"});
+                Check(u.plannedSeat==2&&g.State.players[2].hp==28,"intention survives next turn");
+                Check(Send(g,0,new GameCommand{kind="target",unitUid=u.uid,targetSeat=-1}).ok&&u.plannedSeat==-1,"center clears explicit target");
+                var defender=Unit(g,1,"C02");Send(g,0,new GameCommand{kind="target",unitUid=u.uid,targetSeat=1,targetUnit=defender.uid});
+                Play(g,0,"S08",1,defender.uid);Success(g);Check(u.plannedSeat==-1,"removed target normalizes to center");
+                g=New(4);Clean(g);Unit(g,1,"C10");Play(g,0,"C02",-1);
+                Check(g.State.cast.randomTarget&&g.State.cast.targetSeat==-1,"random target undecided until resolution");
+                Check(g.State.pending.targets.All(t=>t.unit==""),"random summon can only hit a hero");
+                Success(g);Check(g.State.players[0].units[0].plannedSeat==-1,"summoned random intention persists");
+            });
+            Test("disconnect during announcement clears cast and intentions",()=>{
+                var g=New(4);Clean(g);var u=Unit(g,2,"C03");u.plannedSeat=0;
+                Play(g,0,"C02",1,"",0,false);g.Disconnect(0,1);
+                Check(g.State.cast==null&&g.State.qte==null&&g.State.pending==null,"disconnected cast removed");
+                Check(g.State.activeSeat==1&&g.State.phase=="action"&&u.plannedSeat==-1,"turn and intentions recover");
             });
             Test("heal, draw, stun, swap, risk, bounce",()=>{
                 var g=New();Clean(g);g.State.players[0].hp=28;Play(g,0,"S02",0);Success(g);Check(g.State.players[0].hp==30,"heal cap");
@@ -132,6 +167,14 @@ namespace SummonersTable.Editor
                     Check(roundtrip.matchId==g.State.matchId,"match identity preserved");
                 }
                 Clean(g);Play(g,0,"C01");var q=g.State.qte;
+                for(int n=0;n<4;n++)
+                {
+                    var view=g.View(n,g.State.serverTime);
+                    var received=JsonUtility.FromJson<WireMessage>(JsonUtility.ToJson(new WireMessage{kind="state",state=view}));
+                    received.state.RestoreViewPrivacy(n);
+                    Check(received.protocol==2,"new network protocol");
+                    Check(n==0?received.state.qte.sequence==q.sequence:received.state.qte==null&&received.state.deadline==0,"wire QTE is private");
+                }
                 Check(!Send(g,0,new GameCommand{kind="key",phaseId="old",key="A"}).ok,"old QTE id rejected");
                 Check(!Send(g,1,new GameCommand{kind="key",phaseId=q.id,key="A"}).ok,"other player's key rejected");
                 Check(!Send(g,0,new GameCommand{kind="key",phaseId=q.id,key=q.sequence[0].ToString()},q.deadline+1).ok,"late key rejected");
@@ -149,10 +192,9 @@ namespace SummonersTable.Editor
             while(g.State.phase!="matchEnd"&&steps++<6000)
             {
                 var s=g.State;time+=.15;
-                if(s.phase=="qte")
+                if(s.phase=="reveal"){time=s.cast.revealUntil;g.Tick(time);}
+                else if(s.phase=="qte")
                 {var q=s.qte;Send(g,q.owner,new GameCommand{kind="key",phaseId=q.id,key=q.sequence[q.index].ToString()},time);}
-                else if(s.phase=="reaction")
-                {var a=s.pending;int p=s.players.First(x=>!a.responded.Contains(x.seat)).seat;Send(g,p,new GameCommand{kind="pass",phaseId=a.id},time);}
                 else if(s.phase=="roundEnd"){time+=20;g.Tick(time);}
                 else if(s.phase=="action")
                 {

@@ -60,7 +60,7 @@ namespace SummonersTable
         }
         void StartRound()
         {
-            State.qte=null;State.pending=null;State.phase="action";State.winners.Clear();
+            State.qte=null;State.cast=null;State.pending=null;State.tableReactions.Clear();State.phase="action";State.winners.Clear();
             combat.Clear();reactions.Clear();roundAcknowledged.Clear();killers.Clear();
             foreach(var p in State.players)
             {
@@ -82,7 +82,8 @@ namespace SummonersTable
             State.turnNumber++;State.creaturePlayed=0;State.spellsPlayed=0;State.qteAttempted=false;
             State.riskBonus=0;successfulSpells=0;failDrawUsed=false;killers.Clear();
             State.phase="action";State.deadline=now+Catalog.rules.turnSeconds;actionRemaining=Catalog.rules.turnSeconds;
-            foreach(var u in P(State.activeSeat).units){u.exhausted=false;u.plannedSeat=-1;u.plannedUnit="";}
+            foreach(var u in P(State.activeSeat).units)u.exhausted=false;
+            NormalizePlans();
             Log("Ход "+State.turnNumber+": "+P(State.activeSeat).name);
             Draw(State.activeSeat,1);
             if(Live(State.activeSeat))
@@ -173,7 +174,7 @@ namespace SummonersTable
         CommandResult Plan(int seat,GameCommand c)
         {
             if(State.phase!="action"||State.activeSeat!=seat)return CommandResult.No("Сейчас нельзя назначать цели.");
-            var u=Unit(seat,c.unitUid);if(u==null||u.exhausted)return CommandResult.No("Существо не готово.");
+            var u=Unit(seat,c.unitUid);if(u==null)return CommandResult.No("Существо не найдено.");
             if(c.targetSeat==-1){u.plannedSeat=-1;u.plannedUnit="";return CommandResult.Yes();}
             var t=new TargetRef(c.targetSeat,c.targetUnit);
             if(!Valid(t)||t.seat==seat)return CommandResult.No("Нужна вражеская цель.");
@@ -190,9 +191,11 @@ namespace SummonersTable
             if(!creature&&State.spellsPlayed>=(State.creaturePlayed>0?1:3))return CommandResult.No("Лимит заклинаний исчерпан.");
             if(creature&&(cmd.slot<0||cmd.slot>=Catalog.rules.boardSlots||p.units.Any(u=>u.slot==cmd.slot)))return CommandResult.No("Выберите свободную ячейку.");
             var target=new TargetRef(cmd.targetSeat,cmd.targetUnit);
-            if(creature&&cmd.targetSeat<0)target=RandomHero(seat);
-            if(!TargetAllowed(seat,card,target))return CommandResult.No("Выберите допустимую цель.");
-            if(card.effect=="swap"&&(p.hand.Count<2||P(target.seat).hand.Count==0))return CommandResult.No("Для обмена у обоих должна оставаться карта.");
+            bool randomTarget=cmd.targetSeat<0&&card.target!="none"&&card.target!="self";
+            var candidates=RandomTargets(seat,card);
+            if(randomTarget&&candidates.Count==0)return CommandResult.No("На столе нет допустимых случайных целей.");
+            if(!randomTarget&&!TargetAllowed(seat,card,target))return CommandResult.No("Выберите допустимую цель.");
+            if(card.effect=="swap"&&(p.hand.Count<2||(!randomTarget&&P(target.seat).hand.Count==0)))return CommandResult.No("Для обмена у обоих должна оставаться карта.");
             actionRemaining=Math.Max(0,State.deadline-now);
             int bonus=creature?State.riskBonus:0;
             if(creature){State.creaturePlayed++;State.riskBonus=0;}else State.spellsPlayed++;
@@ -209,9 +212,49 @@ namespace SummonersTable
             double duration=Math.Max(6,10+(length-2)*3.3+Sum(seat,"timeBonus",4)-EnemySum(seat,"timeTax",4));
             State.qte=new QteState{id=NextId(),cardId=card.id,cardUid=hc.uid,owner=seat,
                 recipient=RandomHero(seat).seat,targetSeat=target?.seat??seat,targetUnit=target?.unit??"",slot=cmd.slot,
-                sequence=sequence,duration=duration,deadline=now+duration,openingBonus=bonus};
-            State.phase="qte";State.deadline=State.qte.deadline;
-            Log(p.name+" начинает ритуал «"+card.name+"»");return CommandResult.Yes();
+                sequence=sequence,duration=duration,deadline=0,openingBonus=bonus,randomTarget=randomTarget};
+            State.cast=new CastState{id=State.qte.id,cardId=card.id,owner=seat,targetSeat=target.seat,targetUnit=target.unit,
+                slot=cmd.slot,randomTarget=randomTarget,revealUntil=now+Catalog.rules.revealSeconds};
+            State.pending=BuildAction(State.qte,true);reactions.Clear();
+            State.phase="reveal";State.deadline=State.cast.revealUntil;
+            foreach(var player in State.players)
+                if(!player.alive||player.seat==seat||!player.hand.Any(h=>State.pending.targets.Any(t=>CanReact(player.seat,Catalog.Card(h.cardId),t))))
+                    State.pending.responded.Add(player.seat);
+            Log(p.name+" показывает карту «"+card.name+"»");return CommandResult.Yes();
+        }
+        List<TargetRef> RandomTargets(int source,CardDef card)
+        {
+            var targets=new List<TargetRef>();
+            foreach(var player in State.players.Where(p=>Live(p.seat)))
+            {
+                var hero=new TargetRef(player.seat);
+                if(TargetAllowed(source,card,hero)&&(card.effect!="swap"||player.hand.Count>0))targets.Add(hero);
+                // Unassigned creatures always attack faces, never choose a unit automatically.
+                if(card.kind=="creature"||card.target=="enemy")continue;
+                foreach(var unit in player.units)
+                {var t=new TargetRef(player.seat,unit.uid);if(TargetAllowed(source,card,t))targets.Add(t);}
+            }
+            return targets;
+        }
+        PendingAction BuildAction(QteState q,bool preview)
+        {
+            var c=Catalog.Card(q.cardId);
+            var a=new PendingAction{id=q.id,source=q.owner,cardId=q.cardId,slot=q.slot,unitUid=q.cardUid,
+                kind=c.kind=="creature"?"opening":c.effect,continuation=c.kind=="creature"?"summonEnd":"spellContinue",
+                summonHp=c.health,damage=c.kind=="creature"?c.attack+Sum(q.owner,"attackAura",2)+Sum(q.owner,"openingPower",2)+q.openingBonus:c.value,
+                label=c.name,plannedSeat=q.randomTarget?-1:q.targetSeat,plannedUnit=q.randomTarget?"":q.targetUnit};
+            if(c.effect=="damage"||c.effect=="areaDamage")a.damage+=Sum(q.owner,"spellPower",2);
+            if(c.effect=="areaDamage")a.targets=State.players.Where(p=>p.seat!=q.owner&&Live(p.seat)).Select(p=>new TargetRef(p.seat)).ToList();
+            else if(c.target!="none"&&c.target!="self")
+            {
+                if(q.randomTarget)
+                {
+                    var choices=RandomTargets(q.owner,c);
+                    if(preview)a.targets=choices;else if(choices.Count>0)a.targets.Add(choices[random.Next(choices.Count)]);
+                }
+                else a.targets.Add(new TargetRef(q.targetSeat,q.targetUnit));
+            }
+            return a;
         }
         CommandResult Key(int seat,GameCommand cmd)
         {
@@ -220,7 +263,7 @@ namespace SummonersTable
             if(now>=q.deadline){FailQte();return CommandResult.No("Время QTE истекло.");}
             if(cmd.key==null||cmd.key.Length!=1||!"ASDFGHJ".Contains(cmd.key))return CommandResult.No("Недопустимая клавиша.");
             if(q.sequence[q.index]==cmd.key[0])q.index++;
-            else if(q.forgiven==0&&Sum(seat,"forgive",1)>0){q.forgiven++;Log("Техподдержка простила промах.");}
+            else if(q.forgiven==0&&Sum(seat,"forgive",1)>0)q.forgiven++;
             else {q.mistakes++;q.deadline-=2;State.deadline=q.deadline;}
             if(q.mistakes>=Catalog.rules.qteMistakes||now>=q.deadline)FailQte();
             else if(q.index==q.sequence.Length)CompleteQte();
@@ -228,7 +271,7 @@ namespace SummonersTable
         }
         void FailQte()
         {
-            var q=State.qte;if(q==null)return;State.qte=null;
+            var q=State.qte;if(q==null)return;State.qte=null;State.cast=null;State.pending=null;reactions.Clear();
             int recipient=Live(q.recipient)?q.recipient:(RandomHero(q.owner)?.seat??-1);
             Log("Срыв ритуала «"+Catalog.Card(q.cardId).name+"»!");
             if(recipient>=0)Give(recipient,new HandCard{uid=q.cardUid,cardId=q.cardId},true);
@@ -238,24 +281,18 @@ namespace SummonersTable
         }
         void CompleteQte()
         {
-            var q=State.qte;State.qte=null;var c=Catalog.Card(q.cardId);
+            var q=State.qte;State.qte=null;State.cast=null;var c=Catalog.Card(q.cardId);
             Log("Ритуал удался: "+c.name);
-            var a=new PendingAction{id=NextId(),source=q.owner,cardId=q.cardId,slot=q.slot,unitUid=q.cardUid,
-                kind=c.kind=="creature"?"opening":c.effect,continuation=c.kind=="creature"?"summonEnd":"spellContinue",
-                summonHp=c.health,damage=c.kind=="creature"?c.attack+Sum(q.owner,"attackAura",2)+Sum(q.owner,"openingPower",2)+q.openingBonus:c.value,
-                label=c.name};
-            if(c.effect=="damage"||c.effect=="areaDamage")a.damage+=Sum(q.owner,"spellPower",2);
-            if(c.effect=="areaDamage")a.targets=State.players.Where(p=>p.seat!=q.owner&&Live(p.seat)).Select(p=>new TargetRef(p.seat)).ToList();
-            else if(c.target!="none"&&c.target!="self")a.targets.Add(new TargetRef(q.targetSeat,q.targetUnit));
+            var a=BuildAction(q,false);
             if(a.kind=="opening"&&(a.targets.Count==0||!Valid(a.targets[0])))
             {a.targets.Clear();var t=RandomHero(q.owner);if(t!=null)a.targets.Add(t);}
-            OpenAction(a);
+            State.pending=a;ResolveAction();
         }
         bool Damaging(PendingAction a) { return a.kind=="opening"||a.kind=="combat"||a.kind=="damage"||a.kind=="areaDamage"; }
         public bool CanReact(int seat,CardDef card,TargetRef target)
         {
             var a=State.pending;
-            if(a==null||!Live(seat)||card==null||card.kind!="reaction"||target==null||!a.targets.Any(t=>Same(t,target)))return false;
+            if((State.phase!="reveal"&&State.phase!="qte")||State.cast==null||a==null||a.source==seat||a.responded.Contains(seat)||!Live(seat)||card==null||card.kind!="reaction"||target==null||!a.targets.Any(t=>Same(t,target)))return false;
             bool damage=Damaging(a);bool own=target.seat==seat;
             switch(card.effect)
             {
@@ -268,28 +305,25 @@ namespace SummonersTable
         }
         void OpenAction(PendingAction action)
         {
-            State.pending=action;reactions.Clear();State.phase="reaction";State.deadline=now+Catalog.rules.reactionSeconds;
-            foreach(var p in State.players)
-                if(!Live(p.seat)||!p.hand.Any(h=>action.targets.Any(t=>CanReact(p.seat,Catalog.Card(h.cardId),t))))action.responded.Add(p.seat);
-            Log("Объявлено: "+action.label);
-            if(State.players.All(p=>action.responded.Contains(p.seat)))ResolveAction();
+            State.pending=action;reactions.Clear();Log(action.label);ResolveAction();
         }
         CommandResult React(int seat,GameCommand cmd)
         {
             var a=State.pending;
-            if(State.phase!="reaction"||a==null||cmd.phaseId!=a.id||a.responded.Contains(seat))return CommandResult.No("Окно реакции закрыто.");
+            if((State.phase!="reveal"&&State.phase!="qte")||State.cast==null||a==null||cmd.phaseId!=a.id||a.responded.Contains(seat))return CommandResult.No("Окно реакции закрыто.");
             var h=P(seat).hand.Find(c=>c.uid==cmd.cardUid);var t=new TargetRef(cmd.targetSeat,cmd.targetUnit);
             if(h==null||!CanReact(seat,Catalog.Card(h.cardId),t))return CommandResult.No("Эта реакция не подходит к выбранной цели.");
             var card=Catalog.Card(h.cardId);P(seat).hand.Remove(h);P(seat).handCount=P(seat).hand.Count;
             reactions[seat]=new Reaction{player=seat,effect=card.effect,name=card.name,value=card.value,target=t};a.responded.Add(seat);
-            Log(P(seat).name+" подготовил реакцию");
-            if(State.players.All(p=>a.responded.Contains(p.seat)))ResolveAction();return CommandResult.Yes();
+            State.tableReactions.Add(new TableReaction{uid=h.uid,cardId=h.cardId,owner=seat,castId=a.id,targetSeat=t.seat,targetUnit=t.unit,playedAt=now});
+            if(State.tableReactions.Count>12)State.tableReactions.RemoveAt(0);
+            Log(P(seat).name+" выкладывает «"+card.name+"»");return CommandResult.Yes();
         }
         CommandResult Pass(int seat,GameCommand cmd)
         {
-            var a=State.pending;if(State.phase!="reaction"||a==null||cmd.phaseId!=a.id)return CommandResult.No("Нет окна реакции.");
+            var a=State.pending;if((State.phase!="reveal"&&State.phase!="qte")||State.cast==null||a==null||cmd.phaseId!=a.id)return CommandResult.No("Нет окна реакции.");
             if(!a.responded.Contains(seat))a.responded.Add(seat);
-            if(State.players.All(p=>a.responded.Contains(p.seat)))ResolveAction();return CommandResult.Yes();
+            return CommandResult.Yes();
         }
         bool Denied(TargetRef t) { return reactions.Values.Any(r=>r.effect=="deny"&&Same(r.target,t)); }
         int Reduction(TargetRef t) { return reactions.Values.Where(r=>(r.effect=="reduce"||r.effect=="rescue")&&Same(r.target,t)).Sum(r=>r.value); }
@@ -342,7 +376,7 @@ namespace SummonersTable
                     if(attacker!=null)attacker.exhausted=true;
                     if(a.kind=="opening"&&a.summonHp>0&&Live(a.source)&&!P(a.source).units.Any(u=>u.slot==a.slot))
                     {
-                        P(a.source).units.Add(new UnitState{uid=a.unitUid,cardId=a.cardId,slot=a.slot,hp=a.summonHp,exhausted=true});
+                        P(a.source).units.Add(new UnitState{uid=a.unitUid,cardId=a.cardId,slot=a.slot,hp=a.summonHp,exhausted=true,plannedSeat=a.plannedSeat,plannedUnit=a.plannedUnit});
                         Log(c.name+" выходит на стол");
                     }
                 }
@@ -386,7 +420,7 @@ namespace SummonersTable
             {
                 foreach(var dead in p.units.Where(u=>u.hp<=0).ToList()){p.units.Remove(dead);Log(Catalog.Card(dead.cardId).name+" покидает стол");}
             }
-            State.pending=null;reactions.Clear();
+            State.pending=null;reactions.Clear();NormalizePlans();
             if(CheckOutcome())return;
             if(a.continuation=="summonEnd")EndTurn();
             else if(a.continuation=="combatNext")NextAttack();
@@ -396,7 +430,7 @@ namespace SummonersTable
         void ResumeAction() { State.phase="action";State.deadline=now+Math.Max(1,actionRemaining);State.revision++; }
         void EndTurn()
         {
-            State.qte=null;State.pending=null;State.phase="combat";combat.Clear();
+            State.qte=null;State.cast=null;State.pending=null;State.phase="combat";combat.Clear();
             if(Live(State.activeSeat))
                 foreach(var u in P(State.activeSeat).units.OrderBy(u=>u.slot).Where(u=>!u.exhausted))combat.Enqueue(u.uid);
             NextAttack();
@@ -438,7 +472,7 @@ namespace SummonersTable
             }
             killers.Clear();
             var alive=State.players.Where(p=>Live(p.seat)).ToList();if(alive.Count>1)return false;
-            State.qte=null;State.pending=null;combat.Clear();reactions.Clear();
+            State.qte=null;State.cast=null;State.pending=null;combat.Clear();reactions.Clear();
             if(alive.Count==1)
             {
                 alive[0].score+=Catalog.rules.roundWinPoints;State.result=alive[0].name+" выигрывает раунд (+3)";
@@ -463,8 +497,12 @@ namespace SummonersTable
         public void Tick(double time)
         {
             now=time;State.serverTime=time;
+            if(State.phase=="reveal"&&State.cast!=null&&now>=State.cast.revealUntil)
+            {
+                State.phase="qte";State.qte.deadline=State.cast.revealUntil+State.qte.duration;State.deadline=State.qte.deadline;
+                Log(P(State.cast.owner).name+" выполняет скрытый ритуал");
+            }
             if(State.phase=="qte"&&State.qte!=null&&now>=State.qte.deadline)FailQte();
-            else if(State.phase=="reaction"&&now>=State.deadline)ResolveAction();
             else if(State.phase=="action"&&now>=State.deadline){Log("Время хода истекло");EndTurn();}
             else if(State.phase=="roundEnd"&&now>=State.deadline)NextRound();
         }
@@ -478,12 +516,19 @@ namespace SummonersTable
                 if(State.players.Count(x=>x.connected)<2)FinishMatch();return;
             }
             if(CheckOutcome())return;
-            if(State.activeSeat==seat){State.qte=null;State.pending=null;combat.Clear();AdvanceTurn();}
+            NormalizePlans();
+            if(State.activeSeat==seat){State.qte=null;State.cast=null;State.pending=null;reactions.Clear();combat.Clear();AdvanceTurn();}
             else if(State.pending!=null)
             {
                 if(!State.pending.responded.Contains(seat))State.pending.responded.Add(seat);
-                if(State.players.All(x=>State.pending.responded.Contains(x.seat)))ResolveAction();
             }
+        }
+        void NormalizePlans()
+        {
+            foreach(var player in State.players)
+                foreach(var unit in player.units)
+                    if(unit.plannedSeat>=0&&!Valid(new TargetRef(unit.plannedSeat,unit.plannedUnit)))
+                    {unit.plannedSeat=-1;unit.plannedUnit="";}
         }
     }
 }

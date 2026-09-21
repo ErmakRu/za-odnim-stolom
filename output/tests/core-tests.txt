@@ -6,13 +6,16 @@ PASS unassigned attacks choose enemy heroes, never creatures
 PASS three QTE misses transfer exact card and end creature turn
 PASS all timing modifiers and first-miss forgiveness
 PASS guard caps and aura excludes its owner
-PASS reactions have no QTE, shared window, reduce and reflect
-PASS deny only protects its owner's part of area spell
+PASS three-second reveal, private QTE, reactions during casting only
+PASS reflect and spell denial preserve defensive effects
+PASS no reactions on board attacks; failed casts spend reactions
+PASS persistent attack plans and random center targeting
+PASS disconnect during announcement clears cast and intentions
 PASS heal, draw, stun, swap, risk, bounce
 PASS turn limits and bounded decision timers
 PASS elimination scoring, round reset, host-independent disconnect
 PASS draw, heal, damage and opening passive triggers
 PASS wire serialization preserves private views and rejects stale phase commands
 PASS full matches for 2, 3, 4 players across 24 deterministic seeds
-Assertions: 94968
-UTC: 2026-09-21T11:02:28.8993814Z
+Assertions: 75955
+UTC: 2026-09-21T12:48:08.1782794Z

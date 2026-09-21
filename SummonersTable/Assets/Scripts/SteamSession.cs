@@ -194,7 +194,7 @@ namespace SummonersTable
         }
         public void Submit(GameCommand command)
         {
-            if(View==null||Seat<0)return;command.seq=++commandSequence;
+            if(View==null||Seat<0)return;command.seq=++commandSequence;Error="";
             if(Engine!=null)
             {
                 var result=Engine.Submit(Seat,command,TimeNow);if(!result.ok)Error=result.message;else Error="";Publish();
@@ -224,7 +224,7 @@ namespace SummonersTable
                     int used=rateCount.TryGetValue(sender,out var c)?c:0;if(used>=120)continue;rateCount[sender]=used+1;
                     var bytes=new byte[packet.m_cbSize];Marshal.Copy(packet.m_pData,bytes,0,bytes.Length);
                     var wire=JsonUtility.FromJson<WireMessage>(Encoding.UTF8.GetString(bytes));
-                    if(wire==null||wire.protocol!=1)continue;
+                    if(wire==null||wire.protocol!=2)continue;
                     if(Engine!=null)
                     {
                         var p=Engine.State.players.Find(x=>x.id==sender.ToString()&&x.connected);
@@ -242,8 +242,10 @@ namespace SummonersTable
                         if(wire.state.players==null||wire.state.players.Count<2||wire.state.players.Count>4)continue;
                         var own=wire.state.players.Find(p=>p.id==UserId.ToString());if(own==null)continue;
                         if(View!=null&&(View.matchId!=wire.matchId||wire.state.revision<View.revision))continue;
-                        if(View==null){matchHost=new CSteamID(sender);commandSequence=0;}
-                        Seat=own.seat;View=wire.state;ReceivedAt=TimeNow;Error="";
+                        if(View==null){matchHost=new CSteamID(sender);commandSequence=0;Error="";}
+                        if(Error.StartsWith("Нет обновлений от хоста.")||Error.StartsWith("Ожидание Steam-соединения:"))Error="";
+                        wire.state.RestoreViewPrivacy(own.seat);
+                        Seat=own.seat;View=wire.state;ReceivedAt=TimeNow;
                     }
                     else if(wire.kind=="error"&&View!=null&&View.matchId==wire.matchId)Error=Clean(wire.text,180);
                 }

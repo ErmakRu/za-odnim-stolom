@@ -19,7 +19,7 @@ namespace SummonersTable
     [Serializable] public sealed class RulesDef
     {
         public int heroHp=30, deckSize=30, startingHand=5, handLimit=8, boardSlots=5,
-            rounds=3, roundWinPoints=3, eliminationPoints=1, turnSeconds=45, reactionSeconds=7, qteMistakes=3;
+            rounds=3, roundWinPoints=3, eliminationPoints=1, turnSeconds=45, revealSeconds=3, qteMistakes=3;
     }
     [Serializable] public sealed class Catalog
     {
@@ -86,13 +86,31 @@ namespace SummonersTable
     {
         public string id, cardId, cardUid, sequence, targetUnit;
         public int owner, recipient, targetSeat, slot, index, mistakes, forgiven, openingBonus;
+        public bool randomTarget;
         public double deadline, duration;
         public QteState Copy() { return (QteState)MemberwiseClone(); }
+    }
+    [Serializable] public sealed class CastState
+    {
+        public string id,cardId,targetUnit="";
+        public int owner,targetSeat=-1,slot=-1;
+        public bool randomTarget;
+        public double revealUntil;
+        public CastState Copy(){return (CastState)MemberwiseClone();}
+    }
+    [Serializable] public sealed class TableReaction
+    {
+        public string uid,cardId,castId,targetUnit="";
+        public int owner,targetSeat;
+        public double playedAt;
+        public TableReaction Copy(){return (TableReaction)MemberwiseClone();}
     }
     [Serializable] public sealed class PendingAction
     {
         public string id, kind, cardId, unitUid, continuation, label;
         public int source, damage, slot, summonHp;
+        public int plannedSeat=-1;
+        public string plannedUnit="";
         public List<TargetRef> targets=new List<TargetRef>();
         public List<int> responded=new List<int>();
         public PendingAction Copy()
@@ -105,13 +123,15 @@ namespace SummonersTable
     }
     [Serializable] public sealed class MatchState
     {
-        public string version="0.1.0", phase="lobby", result="", lastEvent="", matchId;
+        public string version="0.2.0", phase="lobby", result="", lastEvent="", matchId;
         public int revision, round, turnNumber, activeSeat, creaturePlayed, spellsPlayed, riskBonus;
         public bool qteAttempted;
         public double serverTime, deadline;
         public List<PlayerState> players=new List<PlayerState>();
         public List<string> log=new List<string>();
         public QteState qte;
+        public CastState cast;
+        public List<TableReaction> tableReactions=new List<TableReaction>();
         public PendingAction pending;
         public List<int> winners=new List<int>();
         public MatchState View(int seat,double now)
@@ -119,9 +139,21 @@ namespace SummonersTable
             var v=(MatchState)MemberwiseClone();
             v.players=players.Select(p=>p.View(p.seat==seat)).ToList();
             v.log=new List<string>(log);v.winners=new List<int>(winners);
-            v.qte=qte==null?null:qte.Copy();v.pending=pending==null?null:pending.Copy();
+            // Keys, progress, mistakes and the QTE deadline belong only to the caster.
+            v.qte=qte!=null&&phase=="qte"&&qte.owner==seat?qte.Copy():null;
+            if(phase=="qte"&&(qte==null||qte.owner!=seat))v.deadline=0;
+            v.cast=cast?.Copy();v.pending=pending==null?null:pending.Copy();
+            v.tableReactions=tableReactions.Select(r=>r.Copy()).ToList();
             v.serverTime=now;
             return v;
+        }
+        public void RestoreViewPrivacy(int seat)
+        {
+            // Unity inline-class JSON may materialize empty objects for null fields.
+            if(phase!="reveal"&&phase!="qte"){cast=null;pending=null;}
+            if(phase!="qte"||cast==null||cast.owner!=seat)qte=null;
+            if(phase=="qte"&&(cast==null||cast.owner!=seat))deadline=0;
+            foreach(var p in players)if(p.seat!=seat)p.hand.Clear();
         }
     }
     [Serializable] public sealed class GameCommand
@@ -131,7 +163,7 @@ namespace SummonersTable
     }
     [Serializable] public sealed class WireMessage
     {
-        public int protocol=1;
+        public int protocol=2;
         public string kind, text, matchId;
         public GameCommand command;
         public MatchState state;

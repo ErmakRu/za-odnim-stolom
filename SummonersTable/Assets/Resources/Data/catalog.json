@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Арена призыва: За одним столом",
   "rules": {
     "heroHp": 30,
@@ -11,7 +11,7 @@
     "roundWinPoints": 3,
     "eliminationPoints": 1,
     "turnSeconds": 45,
-    "reactionSeconds": 7,
+    "revealSeconds": 3,
     "qteMistakes": 3
   },
   "typeColors": [
@@ -490,7 +490,7 @@
       "effect": "reduce",
       "value": 3,
       "target": "pending",
-      "rules": "Когда атака или заклинание наносит урон вам либо вашему существу: уменьшите этот урон на 3. Не действует на усталость.",
+      "rules": "Во время розыгрыша чужого существа или заклинания: уменьшите урон этой карты вам либо вашему существу на 3. Не действует на обычные атаки со стола и усталость.",
       "flavor": "Меня здесь даже нарисовали случайно.",
       "art": "A comical wizard-shaped empty coat sidestepping a glowing orange magic bolt, the coat flapping with exaggerated movement"
     },
@@ -506,7 +506,7 @@
       "effect": "rescue",
       "value": 2,
       "target": "pending",
-      "rules": "Когда атака или заклинание наносит урон: уменьшите урон выбранной защищаемой цели на 2. Можно спасать себя или другого игрока.",
+      "rules": "Во время розыгрыша чужой карты: уменьшите её урон защищаемой цели на 2. Можно спасать себя или другого игрока. Не реагирует на обычные атаки со стола.",
       "flavor": "Сначала спасу. Потом посмеюсь.",
       "art": "A warm golden magical hand catching another tiny hand just before a harmless sparkling impact, heroic yet funny composition"
     },
@@ -522,7 +522,7 @@
       "effect": "reflect",
       "value": 2,
       "target": "pending",
-      "rules": "Когда атака или заклинание наносит урон вам либо вашему существу: после разрешения нанесите 2 урона герою источника. Исходный урон не отменяется; ответ не запускает новые реакции.",
+      "rules": "Во время розыгрыша чужой карты, которая угрожает вам либо вашему существу: если она нанесёт урон, её владелец получит 2 ответного урона. Исходный урон не отменяется. Не действует на атаки со стола.",
       "flavor": "Аргумент принят и отправлен обратно.",
       "art": "A cheeky enchanted hand mirror reflecting a small magical fireball back along a curved trail of pink sparks"
     },
@@ -538,7 +538,7 @@
       "effect": "deny",
       "value": 1,
       "target": "pending",
-      "rules": "Когда вражеское заклинание воздействует на вас или ваше существо: отмените эффект для этой цели. Не отменяет атаки существ, добор и усиления самого заклинателя.",
+      "rules": "Во время розыгрыша вражеского заклинания: отмените его эффект для вас или вашего существа. Не отменяет призыв, атаки существ, добор и усиления самого заклинателя.",
       "flavor": "Это моё. Даже если мне не нравится.",
       "art": "A small assertive purple magical stop-hand shielding a glowing playing card from sneaky fingers, no letters or text"
     }
@@ -552,15 +552,15 @@
       "entries": [
         {
           "cardId": "C03",
-          "count": 2
+          "count": 3
         },
         {
           "cardId": "C06",
-          "count": 2
+          "count": 3
         },
         {
           "cardId": "C09",
-          "count": 2
+          "count": 3
         },
         {
           "cardId": "C11",
@@ -600,15 +600,15 @@
         },
         {
           "cardId": "R01",
-          "count": 2
+          "count": 1
         },
         {
           "cardId": "R03",
-          "count": 2
+          "count": 1
         },
         {
           "cardId": "R04",
-          "count": 2
+          "count": 1
         }
       ]
     },
@@ -620,15 +620,15 @@
       "entries": [
         {
           "cardId": "C02",
-          "count": 2
+          "count": 3
         },
         {
           "cardId": "C08",
-          "count": 2
+          "count": 3
         },
         {
           "cardId": "C10",
-          "count": 2
+          "count": 3
         },
         {
           "cardId": "C14",
@@ -668,15 +668,15 @@
         },
         {
           "cardId": "R01",
-          "count": 2
+          "count": 1
         },
         {
           "cardId": "R02",
-          "count": 2
+          "count": 1
         },
         {
           "cardId": "R04",
-          "count": 2
+          "count": 1
         }
       ]
     },
@@ -688,15 +688,15 @@
       "entries": [
         {
           "cardId": "C01",
-          "count": 2
+          "count": 3
         },
         {
           "cardId": "C04",
-          "count": 2
+          "count": 3
         },
         {
           "cardId": "C05",
-          "count": 2
+          "count": 3
         },
         {
           "cardId": "C07",
@@ -736,15 +736,15 @@
         },
         {
           "cardId": "R01",
-          "count": 2
+          "count": 1
         },
         {
           "cardId": "R02",
-          "count": 2
+          "count": 1
         },
         {
           "cardId": "R03",
-          "count": 2
+          "count": 1
         }
       ]
     }
