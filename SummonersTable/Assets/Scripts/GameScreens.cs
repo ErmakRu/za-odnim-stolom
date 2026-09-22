@@ -27,6 +27,7 @@ namespace SummonersTable
         }
         void FrontEndAction(string action)
         {
+            if(HandleLobbyChoice(action))return;
             switch(action)
             {
                 case "steam":page="steam";steam.Search();break;
@@ -35,8 +36,8 @@ namespace SummonersTable
                 case "rules":modal="rules";break;
                 case "quit":Application.Quit();break;
                 case "ready":var me=steam.Members.Find(m=>m.id==steam.UserId.ToString());steam.SetMember(me?.deckId??"noise",me?.ready!=true);break;
-                case "start":steam.StartMatch();break;
-                case "leave":steam.Leave();break;
+                case "start":if(page=="local")StartLocal(localCount);else steam.StartMatch();break;
+                case "leave":if(page=="local")page="menu";else steam.Leave();break;
                 case "copy":GUIUtility.systemCopyBuffer=steam.RoomId.ToString();break;
                 default:if(action.StartsWith("deck")&&int.TryParse(action.Substring(4),out int d))steam.SetMember(catalog.decks[d].id,false);break;
             }
@@ -47,17 +48,35 @@ namespace SummonersTable
             bool visible=modal==""&&!quitConfirm;
             if(menuCanvas!=null){menuCanvas.Visible(page=="menu"&&visible);menuCanvas.status.text="ТЕСТ "+Application.version+" · "+steam.Status;}
             if(lobbyCanvas==null)return;
-            lobbyCanvas.Visible(page=="steam"&&steam.InRoom&&visible);
-            if(!steam.InRoom)return;
-            lobbyCanvas.title.text=steam.RoomName;lobbyCanvas.subtitle.text="Код лобби: "+steam.RoomId+" · Выберите колоду и подтвердите готовность";lobbyCanvas.status.text=steam.Error;
-            for(int i=0;i<4;i++)
-            {
-                var member=i<steam.Members.Count?steam.Members[i]:null;
-                lobbyCanvas.members[i].text=member==null?"Свободное место":member.name+"  ·  "+catalog.Deck(member.deckId).name+"  ·  "+(member.ready?"ГОТОВ":"выбирает колоду");
-            }
-            for(int i=0;i<3;i++)lobbyCanvas.buttons[i].GetComponentInChildren<Text>().text=catalog.decks[i].name;
-            var own=steam.Members.Find(m=>m.id==steam.UserId.ToString());lobbyCanvas.buttons[3].GetComponentInChildren<Text>().text=own?.ready==true?"Снять готовность":"Я готов!";
-            lobbyCanvas.buttons[4].interactable=steam.IsHost&&steam.CanStart;
+            bool localLobby=page=="local";
+            lobbyCanvas.Visible((localLobby||page=="steam"&&steam.InRoom)&&visible);
+            if(localLobby)lobbyCanvas.PresentLobby(LocalLobbyMembers(),"",true,true,true,catalog,"ЗА ОДНИМ ПК · "+localCount+" ИГРОКА","Выберите каждому колоду и героя. Во время матча передавайте управление.");
+            else if(steam.InRoom)lobbyCanvas.PresentLobby(steam.Members,steam.UserId.ToString(),false,steam.IsHost,steam.CanStart,catalog,steam.RoomName+" · КОД "+steam.RoomId,steam.Error);
+        }
+        System.Collections.Generic.List<LobbyMember> LocalLobbyMembers()
+        {
+            return Enumerable.Range(0,localCount).Select(i=>new LobbyMember{id="local-"+i,name=localNames[i],deckId=catalog.decks[localDecks[i]].id,heroId=localHeroes[i],outfit=localOutfits[i],palette=localPalettes[i],ready=true}).ToList();
+        }
+        bool HandleLobbyChoice(string action)
+        {
+            bool localLobby=page=="local";
+            if(action=="customize-close"){lobbyCanvas.CloseAppearance();return true;}
+            if(action.StartsWith("players:")&&localLobby){localCount=int.Parse(action.Substring(8));lobbyCanvas.CloseAppearance();return true;}
+            int split=action.IndexOf(':');string kind=split>=0?action.Substring(0,split):action;
+            if(!new[]{"deck-prev","deck-next","hero-prev","hero-next","customize","outfit-prev","outfit-next","palette"}.Contains(kind))return false;
+            int seatIndex=kind.StartsWith("outfit")||kind=="palette"?lobbyCanvas.AppearanceSeat:int.Parse(action.Substring(split+1));
+            var list=localLobby?LocalLobbyMembers():steam.Members;
+            if(seatIndex<0||seatIndex>=list.Count||!localLobby&&list[seatIndex].id!=steam.UserId.ToString())return true;
+            var member=list[seatIndex];if(kind=="customize"){lobbyCanvas.OpenAppearance(seatIndex);return true;}
+            int deck=catalog.decks.FindIndex(d=>d.id==member.deckId),hero=System.Array.IndexOf(HeroOptions.Ids,member.heroId),outfit=member.outfit,palette=member.palette;
+            if(kind.StartsWith("deck"))deck=(deck+(kind.EndsWith("next")?1:catalog.decks.Count-1))%catalog.decks.Count;
+            if(kind.StartsWith("hero"))hero=(hero+(kind.EndsWith("next")?1:7))%8;
+            if(kind.StartsWith("outfit"))outfit=(outfit+(kind.EndsWith("next")?1:7))%8;
+            if(kind=="palette")palette=int.Parse(action.Substring(split+1));
+            if(localLobby){localDecks[seatIndex]=deck;localHeroes[seatIndex]=HeroOptions.Ids[hero];localOutfits[seatIndex]=outfit;localPalettes[seatIndex]=palette;}
+            else if(kind.StartsWith("deck"))steam.SetMember(catalog.decks[deck].id,false);
+            else steam.SetAppearance(HeroOptions.Ids[hero],outfit,palette);
+            return true;
         }
         public void StartPresentationLab()
         {

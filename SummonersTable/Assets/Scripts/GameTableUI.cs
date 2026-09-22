@@ -61,8 +61,8 @@ namespace SummonersTable
             var q=state.qte;
             if(q==null){lastQte="";return;}
             if(lastQte!=q.id){lastQte=q.id;lastProgress=q.index;lastMistakes=q.mistakes;}
-            if(q.index>lastProgress)audioSource.PlayOneShot(tickTone);
-            if(q.mistakes>lastMistakes)audioSource.PlayOneShot(failTone);
+            if(q.index>lastProgress)audioSource.PlayOneShot(board.CameraRig.settings?.qteSuccess??tickTone);
+            if(q.mistakes>lastMistakes)audioSource.PlayOneShot(board.CameraRig.settings?.qteError??failTone);
             lastProgress=q.index;lastMistakes=q.mistakes;
             if(q.owner!=seat||modal!=""||quitConfirm)return;
             foreach(char key in "ASDFGHJ")
@@ -378,7 +378,18 @@ namespace SummonersTable
             yield return Shot(directory,"lab-camera-and-settings");
             LabAttack();localTime+=.41;local.Tick(localTime);state=local.View(seat,localTime);
             yield return Shot(directory,"lab-combat-effects");
-            File.WriteAllText(Path.Combine(directory,"capture-report.txt"),"PASS PresentationLab boot without Steam, one EventSystem, JSON export/import roundtrip, test combat and settings panel.\n");Application.Quit();
+            var actor=board.Actor(1);
+            foreach(string clip in new[]{"Idle_Normal","Defend","AttackCombo04","Die","AttackCombo05","DashForward","DashBackward","DieRecover","Dizzy","GetHit","Sliding"})
+            {
+                actor.Play(clip,2);yield return new WaitForSeconds(.25f);
+                var current=actor.Animator.GetCurrentAnimatorStateInfo(0);var next=actor.Animator.GetNextAnimatorStateInfo(0);
+                if(!current.IsName(clip)&&!next.IsName(clip))throw new Exception("Hero clip not playing: "+clip);
+            }
+            actor.Die();yield return new WaitForSeconds(1.4f);if(actor.AnimationName!="AttackCombo05")throw new Exception("Death sequence incomplete");
+            actor.Revive();yield return Shot(directory,"lab-hero-revive");
+            announcements.Preview("ВАШ ХОД");yield return new WaitForSeconds(1.4f);yield return Shot(directory,"lab-motion-titles");
+            if(!announcements.style.IsPlaying)throw new Exception("Motion Titles did not start");
+            File.WriteAllText(Path.Combine(directory,"capture-report.txt"),"PASS PresentationLab boot without Steam, one EventSystem, JSON export/import roundtrip, combat effects and settings panel, all 11 humanoid Animator states, Die to AttackCombo05 then DieRecover, Cyrillic Motion Titles.\n");Application.Quit();
         }
         IEnumerator CapturePreview()
         {
@@ -388,11 +399,22 @@ namespace SummonersTable
             if(FindObjectsByType<TableBoard>(FindObjectsInactive.Include,FindObjectsSortMode.None).Length!=1||FindObjectsByType<CardTableCanvas>(FindObjectsInactive.Include,FindObjectsSortMode.None).Length!=1)throw new Exception("Duplicate match presentation objects after scene load");
             yield return Shot(directory,"01-menu");
             menuCanvas.buttons[1].onClick.Invoke();if(page!="local")throw new Exception("Main menu local button is not connected");
-            previewLobby=true;page="fixture";menuCanvas.Visible(false);lobbyCanvas.Visible(true);
-            lobbyCanvas.title.text="Тестовый стол · 4 игрока";lobbyCanvas.subtitle.text="Предпросмотр лобби · Steam отключён в режиме проверки";
-            for(int i=0;i<4;i++)lobbyCanvas.members[i].text="Игрок "+(i+1)+" · "+catalog.decks[i%3].name+" · ГОТОВ";
-            for(int i=0;i<3;i++)lobbyCanvas.buttons[i].GetComponentInChildren<UnityEngine.UI.Text>().text=catalog.decks[i].name;
-            yield return Shot(directory,"01a-lobby-layout");previewLobby=false;
+            previewLobby=true;page="local";localCount=4;menuCanvas.Visible(false);lobbyCanvas.Visible(true);
+            lobbyCanvas.PresentLobby(LocalLobbyMembers(),"local-0",false,true,true,catalog,"ТЕСТОВЫЙ СТОЛ · 4 ИГРОКА","Предпросмотр без подключения к Steam");
+            yield return Shot(directory,"01a-lobby-layout");
+            foreach(var portrait in lobbyCanvas.portraits)
+            {
+                if(portrait.actor.Head==null||portrait.actor.Animator==null)throw new Exception("Lobby hero rig missing");
+                if(portrait.actor.GetComponentsInChildren<Transform>(true).Any(t=>t.name=="Weapon"&&t.gameObject.activeSelf))throw new Exception("Hero weapon visible");
+            }
+            string oldHero=localHeroes[0];int oldDeck=localDecks[0];
+            FrontEndAction("hero-next:0");FrontEndAction("deck-next:0");FrontEndAction("customize:0");FrontEndAction("outfit-next");FrontEndAction("palette:2");
+            if(localHeroes[0]==oldHero||localDecks[0]==oldDeck||localOutfits[0]!=1||localPalettes[0]!=2)throw new Exception("Lobby choices not connected");
+            lobbyCanvas.PresentLobby(LocalLobbyMembers(),"",true,true,true,catalog,"ЛОКАЛЬНЫЙ СТОЛ","");yield return Shot(directory,"01b-appearance-controls");FrontEndAction("customize-close");
+            localHeroes=new[]{"lizard","owl","rabbit","rat"};
+            lobbyCanvas.PresentLobby(LocalLobbyMembers(),"",true,true,true,catalog,"ЛОКАЛЬНЫЙ СТОЛ","");yield return Shot(directory,"01c-more-animal-heroes");
+            localCount=2;lobbyCanvas.PresentLobby(LocalLobbyMembers(),"",true,true,true,catalog,"ЛОКАЛЬНЫЙ СТОЛ · 2 ИГРОКА","");yield return Shot(directory,"01d-two-player-lobby");
+            localCount=4;localHeroes=new[]{"badger","deer","dog","lion"};localOutfits=new[]{0,1,2,3};localPalettes=new[]{0,1,2,3};previewLobby=false;
             StartLocal(4);handoff=false;localTime=0;
             foreach(var p in local.State.players)
             {
@@ -408,6 +430,9 @@ namespace SummonersTable
             yield return Shot(directory,"02a-first-person");
             board.CameraRig.SetMode(1);board.CameraRig.Sync(0,4,false,true);
             yield return Shot(directory,"02b-above-head");
+            if(state.players[0].heroId!=localHeroes[0]||board.Actor(0)?.Head==null)throw new Exception("Lobby appearance lost entering match");
+            board.Actor(1).SetLook(new Vector2(45,-20));board.Actor(1).Play("Sliding",2);
+            yield return Shot(directory,"02c-hero-animation");
             board.CameraRig.SetMode(2);board.CameraRig.Sync(0,4,false,true);
             foreach(var player in state.players)
             {
@@ -495,8 +520,8 @@ namespace SummonersTable
             yield return Shot(directory,"11-duel-opposite-seats");
             StartLocal(3);handoff=false;state=local.View(0,0);board.Sync(state,0,0);board.SnapCamera(0,true);
             yield return Shot(directory,"12-three-player-layout");
-            if(Directory.GetFiles(directory,"*.png").Length<20)throw new Exception("Runtime screenshots are missing");
-            File.WriteAllText(Path.Combine(directory,"capture-report.txt"),"PASS 20 nonblank runtime screenshots without missing shaders or duplicate worlds/Canvas. Three manual cameras, 2/3/4 seating, main-menu callback, offline lobby layout. Revealed card goes left for caster and observer; right slot follows hand/world hover and clears on leave. Private QTE and public progress. Four hero and 12 unit raycasts. Summon lands on table without automatic target selection. Short/long segmented arrows; explicit drag to hero/center, click and invalid/empty drop preserve old target. Spell target before QTE; deferred combat; camera unchanged by turn. Gray placeholders.\n");
+            if(Directory.GetFiles(directory,"*.png").Length<24)throw new Exception("Runtime screenshots are missing");
+            File.WriteAllText(Path.Combine(directory,"capture-report.txt"),"PASS 24 nonblank runtime screenshots without missing shaders or duplicate worlds/Canvas. Tavern lobby, all eight imported hero rigs, Weapon disabled, deck/hero/armor/palette callbacks, appearance preserved in match. Three manual cameras, 2/3/4 seating. Revealed card goes left for caster and observer; right slot follows hand/world hover and clears on leave. Private QTE and public VFX progress. Four hero and 12 unit raycasts. Summon lands on table without automatic target selection. Short/long segmented arrows; explicit drag to hero/center, click and invalid/empty drop preserve old target. Spell target before QTE; deferred combat; camera unchanged by turn.\n");
             Debug.Log("PREVIEW_CAPTURE_COMPLETE "+directory);Application.Quit();
         }
         void CheckCardPanels(string id,bool ownQte)

@@ -44,6 +44,7 @@ namespace SummonersTable
     [Serializable] public sealed class LobbyMember
     {
         public string id, name, deckId="noise";
+        public string heroId="badger";public int outfit,palette;
         public bool ready;
     }
     [Serializable] public sealed class HandCard
@@ -62,6 +63,8 @@ namespace SummonersTable
     [Serializable] public sealed class PlayerState
     {
         public string id, name, deckId;
+        public string heroId="badger";public int outfit,palette,cameraMode=1;
+        public float lookYaw,lookPitch;
         public int seat, hp, score, handCount, deckCount, fatigue;
         public bool alive=true, connected=true;
         public List<HandCard> hand=new List<HandCard>();
@@ -105,6 +108,7 @@ namespace SummonersTable
         public string uid,cardId,castId,targetUnit="";
         public int owner,targetSeat;
         public double playedAt;
+        public bool resolved,successful;
         public TableReaction Copy(){return (TableReaction)MemberwiseClone();}
     }
     [Serializable] public sealed class PendingAction
@@ -172,11 +176,12 @@ namespace SummonersTable
     [Serializable] public sealed class GameCommand
     {
         public int seq, slot=-1, targetSeat=-1;
+        public float lookYaw,lookPitch;public int cameraMode=1;
         public string kind, cardUid="", unitUid="", targetUnit="", key="", phaseId="";
     }
     [Serializable] public sealed class WireMessage
     {
-        public int protocol=3;
+        public int protocol=4;
         public string kind, text, matchId;
         public GameCommand command;
         public MatchState state;

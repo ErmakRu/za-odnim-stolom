@@ -18,6 +18,7 @@ namespace SummonersTable
         public string targetMode="enemy";
         public bool choosingTarget,placingCreature;
         bool ownAction;
+        Catalog catalog;
         static TableLayout activeLayout;
         public Camera ViewCamera {get;private set;}
         public const float TableTop=1.02f;
@@ -31,10 +32,11 @@ namespace SummonersTable
         readonly List<GameObject> seatRoots=new List<GameObject>();
         readonly List<GameObject> slots=new List<GameObject>();
         GameObject environment,playersRoot,floatingCard,centerMarker;Material gray,seatGray,darkGray;
-        Light keyLight;int count;string visibleCast="";int cameraSeat=-1;Arrow castArrow;
+        Light keyLight;int count;string visibleCast="",visibleCardId="";int cameraSeat=-1;Arrow castArrow;
 
         public void Initialize(Catalog data)
         {
+            catalog=data;
             ViewCamera=tableCamera??Camera.main??FindFirstObjectByType<Camera>();
             if(ViewCamera==null)ViewCamera=new GameObject("Table camera").AddComponent<Camera>();
             ViewCamera.name="Table camera";ViewCamera.tag="MainCamera";ViewCamera.orthographic=false;
@@ -187,7 +189,7 @@ namespace SummonersTable
                 if(visibleCast!=state.cast.id)
                 {
                     if(floatingCard!=null)Destroy(floatingCard);
-                    floatingCard=Card("Announced card",state.cast.cardId,new Vector3(0,3.7f,0),Quaternion.identity,new Vector2(1.8f,2.6f));visibleCast=state.cast.id;
+                    floatingCard=Card("Announced card",state.cast.cardId,new Vector3(0,3.7f,0),Quaternion.identity,new Vector2(1.8f,2.6f));visibleCast=state.cast.id;visibleCardId=state.cast.cardId;
                 }
                 bool reveal=state.phase=="reveal";
                 floatingCard.SetActive(false); // The authored Canvas now owns the reveal and card flight.
@@ -199,7 +201,12 @@ namespace SummonersTable
             }
             else
             {
-                if(floatingCard!=null){Destroy(floatingCard);floatingCard=null;visibleCast="";}
+                if(floatingCard!=null)
+                {
+                    if(catalog.Card(visibleCardId).kind=="spell"){floatingCard.SetActive(true);StartCoroutine(Dissolve(floatingCard));}
+                    else Destroy(floatingCard);
+                    floatingCard=null;visibleCast="";
+                }
                 if(castArrow!=null){castArrow.Destroy();castArrow=null;}
             }
             var visibleReactions=new HashSet<string>();
@@ -213,9 +220,10 @@ namespace SummonersTable
                     reactionCards[reaction.uid]=Card("Reaction "+reaction.cardId,reaction.cardId,pos,Quaternion.LookRotation(-Away(reaction.owner,count))*Quaternion.Euler(90,0,0),new Vector2(.72f,1.02f));
                 }
             }
-            foreach(var id in reactionCards.Keys.Where(id=>!visibleReactions.Contains(id)).ToList()){Destroy(reactionCards[id]);reactionCards.Remove(id);}
+            foreach(var id in reactionCards.Keys.Where(id=>!visibleReactions.Contains(id)).ToList()){StartCoroutine(Dissolve(reactionCards[id]));reactionCards.Remove(id);}
             CameraRig.Sync(viewer,count,inputEnabled,cameraSeat!=viewer);cameraSeat=viewer;
-            if(activeLayout!=null)for(int i=0;i<activeLayout.avatars.Length;i++)activeLayout.avatars[i].SetActive(state.players[i].alive&&!(i==viewer&&CameraRig.Mode==0));
+            SyncHeroes(state,viewer);
+            if(activeLayout!=null)for(int i=0;i<activeLayout.avatars.Length;i++)Actor(i)?.SetVisible(!(i==viewer&&CameraRig.Mode==0));
             SyncEffects(state,viewer,clock);
         }
         public void MoveCamera(int viewer,bool ownTurn,bool snap=false)

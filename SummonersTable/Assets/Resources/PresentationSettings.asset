@@ -44,11 +44,21 @@ MonoBehaviour:
       yawLimit: 30
       downLimit: 10
       upLimit: 10
-  cardHover: {fileID: 0}
-  invalidAction: {fileID: 0}
-  attack: {fileID: 0}
-  hit: {fileID: 0}
-  music: {fileID: 0}
-  attackEffect: {fileID: 0}
-  impactEffect: {fileID: 0}
-  deathEffect: {fileID: 0}
+  cardHover: {fileID: 8300000, guid: 067c6bb7e7529418b9403be18d734770, type: 3}
+  invalidAction: {fileID: 8300000, guid: 84aa69f4ecdfd4c8b882f7a703503b09, type: 3}
+  attack: {fileID: 8300000, guid: 8be21a09f5ecd4be8bafbd7f2947e335, type: 3}
+  hit: {fileID: 8300000, guid: 35779339d76db49689c500c1eb0b9755, type: 3}
+  music: {fileID: 8300000, guid: f872fbeed870c452f990f9f27884a45a, type: 3}
+  attackEffect: {fileID: 237099526826154970, guid: c1b089cd69be38a478350cf07ffdafeb, type: 3}
+  impactEffect: {fileID: 6794032839613893828, guid: 20f44ec5f6606de49bb9cd293062373f, type: 3}
+  deathEffect: {fileID: 85531819248082666, guid: d65ba33f8b511d6448fbf3aaeabf0305, type: 3}
+  qteFire: {fileID: 3636385554672925191, guid: c50bdb43edb3cbc46a8ec14a2f935284, type: 3}
+  qteSmoke: {fileID: 316626887494704670, guid: 508a0848c6982fe47a6ec95074bc51ee, type: 3}
+  qteAttempt: {fileID: 5510580666179602521, guid: 2fdbd9517280ef741a40cb5f46c20e4c, type: 3}
+  motionTitle: {fileID: 8747809221265491226, guid: 042664d3bada9944ba1b1a609edc4fc4, type: 3}
+  qteSuccess: {fileID: 8300000, guid: 9296ccb7ce15142418d69ac87cdc2ae4, type: 3}
+  qteError: {fileID: 8300000, guid: 6973ba58c45314283987b3e3bb00ba62, type: 3}
+  turnNotice: {fileID: 8300000, guid: 84aa69f4ecdfd4c8b882f7a703503b09, type: 3}
+  attackEffectScale: 0.3
+  impactEffectScale: 0.35
+  qteEffectScale: 0.42

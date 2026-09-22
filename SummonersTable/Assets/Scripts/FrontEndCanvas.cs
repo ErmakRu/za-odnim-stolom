@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace SummonersTable
 {
     [RequireComponent(typeof(Canvas),typeof(CanvasScaler))]
-    public sealed class FrontEndCanvas : MonoBehaviour
+    public sealed partial class FrontEndCanvas : MonoBehaviour
     {
         public bool lobby;
         public Text title,subtitle,status;
@@ -21,6 +21,7 @@ namespace SummonersTable
         public void Visible(bool visible){gameObject.SetActive(visible);}
         public void Build(bool isLobby)
         {
+            if(isLobby){BuildTavern();return;}
             lobby=isLobby;var canvas=GetComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=5;
             var scale=GetComponent<CanvasScaler>();scale.uiScaleMode=CanvasScaler.ScaleMode.ScaleWithScreenSize;scale.referenceResolution=new Vector2(1600,1000);scale.matchWidthOrHeight=.5f;
             gameObject.AddComponent<GraphicRaycaster>();

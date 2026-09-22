@@ -27,3 +27,14 @@ The Steam client/API are governed by Valve's applicable terms.
 Unity Player: Unity Technologies, subject to the applicable Unity terms.
 Game illustrations: generated for this prototype using OpenAI image_gen.
 Arial: provided by the player's Windows installation; no font file bundled in the game.
+
+Assets supplied by the project owner in branch stuff (95a8a86):
+ModularAnimalKnightsPolyart; room_items (SM_Table / SM_Armchair);
+Trails VFX URP (Vefects); Hyper Casual FX (Lana Studio);
+VFXPACK_FIRE_WALLCOEUR; Motion Titles Pack (Michsky); Card_Game audio.
+Source packages and their supplied notices are retained under Assets/ThirdParty.
+Their existing publisher terms apply; this project does not relicense these packs.
+Selected particles have separate built-in-renderer materials in Assets/Presentation.
+Motion Titles uses its supplied Roboto-Bold font; TMP Essential Resources are included.
+Additional unused asset packages from stuff remain in the Unity project, not the Player.
+LobbyBackdrop.png: generated with built-in OpenAI image_gen; prompt in docs/lobby-background-prompt.md.

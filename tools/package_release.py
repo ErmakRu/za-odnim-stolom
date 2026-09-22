@@ -29,7 +29,7 @@ def package(path, items):
     return dict(file=path.name, bytes=path.stat().st_size, entries=count,
                 sha256=hashlib.sha256(path.read_bytes()).hexdigest())
 
-build_items=[(p, 'ZaOdnimStolom/'+p.relative_to(BUILD).as_posix()) for p in BUILD.rglob('*') if p.is_file()]
+build_items=[(p, 'ZaOdnimStolom/'+p.relative_to(BUILD).as_posix()) for p in BUILD.rglob('*') if p.is_file() and not any('DoNotShip' in part for part in p.parts)]
 project_items=[]
 for folder in ['SummonersTable/Assets','SummonersTable/Packages','SummonersTable/ProjectSettings','docs','tools','output/tests','output/pdf']:
     for p in (ROOT/folder).rglob('*'):
@@ -37,7 +37,7 @@ for folder in ['SummonersTable/Assets','SummonersTable/Packages','SummonersTable
             project_items.append((p,'ZaOdnimStolom-Unity/'+p.relative_to(ROOT).as_posix()))
 for name in ['README.md','.gitignore','.gitattributes','SummonersTable/steam_appid.txt']:
     project_items.append((ROOT/name,'ZaOdnimStolom-Unity/'+name))
-manifest={'version':VERSION,'balanceVersion':BALANCE_VERSION,'steamAppId':480,'unity':'6000.3.21f1','artAssets':33,'uniqueCards':30,
+manifest={'version':VERSION,'balanceVersion':BALANCE_VERSION,'steamAppId':480,'networkProtocol':4,'unity':'6000.3.21f1','artAssets':34,'uniqueCards':30,'selectableHeroes':8,
           'artMode':'built-in image_gen','pdfPages':22,'archives':[
     package(OUTPUT/('ZaOdnimStolom-Windows-v'+VERSION+'.zip'),build_items),
     package(OUTPUT/('ZaOdnimStolom-Unity-v'+VERSION+'.zip'),project_items)]}

@@ -36,6 +36,18 @@ namespace SummonersTable.Editor
         {
             asserts=0;serial=0;results.Clear();catalog=JsonUtility.FromJson<Catalog>(Resources.Load<TextAsset>("Data/catalog").text);catalog.Validate();
             Test("catalog / all faction roles / 3 x 30 cards",()=>{Check(catalog.cards.Count==30,"unique cards");Check(catalog.decks.All(d=>d.entries.Sum(e=>e.count)==30),"deck size");Check(catalog.decks.All(d=>d.entries.Where(e=>catalog.Card(e.cardId).kind=="reaction").Sum(e=>e.count)==3),"reactions reduced to 3 of 30");});
+            Test("lobby appearance and bounded cosmetic look survive private wire views",()=>{
+                var members=new[]{new LobbyMember{id="a",name="A",heroId="owl",outfit=6,palette=2},new LobbyMember{id="b",name="B",heroId="invalid",outfit=99,palette=-5}};
+                var g=new GameEngine(catalog,members,42);Check(g.State.players[0].heroId=="owl"&&g.State.players[0].outfit==6&&g.State.players[0].palette==2,"selected outfit enters match");
+                Check(g.State.players[1].heroId=="badger"&&g.State.players[1].outfit==7&&g.State.players[1].palette==0,"untrusted appearance sanitized");
+                int hp=g.State.players[0].hp,turn=g.State.turnNumber;
+                Check(g.Submit(1,new GameCommand{seq=1,kind="look",lookYaw=500,lookPitch=-500,cameraMode=2},0).ok,"observer can look around");
+                Check(g.State.players[1].lookYaw==90&&g.State.players[1].lookPitch==-90&&g.State.turnNumber==turn&&g.State.players[0].hp==hp,"look bounded and cosmetic only");
+                Check(!g.Submit(1,new GameCommand{seq=2,kind="look",lookYaw=float.NaN},0).ok,"nonfinite look rejected");
+                Check(!g.Submit(1,new GameCommand{seq=3,kind="look",cameraMode=3},0).ok,"invalid camera rejected");
+                var view=JsonUtility.FromJson<MatchState>(JsonUtility.ToJson(g.View(0,0)));view.RestoreViewPrivacy(0);
+                Check(view.players[1].lookYaw==90&&view.players[0].heroId=="owl"&&view.players[1].hand.Count==0,"cosmetics survive JSON without exposing hands");
+            });
             Test("2-4 seats, private hands, ownership and replay protection",()=>{
                 for(int n=2;n<=4;n++)
                 {
@@ -95,6 +107,7 @@ namespace SummonersTable.Editor
                 Check(Send(g,1,new GameCommand{kind="react",cardUid=copy.uid,phaseId=cast,targetSeat=0}).ok,"copy accepted");
                 Check(Send(g,2,new GameCommand{kind="react",cardUid=bounce.uid,phaseId=cast,targetSeat=0}).ok,"return accepted");
                 Success(g);Check(g.State.players[0].units.Count==0&&g.State.players[0].hand.Any(h=>h.cardId=="C02"),"source returns to hand");
+                Check(g.State.tableReactions.All(r=>r.resolved&&r.successful),"applied summon reactions animate success");
                 Check(g.State.players[1].units.Count==1&&g.State.players[1].units[0].slot==2&&g.State.players[1].units[0].exhausted&&!g.State.players[1].units[0].deploying,"copy survives return, same slot, passive active");
                 g=New();Clean(g);Unit(g,1,"C01",2);copy=Give(g,1,"R02");Play(g,0,"C02",-1,"",2);
                 Check(!Send(g,1,new GameCommand{kind="react",cardUid=copy.uid,phaseId=g.State.cast.id,targetSeat=0}).ok,"copy requires free matching slot");
@@ -125,6 +138,7 @@ namespace SummonersTable.Editor
                 g.Tick(g.State.qte.deadline+1);
                 Check(g.State.players[1].hp==30&&g.State.players[0].units.Count==0,"failed cast no damage or summon");
                 Check(!g.State.players[1].hand.Any(x=>x.uid==h.uid)&&g.State.tableReactions.Count==1,"played reaction spent and visible");
+                Check(g.State.tableReactions[0].resolved&&!g.State.tableReactions[0].successful,"failed cast does not animate successful reaction");
             });
             Test("persistent attack plans and random center targeting",()=>{
                 var g=New(3);Clean(g);var u=Unit(g,0,"C01");
@@ -192,7 +206,7 @@ namespace SummonersTable.Editor
                     var view=g.View(n,g.State.serverTime);
                     var received=JsonUtility.FromJson<WireMessage>(JsonUtility.ToJson(new WireMessage{kind="state",state=view}));
                     received.state.RestoreViewPrivacy(n);
-                    Check(received.protocol==3,"new network protocol");
+                    Check(received.protocol==4,"new network protocol");
                     Check(received.state.cast.qteLength==q.sequence.Length,"public progress survives wire");
                     Check(n==0?received.state.qte.sequence==q.sequence:received.state.qte==null&&received.state.deadline==0,"wire QTE is private");
                 }

@@ -30,7 +30,7 @@ namespace SummonersTable
             for(int i=0;i<members.Count;i++)
             {
                 var m=members[i];if(Catalog.Deck(m.deckId)==null)throw new ArgumentException("Unknown deck.");
-                State.players.Add(new PlayerState{seat=i,id=m.id,name=m.name,deckId=m.deckId});
+                State.players.Add(new PlayerState{seat=i,id=m.id,name=m.name,deckId=m.deckId,heroId=HeroOptions.Normalize(m.heroId),outfit=HeroOptions.Outfit(m.outfit),palette=HeroOptions.Palette(m.palette)});
                 sequences[i]=0;
             }
             State.round=1;StartRound();
@@ -147,6 +147,11 @@ namespace SummonersTable
             sequences[seat]=cmd.seq;
             Tick(time);
             if(cmd.kind=="leave"){Disconnect(seat,time);return CommandResult.Yes();}
+            if(cmd.kind=="look")
+            {
+                if(!P(seat).connected||float.IsNaN(cmd.lookYaw)||float.IsNaN(cmd.lookPitch)||float.IsInfinity(cmd.lookYaw)||float.IsInfinity(cmd.lookPitch)||cmd.cameraMode<0||cmd.cameraMode>2)return CommandResult.No("Некорректное направление взгляда.");
+                var p=P(seat);p.lookYaw=Math.Max(-90,Math.Min(90,cmd.lookYaw));p.lookPitch=Math.Max(-90,Math.Min(90,cmd.lookPitch));p.cameraMode=cmd.cameraMode;State.revision++;return CommandResult.Yes();
+            }
             if(cmd.kind=="nextRound")
             {
                 if(State.phase!="roundEnd"||!P(seat).connected)return CommandResult.No("Раунд ещё не завершён.");
@@ -273,6 +278,7 @@ namespace SummonersTable
         void FailQte()
         {
             var q=State.qte;if(q==null)return;State.qte=null;State.cast=null;State.pending=null;reactions.Clear();
+            foreach(var r in State.tableReactions.Where(r=>r.castId==q.id))r.resolved=true;
             int recipient=Live(q.recipient)?q.recipient:(RandomHero(q.owner)?.seat??-1);
             Log("Срыв ритуала «"+Catalog.Card(q.cardId).name+"»!");
             if(recipient>=0)Give(recipient,new HandCard{uid=q.cardUid,cardId=q.cardId},true);
@@ -283,15 +289,16 @@ namespace SummonersTable
         void CompleteQte()
         {
             var q=State.qte;State.qte=null;State.cast=null;var c=Catalog.Card(q.cardId);
+            foreach(var r in State.tableReactions.Where(r=>r.castId==q.id))r.resolved=true;
             Log("Ритуал удался: "+c.name);
             if(c.kind=="creature")
             {
                 // Cast reactions resolve on successful summoning, never in the combat phase.
                 foreach(var r in reactions.Values.Where(r=>r.effect=="copySummon").OrderBy(r=>r.player))
                     if(Live(r.player)&&!P(r.player).units.Any(u=>u.slot==q.slot))
-                        P(r.player).units.Add(new UnitState{uid=NextId(),cardId=c.id,slot=q.slot,hp=c.health,exhausted=true});
+                    {P(r.player).units.Add(new UnitState{uid=NextId(),cardId=c.id,slot=q.slot,hp=c.health,exhausted=true});ReactionSucceeded(q.id,r.player);}
                 if(reactions.Values.Any(r=>r.effect=="returnSummon"))
-                    Give(q.owner,new HandCard{uid=q.cardUid,cardId=c.id},true);
+                {Give(q.owner,new HandCard{uid=q.cardUid,cardId=c.id},true);foreach(var r in reactions.Values.Where(r=>r.effect=="returnSummon"))ReactionSucceeded(q.id,r.player);}
                 else P(q.owner).units.Add(new UnitState{uid=q.cardUid,cardId=c.id,slot=q.slot,hp=c.health,deploying=true,openingBonus=q.openingBonus});
                 State.pending=null;reactions.Clear();ResumeAction();return;
             }
@@ -324,8 +331,11 @@ namespace SummonersTable
             if(!a.responded.Contains(seat))a.responded.Add(seat);
             return CommandResult.Yes();
         }
-        bool Denied(TargetRef t) { return reactions.Values.Any(r=>r.effect=="deny"&&Same(r.target,t)); }
-        int Reduction(TargetRef t) { return reactions.Values.Where(r=>(r.effect=="reduce"||r.effect=="rescue")&&Same(r.target,t)).Sum(r=>r.value); }
+        void ReactionSucceeded(string cast,int owner){var visual=State.tableReactions.Find(r=>r.castId==cast&&r.owner==owner);if(visual!=null)visual.successful=true;}
+        bool Denied(TargetRef t)
+        {var matches=reactions.Values.Where(r=>r.effect=="deny"&&Same(r.target,t)).ToList();foreach(var r in matches)ReactionSucceeded(State.pending.id,r.player);return matches.Count>0;}
+        int Reduction(TargetRef t)
+        {var matches=reactions.Values.Where(r=>(r.effect=="reduce"||r.effect=="rescue")&&Same(r.target,t)).ToList();foreach(var r in matches)ReactionSucceeded(State.pending.id,r.player);return matches.Sum(r=>r.value);}
         void RawHeroDamage(int seat,int amount,int source)
         {
             if(!Live(seat)||amount<=0)return;
@@ -349,7 +359,7 @@ namespace SummonersTable
             }
             else {var u=Unit(t.seat,t.unit);u.hp-=n;Log(Catalog.Card(u.cardId).name+": -"+n+" HP");}
             if(n>0)
-                foreach(var r in reactions.Values.Where(r=>r.effect=="reflect"&&Same(r.target,t)))RawHeroDamage(source,r.value,r.player);
+                foreach(var r in reactions.Values.Where(r=>r.effect=="reflect"&&Same(r.target,t))){RawHeroDamage(source,r.value,r.player);ReactionSucceeded(State.pending.id,r.player);}
             return n;
         }
         void ResolveAction()

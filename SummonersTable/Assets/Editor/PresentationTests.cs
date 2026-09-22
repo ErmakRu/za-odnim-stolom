@@ -32,13 +32,19 @@ namespace SummonersTable.Editor
                 Check(left==right&&center.x>left.x&&center.y>left.y,"equal side slots, larger center");
                 var board=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/TableWorld.prefab").GetComponent<TableBoard>();
                 foreach(var layout in board.layouts)Check(layout.slotAnchors.Length==5*layout.playerCount&&layout.heroes.Length==layout.playerCount,"editable seat banks");
+                var heroes=Resources.Load<HeroLibrary>("HeroLibrary");Check(heroes!=null&&heroes.heroes.Length==8&&heroes.controller!=null,"eight imported heroes and animation controller");
+                foreach(var hero in heroes.heroes)Check(hero.prefab!=null&&hero.prefab.GetComponentInChildren<Animator>().avatar.isHuman,"valid humanoid avatar "+hero.id);
+                foreach(var layout in board.layouts)foreach(var actor in layout.avatars)Check(actor.GetComponent<HeroActor>()?.library==heroes,"all table seats use imported avatars");
+                Check(settings.cardHover!=null&&settings.invalidAction!=null&&settings.attackEffect!=null&&settings.impactEffect!=null&&settings.qteFire!=null&&settings.qteSmoke!=null&&settings.motionTitle!=null,"stuff effects and audio assigned");
+                var lobby=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/LobbyCanvas.prefab").GetComponent<FrontEndCanvas>();
+                Check(lobby.portraits.Length==4&&lobby.seatControls.Length==20&&lobby.appearancePanel!=null,"four editable lobby places and wardrobe");
                 Check(TargetArrowGeometry.Build(Vector2.zero,new Vector2(10,0)).Length==0,"no arrow before pulling away");
                 var shortArrow=TargetArrowGeometry.Build(Vector2.zero,new Vector2(80,0));
                 var longArrow=TargetArrowGeometry.Build(Vector2.zero,new Vector2(420,0));
                 Check(shortArrow.Length<longArrow.Length,"drag distance adds links rather than stretching all links");
                 foreach(var arrow in new[]{shortArrow,longArrow,TargetArrowGeometry.Build(Vector2.zero,new Vector2(-200,-150))})
                     for(int i=0;i<arrow.Length-2;i+=2)Check(Mathf.Abs(Vector2.Distance(arrow[i],arrow[i+1])-14)<.2f,"arrow links keep their length");
-                Directory.CreateDirectory("../output/tests");File.WriteAllText("../output/tests/presentation-tests.txt","PASS camera clamps in all 3 modes, mode persistence, JSON roundtrip and validation, opposite duel seats, 4 authored scenes, 2/3/4 seat layouts, Canvas slot dimensions. Target arrow adds fixed-length links as drag distance grows; no arrow at click distance.\n");
+                Directory.CreateDirectory("../output/tests");File.WriteAllText("../output/tests/presentation-tests.txt","PASS camera clamps in all 3 modes, mode persistence, JSON roundtrip and validation, opposite duel seats, 4 authored scenes, 2/3/4 seat layouts, Canvas slot dimensions. Eight imported humanoid rigs, controller, all table avatars, four lobby places, wardrobe controls, required VFX/audio assignments. Target arrow adds fixed-length links as drag distance grows; no arrow at click distance.\n");
                 Debug.Log("ALL_PRESENTATION_TESTS_PASSED");
             }
             finally{UnityEngine.Object.DestroyImmediate(obj);}

@@ -37,6 +37,9 @@ namespace SummonersTable
         [Tooltip("Optional replacement assets from Audio/Card_Game. Synthesized previews are used until assigned.")]
         public AudioClip cardHover,invalidAction,attack,hit,music;
         public GameObject attackEffect,impactEffect,deathEffect;
+        public GameObject qteFire,qteSmoke,qteAttempt,motionTitle;
+        public AudioClip qteSuccess,qteError,turnNotice;
+        public float attackEffectScale=.3f,impactEffectScale=.35f,qteEffectScale=.17f;
         public void ImportJson(string json){var next=JsonUtility.FromJson<PresentationData>(json);if(next==null)throw new ArgumentException("Empty settings.");next.Validate();data=next;}
         public string ToJson(){data.Validate();return JsonUtility.ToJson(data,true);}
     }

@@ -1,0 +1,1 @@
+PASS PresentationLab boot without Steam, one EventSystem, JSON export/import roundtrip, combat effects and settings panel, all 11 humanoid Animator states, Die to AttackCombo05 then DieRecover, Cyrillic Motion Titles.

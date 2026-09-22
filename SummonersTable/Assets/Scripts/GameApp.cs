@@ -17,12 +17,15 @@ namespace SummonersTable
         GUIStyle buttonStyle,fieldStyle;Font font;
         string page="menu",modal="",returnPage="menu",error="",selectedCard="",selectedUnit="",joinCode="",roomName="Весёлый стол";
         string[] localNames={"Игрок 1","Игрок 2","Игрок 3","Игрок 4"};
+        string[] localHeroes={"badger","deer","owl","lion"};int[] localOutfits={0,1,2,3},localPalettes={0,1,2,3};
+        double nextLookSend;Vector2 lastSentLook=new Vector2(999,999);int lastSentMode=-1;
         int[] localDecks={0,1,2,0};int localCount=2,capacity=4,seat,selectedSlot=-1,catalogDeck=-1;
         bool handoff,initialized,quitConfirm;double localTime;int[] seq=new int[4];
         float scale;Vector2 offset,scroll;bool online;
         string seenPhase="";int seenTurn=-1;
         AudioSource audioSource;AudioClip tickTone,failTone,successTone;string lastQte="";int lastProgress,lastMistakes;
         CardTableCanvas cardCanvas;
+        MotionAnnouncements announcements;
         public bool IsReady {get{return steam!=null&&board!=null&&cardCanvas!=null;}}
         public Catalog Catalog {get {return catalog;}}
 
@@ -42,6 +45,7 @@ namespace SummonersTable
             cardCanvas=FindFirstObjectByType<CardTableCanvas>(FindObjectsInactive.Include);
             if(cardCanvas==null){cardCanvas=new GameObject("Card display Canvas").AddComponent<CardTableCanvas>();cardCanvas.Build();}
             cardCanvas.Initialize(font,key=>{if(state?.qte!=null)Send(new GameCommand{kind="key",phaseId=state.qte.id,key=key});});
+            announcements=FindFirstObjectByType<MotionAnnouncements>(FindObjectsInactive.Include);
             if(FindFirstObjectByType<UnityEngine.EventSystems.EventSystem>()==null)
             {var events=new GameObject("UI Event System");events.AddComponent<UnityEngine.EventSystems.EventSystem>();events.AddComponent<UnityEngine.EventSystems.StandaloneInputModule>();}
             var eventSystems=FindObjectsByType<UnityEngine.EventSystems.EventSystem>(FindObjectsSortMode.InstanceID);
@@ -65,7 +69,7 @@ namespace SummonersTable
         void StartLocal(int count)
         {
             steam.Leave();var members=new List<LobbyMember>();
-            for(int i=0;i<count;i++)members.Add(new LobbyMember{id="local-"+i,name=string.IsNullOrWhiteSpace(localNames[i])?"Игрок "+(i+1):localNames[i],deckId=catalog.decks[localDecks[i]].id,ready=true});
+            for(int i=0;i<count;i++)members.Add(new LobbyMember{id="local-"+i,name=string.IsNullOrWhiteSpace(localNames[i])?"Игрок "+(i+1):localNames[i],deckId=catalog.decks[localDecks[i]].id,heroId=localHeroes[i],outfit=localOutfits[i],palette=localPalettes[i],ready=true});
             localTime=0;local=new GameEngine(catalog,members,Environment.TickCount);online=false;seq=new int[4];seat=0;
             page="game";modal="";handoff=true;ClearSelection();seenTurn=-1;state=local.View(seat,localTime);
         }
@@ -73,6 +77,7 @@ namespace SummonersTable
         {
             if(!IsReady)return;
             if(!captureMode)UpdateSession();SyncFrontEnd();
+            if(!captureMode&&announcements!=null)announcements.Present(handoff?"handoff":page,state,page=="local"?localCount:steam.Members.Count);
             if(page=="game"&&state!=null&&!handoff)
             {
                 board.inputEnabled=!captureMode&&modal==""&&!quitConfirm;
@@ -80,6 +85,13 @@ namespace SummonersTable
                 var selectedDefinition=catalog.Card(state.players[seat].hand.Find(h=>h.uid==selectedCard)?.cardId);
                 board.placingCreature=selectedDefinition?.kind=="creature";board.targetMode=selectedUnit!=""?"enemy":selectedDefinition?.target??"none";
                 board.Sync(state,seat,Clock,selectedSlot);
+                board.AimTrail(Input.mousePosition,!captureMode&&board.inputEnabled&&board.choosingTarget&&(selectedUnit==""||unitDragMoved));
+                if(!captureMode&&Time.unscaledTimeAsDouble>=nextLookSend&&(Vector2.Distance(lastSentLook,board.CameraRig.Look)>1||lastSentMode!=board.CameraRig.Mode))
+                {
+                    nextLookSend=Time.unscaledTimeAsDouble+.2;lastSentLook=board.CameraRig.Look;lastSentMode=board.CameraRig.Mode;
+                    if(online)steam.SubmitLook(lastSentLook.x,lastSentLook.y,lastSentMode);
+                    else if(local!=null)local.Submit(seat,new GameCommand{seq=++seq[seat],kind="look",lookYaw=lastSentLook.x,lookPitch=lastSentLook.y,cameraMode=lastSentMode},localTime);
+                }
                 if(!captureMode)ReadQteKeys();
             }
             else board.gameObject.SetActive(false);
@@ -137,7 +149,7 @@ namespace SummonersTable
         {
             if(!IsReady)return;
             if(previewLobby)return;
-            if(modal==""&&!quitConfirm&&((page=="menu"&&menuCanvas!=null)||(page=="steam"&&steam.InRoom&&lobbyCanvas!=null)))return;
+            if(modal==""&&!quitConfirm&&((page=="menu"&&menuCanvas!=null)||((page=="local"||page=="steam"&&steam.InRoom)&&lobbyCanvas!=null)))return;
             SetupStyles();GUI.color=Color.white;
             if(page!="game"||handoff)Box(new Rect(0,0,Screen.width,Screen.height),Color.black);
             scale=Mathf.Min(Screen.width/W,Screen.height/H);offset=new Vector2((Screen.width-W*scale)/2,(Screen.height-H*scale)/2);
@@ -339,7 +351,7 @@ namespace SummonersTable
                 "В начале хода доберите карту. За ход: до 3 заклинаний ИЛИ 1 заклинание и 1 существо. Рука до 8 карт, поле — 5 ячеек.",
                 "Существо: выберите карту и свободный слот (или перетащите). Заклинание: выберите карту и цель. Центр означает случайную допустимую цель.",
                 "Карта показывается 2 секунды. Затем владелец вводит A S D F G H J, остальные видят огоньки прогресса. После QTE назначьте существу цель. Атаки — по кнопке «Закончить ход».",
-                "Стрелки существ показывают будущие атаки. В свой ход нажмите существо и новую цель; центр — случайный герой. Назначение сохраняется между ходами.",
+                "Стрелки показывают будущие атаки. Зажмите ЛКМ на своём существе, вытяните стрелку и отпустите над целью; центр — случайный герой. Назначение сохраняется.",
                 "Реакции: до одной на чужой розыгрыш, без QTE. Копирование и возврат — на призыв; защита — на заклинание. На атаки существ реакций нет. Камера: колесо и ПКМ.",
                 "Три ошибки или тайм-аут QTE: карта уходит показанному сопернику. Если закончить ход без QTE, получите бонусный добор. Пустая колода наносит растущую усталость."
             };

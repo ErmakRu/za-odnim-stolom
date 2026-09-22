@@ -8,6 +8,7 @@ namespace SummonersTable
     public sealed partial class TableBoard
     {
         readonly List<GameObject> orbs=new List<GameObject>();
+        readonly List<bool> orbLit=new List<bool>();
         readonly Dictionary<string,double> invalidUntil=new Dictionary<string,double>();
         readonly HashSet<string> observedImpacts=new HashSet<string>();
         readonly Dictionary<string,int> previousHp=new Dictionary<string,int>();
@@ -17,6 +18,16 @@ namespace SummonersTable
         readonly Dictionary<string,LineRenderer> outlines=new Dictionary<string,LineRenderer>();
         string orbCast="",eventMatch="",hoveredUnit="";int orbMistakes;
         float errorPulseUntil;
+        GameObject aimTrail;
+        public void AimTrail(Vector2 screen,bool visible)
+        {
+            if(!visible){if(aimTrail!=null){Destroy(aimTrail);aimTrail=null;}return;}
+            var ray=ViewCamera.ScreenPointToRay(screen);var plane=new Plane(Vector3.up,new Vector3(0,TableTop+.3f,0));
+            if(!plane.Raycast(ray,out float distance))return;
+            if(aimTrail==null&&CameraRig.settings?.attackEffect!=null)
+            {aimTrail=Instantiate(CameraRig.settings.attackEffect,transform);aimTrail.name="Targeting trail tip";aimTrail.transform.localScale*=CameraRig.settings.attackEffectScale*.6f;}
+            if(aimTrail!=null)aimTrail.transform.position=ray.GetPoint(distance);
+        }
         public float DisplayHp(string id,int actual)
         {return displayedHp.TryGetValue(id,out float hp)?hp:actual;}
         public void Invalid(string uid){invalidUntil[uid]=Time.unscaledTime+.35;}
@@ -67,7 +78,7 @@ namespace SummonersTable
                     if(!projectiles.TryGetValue(e.id,out var projectile))
                     {
                         var prefab=CameraRig.settings?.attackEffect;
-                        projectile=prefab!=null?Instantiate(prefab,transform):Sphere("Attack preview",.18f,SeatColors[e.source]);projectiles[e.id]=projectile;
+                        projectile=prefab!=null?Instantiate(prefab,transform):Sphere("Attack preview",.18f,SeatColors[e.source]);if(prefab!=null)projectile.transform.localScale*=CameraRig.settings.attackEffectScale;projectiles[e.id]=projectile;
                         var trail=projectile.AddComponent<TrailRenderer>();trail.sharedMaterial=Flat(SeatColors[e.source]);trail.time=.15f;trail.startWidth=.1f;trail.endWidth=0;
                         PlaySound(CameraRig.settings?.attack,420,.075f);
                     }
@@ -86,7 +97,7 @@ namespace SummonersTable
             {
                 TrackHp("hero-"+p.seat,p.hp,HeroPosition(p.seat,count)+Vector3.up);
                 foreach(var u in p.units)TrackHp(u.uid,u.hp,SlotPosition(p.seat,u.slot,count)+Vector3.up);
-                if(activeLayout!=null)
+                if(activeLayout!=null&&Actor(p.seat)==null)
                 {
                     var renderer=activeLayout.avatars[p.seat].GetComponentInChildren<Renderer>();
                     var props=new MaterialPropertyBlock();bool flash=hpChangedAt.TryGetValue("hero-"+p.seat,out var changed)&&Time.unscaledTime-changed<.25;
@@ -122,28 +133,37 @@ namespace SummonersTable
         void SyncOrbs(MatchState state)
         {
             var cast=state.cast;int length=state.phase=="qte"&&cast!=null?cast.qteLength:0;
-            if(length==0){foreach(var orb in orbs)Destroy(orb);orbs.Clear();orbCast="";return;}
+            if(length==0){foreach(var orb in orbs)Destroy(orb);orbs.Clear();orbLit.Clear();orbCast="";return;}
             if(orbCast!=cast.id)
             {
-                foreach(var orb in orbs)Destroy(orb);orbs.Clear();orbCast=cast.id;orbMistakes=0;
-                for(int i=0;i<length+3;i++)orbs.Add(Sphere(i<length?"Public QTE progress":"Remaining attempt",i<length?.22f:.11f,Color.black));
+                foreach(var orb in orbs)Destroy(orb);orbs.Clear();orbLit.Clear();orbCast=cast.id;orbMistakes=0;
+                for(int i=0;i<length+3;i++){orbs.Add(QteOrb(i>=length,i>=length));orbLit.Add(i>=length);}
             }
-            if(cast.qteMistakes>orbMistakes){errorPulseUntil=Time.unscaledTime+.45f;orbMistakes=cast.qteMistakes;PlaySound(null,150,.1f);}
+            if(cast.qteMistakes>orbMistakes){errorPulseUntil=Time.unscaledTime+.45f;orbMistakes=cast.qteMistakes;PlaySound(CameraRig.settings?.qteError,150,.1f);}
             var away=Away(cast.owner,count);var right=Vector3.Cross(Vector3.up,-away);Vector3 start=away*3.1f+Vector3.up*2.75f;
             Color color=cast.cardId.StartsWith("C")?new Color(.25f,.79f,.69f):new Color(.97f,.74f,.36f);
             for(int i=0;i<orbs.Count;i++)
             {
-                bool main=i<length;var orb=orbs[i];orb.transform.position=start+right*(main?(i-(length-1)*.5f)*.28f:(length*.14f+(i-length)*.16f))+Vector3.up*(main?0:.34f);
+                bool main=i<length,lit=main?i<cast.qteProgress:i-length<3-cast.qteMistakes;
+                if(orbLit[i]!=lit){Destroy(orbs[i]);orbs[i]=QteOrb(lit,!main);orbLit[i]=lit;if(main&&lit)PlaySound(CameraRig.settings?.qteSuccess,640,.045f);}
+                var orb=orbs[i];orb.transform.position=start+right*(main?(i-(length-1)*.5f)*.36f:(length*.18f+(i-length)*.2f))+Vector3.up*(main?0:.4f);
                 bool pulse=main&&i==cast.qteProgress&&Time.unscaledTime<errorPulseUntil;
-                orb.transform.localScale=Vector3.one*(main?.22f:.11f)*(pulse?1.4f+.25f*Mathf.Sin(Time.unscaledTime*35):1);
+                bool effects=CameraRig.settings?.qteFire!=null;
+                orb.transform.localScale=Vector3.one*(effects?CameraRig.settings.qteEffectScale:main?.22f:.11f)*(main?1:.55f)*(pulse?1.4f+.25f*Mathf.Sin(Time.unscaledTime*35):1);
                 Color tint=main?(pulse?Color.red:i<cast.qteProgress?color:new Color(.045f,.05f,.06f)):(i-length<3-cast.qteMistakes?new Color(.3f,1,.35f):new Color(.04f,.08f,.04f));
-                orb.GetComponent<Renderer>().sharedMaterial.color=tint;
+                foreach(var ps in orb.GetComponentsInChildren<ParticleSystem>()){var module=ps.main;module.startColor=tint;}
+                var renderer=orb.GetComponent<Renderer>();if(renderer!=null&&!effects)renderer.sharedMaterial.color=tint;
             }
+        }
+        GameObject QteOrb(bool lit,bool attempt)
+        {
+            var prefab=lit?(attempt?CameraRig.settings?.qteAttempt:CameraRig.settings?.qteFire):CameraRig.settings?.qteSmoke;
+            return prefab!=null?Instantiate(prefab,transform):Sphere("QTE progress",.22f,Color.black);
         }
         void SpawnImpact(Vector3 point,int damage)
         {
             var prefab=CameraRig.settings?.impactEffect;
-            if(prefab!=null){var fx=Instantiate(prefab,point,Quaternion.identity);Destroy(fx,3);}
+            if(prefab!=null){var fx=Instantiate(prefab,point,Quaternion.identity);fx.transform.localScale*=CameraRig.settings.impactEffectScale;Destroy(fx,3);}
             else StartCoroutine(Pulse(point));
         }
         IEnumerator Pulse(Vector3 point)
@@ -159,7 +179,7 @@ namespace SummonersTable
         IEnumerator Dissolve(GameObject obj)
         {
             if(obj==null)yield break;foreach(var collider in obj.GetComponentsInChildren<Collider>())collider.enabled=false;
-            var prefab=CameraRig.settings?.deathEffect;if(prefab!=null){var fx=Instantiate(prefab,obj.transform.position,Quaternion.identity);Destroy(fx,3);}
+            var prefab=CameraRig.settings?.deathEffect;if(prefab!=null){var fx=Instantiate(prefab,obj.transform.position,Quaternion.identity);fx.transform.localScale*=CameraRig.settings.impactEffectScale;Destroy(fx,3);}
             foreach(var line in obj.GetComponentsInChildren<LineRenderer>())line.enabled=false;
             var renderers=obj.GetComponentsInChildren<Renderer>();
             for(float t=0;t<.45f;t+=Time.unscaledDeltaTime)
@@ -169,7 +189,7 @@ namespace SummonersTable
         void PlaySound(AudioClip clip,float pitch,float duration)
         {
             var source=GetComponent<AudioSource>()??gameObject.AddComponent<AudioSource>();source.volume=.1f;
-            if(clip!=null){source.PlayOneShot(clip);return;}
+            if(clip!=null){source.pitch=clip==CameraRig.settings?.cardHover?pitch/640f:1;source.PlayOneShot(clip);return;}
             int length=(int)(22050*duration);var samples=new float[length];for(int i=0;i<length;i++)samples[i]=Mathf.Sin(i*pitch*2*Mathf.PI/22050)*(1-i/(float)length)*.3f;
             clip=AudioClip.Create("Placeholder feedback",length,1,22050,false);clip.SetData(samples,0);source.PlayOneShot(clip);Destroy(clip,duration+1);
         }

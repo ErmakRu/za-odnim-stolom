@@ -1,4 +1,5 @@
 PASS catalog / all faction roles / 3 x 30 cards
+PASS lobby appearance and bounded cosmetic look survive private wire views
 PASS 2-4 seats, private hands, ownership and replay protection
 PASS creature first attack, enters board, does not attack twice
 PASS summon killed by retaliation never enters board
@@ -18,5 +19,5 @@ PASS elimination scoring, round reset, host-independent disconnect
 PASS draw, heal, damage and opening passive triggers
 PASS wire serialization preserves private views and rejects stale phase commands
 PASS full matches for 2, 3, 4 players across 24 deterministic seeds
-Assertions: 115292
-UTC: 2026-09-22T08:09:42.1124000Z
+Assertions: 115301
+UTC: 2026-09-22T09:26:44.5484496Z
