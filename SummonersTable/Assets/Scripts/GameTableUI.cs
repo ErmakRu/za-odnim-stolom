@@ -117,6 +117,7 @@ namespace SummonersTable
             else if(!Casting)Text(new Rect(400,112,800,46),state.lastEvent,18,Color.white,false,TextAnchor.MiddleCenter);
             if(state.phase=="roundEnd"||state.phase=="matchEnd")ScoreOverlay();
             else if(GUI.enabled&&modal==""&&!quitConfirm)WorldInput();
+            DrawJournal();
         }
 
         void Handoff()
@@ -130,21 +131,18 @@ namespace SummonersTable
         }
         void WorldLabels()
         {
+            Vector2 screenPointer=captureMode?previewPointer??new Vector2(-100,-100):(Vector2)Input.mousePosition;
+            var hovered=!JournalCoversScreen(screenPointer)&&!cardCanvas.Covers(screenPointer)?board.Pick(screenPointer):null;
             foreach(var player in state.players)
             {
-                Vector2 pos=board.Project(TableBoard.HeroPosition(player.seat,state.players.Count)+Vector3.up*1.25f,scale,offset);
-                var rect=new Rect(Mathf.Clamp(pos.x-116,300,1318),Mathf.Clamp(pos.y-36,174,760),232,67);
-                if(player.seat==seat)rect=new Rect(24,676,250,67);
-                if(cardCanvas.Covers(new Vector2(rect.center.x*scale+offset.x,Screen.height-(rect.center.y*scale+offset.y))))continue;
-                Box(rect,panel);Frame(rect,player.alive?TableBoard.SeatColors[player.seat]:muted,2);
-                Text(new Rect(rect.x+8,rect.y+7,216,24),player.name+(player.seat==seat?" (вы)":""),18,null,true,TextAnchor.MiddleCenter);
-                Text(new Rect(rect.x+8,rect.y+36,216,24),"HP "+player.hp+"  ·  Очки "+player.score+"  ·  Рука "+player.handCount,16,player.alive?TableBoard.SeatColors[player.seat]:muted,false,TextAnchor.MiddleCenter);
-                Box(new Rect(rect.x+3,rect.yMax-5,(rect.width-6)*board.DisplayHp("hero-"+player.seat,player.hp)/catalog.rules.heroHp,3),TableBoard.SeatColors[player.seat]);
-                if(GUI.enabled&&Event.current.type==EventType.MouseUp&&Event.current.button==0&&rect.Contains(Event.current.mousePosition))
+                if(hovered?.kind=="hero"&&hovered.seat==player.seat)
                 {
-                    if(unitPointerHeld){MoveUnitDrag(Event.current.mousePosition);FinishUnitDrag("hero",player.seat,"",-1);}
-                    else ApplyWorldTarget("hero",player.seat,"",-1);
-                    Event.current.Use();
+                var rect=new Rect(1275,117,297,97);
+                Box(rect,panel);Frame(rect,player.alive?TableBoard.SeatColors[player.seat]:muted,2);
+                Text(new Rect(rect.x+8,rect.y+7,281,30),player.name+(player.seat==seat?" (вы)":""),20,null,true,TextAnchor.MiddleCenter);
+                Text(new Rect(rect.x+8,rect.y+42,281,24),"HP "+player.hp+"  ·  Очки "+player.score+"  ·  Рука "+player.handCount,17,player.alive?TableBoard.SeatColors[player.seat]:muted,false,TextAnchor.MiddleCenter);
+                Text(new Rect(rect.x+8,rect.y+69,281,20),player.alive?"Герой":"Выбыл из раунда",14,muted,false,TextAnchor.MiddleCenter);
+                Box(new Rect(rect.x+3,rect.yMax-5,(rect.width-6)*board.DisplayHp("hero-"+player.seat,player.hp)/catalog.rules.heroHp,3),TableBoard.SeatColors[player.seat]);
                 }
                 foreach(var unit in player.units)
                 {
@@ -172,12 +170,6 @@ namespace SummonersTable
             if(cast.owner!=seat)
             {
                 Box(new Rect(410,704,780,42),panel);Text(new Rect(425,710,750,32),CanAnyReact()?"Подходящие реакции подсвечены в вашей руке":"Наблюдаем за розыгрышем",19,new Color(.80f,.71f,1),true,TextAnchor.MiddleCenter);
-            }
-            foreach(var reaction in state.tableReactions.Where(r=>r.castId==cast.id))
-            {
-                var p=board.Project(TableBoard.Away(reaction.owner,state.players.Count)*2.1f+Vector3.up*1.1f,scale,offset);
-                if(cardCanvas.Covers(new Vector2(p.x*scale+offset.x,Screen.height-((p.y+40)*scale+offset.y))))continue;
-                Box(new Rect(p.x-83,p.y+28,166,44),panel);Text(new Rect(p.x-77,p.y+33,154,35),catalog.Card(reaction.cardId).name,14,new Color(.8f,.72f,1),true,TextAnchor.MiddleCenter);
             }
         }
 
@@ -240,7 +232,12 @@ namespace SummonersTable
                 if(h.uid==shakeHand&&Time.unscaledTime<shakeUntil)rect.x+=Mathf.Sin(Time.unscaledTime*70)*9;
                 float tilt=lift?Mathf.Clamp((rect.center.x-pointer.x)/rect.width,-1,1)*board.CameraRig.Data.hoverTilt:(i-(hand.Count-1)/2f)*3.2f;
                 GUIUtility.RotateAroundPivot(tilt,rect.center);
-                if(c.kind=="reaction"&&ReactionTarget(c)!=null)Frame(new Rect(rect.x-5,rect.y-5,rect.width+10,rect.height+10),new Color(.85f,.67f,1),4);
+                if(MatchRules.CanUse(catalog,state,seat,c))
+                {
+                    var glow=c.kind=="reaction"?new Color(.85f,.67f,1):new Color(.39f,.94f,.67f);
+                    Frame(new Rect(rect.x-7,rect.y-7,rect.width+14,rect.height+14),new Color(glow.r,glow.g,glow.b,.24f),7);
+                    Frame(new Rect(rect.x-3,rect.y-3,rect.width+6,rect.height+6),glow,3);
+                }
                 MiniCard(c,rect,selectedCard==h.uid);GUI.matrix=matrix;
                 if(selectedCard==h.uid)aimStart=new Vector2(rect.center.x,rect.y+18);
             }
@@ -271,6 +268,7 @@ namespace SummonersTable
             float factor=Mathf.Min(Screen.width/W,Screen.height/H);
             var padding=new Vector2((Screen.width-W*factor)/2,(Screen.height-H*factor)/2);
             var pointer=new Vector2((screenPoint.x-padding.x)/factor,(Screen.height-screenPoint.y-padding.y)/factor);
+            if(JournalCovers(pointer))return JournalInspection(screenPoint);
             string canvasCard=cardCanvas.InspectAt(screenPoint);if(canvasCard!="")return canvasCard;
             if(cardCanvas.Covers(screenPoint))return "";
             var hand=state.players[seat].hand;
@@ -304,7 +302,7 @@ namespace SummonersTable
         {
             var e=Event.current;var pointer=e.mousePosition;
             if(unitPointerHeld&&e.type==EventType.MouseDrag){MoveUnitDrag(pointer);e.Use();return;}
-            bool available=pointer.y>=105&&pointer.y<=751&&!cardCanvas.Covers(Input.mousePosition);
+            bool available=pointer.y>=105&&pointer.y<=751&&!cardCanvas.Covers(Input.mousePosition)&&!JournalCovers(pointer);
             if(unitPointerHeld&&e.type==EventType.MouseUp&&e.button==0)
             {
                 MoveUnitDrag(pointer);var drop=available?board.Pick(Input.mousePosition):null;
@@ -474,6 +472,7 @@ namespace SummonersTable
             seat=1;localTime+=.65;local.Tick(localTime);
             state=local.View(seat,localTime);yield return Shot(directory,"05-two-second-reveal");
             local.Submit(1,new GameCommand{seq=1,kind="react",cardUid="preview-reaction",phaseId=local.State.cast.id,targetSeat=1},localTime+.5);
+            state=local.View(seat,localTime);yield return Shot(directory,"05a-reaction-over-reveal");CheckReactionOverlays(1,"R01");
             localTime=local.State.cast.revealUntil;local.Tick(localTime);state=local.View(seat,localTime);
             if(state.qte!=null||state.deadline!=0)throw new Exception("Observer QTE leaked in preview");
             yield return Shot(directory,"06-observer-private-qte-hidden");
@@ -482,6 +481,13 @@ namespace SummonersTable
             if(state.qte==null)throw new Exception("Caster QTE missing in preview");
             yield return Shot(directory,"07-caster-private-qte");
             CheckCardPanels("S01",true);
+            CheckReactionOverlays(1,"R01");
+            previewPointer=RectTransformUtility.WorldToScreenPoint(null,cardCanvas.reactionSlots[0].transform.position);
+            yield return Shot(directory,"07c-reaction-hover");
+            if(cardCanvas.rightSlot.CardId!="R01")throw new Exception("Reaction full inspection missing");
+            previewPointer=null;historyOpen=true;yield return Shot(directory,"07d-history-during-qte");
+            if(cardCanvas.qtePanel.gameObject.activeSelf||cardCanvas.keyButtons.Any(b=>b.interactable))throw new Exception("Journal permits QTE button click-through");
+            historyOpen=false;
             previewPointer=new Vector2(HandRect(0,state.players[0].hand.Count,false).center.x*scale+offset.x,Screen.height-(900*scale+offset.y));
             yield return Shot(directory,"07a-hover-inspection");
             if(!cardCanvas.rightSlot.gameObject.activeSelf||cardCanvas.rightSlot.CardId!="C02")throw new Exception("Hand hover did not inspect C02");
@@ -493,13 +499,23 @@ namespace SummonersTable
             if(state.qte!=null||state.cast.qteProgress!=1)throw new Exception("Public progress/private letters contract failed");
             yield return Shot(directory,"08-public-qte-orbs");
             seat=0;LabFinishQte();ClearSelection();board.SnapCamera(0,true);
+            for(int owner=1;owner<4;owner++)local.State.players[owner].hand.Add(new HandCard{uid="copy-reaction-"+owner,cardId="R02"});
             ChooseHand(state.players[0].hand.Find(h=>h.uid=="preview-C02"),new Vector2(600,790));ApplyWorldTarget("slot",0,"",3);
             if(local.State.cast?.slot!=3)throw new Exception("Click-to-slot summon failed");
+            for(int owner=1;owner<4;owner++)
+            {
+                string uid="copy-reaction-"+owner;
+                if(!local.Submit(owner,new GameCommand{seq=100+owner,kind="react",cardUid=uid,phaseId=local.State.cast.id,targetSeat=0},localTime).ok)throw new Exception("Copy reaction fixture rejected");
+            }
+            state=local.View(seat,localTime);yield return Shot(directory,"08b-three-reactions-over-summon");CheckReactionOverlays(3,"R02");
             localTime=local.State.cast.revealUntil;local.Tick(localTime);state=local.View(seat,localTime);
             yield return Shot(directory,"08a-summon-private-qte");CheckCardPanels("C02",true);
+            CheckReactionOverlays(3,"R02");
             LabFinishQte();
             yield return Shot(directory,"09-summon-rests-on-table");
-            CheckCardPanels("C02",false);
+            CheckSummonPreviewCleared();
+            seat=1;state=local.View(seat,localTime);yield return Shot(directory,"09b-observer-summon-cleared");CheckSummonPreviewCleared();
+            seat=0;state=local.View(seat,localTime);
             if(selectedUnit!=""||unitPointerHeld||cardCanvas.rightSlot.gameObject.activeSelf)throw new Exception("Summon was automatically selected or inspected");
             var summoned=board.GetComponentsInChildren<BoardTarget>().First(t=>t.uid=="preview-C02");
             if(Mathf.Abs(summoned.transform.position.y-TableBoard.SlotPosition(0,3,4).y-.065f)>.01f)throw new Exception("Summon still floats above its slot");
@@ -513,21 +529,38 @@ namespace SummonersTable
             BeginUnitDrag("preview-C02",board.Project(summoned.transform.position,scale,offset));
             MoveUnitDrag(unitPress+Vector2.up*100);FinishUnitDrag("hero",1,"",-1);
             if(local.State.players[0].units.Find(u=>u.uid=="preview-C02").plannedSeat!=1)throw new Exception("Drag to enemy hero failed");
+            Send(new GameCommand{kind="target",unitUid="preview-unit-0-0",targetSeat=1,targetUnit="preview-unit-1-0"});
             Send(new GameCommand{kind="end"});localTime+=.41;local.Tick(localTime);state=local.View(seat,localTime);
             yield return Shot(directory,"10-sequential-attack-impact");
+            yield return CaptureFeedbackDetails(directory);
             if(board.CameraRig.Mode!=2)throw new Exception("Turn changed manual camera mode");
             ClearSelection();StartLocal(2);handoff=false;state=local.View(0,0);board.Sync(state,0,0);board.SnapCamera(0,true);
             yield return Shot(directory,"11-duel-opposite-seats");
+            CheckHandBackCounts();
             StartLocal(3);handoff=false;state=local.View(0,0);board.Sync(state,0,0);board.SnapCamera(0,true);
             yield return Shot(directory,"12-three-player-layout");
-            if(Directory.GetFiles(directory,"*.png").Length<24)throw new Exception("Runtime screenshots are missing");
-            File.WriteAllText(Path.Combine(directory,"capture-report.txt"),"PASS 24 nonblank runtime screenshots without missing shaders or duplicate worlds/Canvas. Tavern lobby, all eight imported hero rigs, Weapon disabled, deck/hero/armor/palette callbacks, appearance preserved in match. Three manual cameras, 2/3/4 seating. Revealed card goes left for caster and observer; right slot follows hand/world hover and clears on leave. Private QTE and public VFX progress. Four hero and 12 unit raycasts. Summon lands on table without automatic target selection. Short/long segmented arrows; explicit drag to hero/center, click and invalid/empty drop preserve old target. Spell target before QTE; deferred combat; camera unchanged by turn.\n");
+            CheckHandBackCounts();yield return CaptureFailedSummon(directory);
+            int captured=Directory.GetFiles(directory,"*.png").Length;
+            if(captured<36)throw new Exception("Runtime screenshots are missing");
+            File.WriteAllText(Path.Combine(directory,"capture-report.txt"),"PASS "+captured+" nonblank runtime screenshots without missing shaders or duplicate worlds/Canvas. Tavern lobby, all eight imported hero rigs, Weapon disabled, deck/hero/armor/palette callbacks, appearance preserved in match. Three manual cameras, 2/3/4 seating and exact public 3D hand counts. Revealed card goes left for caster and observer; right slot follows hand/world/reaction/history hover and clears on leave. One/three UI reaction overlays tilt about 20 degrees and follow the cast. Summon previews clear on success and failure for caster and observer. Private QTE and public progress. Hero HP/name only on hover. History source and target inspection, input coverage, damage and retaliation ownership. Journal suppresses QTE click-through. Four hero and 12 unit raycasts. Summon lands on table without automatic selection. Short/long segmented arrows without aim VFX; explicit drag to hero/center, click and invalid/empty drop preserve old target. Spell target before QTE; deferred combat; camera unchanged by turn.\n");
             Debug.Log("PREVIEW_CAPTURE_COMPLETE "+directory);Application.Quit();
         }
         void CheckCardPanels(string id,bool ownQte)
         {
             if(!cardCanvas.leftSlot.gameObject.activeSelf||cardCanvas.leftSlot.CardId!=id||cardCanvas.rightSlot.gameObject.activeSelf||cardCanvas.qtePanel.gameObject.activeSelf!=ownQte)
                 throw new Exception("Card panels violated left announcement / hover-only right / private QTE contract");
+        }
+        void CheckSummonPreviewCleared()
+        {
+            if(cardCanvas.leftSlot.gameObject.activeSelf||cardCanvas.centerSlot.gameObject.activeSelf||cardCanvas.reactionSlots.Any(s=>s.gameObject.activeSelf))throw new Exception("Summon preview survived QTE");
+        }
+        void CheckReactionOverlays(int count,string id)
+        {
+            if(cardCanvas.reactionSlots.Count(s=>s.gameObject.activeSelf)!=count)throw new Exception("Wrong reaction overlay count");
+            foreach(var slot in cardCanvas.reactionSlots.Where(s=>s.gameObject.activeSelf))
+                if(slot.CardId!=id||Mathf.Abs(Mathf.DeltaAngle(slot.transform.localEulerAngles.z,-20))>3)throw new Exception("Wrong reaction card or tilt");
+            var top=cardCanvas.reactionSlots[count-1];var pointer=RectTransformUtility.WorldToScreenPoint(null,top.transform.position);
+            if(cardCanvas.InspectAt(pointer)!=id||!cardCanvas.Covers(pointer))throw new Exception("Reaction hover/input coverage failed");
         }
         IEnumerator Shot(string directory,string name)
         {

@@ -54,6 +54,9 @@ namespace SummonersTable.Editor
             }
             if(!File.Exists("Assets/Prefabs/CardTableCanvas.prefab"))
             {var o=new GameObject("Card presentation — three slots");o.AddComponent<CardTableCanvas>().Build();PrefabUtility.SaveAsPrefabAsset(o,"Assets/Prefabs/CardTableCanvas.prefab");UnityEngine.Object.DestroyImmediate(o);}
+            var cards=PrefabUtility.LoadPrefabContents("Assets/Prefabs/CardTableCanvas.prefab");
+            try{cards.GetComponent<CardTableCanvas>().EnsureReactionSlots();PrefabUtility.SaveAsPrefabAsset(cards,"Assets/Prefabs/CardTableCanvas.prefab");}
+            finally{PrefabUtility.UnloadPrefabContents(cards);}
             foreach(bool lobby in new[]{false,true})
             {
                 string file="Assets/Prefabs/"+(lobby?"LobbyCanvas":"MainMenuCanvas")+".prefab";

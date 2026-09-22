@@ -30,6 +30,8 @@ namespace SummonersTable.Editor
                 var canvas=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/CardTableCanvas.prefab").GetComponent<CardTableCanvas>();
                 var left=((RectTransform)canvas.leftSlot.transform).sizeDelta;var right=((RectTransform)canvas.rightSlot.transform).sizeDelta;var center=((RectTransform)canvas.centerSlot.transform).sizeDelta;
                 Check(left==right&&center.x>left.x&&center.y>left.y,"equal side slots, larger center");
+                Check(canvas.reactionSlots!=null&&canvas.reactionSlots.Length==3,"three editable reaction overlays");
+                foreach(var reaction in canvas.reactionSlots)Check(reaction!=null&&reaction!=canvas.leftSlot,"independent overlay slot");
                 var board=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/TableWorld.prefab").GetComponent<TableBoard>();
                 foreach(var layout in board.layouts)Check(layout.slotAnchors.Length==5*layout.playerCount&&layout.heroes.Length==layout.playerCount,"editable seat banks");
                 var heroes=Resources.Load<HeroLibrary>("HeroLibrary");Check(heroes!=null&&heroes.heroes.Length==8&&heroes.controller!=null,"eight imported heroes and animation controller");

@@ -37,7 +37,8 @@ for folder in ['SummonersTable/Assets','SummonersTable/Packages','SummonersTable
             project_items.append((p,'ZaOdnimStolom-Unity/'+p.relative_to(ROOT).as_posix()))
 for name in ['README.md','.gitignore','.gitattributes','SummonersTable/steam_appid.txt']:
     project_items.append((ROOT/name,'ZaOdnimStolom-Unity/'+name))
-manifest={'version':VERSION,'balanceVersion':BALANCE_VERSION,'steamAppId':480,'networkProtocol':4,'unity':'6000.3.21f1','artAssets':34,'uniqueCards':30,'selectableHeroes':8,
+protocol=int(re.search(r'CurrentProtocol=(\d+)',(ROOT/'SummonersTable/Assets/Scripts/Core/Models.cs').read_text(encoding='utf-8')).group(1))
+manifest={'version':VERSION,'balanceVersion':BALANCE_VERSION,'steamAppId':480,'networkProtocol':protocol,'unity':'6000.3.21f1','artAssets':34,'uniqueCards':30,'selectableHeroes':8,
           'artMode':'built-in image_gen','pdfPages':22,'archives':[
     package(OUTPUT/('ZaOdnimStolom-Windows-v'+VERSION+'.zip'),build_items),
     package(OUTPUT/('ZaOdnimStolom-Unity-v'+VERSION+'.zip'),project_items)]}

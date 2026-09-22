@@ -142,6 +142,7 @@ namespace SummonersTable
         public double serverTime, deadline;
         public List<PlayerState> players=new List<PlayerState>();
         public List<string> log=new List<string>();
+        public List<HistoryEntry> history=new List<HistoryEntry>();
         public QteState qte;
         public CastState cast;
         public List<TableReaction> tableReactions=new List<TableReaction>();
@@ -153,6 +154,7 @@ namespace SummonersTable
             var v=(MatchState)MemberwiseClone();
             v.players=players.Select(p=>p.View(p.seat==seat)).ToList();
             v.log=new List<string>(log);v.winners=new List<int>(winners);
+            v.history=history.Select(e=>e.Copy()).ToList();
             // Letters and timer remain private; cast exposes only counts for the public orbs.
             v.qte=qte!=null&&phase=="qte"&&qte.owner==seat?qte.Copy():null;
             if(phase=="qte"&&(qte==null||qte.owner!=seat))v.deadline=0;
@@ -181,7 +183,8 @@ namespace SummonersTable
     }
     [Serializable] public sealed class WireMessage
     {
-        public int protocol=4;
+        public const int CurrentProtocol=5;
+        public int protocol=CurrentProtocol;
         public string kind, text, matchId;
         public GameCommand command;
         public MatchState state;

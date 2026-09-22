@@ -41,7 +41,7 @@ namespace SummonersTable.Editor
                 if(!exists){int index=included.arraySize;included.InsertArrayElementAtIndex(index);included.GetArrayElementAtIndex(index).objectReferenceValue=shader;}
             }
             graphics.ApplyModifiedPropertiesWithoutUndo();graphics.Dispose();
-            PlayerSettings.companyName="GameJams";PlayerSettings.productName="Za odnim stolom";PlayerSettings.bundleVersion="0.4.0";
+            PlayerSettings.companyName="GameJams";PlayerSettings.productName="Za odnim stolom";PlayerSettings.bundleVersion="0.4.1";
             PlayerSettings.defaultScreenWidth=1440;PlayerSettings.defaultScreenHeight=900;
             PlayerSettings.fullScreenMode=FullScreenMode.Windowed;PlayerSettings.resizableWindow=true;
             PlayerSettings.runInBackground=true;
@@ -49,7 +49,7 @@ namespace SummonersTable.Editor
             PlayerSettings.SetApiCompatibilityLevel(UnityEditor.Build.NamedBuildTarget.Standalone,ApiCompatibilityLevel.NET_Standard);
             PlayerSettings.SetManagedStrippingLevel(UnityEditor.Build.NamedBuildTarget.Standalone,ManagedStrippingLevel.Low);
             AssetDatabase.SaveAssets();
-            string output=Path.GetFullPath("../Builds/Windows-v0.4.0");Directory.CreateDirectory(output);
+            string output=Path.GetFullPath("../Builds/Windows-v0.4.1");Directory.CreateDirectory(output);
             var report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{scenes=ProjectScaffolder.ScenePaths,
                 locationPathName=Path.Combine(output,"ZaOdnimStolom.exe"),target=BuildTarget.StandaloneWindows64,options=BuildOptions.None});
             if(report.summary.result!=BuildResult.Succeeded)throw new Exception("Build failed: "+report.summary.result);
