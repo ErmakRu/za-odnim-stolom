@@ -9,6 +9,7 @@ namespace SummonersTable
         public RawImage artwork;
         public Text typeLabel,nameLabel,statsLabel,rulesLabel,roleLabel;
         string current="";
+        public string CardId {get{return current;}}
         public void Show(CardDef card,Catalog catalog,Font font)
         {
             gameObject.SetActive(card!=null);if(card==null)return;

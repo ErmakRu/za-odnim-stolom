@@ -45,7 +45,7 @@ namespace SummonersTable
         {
             if(previewLobby)return;
             bool visible=modal==""&&!quitConfirm;
-            if(menuCanvas!=null){menuCanvas.Visible(page=="menu"&&visible);menuCanvas.status.text="ТЕСТ "+catalog.version+" · "+steam.Status;}
+            if(menuCanvas!=null){menuCanvas.Visible(page=="menu"&&visible);menuCanvas.status.text="ТЕСТ "+Application.version+" · "+steam.Status;}
             if(lobbyCanvas==null)return;
             lobbyCanvas.Visible(page=="steam"&&steam.InRoom&&visible);
             if(!steam.InRoom)return;

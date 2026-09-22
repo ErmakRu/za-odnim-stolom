@@ -1,10 +1,15 @@
 """Package only distributable build/project files; verify every ZIP entry."""
-import hashlib, json, zipfile
+import argparse, hashlib, json, re, zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'output'
-VERSION = json.loads((ROOT/'SummonersTable/Assets/Resources/Data/catalog.json').read_text(encoding='utf-8'))['version']
+BALANCE_VERSION = json.loads((ROOT/'SummonersTable/Assets/Resources/Data/catalog.json').read_text(encoding='utf-8'))['version']
+parser=argparse.ArgumentParser()
+player_version=re.search(r'^\s*bundleVersion: (\S+)',(ROOT/'SummonersTable/ProjectSettings/ProjectSettings.asset').read_text(encoding='utf-8'),re.MULTILINE).group(1)
+parser.add_argument('--version',default=player_version,help='Player build version (defaults to Unity project settings)')
+VERSION=parser.parse_args().version
+assert all(part.isdigit() for part in VERSION.split('.')) and len(VERSION.split('.'))==3
 BUILD = ROOT / ('Builds/Windows-v'+VERSION)
 required = ['ZaOdnimStolom.exe', 'UnityPlayer.dll', 'steam_appid.txt',
             'ZaOdnimStolom_Data/Plugins/x86_64/steam_api64.dll',
@@ -32,7 +37,7 @@ for folder in ['SummonersTable/Assets','SummonersTable/Packages','SummonersTable
             project_items.append((p,'ZaOdnimStolom-Unity/'+p.relative_to(ROOT).as_posix()))
 for name in ['README.md','.gitignore','.gitattributes','SummonersTable/steam_appid.txt']:
     project_items.append((ROOT/name,'ZaOdnimStolom-Unity/'+name))
-manifest={'version':VERSION,'steamAppId':480,'unity':'6000.3.21f1','artAssets':33,'uniqueCards':30,
+manifest={'version':VERSION,'balanceVersion':BALANCE_VERSION,'steamAppId':480,'unity':'6000.3.21f1','artAssets':33,'uniqueCards':30,
           'artMode':'built-in image_gen','pdfPages':22,'archives':[
     package(OUTPUT/('ZaOdnimStolom-Windows-v'+VERSION+'.zip'),build_items),
     package(OUTPUT/('ZaOdnimStolom-Unity-v'+VERSION+'.zip'),project_items)]}

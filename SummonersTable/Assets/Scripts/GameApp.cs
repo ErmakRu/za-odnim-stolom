@@ -15,7 +15,7 @@ namespace SummonersTable
         readonly Dictionary<int,GUIStyle> labels=new Dictionary<int,GUIStyle>();
         Catalog catalog; SteamSession steam; GameEngine local; MatchState state;
         GUIStyle buttonStyle,fieldStyle;Font font;
-        string page="menu",modal="",returnPage="menu",error="",selectedCard="",selectedUnit="",detailId="",joinCode="",roomName="Весёлый стол";
+        string page="menu",modal="",returnPage="menu",error="",selectedCard="",selectedUnit="",joinCode="",roomName="Весёлый стол";
         string[] localNames={"Игрок 1","Игрок 2","Игрок 3","Игрок 4"};
         int[] localDecks={0,1,2,0};int localCount=2,capacity=4,seat,selectedSlot=-1,catalogDeck=-1;
         bool handoff,initialized,quitConfirm;double localTime;int[] seq=new int[4];
@@ -83,7 +83,7 @@ namespace SummonersTable
                 if(!captureMode)ReadQteKeys();
             }
             else board.gameObject.SetActive(false);
-            var inspected=hoverCard!=""?hoverCard:detailId;
+            var inspected=InspectionAt(captureMode?previewPointer??new Vector2(-100,-100):(Vector2)Input.mousePosition);
             cardCanvas.Present(state,seat,state==null?0:Clock,inspected,catalog,board,page=="game"&&!handoff&&modal==""&&!quitConfirm&&state.phase!="roundEnd"&&state.phase!="matchEnd");
             if(Input.GetKeyDown(KeyCode.Escape))
             {
@@ -100,7 +100,7 @@ namespace SummonersTable
             else if(local!=null){command.seq=++seq[seat];var result=local.Submit(seat,command,localTime);error=result.ok?"":result.message;state=local.View(seat,localTime);}
         }
         double Clock {get {return online?state.serverTime+Time.realtimeSinceStartupAsDouble-steam.ReceivedAt:localTime;}}
-        void ClearSelection(){selectedCard="";selectedUnit="";detailId="";selectedSlot=-1;mouseHeld=false;draggingCard=false;error="";}
+        void ClearSelection(){selectedCard="";selectedUnit="";selectedSlot=-1;mouseHeld=false;draggingCard=false;unitPointerHeld=false;unitDragMoved=false;error="";}
         void ExitMatch(){steam.Leave();local=null;state=null;online=false;page="menu";quitConfirm=false;ClearSelection();}
         void SetupStyles()
         {
@@ -180,7 +180,7 @@ namespace SummonersTable
             if(Button(new Rect(78,676,232,54),"Колоды и карты",new Color(.77f,.71f,.95f))){returnPage="menu";page="cards";}
             if(Button(new Rect(326,676,232,54),"Как играть",new Color(.7f,.78f,.77f)))modal="rules";
             Text(new Rect(78,780,520,65),steam.Status,17,muted);
-            Text(new Rect(78,870,510,50),"ТЕСТ 0.3.0  /  3 РАУНДА  /  30 КАРТ",16,teal,true);
+            Text(new Rect(78,870,510,50),"ТЕСТ "+Application.version+"  /  3 РАУНДА  /  30 КАРТ",16,teal,true);
             if(Button(new Rect(78,927,150,40),"Выход",new Color(.7f,.78f,.77f)))Application.Quit();
             Text(new Rect(1130,900,390,70),"Существа + заклинания + реакции\nНикаких серьёзных лиц",21,Color.white,false,TextAnchor.MiddleRight);
         }

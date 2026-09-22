@@ -13,6 +13,7 @@ namespace SummonersTable
         public Button[] keyButtons;
         Vector2 centerRest;
         string phaseId;
+        string announcedCard="",announcedMatch="";int announcedRound;
         Action<string> sendKey;
         Font font;
         public void Initialize(Font typeface,Action<string> input)
@@ -30,13 +31,25 @@ namespace SummonersTable
                 if(r.gameObject.activeInHierarchy&&RectTransformUtility.RectangleContainsScreenPoint(r,screenPoint))return true;
             return false;
         }
+        public string InspectAt(Vector2 screenPoint)
+        {
+            // The side preview must never inspect itself and keep itself open.
+            foreach(var slot in new[]{leftSlot,centerSlot})
+                if(slot.gameObject.activeInHierarchy&&RectTransformUtility.RectangleContainsScreenPoint((RectTransform)slot.transform,screenPoint))return slot.CardId;
+            return "";
+        }
         public void Present(MatchState state,int seat,double now,string inspection,Catalog catalog,TableBoard board,bool visible)
         {
-            gameObject.SetActive(visible);if(!visible||state==null)return;
+            gameObject.SetActive(visible);
+            if(state==null){announcedCard="";announcedMatch="";return;}
+            if(announcedMatch!=state.matchId||announcedRound!=state.round)
+            {announcedCard="";announcedMatch=state.matchId;announcedRound=state.round;}
             var cast=state.cast;bool reveal=cast!=null&&state.phase=="reveal",qte=cast!=null&&state.phase=="qte";
             var card=cast==null?null:catalog.Card(cast.cardId);
-            leftSlot.Show(qte&&cast.owner!=seat?card:null,catalog,font);
-            rightSlot.Show(qte&&cast.owner==seat?card:catalog.Card(inspection),catalog,font);
+            if(card!=null)announcedCard=card.id;
+            if(!visible)return;
+            leftSlot.Show(reveal?null:catalog.Card(announcedCard),catalog,font);
+            rightSlot.Show(catalog.Card(inspection),catalog,font);
             centerSlot.Show(reveal?card:null,catalog,font);
             if(reveal)
             {

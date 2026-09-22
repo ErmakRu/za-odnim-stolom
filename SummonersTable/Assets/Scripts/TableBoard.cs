@@ -23,6 +23,7 @@ namespace SummonersTable
         public const float TableTop=1.02f;
         public static readonly Color[] SeatColors={new Color(.3f,.85f,.76f),new Color(1,.67f,.35f),new Color(.69f,.57f,.95f),new Color(.42f,.71f,.96f)};
         readonly Dictionary<string,GameObject> units=new Dictionary<string,GameObject>();
+        readonly Dictionary<string,float> landingStarted=new Dictionary<string,float>();
         readonly Dictionary<string,Material> artMaterials=new Dictionary<string,Material>();
         readonly Dictionary<string,Arrow> arrows=new Dictionary<string,Arrow>();
         readonly Dictionary<string,GameObject> reactionCards=new Dictionary<string,GameObject>();
@@ -158,19 +159,21 @@ namespace SummonersTable
                         var collider=obj.AddComponent<BoxCollider>();collider.size=new Vector3(.96f,1.24f,.10f);
                         var marker=obj.AddComponent<BoardTarget>();marker.kind="unit";marker.seat=player.seat;marker.slot=unit.slot;marker.uid=unit.uid;
                         units[unit.uid]=obj;
+                        landingStarted[unit.uid]=Time.unscaledTime;
                     }
                     if(!arrows.TryGetValue(unit.uid,out var arrow)){arrow=new Arrow(transform,Flat(SeatColors[player.seat]));arrows[unit.uid]=arrow;}
-                    var position=SlotPosition(player.seat,unit.slot,count)+Vector3.up*(unit.deploying?.6f:.065f);
+                    float landing=landingStarted.TryGetValue(unit.uid,out float began)?1-Mathf.SmoothStep(0,1,(Time.unscaledTime-began)/.28f):0;
+                    var position=SlotPosition(player.seat,unit.slot,count)+Vector3.up*(.065f+.3f*landing);
                     obj.transform.position=position;
                     obj.transform.rotation=Quaternion.LookRotation(-Away(player.seat,count))*Quaternion.Euler(90,0,0);
                     obj.transform.localScale=Vector3.one;
                     var target=TargetPosition(unit.plannedSeat,unit.plannedUnit,state);
-                    arrow.Set(obj.transform.position+Vector3.up*.16f,target,unit.plannedSeat<0?.28f:.7f,unit.targetAssigned?(unit.exhausted?.024f:.045f):0);
+                    arrow.Set(obj.transform.position+Vector3.up*.16f,target,unit.plannedSeat<0?.28f:.7f,unit.targetAssigned&&unit.uid!=selectedUnit?(unit.exhausted?.024f:.045f):0);
                     TintUnit(obj,unit,player.seat,viewer);
                 }
             }
             foreach(string uid in units.Keys.Where(id=>!liveUnits.Contains(id)).ToList())
-            {StartCoroutine(Dissolve(units[uid]));units.Remove(uid);arrows[uid].Destroy();arrows.Remove(uid);}
+            {StartCoroutine(Dissolve(units[uid]));units.Remove(uid);landingStarted.Remove(uid);arrows[uid].Destroy();arrows.Remove(uid);}
             foreach(var slot in slots)
             {
                 var marker=slot.GetComponent<BoardTarget>();

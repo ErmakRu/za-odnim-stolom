@@ -19,4 +19,4 @@ PASS draw, heal, damage and opening passive triggers
 PASS wire serialization preserves private views and rejects stale phase commands
 PASS full matches for 2, 3, 4 players across 24 deterministic seeds
 Assertions: 115292
-UTC: 2026-09-22T07:32:48.9942027Z
+UTC: 2026-09-22T08:09:42.1124000Z
