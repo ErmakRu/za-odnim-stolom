@@ -77,29 +77,32 @@ namespace SummonersTable
         {
             if(!IsReady)return;
             if(!captureMode)UpdateSession();SyncFrontEnd();
+            UpdateJournal();
             if(!captureMode&&announcements!=null)announcements.Present(handoff?"handoff":page,state,page=="local"?localCount:steam.Members.Count);
             if(page=="game"&&state!=null&&!handoff)
             {
-                board.inputEnabled=!captureMode&&modal==""&&!quitConfirm;
+                board.inputEnabled=!captureMode&&modal==""&&!quitConfirm&&!JournalCoversScreen(Input.mousePosition);
                 board.selectedUnit=selectedUnit;board.choosingTarget=selectedUnit!=""||(selectedCard!=""&&catalog.Card(state.players[seat].hand.Find(h=>h.uid==selectedCard)?.cardId)?.kind=="spell");
                 var selectedDefinition=catalog.Card(state.players[seat].hand.Find(h=>h.uid==selectedCard)?.cardId);
                 board.placingCreature=selectedDefinition?.kind=="creature";board.targetMode=selectedUnit!=""?"enemy":selectedDefinition?.target??"none";
                 board.Sync(state,seat,Clock,selectedSlot);
-                board.AimTrail(Input.mousePosition,!captureMode&&board.inputEnabled&&board.choosingTarget&&(selectedUnit==""||unitDragMoved));
                 if(!captureMode&&Time.unscaledTimeAsDouble>=nextLookSend&&(Vector2.Distance(lastSentLook,board.CameraRig.Look)>1||lastSentMode!=board.CameraRig.Mode))
                 {
                     nextLookSend=Time.unscaledTimeAsDouble+.2;lastSentLook=board.CameraRig.Look;lastSentMode=board.CameraRig.Mode;
                     if(online)steam.SubmitLook(lastSentLook.x,lastSentLook.y,lastSentMode);
                     else if(local!=null)local.Submit(seat,new GameCommand{seq=++seq[seat],kind="look",lookYaw=lastSentLook.x,lookPitch=lastSentLook.y,cameraMode=lastSentMode},localTime);
                 }
-                if(!captureMode)ReadQteKeys();
+                if(!captureMode&&!historyOpen)ReadQteKeys();
             }
             else board.gameObject.SetActive(false);
             var inspected=InspectionAt(captureMode?previewPointer??new Vector2(-100,-100):(Vector2)Input.mousePosition);
             cardCanvas.Present(state,seat,state==null?0:Clock,inspected,catalog,board,page=="game"&&!handoff&&modal==""&&!quitConfirm&&state.phase!="roundEnd"&&state.phase!="matchEnd");
+            foreach(var key in cardCanvas.keyButtons)key.interactable=!historyOpen;
+            if(historyOpen)cardCanvas.CoverWithJournal();
             if(Input.GetKeyDown(KeyCode.Escape))
             {
                 if(modal!="")modal="";
+                else if(historyOpen)historyOpen=false;
                 else if(selectedCard!=""||selectedUnit!="")ClearSelection();
                 else if(page=="game")quitConfirm=!quitConfirm;
                 else if(steam.InRoom)steam.Leave();

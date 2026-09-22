@@ -82,7 +82,7 @@ namespace SummonersTable
         bool Compatible(CSteamID room)
         {
             return SteamMatchmaking.GetLobbyData(room,"game")==GameTag&&
-                SteamMatchmaking.GetLobbyData(room,"version")==catalog.version&&SteamMatchmaking.GetLobbyData(room,"protocol")=="4";
+                SteamMatchmaking.GetLobbyData(room,"version")==catalog.version&&SteamMatchmaking.GetLobbyData(room,"protocol")==WireMessage.CurrentProtocol.ToString();
         }
         public void Search(bool quick=false)
         {
@@ -90,7 +90,7 @@ namespace SummonersTable
             Busy=true;quickSearch=quick;Error="";Rooms.Clear();operationStarted=TimeNow;int token=++requestGeneration;
             SteamMatchmaking.AddRequestLobbyListStringFilter("game",GameTag,ELobbyComparison.k_ELobbyComparisonEqual);
             SteamMatchmaking.AddRequestLobbyListStringFilter("version",catalog.version,ELobbyComparison.k_ELobbyComparisonEqual);
-            SteamMatchmaking.AddRequestLobbyListStringFilter("protocol","4",ELobbyComparison.k_ELobbyComparisonEqual);
+            SteamMatchmaking.AddRequestLobbyListStringFilter("protocol",WireMessage.CurrentProtocol.ToString(),ELobbyComparison.k_ELobbyComparisonEqual);
             SteamMatchmaking.AddRequestLobbyListStringFilter("state","waiting",ELobbyComparison.k_ELobbyComparisonEqual);
             SteamMatchmaking.AddRequestLobbyListDistanceFilter(ELobbyDistanceFilter.k_ELobbyDistanceFilterWorldwide);
             SteamMatchmaking.AddRequestLobbyListFilterSlotsAvailable(1);
@@ -120,7 +120,7 @@ namespace SummonersTable
                 if(failed||result.m_eResult!=EResult.k_EResultOK){Error="Не удалось создать лобби: "+result.m_eResult;return;}
                 lobby=new CSteamID(result.m_ulSteamIDLobby);Debug.Log("STEAM_LOBBY_CREATED");
                 SteamMatchmaking.SetLobbyData(lobby,"game",GameTag);SteamMatchmaking.SetLobbyData(lobby,"version",catalog.version);
-                SteamMatchmaking.SetLobbyData(lobby,"protocol","4");
+                SteamMatchmaking.SetLobbyData(lobby,"protocol",WireMessage.CurrentProtocol.ToString());
                 SteamMatchmaking.SetLobbyData(lobby,"state","waiting");SteamMatchmaking.SetLobbyData(lobby,"name",RoomName);
                 SteamMatchmaking.SetLobbyJoinable(lobby,true);SetMember(selectedDeck,false);RefreshMembers();
             });
@@ -238,7 +238,7 @@ namespace SummonersTable
                     int used=rateCount.TryGetValue(sender,out var c)?c:0;if(used>=120)continue;rateCount[sender]=used+1;
                     var bytes=new byte[packet.m_cbSize];Marshal.Copy(packet.m_pData,bytes,0,bytes.Length);
                     var wire=JsonUtility.FromJson<WireMessage>(Encoding.UTF8.GetString(bytes));
-                    if(wire==null||wire.protocol!=4)continue;
+                    if(wire==null||wire.protocol!=WireMessage.CurrentProtocol)continue;
                     if(Engine!=null)
                     {
                         var p=Engine.State.players.Find(x=>x.id==sender.ToString()&&x.connected);

@@ -18,16 +18,6 @@ namespace SummonersTable
         readonly Dictionary<string,LineRenderer> outlines=new Dictionary<string,LineRenderer>();
         string orbCast="",eventMatch="",hoveredUnit="";int orbMistakes;
         float errorPulseUntil;
-        GameObject aimTrail;
-        public void AimTrail(Vector2 screen,bool visible)
-        {
-            if(!visible){if(aimTrail!=null){Destroy(aimTrail);aimTrail=null;}return;}
-            var ray=ViewCamera.ScreenPointToRay(screen);var plane=new Plane(Vector3.up,new Vector3(0,TableTop+.3f,0));
-            if(!plane.Raycast(ray,out float distance))return;
-            if(aimTrail==null&&CameraRig.settings?.attackEffect!=null)
-            {aimTrail=Instantiate(CameraRig.settings.attackEffect,transform);aimTrail.name="Targeting trail tip";aimTrail.transform.localScale*=CameraRig.settings.attackEffectScale*.6f;}
-            if(aimTrail!=null)aimTrail.transform.position=ray.GetPoint(distance);
-        }
         public float DisplayHp(string id,int actual)
         {return displayedHp.TryGetValue(id,out float hp)?hp:actual;}
         public void Invalid(string uid){invalidUntil[uid]=Time.unscaledTime+.35;}

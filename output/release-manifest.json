@@ -1,8 +1,8 @@
 {
-  "version": "0.4.0",
+  "version": "0.4.1",
   "balanceVersion": "0.3.0",
   "steamAppId": 480,
-  "networkProtocol": 4,
+  "networkProtocol": 5,
   "unity": "6000.3.21f1",
   "artAssets": 34,
   "uniqueCards": 30,
@@ -11,16 +11,16 @@
   "pdfPages": 22,
   "archives": [
     {
-      "file": "ZaOdnimStolom-Windows-v0.4.0.zip",
-      "bytes": 83408082,
+      "file": "ZaOdnimStolom-Windows-v0.4.1.zip",
+      "bytes": 83422478,
       "entries": 170,
-      "sha256": "2f59bd2b33ba7677abcd564a9ff3bdbf7d9b249c93b2b4ef170498716240d55c"
+      "sha256": "a0220311cc37ac84e62b7f46715f041662d42dcce100c6962d19671e1ee31e93"
     },
     {
-      "file": "ZaOdnimStolom-Unity-v0.4.0.zip",
-      "bytes": 819017348,
-      "entries": 8950,
-      "sha256": "be970518436e5b1323ab4828b3622e5c4bf7f1b3a8869f32f4e0997afa6c8944"
+      "file": "ZaOdnimStolom-Unity-v0.4.1.zip",
+      "bytes": 820706601,
+      "entries": 8963,
+      "sha256": "2919416aa510b60efcb38f9d0f60158773fa6fcad07b3781134d9d6c2bcd0686"
     }
   ]
 }

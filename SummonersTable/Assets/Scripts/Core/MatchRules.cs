@@ -3,6 +3,11 @@ namespace SummonersTable
 {
     public static class MatchRules
     {
+        public static bool CanUse(Catalog catalog,MatchState state,int seat,CardDef card)
+        {
+            if(state==null||seat<0||seat>=state.players.Count||card==null||!state.players[seat].connected)return false;
+            return card.kind=="reaction"?state.pending!=null&&state.pending.targets.Any(t=>CanReact(catalog,state,seat,card,t)):CanPlay(catalog,state,seat,card);
+        }
         // Shared by the host and UI. A glowing button is advice, never an extra gate.
         public static bool CanPlay(Catalog catalog,MatchState state,int seat,CardDef card)
         {

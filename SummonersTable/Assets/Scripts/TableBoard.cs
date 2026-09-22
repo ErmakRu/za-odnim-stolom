@@ -27,7 +27,6 @@ namespace SummonersTable
         readonly Dictionary<string,float> landingStarted=new Dictionary<string,float>();
         readonly Dictionary<string,Material> artMaterials=new Dictionary<string,Material>();
         readonly Dictionary<string,Arrow> arrows=new Dictionary<string,Arrow>();
-        readonly Dictionary<string,GameObject> reactionCards=new Dictionary<string,GameObject>();
         readonly List<Material> ownedMaterials=new List<Material>();
         readonly List<GameObject> seatRoots=new List<GameObject>();
         readonly List<GameObject> slots=new List<GameObject>();
@@ -209,20 +208,9 @@ namespace SummonersTable
                 }
                 if(castArrow!=null){castArrow.Destroy();castArrow=null;}
             }
-            var visibleReactions=new HashSet<string>();
-            foreach(var reaction in state.tableReactions)
-            {
-                if(clock-reaction.playedAt>6&&(state.cast==null||state.cast.id!=reaction.castId))continue;
-                visibleReactions.Add(reaction.uid);
-                if(!reactionCards.ContainsKey(reaction.uid))
-                {
-                    var pos=Away(reaction.owner,count)*2.1f+Vector3.up*(TableTop+.15f);
-                    reactionCards[reaction.uid]=Card("Reaction "+reaction.cardId,reaction.cardId,pos,Quaternion.LookRotation(-Away(reaction.owner,count))*Quaternion.Euler(90,0,0),new Vector2(.72f,1.02f));
-                }
-            }
-            foreach(var id in reactionCards.Keys.Where(id=>!visibleReactions.Contains(id)).ToList()){StartCoroutine(Dissolve(reactionCards[id]));reactionCards.Remove(id);}
             CameraRig.Sync(viewer,count,inputEnabled,cameraSeat!=viewer);cameraSeat=viewer;
             SyncHeroes(state,viewer);
+            SyncHandBacks(state,viewer);
             if(activeLayout!=null)for(int i=0;i<activeLayout.avatars.Length;i++)Actor(i)?.SetVisible(!(i==viewer&&CameraRig.Mode==0));
             SyncEffects(state,viewer,clock);
         }

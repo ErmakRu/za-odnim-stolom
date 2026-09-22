@@ -206,13 +206,56 @@ namespace SummonersTable.Editor
                     var view=g.View(n,g.State.serverTime);
                     var received=JsonUtility.FromJson<WireMessage>(JsonUtility.ToJson(new WireMessage{kind="state",state=view}));
                     received.state.RestoreViewPrivacy(n);
-                    Check(received.protocol==4,"new network protocol");
+                    Check(received.protocol==WireMessage.CurrentProtocol&&received.protocol==5,"new network protocol");
                     Check(received.state.cast.qteLength==q.sequence.Length,"public progress survives wire");
                     Check(n==0?received.state.qte.sequence==q.sequence:received.state.qte==null&&received.state.deadline==0,"wire QTE is private");
                 }
                 Check(!Send(g,0,new GameCommand{kind="key",phaseId="old",key="A"}).ok,"old QTE id rejected");
                 Check(!Send(g,1,new GameCommand{kind="key",phaseId=q.id,key="A"}).ok,"other player's key rejected");
                 Check(!Send(g,0,new GameCommand{kind="key",phaseId=q.id,key=q.sequence[0].ToString()},q.deadline+1).ok,"late key rejected");
+            });
+            Test("public history snapshots damage ownership, dead targets and reactions",()=>{
+                var g=New(4);Clean(g);var target=Unit(g,1,"C01");target.hp=1;
+                Play(g,0,"S01",1,target.uid);Success(g);
+                var hit=g.State.history.Last(e=>e.kind=="damage");
+                Check(hit.actor==0&&hit.cardId=="S01"&&hit.turnSeat==0&&hit.targets[0].seat==1&&hit.targets[0].cardId=="C01"&&hit.targets[0].amount==1,"actual HP loss and both owners retained after death");
+                Check(g.State.players[1].units.Count==0,"target removed");
+                var view=g.View(2,0);view.history.Last(e=>e.kind=="damage").targets[0].cardId="changed";
+                Check(hit.targets[0].cardId=="C01","history view is deep copy");
+                var wire=JsonUtility.FromJson<WireMessage>(JsonUtility.ToJson(new WireMessage{kind="state",state=g.View(3,0)}));
+                Check(wire.state.history.Last(e=>e.kind=="damage").targets[0].unit==target.uid,"history snapshot survives wire");
+                g=New(4);Clean(g);var attacker=Unit(g,0,"C01");var defender=Unit(g,1,"C03");attacker.targetAssigned=true;attacker.plannedSeat=1;attacker.plannedUnit=defender.uid;
+                Send(g,0,new GameCommand{kind="end"});
+                Check(g.State.history.Any(e=>e.kind=="attack"&&e.actor==0&&e.cardId=="C01"&&e.targets[0].cardId=="C03"),"attack identifies both creatures");
+                Check(g.State.history.Any(e=>e.kind=="damage"&&e.actor==1&&e.cardId=="C03"&&e.targets[0].seat==0&&e.targets[0].cardId=="C01"),"retaliation ownership retained");
+                g=New();Clean(g);var reaction=Give(g,1,"R01");Play(g,0,"S01",1,"",0,false);
+                Send(g,1,new GameCommand{kind="react",cardUid=reaction.uid,phaseId=g.State.cast.id,targetSeat=1});
+                var r=g.State.history.Last(e=>e.kind=="reaction");Check(r.actor==1&&r.cardId=="R01"&&r.targets[0].seat==0&&r.targets[0].cardId=="S01","reaction names affected cast and caster");
+            });
+            Test("history archive deduplicates, bounds wire size and never logs private draws",()=>{
+                var g=New(4);Check(g.State.history.All(e=>e.cardId==""&&e.targets.All(t=>t.cardId=="")),"starting hands never in history");
+                var archive=new HistoryArchive();var state=g.View(0,0);state.history.Clear();
+                for(int i=1;i<=160;i++)
+                {
+                    state.history.Add(new HistoryEntry{id=i,round=1,turn=1,turnSeat=0,actor=0,kind="damage",cardId="S03",detail="Урон предотвращён",targets=Enumerable.Range(0,4).Select(n=>new HistoryTarget{seat=n,cardId="C01",unit="unit-123456789",amount=4}).ToList()});
+                    if(state.history.Count>80)state.history.RemoveAt(0);archive.Observe(state);archive.Observe(state);
+                }
+                Check(archive.Entries.Count==160&&state.history.Count==80,"archive retains old wire windows without duplicates");
+                string json=JsonUtility.ToJson(new WireMessage{kind="state",state=state});
+                Check(System.Text.Encoding.UTF8.GetByteCount(json)<65536,"history fits Steam packet including worst-case target lists");
+                state.matchId="next";state.history.Clear();archive.Observe(state);Check(archive.Entries.Count==0,"new match clears history");
+                for(int i=0;i<40;i++){g.State.players.ForEach(p=>p.hp=30);g.State.creaturePlayed=0;g.State.spellsPlayed=0;g.State.activeSeat=0;g.State.phase="action";Play(g,0,"S01");Success(g);}
+                Check(g.State.history.Count==80&&g.State.history[0].id>1,"engine bounds public window");
+            });
+            Test("playability highlight follows limits, slots, targets and reaction window",()=>{
+                var g=New();Clean(g);Func<string,bool> usable=id=>MatchRules.CanUse(catalog,g.View(0,0),0,catalog.Card(id));
+                Check(usable("C01")&&usable("S01")&&!usable("R01"),"normal cards available, reactions closed");
+                g.State.creaturePlayed=1;g.State.spellsPlayed=1;Check(!usable("C01")&&!usable("S01"),"turn limits disable glow");
+                g.State.creaturePlayed=0;g.State.spellsPlayed=0;for(int i=0;i<5;i++)Unit(g,0,"C01",i);Check(!usable("C01"),"full board disables glow");
+                g.State.players[0].connected=false;Check(!usable("S01"),"disconnected cannot play");g.State.players[0].connected=true;
+                g=New();Clean(g);Give(g,1,"R01");Play(g,0,"S01",1,"",0,false);
+                Check(MatchRules.CanUse(catalog,g.View(1,0),1,catalog.Card("R01"))&&!MatchRules.CanUse(catalog,g.View(1,0),1,catalog.Card("C01")),"only matching reaction glows during reveal");
+                g.State.pending.responded.Add(1);Check(!MatchRules.CanUse(catalog,g.View(1,0),1,catalog.Card("R01")),"already responded disables reaction");
             });
             Test("full matches for 2, 3, 4 players across 24 deterministic seeds",()=>{
                 for(int n=2;n<=4;n++)for(int seed=0;seed<8;seed++)Simulate(n,seed*97+13);
