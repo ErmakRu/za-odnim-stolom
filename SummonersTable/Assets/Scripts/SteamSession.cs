@@ -224,7 +224,7 @@ namespace SummonersTable
                     int used=rateCount.TryGetValue(sender,out var c)?c:0;if(used>=120)continue;rateCount[sender]=used+1;
                     var bytes=new byte[packet.m_cbSize];Marshal.Copy(packet.m_pData,bytes,0,bytes.Length);
                     var wire=JsonUtility.FromJson<WireMessage>(Encoding.UTF8.GetString(bytes));
-                    if(wire==null||wire.protocol!=2)continue;
+                    if(wire==null||wire.protocol!=3)continue;
                     if(Engine!=null)
                     {
                         var p=Engine.State.players.Find(x=>x.id==sender.ToString()&&x.connected);

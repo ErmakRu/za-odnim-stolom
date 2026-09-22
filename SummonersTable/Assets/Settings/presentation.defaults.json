@@ -1,0 +1,40 @@
+{
+    "lookSensitivity": 3.0,
+    "cameraSmoothing": 8.0,
+    "hoverScale": 1.100000023841858,
+    "hoverTilt": 7.0,
+    "cardFlightSeconds": 0.5,
+    "initialCameraMode": 1,
+    "cameraModes": [
+        {
+            "name": "От первого лица",
+            "distance": 6.300000190734863,
+            "height": 2.299999952316284,
+            "focusHeight": 1.2000000476837159,
+            "fieldOfView": 66.0,
+            "yawLimit": 90.0,
+            "downLimit": 45.0,
+            "upLimit": 90.0
+        },
+        {
+            "name": "Над головой",
+            "distance": 8.399999618530274,
+            "height": 7.0,
+            "focusHeight": 1.2000000476837159,
+            "fieldOfView": 60.0,
+            "yawLimit": 30.0,
+            "downLimit": 10.0,
+            "upLimit": 10.0
+        },
+        {
+            "name": "Над столом",
+            "distance": 2.4000000953674318,
+            "height": 18.0,
+            "focusHeight": 1.2000000476837159,
+            "fieldOfView": 57.0,
+            "yawLimit": 30.0,
+            "downLimit": 10.0,
+            "upLimit": 10.0
+        }
+    ]
+}

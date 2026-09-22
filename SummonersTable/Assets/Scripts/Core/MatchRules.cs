@@ -1,0 +1,38 @@
+using System.Linq;
+namespace SummonersTable
+{
+    public static class MatchRules
+    {
+        // Shared by the host and UI. A glowing button is advice, never an extra gate.
+        public static bool CanPlay(Catalog catalog,MatchState state,int seat,CardDef card)
+        {
+            if(state.phase!="action"||state.activeSeat!=seat||!state.players[seat].alive||card==null||card.kind=="reaction")return false;
+            var p=state.players[seat];
+            if(card.kind=="creature")return state.creaturePlayed==0&&state.spellsPlayed<=1&&p.units.Count<catalog.rules.boardSlots;
+            if(state.spellsPlayed>=(state.creaturePlayed>0?1:3))return false;
+            if(card.target=="enemyUnit")return state.players.Any(x=>x.seat!=seat&&x.alive&&x.units.Count>0);
+            if(card.target=="unit")return state.players.Any(x=>x.alive&&x.units.Count>0);
+            if(card.effect=="swap")return p.hand.Count>=2&&state.players.Any(x=>x.seat!=seat&&x.alive&&x.handCount>0);
+            return true;
+        }
+        public static bool ReadyToEnd(Catalog catalog,MatchState state,int seat)
+        {
+            return state.phase=="action"&&state.activeSeat==seat&&state.players[seat].units.All(u=>u.targetAssigned)&&
+                !state.players[seat].hand.Any(h=>CanPlay(catalog,state,seat,catalog.Card(h.cardId)));
+        }
+        public static bool CanReact(Catalog catalog,MatchState state,int seat,CardDef card,TargetRef target)
+        {
+            var a=state.pending;
+            if((state.phase!="reveal"&&state.phase!="qte")||state.cast==null||a==null||a.source==seat||a.responded.Contains(seat)||!state.players[seat].alive||!state.players[seat].connected||card==null||card.kind!="reaction"||target==null||!a.targets.Any(t=>t.seat==target.seat&&(t.unit??"")==(target.unit??"")))return false;
+            if(catalog.Card(a.cardId).kind=="creature")return card.effect=="returnSummon"||(card.effect=="copySummon"&&!state.players[seat].units.Any(u=>u.slot==a.slot));
+            bool damage=a.kind=="damage"||a.kind=="areaDamage";
+            switch(card.effect)
+            {
+                case "reduce":case "reflect":return damage&&target.seat==seat;
+                case "rescue":return damage;
+                case "deny":return target.seat==seat&&(damage||new[]{"stun","swap","bounce","heal"}.Contains(a.kind));
+                default:return false;
+            }
+        }
+    }
+}
