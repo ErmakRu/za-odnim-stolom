@@ -1,0 +1,1 @@
+PASS 30 actual Prefab Variants: CardBase -> type -> card; full/table art and definitions agree; 8 spell effect prefabs reference existing particles and two audio clips each; nested hand/history/player labels; two audio sliders; all editable prefabs without missing scripts.

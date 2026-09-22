@@ -25,6 +25,7 @@ namespace SummonersTable
         {
             foreach(var o in projectiles.Values)if(o!=null)Destroy(o);projectiles.Clear();
             previousHp.Clear();displayedHp.Clear();hpChangedAt.Clear();observedImpacts.Clear();
+            ClearSpells();
         }
         void TintUnit(GameObject obj,UnitState unit,int owner,int viewer)
         {
@@ -33,12 +34,10 @@ namespace SummonersTable
             Color color=target?Color.white:SeatColors[owner];
             if(!outlines.TryGetValue(unit.uid,out var outline)||outline==null)
             {
-                var border=new GameObject("Card readiness outline");border.transform.SetParent(obj.transform,false);
-                outline=border.AddComponent<LineRenderer>();outline.sharedMaterial=Flat(color);outline.useWorldSpace=false;
-                outline.loop=true;outline.positionCount=4;outline.SetPositions(new[]{new Vector3(-.48f,-.62f,-.02f),new Vector3(.48f,-.62f,-.02f),new Vector3(.48f,.62f,-.02f),new Vector3(-.48f,.62f,-.02f)});outlines[unit.uid]=outline;
+                outline=obj.GetComponent<CardView>().worldOutline;outlines[unit.uid]=outline;
             }
             outline.enabled=ready||target;outline.startWidth=outline.endWidth=.025f;
-            outline.sharedMaterial.color=color;
+            outline.startColor=outline.endColor=color;
             if(invalidUntil.TryGetValue(unit.uid,out double until)&&Time.unscaledTime<until)
                 obj.transform.position+=ViewCamera.transform.right*(Mathf.Sin(Time.unscaledTime*70)*.1f);
         }
@@ -46,6 +45,7 @@ namespace SummonersTable
         {
             if(eventMatch!=state.matchId){ClearMatchVisuals();eventMatch=state.matchId;}
             SyncOrbs(state);
+            SyncSpells(state,clock);
             var hover=inputEnabled?Pick(Input.mousePosition):null;
             string hoverId=hover!=null&&hover.kind=="unit"?hover.uid:"";
             if(hoverId!=""&&hoverId!=hoveredUnit)PlaySound(CameraRig.settings?.cardHover,640*Random.Range(.94f,1.06f),.045f);
@@ -69,7 +69,6 @@ namespace SummonersTable
                     {
                         var prefab=CameraRig.settings?.attackEffect;
                         projectile=prefab!=null?Instantiate(prefab,transform):Sphere("Attack preview",.18f,SeatColors[e.source]);if(prefab!=null)projectile.transform.localScale*=CameraRig.settings.attackEffectScale;projectiles[e.id]=projectile;
-                        var trail=projectile.AddComponent<TrailRenderer>();trail.sharedMaterial=Flat(SeatColors[e.source]);trail.time=.15f;trail.startWidth=.1f;trail.endWidth=0;
                         PlaySound(CameraRig.settings?.attack,420,.075f);
                     }
                     projectile.transform.position=Vector3.Lerp(from,to,t/.4f)+Vector3.up*Mathf.Sin(t/.4f*Mathf.PI)*.45f;
@@ -163,7 +162,7 @@ namespace SummonersTable
         }
         IEnumerator Number(Vector3 point,int delta)
         {
-            var o=new GameObject("Health change "+delta);o.transform.SetParent(transform);var text=o.AddComponent<TextMesh>();text.text=(delta>0?"+":"")+delta;text.fontSize=70;text.characterSize=.07f;text.anchor=TextAnchor.MiddleCenter;text.color=delta>0?Color.green:new Color(1,.35f,.25f);
+            var text=Instantiate(numberPrefab,transform);var o=text.gameObject;text.text=(delta>0?"+":"")+delta;text.color=delta>0?Color.green:numberPrefab.color;
             for(float t=0;t<.8f;t+=Time.unscaledDeltaTime){o.transform.position=point+Vector3.up*t;o.transform.rotation=ViewCamera.transform.rotation;yield return null;}Destroy(o);
         }
         IEnumerator Dissolve(GameObject obj)
@@ -178,7 +177,7 @@ namespace SummonersTable
         }
         void PlaySound(AudioClip clip,float pitch,float duration)
         {
-            var source=GetComponent<AudioSource>()??gameObject.AddComponent<AudioSource>();source.volume=.1f;
+            var source=GetComponent<AudioSource>();
             if(clip!=null){source.pitch=clip==CameraRig.settings?.cardHover?pitch/640f:1;source.PlayOneShot(clip);return;}
             int length=(int)(22050*duration);var samples=new float[length];for(int i=0;i<length;i++)samples[i]=Mathf.Sin(i*pitch*2*Mathf.PI/22050)*(1-i/(float)length)*.3f;
             clip=AudioClip.Create("Placeholder feedback",length,1,22050,false);clip.SetData(samples,0);source.PlayOneShot(clip);Destroy(clip,duration+1);

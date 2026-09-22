@@ -34,7 +34,7 @@ namespace SummonersTable.Editor
         static void Test(string name,Action body){body();results.Add("PASS "+name);Debug.Log("PASS "+name);}
         public static void Run()
         {
-            asserts=0;serial=0;results.Clear();catalog=JsonUtility.FromJson<Catalog>(Resources.Load<TextAsset>("Data/catalog").text);catalog.Validate();
+            asserts=0;serial=0;results.Clear();catalog=CardLibrary.LoadCatalog();catalog.Validate();
             Test("catalog / all faction roles / 3 x 30 cards",()=>{Check(catalog.cards.Count==30,"unique cards");Check(catalog.decks.All(d=>d.entries.Sum(e=>e.count)==30),"deck size");Check(catalog.decks.All(d=>d.entries.Where(e=>catalog.Card(e.cardId).kind=="reaction").Sum(e=>e.count)==3),"reactions reduced to 3 of 30");});
             Test("lobby appearance and bounded cosmetic look survive private wire views",()=>{
                 var members=new[]{new LobbyMember{id="a",name="A",heroId="owl",outfit=6,palette=2},new LobbyMember{id="b",name="B",heroId="invalid",outfit=99,palette=-5}};
@@ -166,16 +166,20 @@ namespace SummonersTable.Editor
                 g=New();Clean(g);var first=Give(g,0,"C01");var second=Give(g,1,"C02");Play(g,0,"S05");Success(g);Check(g.State.players[0].hand.Any(h=>h.uid==second.uid)&&g.State.players[1].hand.Any(h=>h.uid==first.uid),"swap physical cards");
                 g=New();Clean(g);Play(g,0,"S07",-1);Success(g);Play(g,0,"C02");Check(g.State.qte.sequence.Length==6,"risk length");Success(g);Send(g,0,new GameCommand{kind="end"});Check(g.State.players[1].hp==24,"risk opening damage");
                 g=New();Clean(g);u=Unit(g,1,"C02");Play(g,0,"S08",1,u.uid);Success(g);Check(g.State.players[1].units.Count==0&&g.State.players[1].hand.Any(h=>h.uid==u.uid),"bounce identity");
+                var snapshot=g.State.history.Last(e=>e.kind=="effect");Check(snapshot.targets[0].slot==u.slot&&snapshot.targets[0].cardId==u.cardId,"bounce VFX retains removed unit slot and public card");
+                g=New(3);Clean(g);var protect=Give(g,1,"R04");Play(g,0,"S03",-1);Send(g,1,new GameCommand{kind="react",cardUid=protect.uid,phaseId=g.State.cast.id,targetSeat=1});Success(g);
+                snapshot=g.View(2,10).history.Last(e=>e.kind=="effect");Check(snapshot.targets.First(t=>t.seat==1).prevented&&!snapshot.targets.First(t=>t.seat==2).prevented,"public spell VFX skips precisely denied target");
             });
             Test("turn limits and bounded decision timers",()=>{
                 var g=New();Clean(g);for(int i=0;i<3;i++){Play(g,0,"S02",0);Success(g);}var h=Give(g,0,"S06");Check(!Send(g,0,new GameCommand{kind="play",cardUid=h.uid}).ok,"fourth spell blocked");
                 h=Give(g,0,"C02");Check(!Send(g,0,new GameCommand{kind="play",cardUid=h.uid,slot=0,targetSeat=1}).ok,"creature after two spells blocked");g.Tick(100);Check(g.State.activeSeat==1,"turn timeout");
                 g=New();Clean(g);Play(g,0,"C01");g.Tick(100);Check(g.State.activeSeat==0&&g.State.phase=="action","QTE timeout preserves manual end");
             });
-            Test("elimination scoring, round reset, host-independent disconnect",()=>{
+            Test("elimination scoring, one-round finish, host-independent disconnect",()=>{
                 var g=New(3);Clean(g);g.State.players[1].hp=1;Play(g,0,"S01");Success(g);Check(!g.State.players[1].alive&&g.State.players[0].score==1,"kill points");
-                g.State.players[2].hp=1;Play(g,0,"S01",2);Success(g);Check(g.State.phase=="roundEnd"&&g.State.players[0].score==5,"round points");g.Tick(30);
-                Check(g.State.round==2&&g.State.activeSeat==1&&g.State.players.All(p=>p.hp==30&&p.units.Count==0),"round resets and starter rotates");Check(g.State.players[0].score==5,"score persists");
+                g.State.players[2].hp=1;Play(g,0,"S01",2);Success(g);Check(g.State.phase=="matchEnd"&&g.State.players[0].score==5,"one-round match points");g.Tick(30);
+                Check(g.State.round==1&&g.State.phase=="matchEnd","no automatic second round");Check(g.State.players[0].score==5,"score persists");
+                g=New(3);Clean(g);
                 g.Disconnect(1,31);Check(g.State.activeSeat!=1,"disconnect advances turn");g.Disconnect(2,31);Check(g.State.phase=="matchEnd","one connected ends match");
             });
             Test("draw, heal, damage and opening passive triggers",()=>{
@@ -206,7 +210,7 @@ namespace SummonersTable.Editor
                     var view=g.View(n,g.State.serverTime);
                     var received=JsonUtility.FromJson<WireMessage>(JsonUtility.ToJson(new WireMessage{kind="state",state=view}));
                     received.state.RestoreViewPrivacy(n);
-                    Check(received.protocol==WireMessage.CurrentProtocol&&received.protocol==5,"new network protocol");
+                    Check(received.protocol==WireMessage.CurrentProtocol&&received.protocol==6,"new network protocol");
                     Check(received.state.cast.qteLength==q.sequence.Length,"public progress survives wire");
                     Check(n==0?received.state.qte.sequence==q.sequence:received.state.qte==null&&received.state.deadline==0,"wire QTE is private");
                 }
@@ -257,6 +261,20 @@ namespace SummonersTable.Editor
                 Check(MatchRules.CanUse(catalog,g.View(1,0),1,catalog.Card("R01"))&&!MatchRules.CanUse(catalog,g.View(1,0),1,catalog.Card("C01")),"only matching reaction glows during reveal");
                 g.State.pending.responded.Add(1);Check(!MatchRules.CanUse(catalog,g.View(1,0),1,catalog.Card("R01")),"already responded disables reaction");
             });
+            Test("rematch votes, changed decks and ordered match transitions",()=>{
+                var g=New(3);Clean(g);Check(!Send(g,0,new GameCommand{kind="postMatch",choice="again"}).ok,"cannot vote during gameplay");g.State.phase="matchEnd";
+                var members=g.State.players.Select(p=>new LobbyMember{id=p.id,deckId=p.deckId,ready=true,readyMatch="old"}).ToList();
+                for(int i=0;i<2;i++)Check(Send(g,i,new GameCommand{kind="postMatch",choice="again"}).ok,"vote accepted");
+                Check(!RematchRules.CanRestart(g.State,members),"waits for everybody");
+                Check(Send(g,2,new GameCommand{kind="postMatch",choice="deck"}).ok,"deck choice accepted");Check(!RematchRules.CanRestart(g.State,members),"old ready flag cannot start new match");
+                members[2].readyMatch=g.State.matchId;members[2].deckId="survive";Check(RematchRules.CanRestart(g.State,members),"deck chooser rejoins after current-match ready");
+                members[2].ready=false;Check(!RematchRules.CanRestart(g.State,members),"changing outfit or deck withdraws ready");
+                Send(g,2,new GameCommand{kind="postMatch",choice="again"});Check(RematchRules.CanRestart(g.State,members),"all replay votes start match");
+                Check(!RematchRules.CanRestart(g.State,members.Take(1).ToList()),"no solo rematch");
+                var next=New(3);var wire=new WireMessage{state=next.State,matchId=next.State.matchId,previousMatchId=g.State.matchId};Check(RematchRules.AcceptNext(g.State,wire),"finished match accepts authenticated successor");
+                g.State.phase="action";Check(!RematchRules.AcceptNext(g.State,wire),"ongoing match cannot be replaced");
+                Check(!RematchRules.AcceptNext(next.State,new WireMessage{state=g.State,matchId=g.State.matchId,previousMatchId=""}),"late old packet cannot roll back a rematch");
+            });
             Test("full matches for 2, 3, 4 players across 24 deterministic seeds",()=>{
                 for(int n=2;n<=4;n++)for(int seed=0;seed<8;seed++)Simulate(n,seed*97+13);
             });
@@ -293,7 +311,7 @@ namespace SummonersTable.Editor
                 foreach(var p in s.players)
                 {Check(p.hand.Count<=8&&p.units.Count<=5,"capacity invariant");Check(p.units.Select(u=>u.slot).Distinct().Count()==p.units.Count,"unique slots");Check(p.hp>=0&&p.hp<=30,"hp invariant");}
             }
-            Check(steps<6000&&g.State.round==3,"match terminates, all 3 rounds");Check(g.State.winners.Count>0,"winner exists");
+            Check(steps<6000&&g.State.round==1,"match terminates, one round");Check(g.State.winners.Count>0,"winner exists");
         }
     }
 }

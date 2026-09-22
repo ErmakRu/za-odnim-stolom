@@ -12,6 +12,9 @@ namespace SummonersTable
         public Transform authoredEnvironment;
         public TableLayout[] layouts;
         public Camera tableCamera;
+        public CardLibrary cardLibrary;
+        public WorldArrowView arrowPrefab;
+        public TextMesh numberPrefab;
         public ManualTableCamera CameraRig {get;private set;}
         public bool inputEnabled=true;
         public string selectedUnit="";
@@ -136,10 +139,10 @@ namespace SummonersTable
         }
         GameObject Card(string name,string cardId,Vector3 position,Quaternion rotation,Vector2 size)
         {
-            var root=new GameObject(name);root.transform.SetParent(transform);root.transform.position=position;root.transform.rotation=rotation;
-            var quad=GameObject.CreatePrimitive(PrimitiveType.Quad);quad.name="Replaceable card face";quad.transform.SetParent(root.transform,false);
-            quad.transform.localScale=new Vector3(size.x,size.y,1);quad.GetComponent<Renderer>().sharedMaterial=Art(cardId);
-            Destroy(quad.GetComponent<Collider>());return root;
+            GameObject root;
+            if(cardId=="card_back"){root=Instantiate(cardLibrary.cardBackPrefab,transform);root.transform.GetChild(0).localScale=new Vector3(size.x,size.y,1);}
+            else {var view=Instantiate(cardLibrary.Find(cardId),transform);view.Mode("world");view.Highlight(false,false);view.worldFace.transform.localScale=new Vector3(size.x,size.y,1);root=view.gameObject;}
+            root.name=name;root.transform.position=position;root.transform.rotation=rotation;return root;
         }
         public void Sync(MatchState state,int viewer,double clock,int selectedSlot=-1)
         {
@@ -162,7 +165,7 @@ namespace SummonersTable
                         units[unit.uid]=obj;
                         landingStarted[unit.uid]=Time.unscaledTime;
                     }
-                    if(!arrows.TryGetValue(unit.uid,out var arrow)){arrow=new Arrow(transform,Flat(SeatColors[player.seat]));arrows[unit.uid]=arrow;}
+                    if(!arrows.TryGetValue(unit.uid,out var arrow)){arrow=new Arrow(transform,arrowPrefab,SeatColors[player.seat]);arrows[unit.uid]=arrow;}
                     float landing=landingStarted.TryGetValue(unit.uid,out float began)?1-Mathf.SmoothStep(0,1,(Time.unscaledTime-began)/.28f):0;
                     var position=SlotPosition(player.seat,unit.slot,count)+Vector3.up*(.065f+.3f*landing);
                     obj.transform.position=position;
@@ -185,27 +188,12 @@ namespace SummonersTable
             }
             if(state.cast!=null)
             {
-                if(visibleCast!=state.cast.id)
-                {
-                    if(floatingCard!=null)Destroy(floatingCard);
-                    floatingCard=Card("Announced card",state.cast.cardId,new Vector3(0,3.7f,0),Quaternion.identity,new Vector2(1.8f,2.6f));visibleCast=state.cast.id;visibleCardId=state.cast.cardId;
-                }
-                bool reveal=state.phase=="reveal";
-                floatingCard.SetActive(false); // The authored Canvas now owns the reveal and card flight.
-                floatingCard.transform.position=reveal?new Vector3(0,3.7f,0):new Vector3(0,TableTop+.12f,0);
-                floatingCard.transform.rotation=reveal?Quaternion.LookRotation(ViewCamera.transform.forward,ViewCamera.transform.up):Quaternion.Euler(90,0,0);
-                if(castArrow==null)castArrow=new Arrow(transform,Flat(new Color(1,.77f,.3f)));
+                if(castArrow==null)castArrow=new Arrow(transform,arrowPrefab,new Color(1,.77f,.3f));
                 Vector3 from=state.cast.slot>=0?SlotPosition(state.cast.owner,state.cast.slot,count):HeroPosition(state.cast.owner,count);
                 castArrow.Set(from+Vector3.up*.2f,TargetPosition(state.cast.targetSeat,state.cast.targetUnit,state),.9f,state.cast.slot>=0?0:.07f);
             }
             else
             {
-                if(floatingCard!=null)
-                {
-                    if(catalog.Card(visibleCardId).kind=="spell"){floatingCard.SetActive(true);StartCoroutine(Dissolve(floatingCard));}
-                    else Destroy(floatingCard);
-                    floatingCard=null;visibleCast="";
-                }
                 if(castArrow!=null){castArrow.Destroy();castArrow=null;}
             }
             CameraRig.Sync(viewer,count,inputEnabled,cameraSeat!=viewer);cameraSeat=viewer;
@@ -230,22 +218,10 @@ namespace SummonersTable
         void OnDestroy(){activeLayout=null;foreach(var material in ownedMaterials)if(material!=null)Destroy(material);}
         sealed class Arrow
         {
-            readonly GameObject root;readonly LineRenderer line,head;
-            public Arrow(Transform parent,Material material)
-            {
-                root=new GameObject("Attack intention arrow");root.transform.SetParent(parent);line=root.AddComponent<LineRenderer>();
-                var tip=new GameObject("Arrow head");tip.transform.SetParent(root.transform);head=tip.AddComponent<LineRenderer>();
-                foreach(var lr in new[]{line,head}){lr.sharedMaterial=material;lr.useWorldSpace=true;lr.numCapVertices=2;lr.shadowCastingMode=UnityEngine.Rendering.ShadowCastingMode.Off;}
-            }
-            public void Set(Vector3 a,Vector3 b,float lift,float width)
-            {
-                line.startWidth=line.endWidth=width;head.startWidth=head.endWidth=width*1.4f;line.positionCount=25;
-                Vector3 last=a;
-                for(int i=0;i<25;i++){float t=i/24f;last=Vector3.Lerp(a,b,t)+Vector3.up*(Mathf.Sin(t*Mathf.PI)*lift);line.SetPosition(i,last);}
-                Vector3 direction=(b-line.GetPosition(22)).normalized;Vector3 side=Vector3.Cross(direction,Vector3.up).normalized;
-                head.positionCount=3;head.SetPositions(new[]{b-direction*.26f+side*.14f,b,b-direction*.26f-side*.14f});
-            }
-            public void Destroy(){UnityEngine.Object.Destroy(root);}
+            readonly WorldArrowView view;readonly Color color;
+            public Arrow(Transform parent,WorldArrowView prefab,Color tint){view=UnityEngine.Object.Instantiate(prefab,parent);color=tint;}
+            public void Set(Vector3 a,Vector3 b,float lift,float width){view.Set(a,b,lift,width,color);}
+            public void Destroy(){UnityEngine.Object.Destroy(view.gameObject);}
         }
     }
 }

@@ -144,8 +144,8 @@ decks = [
  'Развивайте добор, но следите за лимитом руки. Помехи усложняют ритуалы всех противников. Техподдержка страхует ваши ошибки. Обмен и возврат существ меняют планы соперников; реакции копируют чужие призывы или возвращают их в руку. Копирование требует свободного слота с тем же номером.')
 ]
 
-catalog = dict(version='0.3.0',title='Арена призыва: За одним столом',
- rules=dict(heroHp=30,deckSize=30,startingHand=5,handLimit=8,boardSlots=5,rounds=3,
+catalog = dict(version='0.5.0',title='Арена призыва: За одним столом',
+ rules=dict(heroHp=30,deckSize=30,startingHand=5,handLimit=8,boardSlots=5,rounds=1,
             roundWinPoints=3,eliminationPoints=1,turnSeconds=45,revealSeconds=2,qteMistakes=3),
  typeColors=[dict(id='creature',name='Существо',hex='#3FC5AD'),dict(id='spell',name='Заклинание',hex='#F0B354'),dict(id='reaction',name='Реакция',hex='#AF9AF6')],
  roleColors=[dict(name='Защитник',hex='#5D9CEB'),dict(name='Лекарь',hex='#78C66B'),dict(name='Снабженец',hex='#E5C85B'),dict(name='Усилитель',hex='#F49454'),dict(name='Ритуалист',hex='#6BD7D8'),dict(name='Вредитель',hex='#CF7CBF'),dict(name='Провокатор',hex='#EF7983')],

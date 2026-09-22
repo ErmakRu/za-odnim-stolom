@@ -1,5 +1,5 @@
 {
-  "version": "0.3.0",
+  "version": "0.5.0",
   "title": "Арена призыва: За одним столом",
   "rules": {
     "heroHp": 30,
@@ -7,7 +7,7 @@
     "startingHand": 5,
     "handLimit": 8,
     "boardSlots": 5,
-    "rounds": 3,
+    "rounds": 1,
     "roundWinPoints": 3,
     "eliminationPoints": 1,
     "turnSeconds": 45,

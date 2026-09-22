@@ -60,17 +60,15 @@ namespace SummonersTable
             status=TText("Status",transform,new Vector2(0,269),new Vector2(1320,31),"",17);
             localCountControls=CardTableCanvas.Rect("Local player count",transform,new Vector2(-391,-419),new Vector2(280,50)).gameObject;
             for(int n=2;n<=4;n++)TButton("players:"+n,n+" игрока",localCountControls.transform,new Vector2((n-3)*99,0),new Vector2(95,44));
-            appearancePanel=CardTableCanvas.Rect("Appearance controls",transform,Vector2.zero,new Vector2(1600,900)).gameObject;
-            Panel("Modal shade",appearancePanel.transform,Vector2.zero,new Vector2(2000,1125),new Color(.025f,.015f,.008f,.48f),false).raycastTarget=true;
-            Panel("Wardrobe panel",appearancePanel.transform,Vector2.zero,new Vector2(740,386),wood);
-            appearanceTitle=TText("Wardrobe title",appearancePanel.transform,new Vector2(0,136),new Vector2(660,56),"ОБЛИК ГЕРОЯ",32,true);
-            TButton("outfit-prev","‹ ДОСПЕХ",appearancePanel.transform,new Vector2(-182,52),new Vector2(294,52));
-            TButton("outfit-next","ДОСПЕХ ›",appearancePanel.transform,new Vector2(182,52),new Vector2(294,52));
-            for(int c=0;c<4;c++)TButton("palette:"+c,"●",appearancePanel.transform,new Vector2(-225+c*150,-26),new Vector2(126,54),banners[c]);
-            TButton("customize-close","ГОТОВО",appearancePanel.transform,new Vector2(0,-125),new Vector2(350,54),banners[1]);
+            appearancePanel=CardTableCanvas.Rect("Appearance controls",transform,new Vector2(-558,-263),new Vector2(345,170)).gameObject;
+            appearanceTitle=TText("Wardrobe title",appearancePanel.transform,new Vector2(0,56),new Vector2(325,28),"ОБЛИК ГЕРОЯ",18,true);
+            TButton("outfit-prev","‹",appearancePanel.transform,new Vector2(-124,12),new Vector2(80,35));
+            TButton("outfit-next","›",appearancePanel.transform,new Vector2(124,12),new Vector2(80,35));
+            for(int c=0;c<4;c++)TButton("palette:"+c,"●",appearancePanel.transform,new Vector2(-102+c*68,-30),new Vector2(61,30),banners[c]);
+            TButton("customize-close","ПОДТВЕРДИТЬ ОБЛИК",appearancePanel.transform,new Vector2(0,-71),new Vector2(296,32),banners[1]);
             appearancePanel.SetActive(false);buttons=builtButtons.ToArray();actions=builtActions.ToArray();
         }
-        public void OpenAppearance(int seat){appearanceSeat=seat;appearancePanel.SetActive(true);}
+        public void OpenAppearance(int seat){appearanceSeat=seat;((RectTransform)appearancePanel.transform).anchoredPosition=new Vector2(-558+372*seat,-263);appearancePanel.SetActive(true);}
         public int AppearanceSeat {get{return appearanceSeat;}}
         public void CloseAppearance(){appearancePanel.SetActive(false);appearanceSeat=-1;}
         public void PresentLobby(IList<LobbyMember> list,string ownId,bool local,bool host,bool canStart,Catalog catalog,string room,string message)
@@ -86,6 +84,9 @@ namespace SummonersTable
                 heroNames[i].text=m==null?"Герой ещё не выбран":HeroOptions.Names[Array.IndexOf(HeroOptions.Ids,HeroOptions.Normalize(m.heroId))];
                 readyLabels[i].text=m==null?"ЖДЁМ ИГРОКА":m.ready?"✓ ГОТОВ":"ВЫБИРАЕТ КАРТЫ";readyLabels[i].color=m?.ready==true?new Color(.66f,.91f,.40f):cream;
                 for(int b=0;b<5;b++)seatControls[i*5+b].interactable=editable;
+                bool wardrobe=appearancePanel.activeSelf&&appearanceSeat==i;
+                deckNames[i].gameObject.SetActive(!wardrobe);heroNames[i].gameObject.SetActive(!wardrobe);
+                for(int b=0;b<5;b++)seatControls[i*5+b].gameObject.SetActive(!wardrobe);
                 var cards=m==null?new string[0]:catalog.Deck(m.deckId).entries.Select(e=>e.cardId).Take(3).ToArray();
                 for(int c=0;c<3;c++){var art=deckCards[i*3+c];art.transform.parent.gameObject.SetActive(m!=null);if(m!=null)art.texture=Resources.Load<Texture2D>("Art/"+cards[c]);}
                 portraits[i].Present(m);
@@ -94,7 +95,7 @@ namespace SummonersTable
             if(appearanceSeat>=0)
             {
                 if(appearanceSeat>=list.Count||!local&&list[appearanceSeat].id!=ownId)CloseAppearance();
-                else{var m=list[appearanceSeat];appearanceTitle.text=HeroOptions.Names[Array.IndexOf(HeroOptions.Ids,m.heroId)]+" · ДОСПЕХ "+(m.outfit+1)+" / 8";}
+                else{var m=list[appearanceSeat];appearanceTitle.text="ДОСПЕХ "+(m.outfit+1)+" / 8";}
             }
         }
         Button TButton(string action,string text,Transform parent,Vector2 position,Vector2 size,Color? tint=null)

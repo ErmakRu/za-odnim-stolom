@@ -19,7 +19,7 @@ namespace SummonersTable
     [Serializable] public sealed class RulesDef
     {
         public int heroHp=30, deckSize=30, startingHand=5, handLimit=8, boardSlots=5,
-            rounds=3, roundWinPoints=3, eliminationPoints=1, turnSeconds=45, revealSeconds=2, qteMistakes=3;
+            rounds=1, roundWinPoints=3, eliminationPoints=1, turnSeconds=45, revealSeconds=2, qteMistakes=3;
     }
     [Serializable] public sealed class Catalog
     {
@@ -46,6 +46,7 @@ namespace SummonersTable
         public string id, name, deckId="noise";
         public string heroId="badger";public int outfit,palette;
         public bool ready;
+        public string readyMatch="";
     }
     [Serializable] public sealed class HandCard
     {
@@ -63,6 +64,7 @@ namespace SummonersTable
     [Serializable] public sealed class PlayerState
     {
         public string id, name, deckId;
+        public string postMatchChoice="";
         public string heroId="badger";public int outfit,palette,cameraMode=1;
         public float lookYaw,lookPitch;
         public int seat, hp, score, handCount, deckCount, fatigue;
@@ -180,12 +182,14 @@ namespace SummonersTable
         public int seq, slot=-1, targetSeat=-1;
         public float lookYaw,lookPitch;public int cameraMode=1;
         public string kind, cardUid="", unitUid="", targetUnit="", key="", phaseId="";
+        public string choice="";
     }
     [Serializable] public sealed class WireMessage
     {
-        public const int CurrentProtocol=5;
+        public const int CurrentProtocol=6;
         public int protocol=CurrentProtocol;
         public string kind, text, matchId;
+        public string previousMatchId="";
         public GameCommand command;
         public MatchState state;
     }

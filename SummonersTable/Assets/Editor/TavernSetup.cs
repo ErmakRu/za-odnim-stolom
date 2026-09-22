@@ -70,6 +70,7 @@ namespace SummonersTable.Editor
             var obj=UnityEngine.Object.Instantiate(Load<GameObject>(path));obj.name=name;
             foreach(var script in obj.GetComponentsInChildren<MonoBehaviour>(true))UnityEngine.Object.DestroyImmediate(script);
             foreach(var light in obj.GetComponentsInChildren<Light>(true))UnityEngine.Object.DestroyImmediate(light);
+            foreach(var audio in obj.GetComponentsInChildren<AudioSource>(true))UnityEngine.Object.DestroyImmediate(audio);
             foreach(var renderer in obj.GetComponentsInChildren<Renderer>(true))
             {
                 renderer.sharedMaterials=renderer.sharedMaterials.Select(m=>ParticleMaterial(m)).ToArray();
@@ -77,6 +78,11 @@ namespace SummonersTable.Editor
             }
             foreach(var ps in obj.GetComponentsInChildren<ParticleSystem>(true)){var main=ps.main;main.scalingMode=ParticleSystemScalingMode.Hierarchy;main.simulationSpace=ParticleSystemSimulationSpace.Local;}
             var prefab=PrefabUtility.SaveAsPrefabAsset(obj,Destination+"Effects/"+name+".prefab");UnityEngine.Object.DestroyImmediate(obj);return prefab;
+        }
+        public static GameObject PrepareEffect(string name,string path)
+        {
+            var existing=AssetDatabase.LoadAssetAtPath<GameObject>(Destination+"Effects/"+name+".prefab");
+            return existing!=null?existing:Effect(name,path);
         }
         static Material ParticleMaterial(Material source)
         {

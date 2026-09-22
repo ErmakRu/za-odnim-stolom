@@ -26,8 +26,8 @@ namespace SummonersTable
             centerRest=((RectTransform)centerSlot.transform).anchoredPosition;
             GetComponent<CanvasScaler>().screenMatchMode=CanvasScaler.ScreenMatchMode.Expand;
             for(int i=0;i<keyButtons.Length;i++)
-            {string key="ASDFGHJ"[i].ToString();var b=keyButtons[i];b.onClick.RemoveAllListeners();b.onClick.AddListener(()=>sendKey(key));b.GetComponentInChildren<Text>().font=font;}
-            qteTitle.font=qteKeys.font=qteStatus.font=font;
+            {string key="ASDFGHJ"[i].ToString();var b=keyButtons[i];b.onClick.RemoveAllListeners();b.onClick.AddListener(()=>sendKey(key));if(b.GetComponentInChildren<Text>().font==null)b.GetComponentInChildren<Text>().font=font;}
+            foreach(var label in new[]{qteTitle,qteKeys,qteStatus})if(label.font==null)label.font=font;
         }
         public bool Covers(Vector2 screenPoint)
         {
@@ -53,7 +53,7 @@ namespace SummonersTable
             var cast=state.cast;bool reveal=cast!=null&&state.phase=="reveal",qte=cast!=null&&state.phase=="qte";
             var card=cast==null?null:catalog.Card(cast.cardId);
             if(card!=null)announcedCard=card.id;
-            else if(catalog.Card(announcedCard)?.kind=="creature")announcedCard="";
+            else announcedCard="";
             if(!visible)return;
             leftSlot.Show(reveal?null:catalog.Card(announcedCard),catalog,font);
             rightSlot.Show(catalog.Card(inspection),catalog,font);
@@ -142,19 +142,7 @@ namespace SummonersTable
             }
         }
         CardDisplaySlot MakeSlot(string name,Vector2 position,Vector2 size)
-        {
-            var rect=Rect(name,transform,position,size);var s=rect.gameObject.AddComponent<CardDisplaySlot>();
-            s.background=rect.gameObject.AddComponent<Image>();s.background.color=new Color(.035f,.085f,.11f,.98f);
-            s.typeBand=Panel("Type color",rect,new Rect(0,0,size.x,32),Color.white);
-            s.typeLabel=Label("Type",rect,new Rect(9,0,size.x-18,32),16);s.typeLabel.color=new Color(.03f,.08f,.1f);
-            var art=TopRect("Artwork",rect,new Rect(8,40,size.x-16,155));s.artwork=art.gameObject.AddComponent<RawImage>();s.artwork.raycastTarget=false;
-            s.roleBand=Panel("Creature role color",rect,new Rect(8,199,size.x-16,25),Color.white);
-            s.roleLabel=Label("Faction and role",rect,new Rect(12,199,size.x-24,25),14);s.roleLabel.color=Color.black;
-            s.nameLabel=Label("Name",rect,new Rect(12,232,size.x-24,54),22);
-            s.statsLabel=Label("Stats",rect,new Rect(12,290,size.x-24,32),16);
-            s.rulesLabel=Label("Rules",rect,new Rect(14,329,size.x-28,size.y-341),18);s.rulesLabel.alignment=TextAnchor.UpperLeft;s.rulesLabel.resizeTextForBestFit=true;s.rulesLabel.resizeTextMinSize=13;s.rulesLabel.resizeTextMaxSize=18;
-            return s;
-        }
+        {var rect=Rect(name,transform,position,size);var slot=rect.gameObject.AddComponent<CardDisplaySlot>();slot.library=Resources.Load<CardLibrary>("CardLibrary");return slot;}
         public static RectTransform Rect(string name,Transform parent,Vector2 position,Vector2 size)
         {var o=new GameObject(name,typeof(RectTransform));o.transform.SetParent(parent,false);var r=(RectTransform)o.transform;r.anchorMin=r.anchorMax=r.pivot=new Vector2(.5f,.5f);r.anchoredPosition=position;r.sizeDelta=size;return r;}
         static RectTransform TopRect(string name,Transform parent,Rect bounds)
