@@ -1,0 +1,1 @@
+PASS PresentationLab boot without Steam, one EventSystem, JSON export/import roundtrip, test combat and settings panel.

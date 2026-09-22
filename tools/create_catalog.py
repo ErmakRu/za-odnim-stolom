@@ -108,32 +108,32 @@ special('S06','Чужой конспект','spell',3,'draw',2,'self',
  'Доберите 2 карты. Всё сверх лимита руки в 8 карт сгорает.', 'Почерк непонятный. Магия рабочая.',
  'A battered open spell notebook with abstract glowing doodles and two blank playing cards rising out of its pages, no readable writing')
 special('S07','Слабо ещё две?','spell',2,'riskBoost',3,'self',
- 'Ваше следующее существо в этот ход получает +2 символа к QTE и +3 урона к атаке при розыгрыше. Усиление одноразовое, действует только в этот ход и не складывается.', 'Последние слова уверенного мага.',
+ 'Ваше следующее существо в этот ход получает +2 символа к QTE и +3 урона к первой атаке в конце хода. Усиление одноразовое, действует только в этот ход и не складывается.', 'Последние слова уверенного мага.',
  'Two extra luminous blank keyboard keys balanced daringly on top of a wobbling magical tower, energetic amber sparks')
 special('S08','Вы ошиблись столиком','spell',4,'bounce',1,'unit',
  'Верните выбранное существо в руку его владельца. Его постоянный эффект сразу исчезает. При полной руке карта сгорает.', 'Ваш ритуал в соседнем зале.',
  'A tiny bewildered friendly summoned creature sliding backwards through a round purple return portal while holding a dinner reservation card without text')
 
 special('R01','Я вообще мимо','reaction',0,'reduce',3,'pending',
- 'Когда атака или заклинание наносит урон вам либо вашему существу: уменьшите этот урон на 3. Не действует на усталость.', 'Меня здесь даже нарисовали случайно.',
+ 'Во время розыгрыша чужого заклинания: уменьшите урон этой карты вам либо вашему существу на 3. Не действует на обычные атаки со стола и усталость.', 'Меня здесь даже нарисовали случайно.',
  'A comical wizard-shaped empty coat sidestepping a glowing orange magic bolt, the coat flapping with exaggerated movement')
-special('R02','Держись, дурень!','reaction',0,'rescue',2,'pending',
- 'Когда атака или заклинание наносит урон: уменьшите урон выбранной защищаемой цели на 2. Можно спасать себя или другого игрока.', 'Сначала спасу. Потом посмеюсь.',
- 'A warm golden magical hand catching another tiny hand just before a harmless sparkling impact, heroic yet funny composition')
-special('R03','Сам такой','reaction',0,'reflect',2,'pending',
- 'Когда атака или заклинание наносит урон вам либо вашему существу: после разрешения нанесите 2 урона герою источника. Исходный урон не отменяется; ответ не запускает новые реакции.', 'Аргумент принят и отправлен обратно.',
- 'A cheeky enchanted hand mirror reflecting a small magical fireball back along a curved trail of pink sparks')
+special('R02','Мне такого же!','reaction',0,'copySummon',1,'pending',
+ 'На чужой призыв: после успешного QTE создайте копию существа в слоте с тем же номером у себя. Слот должен быть свободен. Копия не атакует до вашего хода; её постоянный эффект работает сразу. При срыве QTE копии нет.', 'Повторите заказ. Особенно рога.',
+ 'Two friendly magical hands conjuring a small duplicate of a cheerful creature in matching glowing circles')
+special('R03','Заходи в другой раз','reaction',0,'returnSummon',1,'pending',
+ 'На чужой призыв: после успешного QTE верните разыгранную карту владельцу в руку. При полной руке она сгорает. Уже созданные копии остаются. При срыве QTE действует обычная передача карты сопернику.', 'Столик ещё не освободился.',
+ 'A cheeky enchanted hand mirror returning a bewildered small summoned creature along a curved trail of pink sparks')
 special('R04','Руки прочь','reaction',0,'deny',1,'pending',
- 'Когда вражеское заклинание воздействует на вас или ваше существо: отмените эффект для этой цели. Не отменяет атаки существ, добор и усиления самого заклинателя.', 'Это моё. Даже если мне не нравится.',
+ 'Во время розыгрыша вражеского заклинания: отмените его эффект для вас или вашего существа. Не отменяет призыв, атаки существ, добор и усиления самого заклинателя.', 'Это моё. Даже если мне не нравится.',
  'A small assertive purple magical stop-hand shielding a glowing playing card from sneaky fingers, no letters or text')
 
 def deck(id,name,subtitle,creatures,spells,reactions,guide):
     ids = creatures.split() + spells.split() + reactions.split()
     return dict(id=id,name=name,subtitle=subtitle,guide=guide,
-                entries=[dict(cardId=i,count=2) for i in ids])
+                entries=[dict(cardId=i,count=1 if i.startswith('R') else 3 if i in creatures.split()[:3] else 2) for i in ids])
 
 decks = [
- deck('noise','Шумная компания','Давление, усиления, ответный урон',
+ deck('noise','Шумная компания','Давление, усиления, возврат призывов',
  'C03 C06 C09 C11 C13 C15','S01 S03 S04 S06 S07 S08','R01 R03 R04',
  'Начните с существа и не отдавайте стол без борьбы. Усилители увеличивают урон следующих карт. Слабо ещё две? разыгрывайте до существа, когда уверены в QTE. Выбирайте между атакой героя и устранением опасного постоянного эффекта.'),
  deck('cozy','Живём дальше','Защита, лечение, спокойные ритуалы',
@@ -141,12 +141,12 @@ decks = [
  'Поставьте защитника, затем источник лечения. Сохраняйте реакции для большого урона и защищайте полезных существ. Лечение можно направлять сопернику ради временного союза. Вы ошиблись столиком убирает опасные эффекты или спасает вашего бойца.'),
  deck('tricks','Мелкие пакости','Добор, обмены, помехи QTE',
  'C01 C04 C05 C07 C12 C16','S01 S02 S04 S05 S06 S08','R01 R02 R03',
- 'Развивайте добор, но следите за лимитом руки. Помехи усложняют ритуалы всех противников. Техподдержка страхует ваши ошибки. Обмен и возврат существ меняют планы соперников; реакции позволяют торговаться и спасать нужного вам участника.')
+ 'Развивайте добор, но следите за лимитом руки. Помехи усложняют ритуалы всех противников. Техподдержка страхует ваши ошибки. Обмен и возврат существ меняют планы соперников; реакции копируют чужие призывы или возвращают их в руку. Копирование требует свободного слота с тем же номером.')
 ]
 
-catalog = dict(version='0.1.0',title='Арена призыва: За одним столом',
+catalog = dict(version='0.3.0',title='Арена призыва: За одним столом',
  rules=dict(heroHp=30,deckSize=30,startingHand=5,handLimit=8,boardSlots=5,rounds=3,
-            roundWinPoints=3,eliminationPoints=1,turnSeconds=45,reactionSeconds=7,qteMistakes=3),
+            roundWinPoints=3,eliminationPoints=1,turnSeconds=45,revealSeconds=2,qteMistakes=3),
  typeColors=[dict(id='creature',name='Существо',hex='#3FC5AD'),dict(id='spell',name='Заклинание',hex='#F0B354'),dict(id='reaction',name='Реакция',hex='#AF9AF6')],
  roleColors=[dict(name='Защитник',hex='#5D9CEB'),dict(name='Лекарь',hex='#78C66B'),dict(name='Снабженец',hex='#E5C85B'),dict(name='Усилитель',hex='#F49454'),dict(name='Ритуалист',hex='#6BD7D8'),dict(name='Вредитель',hex='#CF7CBF'),dict(name='Провокатор',hex='#EF7983')],
  cards=cards,decks=decks)
@@ -154,6 +154,7 @@ assert len(cards)==30 and len({c['id'] for c in cards})==30
 for d in decks:
     assert sum(e['count'] for e in d['entries'])==30
     assert all(e['cardId'] in {c['id'] for c in cards} for e in d['entries'])
+    assert sum(e['count'] for e in d['entries'] if e['cardId'].startswith('R'))==3
 for faction in {c['faction'] for c in cards if c['faction']}:
     assert len({c['role'] for c in cards if c['faction']==faction})==3
 OUT.parent.mkdir(parents=True,exist_ok=True)

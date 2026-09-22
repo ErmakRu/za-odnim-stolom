@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.3.0",
   "title": "Арена призыва: За одним столом",
   "rules": {
     "heroHp": 30,
@@ -11,7 +11,7 @@
     "roundWinPoints": 3,
     "eliminationPoints": 1,
     "turnSeconds": 45,
-    "reactionSeconds": 7,
+    "revealSeconds": 2,
     "qteMistakes": 3
   },
   "typeColors": [
@@ -458,7 +458,7 @@
       "effect": "riskBoost",
       "value": 3,
       "target": "self",
-      "rules": "Ваше следующее существо в этот ход получает +2 символа к QTE и +3 урона к атаке при розыгрыше. Усиление одноразовое, действует только в этот ход и не складывается.",
+      "rules": "Ваше следующее существо в этот ход получает +2 символа к QTE и +3 урона к первой атаке в конце хода. Усиление одноразовое, действует только в этот ход и не складывается.",
       "flavor": "Последние слова уверенного мага.",
       "art": "Two extra luminous blank keyboard keys balanced daringly on top of a wobbling magical tower, energetic amber sparks"
     },
@@ -490,41 +490,41 @@
       "effect": "reduce",
       "value": 3,
       "target": "pending",
-      "rules": "Когда атака или заклинание наносит урон вам либо вашему существу: уменьшите этот урон на 3. Не действует на усталость.",
+      "rules": "Во время розыгрыша чужого заклинания: уменьшите урон этой карты вам либо вашему существу на 3. Не действует на обычные атаки со стола и усталость.",
       "flavor": "Меня здесь даже нарисовали случайно.",
       "art": "A comical wizard-shaped empty coat sidestepping a glowing orange magic bolt, the coat flapping with exaggerated movement"
     },
     {
       "id": "R02",
-      "name": "Держись, дурень!",
+      "name": "Мне такого же!",
       "kind": "reaction",
       "faction": "",
       "role": "",
       "attack": 0,
       "health": 0,
       "qte": 0,
-      "effect": "rescue",
-      "value": 2,
+      "effect": "copySummon",
+      "value": 1,
       "target": "pending",
-      "rules": "Когда атака или заклинание наносит урон: уменьшите урон выбранной защищаемой цели на 2. Можно спасать себя или другого игрока.",
-      "flavor": "Сначала спасу. Потом посмеюсь.",
-      "art": "A warm golden magical hand catching another tiny hand just before a harmless sparkling impact, heroic yet funny composition"
+      "rules": "На чужой призыв: после успешного QTE создайте копию существа в слоте с тем же номером у себя. Слот должен быть свободен. Копия не атакует до вашего хода; её постоянный эффект работает сразу. При срыве QTE копии нет.",
+      "flavor": "Повторите заказ. Особенно рога.",
+      "art": "Two friendly magical hands conjuring a small duplicate of a cheerful creature in matching glowing circles"
     },
     {
       "id": "R03",
-      "name": "Сам такой",
+      "name": "Заходи в другой раз",
       "kind": "reaction",
       "faction": "",
       "role": "",
       "attack": 0,
       "health": 0,
       "qte": 0,
-      "effect": "reflect",
-      "value": 2,
+      "effect": "returnSummon",
+      "value": 1,
       "target": "pending",
-      "rules": "Когда атака или заклинание наносит урон вам либо вашему существу: после разрешения нанесите 2 урона герою источника. Исходный урон не отменяется; ответ не запускает новые реакции.",
-      "flavor": "Аргумент принят и отправлен обратно.",
-      "art": "A cheeky enchanted hand mirror reflecting a small magical fireball back along a curved trail of pink sparks"
+      "rules": "На чужой призыв: после успешного QTE верните разыгранную карту владельцу в руку. При полной руке она сгорает. Уже созданные копии остаются. При срыве QTE действует обычная передача карты сопернику.",
+      "flavor": "Столик ещё не освободился.",
+      "art": "A cheeky enchanted hand mirror returning a bewildered small summoned creature along a curved trail of pink sparks"
     },
     {
       "id": "R04",
@@ -538,7 +538,7 @@
       "effect": "deny",
       "value": 1,
       "target": "pending",
-      "rules": "Когда вражеское заклинание воздействует на вас или ваше существо: отмените эффект для этой цели. Не отменяет атаки существ, добор и усиления самого заклинателя.",
+      "rules": "Во время розыгрыша вражеского заклинания: отмените его эффект для вас или вашего существа. Не отменяет призыв, атаки существ, добор и усиления самого заклинателя.",
       "flavor": "Это моё. Даже если мне не нравится.",
       "art": "A small assertive purple magical stop-hand shielding a glowing playing card from sneaky fingers, no letters or text"
     }
@@ -547,20 +547,20 @@
     {
       "id": "noise",
       "name": "Шумная компания",
-      "subtitle": "Давление, усиления, ответный урон",
+      "subtitle": "Давление, усиления, возврат призывов",
       "guide": "Начните с существа и не отдавайте стол без борьбы. Усилители увеличивают урон следующих карт. Слабо ещё две? разыгрывайте до существа, когда уверены в QTE. Выбирайте между атакой героя и устранением опасного постоянного эффекта.",
       "entries": [
         {
           "cardId": "C03",
-          "count": 2
+          "count": 3
         },
         {
           "cardId": "C06",
-          "count": 2
+          "count": 3
         },
         {
           "cardId": "C09",
-          "count": 2
+          "count": 3
         },
         {
           "cardId": "C11",
@@ -600,15 +600,15 @@
         },
         {
           "cardId": "R01",
-          "count": 2
+          "count": 1
         },
         {
           "cardId": "R03",
-          "count": 2
+          "count": 1
         },
         {
           "cardId": "R04",
-          "count": 2
+          "count": 1
         }
       ]
     },
@@ -620,15 +620,15 @@
       "entries": [
         {
           "cardId": "C02",
-          "count": 2
+          "count": 3
         },
         {
           "cardId": "C08",
-          "count": 2
+          "count": 3
         },
         {
           "cardId": "C10",
-          "count": 2
+          "count": 3
         },
         {
           "cardId": "C14",
@@ -668,15 +668,15 @@
         },
         {
           "cardId": "R01",
-          "count": 2
+          "count": 1
         },
         {
           "cardId": "R02",
-          "count": 2
+          "count": 1
         },
         {
           "cardId": "R04",
-          "count": 2
+          "count": 1
         }
       ]
     },
@@ -684,19 +684,19 @@
       "id": "tricks",
       "name": "Мелкие пакости",
       "subtitle": "Добор, обмены, помехи QTE",
-      "guide": "Развивайте добор, но следите за лимитом руки. Помехи усложняют ритуалы всех противников. Техподдержка страхует ваши ошибки. Обмен и возврат существ меняют планы соперников; реакции позволяют торговаться и спасать нужного вам участника.",
+      "guide": "Развивайте добор, но следите за лимитом руки. Помехи усложняют ритуалы всех противников. Техподдержка страхует ваши ошибки. Обмен и возврат существ меняют планы соперников; реакции копируют чужие призывы или возвращают их в руку. Копирование требует свободного слота с тем же номером.",
       "entries": [
         {
           "cardId": "C01",
-          "count": 2
+          "count": 3
         },
         {
           "cardId": "C04",
-          "count": 2
+          "count": 3
         },
         {
           "cardId": "C05",
-          "count": 2
+          "count": 3
         },
         {
           "cardId": "C07",
@@ -736,15 +736,15 @@
         },
         {
           "cardId": "R01",
-          "count": 2
+          "count": 1
         },
         {
           "cardId": "R02",
-          "count": 2
+          "count": 1
         },
         {
           "cardId": "R03",
-          "count": 2
+          "count": 1
         }
       ]
     }

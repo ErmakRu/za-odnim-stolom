@@ -19,7 +19,7 @@ namespace SummonersTable
     [Serializable] public sealed class RulesDef
     {
         public int heroHp=30, deckSize=30, startingHand=5, handLimit=8, boardSlots=5,
-            rounds=3, roundWinPoints=3, eliminationPoints=1, turnSeconds=45, reactionSeconds=7, qteMistakes=3;
+            rounds=3, roundWinPoints=3, eliminationPoints=1, turnSeconds=45, revealSeconds=2, qteMistakes=3;
     }
     [Serializable] public sealed class Catalog
     {
@@ -44,6 +44,7 @@ namespace SummonersTable
     [Serializable] public sealed class LobbyMember
     {
         public string id, name, deckId="noise";
+        public string heroId="badger";public int outfit,palette;
         public bool ready;
     }
     [Serializable] public sealed class HandCard
@@ -55,12 +56,15 @@ namespace SummonersTable
     {
         public string uid, cardId, plannedUnit="";
         public int slot, hp, plannedSeat=-1, skipAttacks;
-        public bool exhausted;
+        public bool exhausted, deploying, targetAssigned;
+        public int openingBonus;
         public UnitState Copy() { return (UnitState)MemberwiseClone(); }
     }
     [Serializable] public sealed class PlayerState
     {
         public string id, name, deckId;
+        public string heroId="badger";public int outfit,palette,cameraMode=1;
+        public float lookYaw,lookPitch;
         public int seat, hp, score, handCount, deckCount, fatigue;
         public bool alive=true, connected=true;
         public List<HandCard> hand=new List<HandCard>();
@@ -86,13 +90,33 @@ namespace SummonersTable
     {
         public string id, cardId, cardUid, sequence, targetUnit;
         public int owner, recipient, targetSeat, slot, index, mistakes, forgiven, openingBonus;
+        public bool randomTarget;
         public double deadline, duration;
         public QteState Copy() { return (QteState)MemberwiseClone(); }
+    }
+    [Serializable] public sealed class CastState
+    {
+        public string id,cardId,targetUnit="";
+        public int owner,targetSeat=-1,slot=-1;
+        public bool randomTarget;
+        public double revealUntil, startedAt;
+        public int qteLength, qteProgress, qteMistakes;
+        public CastState Copy(){return (CastState)MemberwiseClone();}
+    }
+    [Serializable] public sealed class TableReaction
+    {
+        public string uid,cardId,castId,targetUnit="";
+        public int owner,targetSeat;
+        public double playedAt;
+        public bool resolved,successful;
+        public TableReaction Copy(){return (TableReaction)MemberwiseClone();}
     }
     [Serializable] public sealed class PendingAction
     {
         public string id, kind, cardId, unitUid, continuation, label;
         public int source, damage, slot, summonHp;
+        public int plannedSeat=-1;
+        public string plannedUnit="";
         public List<TargetRef> targets=new List<TargetRef>();
         public List<int> responded=new List<int>();
         public PendingAction Copy()
@@ -103,35 +127,61 @@ namespace SummonersTable
             return p;
         }
     }
+    [Serializable] public sealed class CombatEvent
+    {
+        public string id, unitUid, targetUnit;
+        public int source, targetSeat, damage,sourceSlot=-1,targetSlot=-1;
+        public double startedAt;
+        public CombatEvent Copy(){return (CombatEvent)MemberwiseClone();}
+    }
     [Serializable] public sealed class MatchState
     {
-        public string version="0.1.0", phase="lobby", result="", lastEvent="", matchId;
+        public string version="0.3.0", phase="lobby", result="", lastEvent="", matchId;
         public int revision, round, turnNumber, activeSeat, creaturePlayed, spellsPlayed, riskBonus;
         public bool qteAttempted;
         public double serverTime, deadline;
         public List<PlayerState> players=new List<PlayerState>();
         public List<string> log=new List<string>();
         public QteState qte;
+        public CastState cast;
+        public List<TableReaction> tableReactions=new List<TableReaction>();
         public PendingAction pending;
         public List<int> winners=new List<int>();
+        public List<CombatEvent> combatEvents=new List<CombatEvent>();
         public MatchState View(int seat,double now)
         {
             var v=(MatchState)MemberwiseClone();
             v.players=players.Select(p=>p.View(p.seat==seat)).ToList();
             v.log=new List<string>(log);v.winners=new List<int>(winners);
-            v.qte=qte==null?null:qte.Copy();v.pending=pending==null?null:pending.Copy();
+            // Letters and timer remain private; cast exposes only counts for the public orbs.
+            v.qte=qte!=null&&phase=="qte"&&qte.owner==seat?qte.Copy():null;
+            if(phase=="qte"&&(qte==null||qte.owner!=seat))v.deadline=0;
+            v.cast=cast?.Copy();
+            if(v.cast!=null&&qte!=null&&phase=="qte")
+            {v.cast.qteLength=qte.sequence.Length;v.cast.qteProgress=qte.index;v.cast.qteMistakes=qte.mistakes;}
+            v.combatEvents=combatEvents.Select(e=>e.Copy()).ToList();v.pending=pending==null?null:pending.Copy();
+            v.tableReactions=tableReactions.Select(r=>r.Copy()).ToList();
             v.serverTime=now;
             return v;
+        }
+        public void RestoreViewPrivacy(int seat)
+        {
+            // Unity inline-class JSON may materialize empty objects for null fields.
+            if(phase!="reveal"&&phase!="qte"){cast=null;pending=null;}
+            if(phase!="qte"||cast==null||cast.owner!=seat)qte=null;
+            if(phase=="qte"&&(cast==null||cast.owner!=seat))deadline=0;
+            foreach(var p in players)if(p.seat!=seat)p.hand.Clear();
         }
     }
     [Serializable] public sealed class GameCommand
     {
         public int seq, slot=-1, targetSeat=-1;
+        public float lookYaw,lookPitch;public int cameraMode=1;
         public string kind, cardUid="", unitUid="", targetUnit="", key="", phaseId="";
     }
     [Serializable] public sealed class WireMessage
     {
-        public int protocol=1;
+        public int protocol=4;
         public string kind, text, matchId;
         public GameCommand command;
         public MatchState state;

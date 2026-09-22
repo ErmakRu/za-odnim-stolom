@@ -1,0 +1,1 @@
+PASS 7 nonblank runtime screenshots. Observer QTE absent; caster QTE present. Four hero and 12 unit raycasts. UI picks free slot and announces target before QTE. 4 seats, 5 creature slots each. Gray cube placeholders only.

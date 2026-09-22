@@ -20,6 +20,7 @@ tools/__pycache__/
 
 # Downloadable packages live in GitHub Releases, not in Git history.
 output/*.zip
+output/captures*/
 
 # Local credentials and editor/system files.
 .env

@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
 namespace SummonersTable
 {
-    public sealed class GameApp : MonoBehaviour
+    public sealed partial class GameApp : MonoBehaviour
     {
         const float W=1600,H=1000;
         readonly Color ink=new Color(.06f,.11f,.14f),panel=new Color(.055f,.105f,.13f,.96f),muted=new Color(.64f,.75f,.76f);
@@ -14,29 +15,49 @@ namespace SummonersTable
         readonly Dictionary<int,GUIStyle> labels=new Dictionary<int,GUIStyle>();
         Catalog catalog; SteamSession steam; GameEngine local; MatchState state;
         GUIStyle buttonStyle,fieldStyle;Font font;
-        string page="menu",modal="",returnPage="menu",error="",selectedCard="",selectedUnit="",detailId="",joinCode="",roomName="Весёлый стол";
+        string page="menu",modal="",returnPage="menu",error="",selectedCard="",selectedUnit="",joinCode="",roomName="Весёлый стол";
         string[] localNames={"Игрок 1","Игрок 2","Игрок 3","Игрок 4"};
-        int[] localDecks={0,1,2,0};int localCount=2,capacity=4,seat,selectedSlot=-1,targetSeat=-1,catalogDeck=-1;
-        string targetUnit="";bool handoff,initialized,quitConfirm;double localTime;int[] seq=new int[4];
+        string[] localHeroes={"badger","deer","owl","lion"};int[] localOutfits={0,1,2,3},localPalettes={0,1,2,3};
+        double nextLookSend;Vector2 lastSentLook=new Vector2(999,999);int lastSentMode=-1;
+        int[] localDecks={0,1,2,0};int localCount=2,capacity=4,seat,selectedSlot=-1,catalogDeck=-1;
+        bool handoff,initialized,quitConfirm;double localTime;int[] seq=new int[4];
         float scale;Vector2 offset,scroll;bool online;
         string seenPhase="";int seenTurn=-1;
         AudioSource audioSource;AudioClip tickTone,failTone,successTone;string lastQte="";int lastProgress,lastMistakes;
+        CardTableCanvas cardCanvas;
+        MotionAnnouncements announcements;
+        public bool IsReady {get{return steam!=null&&board!=null&&cardCanvas!=null;}}
         public Catalog Catalog {get {return catalog;}}
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         static void Boot(){if(FindFirstObjectByType<GameApp>()==null)new GameObject("SummonersTable").AddComponent<GameApp>();}
-        void Awake()
+        IEnumerator Start()
         {
+            yield return LoadPresentationScenes();
             Application.runInBackground=true;Application.targetFrameRate=60;
             catalog=JsonUtility.FromJson<Catalog>(Resources.Load<TextAsset>("Data/catalog").text);catalog.Validate();
-            font=Font.CreateDynamicFontFromOSFont("Arial",24);
+            font=Font.CreateDynamicFontFromOSFont("Arial",24);BindFrontEnd();
             foreach(var c in catalog.cards)art[c.id]=Resources.Load<Texture2D>("Art/"+c.id);
             foreach(var key in new[]{"menu","board","card_back"})art[key]=Resources.Load<Texture2D>("Art/"+key);
-            steam=new SteamSession(catalog);steam.Initialize();
+            board=FindFirstObjectByType<TableBoard>(FindObjectsInactive.Include);
+            if(board==null)board=new GameObject("3D Table").AddComponent<TableBoard>();
+            board.Initialize(catalog);
+            cardCanvas=FindFirstObjectByType<CardTableCanvas>(FindObjectsInactive.Include);
+            if(cardCanvas==null){cardCanvas=new GameObject("Card display Canvas").AddComponent<CardTableCanvas>();cardCanvas.Build();}
+            cardCanvas.Initialize(font,key=>{if(state?.qte!=null)Send(new GameCommand{kind="key",phaseId=state.qte.id,key=key});});
+            announcements=FindFirstObjectByType<MotionAnnouncements>(FindObjectsInactive.Include);
+            if(FindFirstObjectByType<UnityEngine.EventSystems.EventSystem>()==null)
+            {var events=new GameObject("UI Event System");events.AddComponent<UnityEngine.EventSystems.EventSystem>();events.AddComponent<UnityEngine.EventSystems.StandaloneInputModule>();}
+            var eventSystems=FindObjectsByType<UnityEngine.EventSystems.EventSystem>(FindObjectsSortMode.InstanceID);
+            for(int i=1;i<eventSystems.Length;i++)eventSystems[i].gameObject.SetActive(false);
+            captureMode=Environment.GetCommandLineArgs().Contains("--capture-preview")||Environment.GetCommandLineArgs().Contains("--capture-lab");
+            steam=new SteamSession(catalog);if(!captureMode&&FindFirstObjectByType<PresentationLab>()==null)steam.Initialize();
             audioSource=gameObject.AddComponent<AudioSource>();audioSource.volume=.15f;
             tickTone=Tone(680,.045f);failTone=Tone(160,.12f);successTone=Tone(980,.14f);
             var args=Environment.GetCommandLineArgs();
             if(args.Contains("--local-test"))StartLocal(4);
+            if(args.Contains("--capture-lab"))StartCoroutine(CaptureLabPreview());
+            else if(captureMode)StartCoroutine(CapturePreview());
         }
         AudioClip Tone(float frequency,float duration)
         {
@@ -48,51 +69,38 @@ namespace SummonersTable
         void StartLocal(int count)
         {
             steam.Leave();var members=new List<LobbyMember>();
-            for(int i=0;i<count;i++)members.Add(new LobbyMember{id="local-"+i,name=string.IsNullOrWhiteSpace(localNames[i])?"Игрок "+(i+1):localNames[i],deckId=catalog.decks[localDecks[i]].id,ready=true});
+            for(int i=0;i<count;i++)members.Add(new LobbyMember{id="local-"+i,name=string.IsNullOrWhiteSpace(localNames[i])?"Игрок "+(i+1):localNames[i],deckId=catalog.decks[localDecks[i]].id,heroId=localHeroes[i],outfit=localOutfits[i],palette=localPalettes[i],ready=true});
             localTime=0;local=new GameEngine(catalog,members,Environment.TickCount);online=false;seq=new int[4];seat=0;
             page="game";modal="";handoff=true;ClearSelection();seenTurn=-1;state=local.View(seat,localTime);
         }
         void Update()
         {
-            steam.Update();
-            if(steam.View!=null)
+            if(!IsReady)return;
+            if(!captureMode)UpdateSession();SyncFrontEnd();
+            if(!captureMode&&announcements!=null)announcements.Present(handoff?"handoff":page,state,page=="local"?localCount:steam.Members.Count);
+            if(page=="game"&&state!=null&&!handoff)
             {
-                if(!online||page!="game"){online=true;local=null;page="game";handoff=false;ClearSelection();seenTurn=-1;}
-                state=steam.View;seat=steam.Seat;
-            }
-            else if(online){online=false;page="steam";state=null;}
-            if(page=="game"&&local!=null)
-            {
-                var s=local.State;int next=s.activeSeat;
-                if(s.phase=="reaction"&&s.pending!=null)
+                board.inputEnabled=!captureMode&&modal==""&&!quitConfirm;
+                board.selectedUnit=selectedUnit;board.choosingTarget=selectedUnit!=""||(selectedCard!=""&&catalog.Card(state.players[seat].hand.Find(h=>h.uid==selectedCard)?.cardId)?.kind=="spell");
+                var selectedDefinition=catalog.Card(state.players[seat].hand.Find(h=>h.uid==selectedCard)?.cardId);
+                board.placingCreature=selectedDefinition?.kind=="creature";board.targetMode=selectedUnit!=""?"enemy":selectedDefinition?.target??"none";
+                board.Sync(state,seat,Clock,selectedSlot);
+                board.AimTrail(Input.mousePosition,!captureMode&&board.inputEnabled&&board.choosingTarget&&(selectedUnit==""||unitDragMoved));
+                if(!captureMode&&Time.unscaledTimeAsDouble>=nextLookSend&&(Vector2.Distance(lastSentLook,board.CameraRig.Look)>1||lastSentMode!=board.CameraRig.Mode))
                 {
-                    var p=s.players.FirstOrDefault(x=>x.alive&&!s.pending.responded.Contains(x.seat));if(p!=null)next=p.seat;
+                    nextLookSend=Time.unscaledTimeAsDouble+.2;lastSentLook=board.CameraRig.Look;lastSentMode=board.CameraRig.Mode;
+                    if(online)steam.SubmitLook(lastSentLook.x,lastSentLook.y,lastSentMode);
+                    else if(local!=null)local.Submit(seat,new GameCommand{seq=++seq[seat],kind="look",lookYaw=lastSentLook.x,lookPitch=lastSentLook.y,cameraMode=lastSentMode},localTime);
                 }
-                if(s.phase!="roundEnd"&&s.phase!="matchEnd"&&next!=seat)
-                {seat=next;handoff=true;ClearSelection();}
-                if(!handoff&&modal==""&&!quitConfirm)localTime+=Time.unscaledDeltaTime;
-                local.Tick(localTime);state=local.View(seat,localTime);
+                if(!captureMode)ReadQteKeys();
             }
-            if(state!=null&&page=="game")
-            {
-                if(seenTurn!=state.turnNumber){ClearSelection();seenTurn=state.turnNumber;}
-                if(seenPhase!=state.phase){seenPhase=state.phase;if(state.phase=="reaction"){selectedCard="";targetSeat=-1;targetUnit="";}}
-                var q=state.qte;
-                if(q!=null)
-                {
-                    if(lastQte!=q.id){lastQte=q.id;lastProgress=0;lastMistakes=0;}
-                    if(q.index>lastProgress)audioSource.PlayOneShot(tickTone);
-                    if(q.mistakes>lastMistakes)audioSource.PlayOneShot(failTone);
-                    lastProgress=q.index;lastMistakes=q.mistakes;
-                    if(q.owner==seat&&!handoff&&modal==""&&!quitConfirm)
-                        foreach(char k in "ASDFGHJ")if(Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode),k.ToString())))
-                        {Send(new GameCommand{kind="key",key=k.ToString(),phaseId=q.id});break;}
-                }
-                else if(lastQte!=""){lastQte="";audioSource.PlayOneShot(successTone);}
-            }
+            else board.gameObject.SetActive(false);
+            var inspected=InspectionAt(captureMode?previewPointer??new Vector2(-100,-100):(Vector2)Input.mousePosition);
+            cardCanvas.Present(state,seat,state==null?0:Clock,inspected,catalog,board,page=="game"&&!handoff&&modal==""&&!quitConfirm&&state.phase!="roundEnd"&&state.phase!="matchEnd");
             if(Input.GetKeyDown(KeyCode.Escape))
             {
                 if(modal!="")modal="";
+                else if(selectedCard!=""||selectedUnit!="")ClearSelection();
                 else if(page=="game")quitConfirm=!quitConfirm;
                 else if(steam.InRoom)steam.Leave();
                 else{steam.CancelSearch();page="menu";}
@@ -104,7 +112,7 @@ namespace SummonersTable
             else if(local!=null){command.seq=++seq[seat];var result=local.Submit(seat,command,localTime);error=result.ok?"":result.message;state=local.View(seat,localTime);}
         }
         double Clock {get {return online?state.serverTime+Time.realtimeSinceStartupAsDouble-steam.ReceivedAt:localTime;}}
-        void ClearSelection(){selectedCard="";selectedUnit="";detailId="";selectedSlot=-1;targetSeat=-1;targetUnit="";error="";}
+        void ClearSelection(){selectedCard="";selectedUnit="";selectedSlot=-1;mouseHeld=false;draggingCard=false;unitPointerHeld=false;unitDragMoved=false;error="";}
         void ExitMatch(){steam.Leave();local=null;state=null;online=false;page="menu";quitConfirm=false;ClearSelection();}
         void SetupStyles()
         {
@@ -139,8 +147,19 @@ namespace SummonersTable
         string TypeName(CardDef c){return catalog.typeColors.Find(t=>t.id==c.kind).name;}
         void OnGUI()
         {
-            SetupStyles();GUI.color=Color.white;Box(new Rect(0,0,Screen.width,Screen.height),Color.black);
+            if(!IsReady)return;
+            if(previewLobby)return;
+            if(modal==""&&!quitConfirm&&((page=="menu"&&menuCanvas!=null)||((page=="local"||page=="steam"&&steam.InRoom)&&lobbyCanvas!=null)))return;
+            SetupStyles();GUI.color=Color.white;
+            if(page!="game"||handoff)Box(new Rect(0,0,Screen.width,Screen.height),Color.black);
             scale=Mathf.Min(Screen.width/W,Screen.height/H);offset=new Vector2((Screen.width-W*scale)/2,(Screen.height-H*scale)/2);
+            if(page=="game")
+            {
+                // Reserve the lower screen for the hand, so every own creature remains targetable.
+                board.ViewCamera.rect=new Rect(offset.x/Screen.width,(Screen.height-offset.y-760*scale)/Screen.height,W*scale/Screen.width,650*scale/Screen.height);
+                Box(new Rect(0,0,offset.x,Screen.height),Color.black);Box(new Rect(Screen.width-offset.x,0,offset.x,Screen.height),Color.black);
+                Box(new Rect(0,0,Screen.width,offset.y),Color.black);Box(new Rect(0,Screen.height-offset.y,Screen.width,offset.y),Color.black);
+            }
             GUI.matrix=Matrix4x4.TRS(offset,Quaternion.identity,new Vector3(scale,scale,1));
             bool blocked=modal!=""||quitConfirm;GUI.enabled=!blocked;
             switch(page)
@@ -163,6 +182,7 @@ namespace SummonersTable
         void Back(string destination="menu") {if(Button(new Rect(42,32,150,44),"← Назад",new Color(.7f,.78f,.77f))){page=destination;scroll=Vector2.zero;}}
         void Menu()
         {
+            if(menuCanvas!=null)return;
             Image("menu",new Rect(0,0,W,H));Box(new Rect(0,0,700,H),new Color(.02f,.06f,.08f,.85f));
             Text(new Rect(75,85,550,38),"АРЕНА ПРИЗЫВА",22,teal,true);
             Text(new Rect(70,160,590,200),"За одним\nстолом",76,null,true);
@@ -172,7 +192,7 @@ namespace SummonersTable
             if(Button(new Rect(78,676,232,54),"Колоды и карты",new Color(.77f,.71f,.95f))){returnPage="menu";page="cards";}
             if(Button(new Rect(326,676,232,54),"Как играть",new Color(.7f,.78f,.77f)))modal="rules";
             Text(new Rect(78,780,520,65),steam.Status,17,muted);
-            Text(new Rect(78,870,510,50),"ТЕСТ 0.1.0  /  3 РАУНДА  /  30 КАРТ",16,teal,true);
+            Text(new Rect(78,870,510,50),"ТЕСТ "+Application.version+"  /  3 РАУНДА  /  30 КАРТ",16,teal,true);
             if(Button(new Rect(78,927,150,40),"Выход",new Color(.7f,.78f,.77f)))Application.Quit();
             Text(new Rect(1130,900,390,70),"Существа + заклинания + реакции\nНикаких серьёзных лиц",21,Color.white,false,TextAnchor.MiddleRight);
         }
@@ -233,6 +253,7 @@ namespace SummonersTable
         }
         void Lobby()
         {
+            if(lobbyCanvas!=null)return;
             Text(new Rect(90,167,1110,50),"Код: "+steam.RoomId,30,teal,true);
             if(Button(new Rect(1220,164,285,50),"Скопировать код",gold))GUIUtility.systemCopyBuffer=steam.RoomId.ToString();
             Text(new Rect(90,231,1350,54),"Выберите колоду и нажмите «Готов». Хост начнёт, когда за столом будет хотя бы два готовых игрока.",22,muted);
@@ -265,12 +286,16 @@ namespace SummonersTable
             float start=235;
             if(catalogDeck>=0)
             {
-                var deck=catalog.decks[catalogDeck];Text(new Rect(65,235,1460,68),deck.subtitle+" • 30 карт: по 2 копии каждой показанной карты.",23,teal,true);
+                var deck=catalog.decks[catalogDeck];Text(new Rect(65,235,1460,68),deck.subtitle+" • 30 карт: 15 существ, 12 заклинаний, 3 реакции.",23,teal,true);
                 Text(new Rect(65,290,1460,100),deck.guide,20,muted);start=400;
             }
             float height=Mathf.Ceil(cards.Count/5f)*430;
             scroll=GUI.BeginScrollView(new Rect(55,start,1495,H-start-25),scroll,new Rect(0,0,1470,height));
-            for(int i=0;i<cards.Count;i++)CardDetail(cards[i],new Rect((i%5)*294,Mathf.Floor(i/5f)*430,280,412),true);
+            for(int i=0;i<cards.Count;i++)
+            {
+                var r=new Rect((i%5)*294,Mathf.Floor(i/5f)*430,280,412);CardDetail(cards[i],r,true);
+                if(catalogDeck>=0)Text(new Rect(r.x+225,r.y+8,42,22),"×"+catalog.decks[catalogDeck].entries.Find(e=>e.cardId==cards[i].id).count,16,ink,true);
+            }
             GUI.EndScrollView();
         }
         void CardDetail(CardDef c,Rect r,bool compact=false)
@@ -286,222 +311,16 @@ namespace SummonersTable
             Text(new Rect(r.x+14,y,r.width-28,30),stats,17,TypeColor(c),true);y+=36;
             Text(new Rect(r.x+14,y,r.width-28,r.yMax-y-10),c.rules,compact?16:19,Color.white);
         }
-        void Game()
-        {
-            if(state==null)return;
-            Image("board",new Rect(0,0,W,H));Box(new Rect(0,0,W,H),new Color(.02f,.06f,.075f,.56f));
-            if(handoff)
-            {
-                Dim();Text(new Rect(330,220,940,65),"Передайте клавиатуру",42,muted,true,TextAnchor.MiddleCenter);
-                Text(new Rect(250,325,1100,95),state.players[seat].name,58,teal,true,TextAnchor.MiddleCenter);
-                Text(new Rect(330,450,940,120),state.phase=="reaction"?"Есть возможность сыграть реакцию.\nТаймер запустится после нажатия кнопки.":"Сейчас появится ваша рука.\nОстальные игроки, отвернитесь на минутку.",26,null,false,TextAnchor.MiddleCenter);
-                if(Button(new Rect(530,640,540,70),"Я за столом — показать карты")){handoff=false;error="";}
-                if(Button(new Rect(650,750,300,48),"В главное меню",muted))quitConfirm=true;return;
-            }
-            var me=state.players[seat];
-            bool inputEnabled=GUI.enabled;
-            GUI.enabled=inputEnabled&&state.phase=="action";
-            Box(new Rect(18,18,1564,70),panel);
-            Text(new Rect(40,34,480,40),"РАУНД "+state.round+" / 3  ·  ХОД "+state.turnNumber,24,teal,true);
-            string active=state.players[state.activeSeat].name;
-            Text(new Rect(525,32,770,48),(state.phase=="action"?"Ходит: ":"Ритуал: ")+active+"   ·   "+Math.Max(0,Math.Ceiling(state.deadline-Clock))+" с",24);
-            if(Button(new Rect(1320,30,115,42),"Правила",muted))modal="rules";
-            if(Button(new Rect(1450,30,110,42),"Выйти",muted))quitConfirm=true;
-            var opponents=state.players.Where(p=>p.seat!=seat).ToList();
-            float opponentWidth=1195f/opponents.Count;
-            for(int i=0;i<opponents.Count;i++)Opponent(opponents[i],new Rect(22+i*opponentWidth,110,opponentWidth-12,258));
-            Box(new Rect(24,386,1180,79),panel);
-            Text(new Rect(42,401,1140,52),state.lastEvent,22,gold,true);
-            Text(new Rect(33,482,1170,40),me.name+"  ·  HP "+me.hp+" / 30  ·  Очки "+me.score+"  ·  Колода "+me.deckCount+"  ·  "+catalog.Deck(me.deckId).name,23,me.alive?Color.white:red,true);
-            for(int i=0;i<5;i++)
-            {
-                var r=new Rect(25+i*238,539,220,139);var u=me.units.Find(x=>x.slot==i);
-                if(u!=null)UnitTile(me,u,r,true);
-                else
-                {
-                    Box(r,new Color(.05f,.14f,.16f,.80f));Frame(r,selectedSlot==i?gold:new Color(.19f,.35f,.36f),selectedSlot==i?3:1);
-                    Text(r,"+\nМесто "+(i+1),21,muted,false,TextAnchor.MiddleCenter);
-                    if(GUI.Button(r,"",GUIStyle.none)){selectedSlot=i;selectedUnit="";}
-                }
-            }
-            Text(new Rect(28,699,1180,37),me.alive?"ВАША РУКА  "+me.hand.Count+" / 8   ·   выберите карту, цель и свободное место для существа":"Вы наблюдаете до следующего раунда",17,muted,true);
-            float cardWidth=Math.Min(180,1170f/Math.Max(1,me.hand.Count));
-            for(int i=0;i<me.hand.Count;i++)
-            {
-                var hand=me.hand[i];var c=catalog.Card(hand.cardId);var r=new Rect(27+i*cardWidth,743,cardWidth-8,230);
-                MiniCard(c,r,selectedCard==hand.uid);
-                if(GUI.Button(r,"",GUIStyle.none))
-                {
-                    selectedCard=hand.uid;selectedUnit="";detailId=c.id;error="";
-                    if(c.kind=="creature"&&selectedSlot<0)selectedSlot=Enumerable.Range(0,5).FirstOrDefault(s=>!me.units.Any(u=>u.slot==s));
-                }
-            }
-            SidePanel(me);
-            GUI.enabled=inputEnabled;
-            if(state.phase=="qte"&&state.qte!=null)QteOverlay();
-            if(state.phase=="reaction"&&state.pending!=null)ReactionOverlay();
-            if(state.phase=="roundEnd"||state.phase=="matchEnd")ScoreOverlay();
-        }
-        bool SelectedTarget(int s,string uid=""){return targetSeat==s&&targetUnit==(uid??"");}
-        void SelectTarget(int s,string uid="")
-        {
-            targetSeat=s;targetUnit=uid;
-            if(selectedUnit!=""&&state.phase=="action"&&state.activeSeat==seat)
-                Send(new GameCommand{kind="target",unitUid=selectedUnit,targetSeat=s,targetUnit=uid});
-        }
-        void Opponent(PlayerState p,Rect r)
-        {
-            Box(r,p.alive?panel:new Color(.11f,.10f,.12f,.92f));
-            var hero=new Rect(r.x+8,r.y+8,r.width-16,78);
-            if(SelectedTarget(p.seat))Frame(hero,gold,3);
-            Text(new Rect(hero.x+8,hero.y+5,hero.width-16,34),p.name+(!p.alive?" · выбыл":""),22,null,true);
-            Text(new Rect(hero.x+8,hero.y+43,hero.width-16,32),"HP "+p.hp+"  |  Очки "+p.score+"  |  Рука "+p.handCount+"  |  Колода "+p.deckCount,17,p.alive?teal:muted);
-            if(GUI.Button(hero,"",GUIStyle.none))SelectTarget(p.seat);
-            float uw=(r.width-20)/5;
-            for(int s=0;s<5;s++)
-            {
-                var slot=new Rect(r.x+10+s*uw,r.y+98,uw-5,149);var u=p.units.Find(x=>x.slot==s);
-                if(u!=null)UnitTile(p,u,slot,false);
-                else{Box(slot,new Color(.08f,.16f,.18f,.7f));Text(slot,"·",20,muted,false,TextAnchor.MiddleCenter);}
-            }
-        }
-        int UnitAttack(PlayerState p,UnitState u)
-        {return catalog.Card(u.cardId).attack+Math.Min(2,p.units.Where(x=>x.uid!=u.uid&&catalog.Card(x.cardId).effect=="attackAura").Sum(x=>catalog.Card(x.cardId).value));}
-        void UnitTile(PlayerState p,UnitState u,Rect r,bool own)
-        {
-            var c=catalog.Card(u.cardId);Image(c.id,r);Box(new Rect(r.x,r.yMax-55,r.width,55),new Color(.02f,.06f,.08f,.90f));
-            Frame(r,SelectedTarget(p.seat,u.uid)||selectedUnit==u.uid?gold:RoleColor(c),3);
-            if(own)
-            {
-                Text(new Rect(r.x+7,r.y+5,r.width-14,50),c.name,17,null,true);
-                Text(new Rect(r.x+7,r.yMax-52,r.width-14,26),"АТК "+UnitAttack(p,u)+"   HP "+u.hp,20,Color.white,true);
-                string target=u.plannedSeat<0?"Случайный герой":state.players[u.plannedSeat].name+(u.plannedUnit!=""?" · существо":"");
-                Text(new Rect(r.x+7,r.yMax-25,r.width-14,23),u.exhausted?"Отдыхает":u.skipAttacks>0?"Пропустит атаку":target,13,muted);
-            }
-            else
-            {
-                Text(new Rect(r.x+3,r.yMax-52,r.width-6,22),UnitAttack(p,u)+" / "+u.hp,16,Color.white,true,TextAnchor.MiddleCenter);
-                Text(new Rect(r.x+3,r.yMax-29,r.width-6,26),c.id,13,RoleColor(c),true,TextAnchor.MiddleCenter);
-            }
-            if(GUI.Button(r,"",GUIStyle.none))
-            {
-                detailId=c.id;
-                if(own&&selectedCard==""&&state.phase=="action"&&state.activeSeat==seat){selectedUnit=u.uid;targetSeat=-1;targetUnit="";}
-                else SelectTarget(p.seat,u.uid);
-            }
-        }
         void MiniCard(CardDef c,Rect r,bool selected)
         {
             Box(r,panel);Box(new Rect(r.x,r.y,r.width,25),TypeColor(c));
             Text(new Rect(r.x+4,r.y+4,r.width-8,21),TypeName(c),13,ink,true,TextAnchor.MiddleCenter);
-            Image(c.id,new Rect(r.x+4,r.y+29,r.width-8,105));
-            if(c.kind=="creature")Box(new Rect(r.x+4,r.y+134,r.width-8,5),RoleColor(c));
-            Text(new Rect(r.x+7,r.y+148,r.width-14,53),c.name,16,null,true);
-            Text(new Rect(r.x+7,r.y+203,r.width-14,25),c.kind=="creature"?c.attack+" / "+c.health+"  · Q"+c.qte:c.kind=="reaction"?"БЕЗ QTE":"QTE "+c.qte,15,TypeColor(c),true);
+            float artHeight=r.height*.43f;
+            Image(c.id,new Rect(r.x+4,r.y+29,r.width-8,artHeight));
+            if(c.kind=="creature")Box(new Rect(r.x+4,r.y+29+artHeight,r.width-8,5),RoleColor(c));
+            Text(new Rect(r.x+7,r.y+39+artHeight,r.width-14,r.height-artHeight-68),c.name,16,null,true);
+            Text(new Rect(r.x+7,r.yMax-25,r.width-14,23),c.kind=="creature"?c.attack+" / "+c.health+"  · Q"+c.qte:c.kind=="reaction"?"БЕЗ QTE":"QTE "+c.qte,15,TypeColor(c),true);
             Frame(r,selected?gold:TypeColor(c),selected?4:1);
-        }
-        string TargetLabel()
-        {
-            if(targetSeat<0)return "случайный герой противника";
-            var p=state.players[targetSeat];var unit=p.units.Find(u=>u.uid==targetUnit);
-            return p.name+(unit!=null?" / "+catalog.Card(unit.cardId).name:" / герой");
-        }
-        void SidePanel(PlayerState me)
-        {
-            Box(new Rect(1230,110,346,864),panel);
-            var hand=me.hand.Find(h=>h.uid==selectedCard);var card=hand==null?catalog.Card(detailId):catalog.Card(hand.cardId);
-            if(card!=null)CardDetail(card,new Rect(1243,122,320,485));
-            else
-            {
-                Text(new Rect(1253,145,300,54),"За одним столом",28,teal,true);
-                Text(new Rect(1253,232,300,230),"Нажмите карту в руке: здесь появится её эффект.\n\nВыберите героя или существо на столе, чтобы указать цель.\n\nСвоим существам можно назначить цели перед завершением хода.",21,muted);
-            }
-            Text(new Rect(1250,619,306,82),"Цель: "+TargetLabel(),18,gold);
-            bool turn=state.phase=="action"&&state.activeSeat==seat&&me.alive;
-            if(hand!=null&&card.kind!="reaction")
-            {
-                if(Button(new Rect(1250,709,307,55),"Начать ритуал",teal,turn))
-                {
-                    Send(new GameCommand{kind="play",cardUid=hand.uid,slot=selectedSlot,targetSeat=targetSeat,targetUnit=targetUnit});
-                    if(error==""){selectedCard="";selectedUnit="";}
-                }
-            }
-            else if(selectedUnit!="")
-            {
-                if(Button(new Rect(1250,709,307,55),"Атаковать случайного героя",gold,turn))
-                {Send(new GameCommand{kind="target",unitUid=selectedUnit,targetSeat=-1});targetSeat=-1;targetUnit="";}
-            }
-            else Text(new Rect(1250,716,308,55),card?.kind=="reaction"?"Реакции доступны в ответ на действие.":"До 3 заклинаний ИЛИ\nзаклинание + существо",18,muted);
-            if(Button(new Rect(1250,781,307,51),"Сбросить выбор",muted)){ClearSelection();}
-            if(Button(new Rect(1250,845,307,58),"Завершить ход",gold,turn))Send(new GameCommand{kind="end"});
-            string message=online&&steam.Error!=""?steam.Error:error;
-            Text(new Rect(1250,916,307,56),message!=""?message:turn?"Заклинаний: "+state.spellsPlayed+" / 3":"Ожидаем остальных…",16,message!=""?red:muted);
-            // The local hero is also a legal target for healing and rescue.
-            if(GUI.Button(new Rect(25,480,1180,43),"",GUIStyle.none))SelectTarget(seat);
-        }
-        void QteOverlay()
-        {
-            var q=state.qte;Dim();Box(new Rect(185,174,1230,650),panel);Frame(new Rect(185,174,1230,650),teal,2);
-            bool mine=q.owner==seat;Text(new Rect(230,204,1140,46),mine?"ВАШ РИТУАЛ":"РИТУАЛ: "+state.players[q.owner].name,30,teal,true,TextAnchor.MiddleCenter);
-            Text(new Rect(230,271,1140,58),catalog.Card(q.cardId).name,38,null,true,TextAnchor.MiddleCenter);
-            Text(new Rect(230,342,1140,57),mine?"Нажимайте A S D F G H J на клавиатуре или кнопки ниже":"Наблюдаем за попыткой соперника…",23,muted,false,TextAnchor.MiddleCenter);
-            float sw=76*q.sequence.Length;
-            for(int i=0;i<q.sequence.Length;i++)
-            {
-                var r=new Rect(800-sw/2+i*76,425,60,80);
-                Box(r,i<q.index?teal:i==q.index?gold:new Color(.17f,.23f,.26f));Text(r,q.sequence[i].ToString(),43,i<=q.index?ink:Color.white,true,TextAnchor.MiddleCenter);
-            }
-            double left=Math.Max(0,q.deadline-Clock);Box(new Rect(275,542,1050,9),new Color(.18f,.25f,.28f));Box(new Rect(275,542,1050*Mathf.Clamp01((float)(left/q.duration)),9),left<4?red:teal);
-            Text(new Rect(275,573,1050,38),"Осталось "+left.ToString("0.0")+" с  ·  Ошибки "+q.mistakes+" / 3  ·  При срыве карта → "+state.players[q.recipient].name,22,Color.white,false,TextAnchor.MiddleCenter);
-            for(int i=0;i<7;i++)if(Button(new Rect(428+i*108,647,90,64),"ASDFGHJ"[i].ToString(),gold,mine))Send(new GameCommand{kind="key",phaseId=q.id,key="ASDFGHJ"[i].ToString()});
-            Text(new Rect(230,753,1140,35),"Промах: −2 секунды. Реакции не требуют QTE.",19,muted,false,TextAnchor.MiddleCenter);
-        }
-        bool CanReact(CardDef card,TargetRef t)
-        {
-            var a=state.pending;if(a==null||card.kind!="reaction")return false;
-            bool damage=new[]{"opening","combat","damage","areaDamage"}.Contains(a.kind);
-            switch(card.effect)
-            {
-                case "reduce":case "reflect":return damage&&t.seat==seat&&a.source!=seat;
-                case "rescue":return damage;
-                case "deny":return t.seat==seat&&a.source!=seat&&catalog.Card(a.cardId).kind=="spell"&&(damage||new[]{"stun","swap","bounce","heal"}.Contains(a.kind));
-            }
-            return false;
-        }
-        void ReactionOverlay()
-        {
-            var a=state.pending;Dim();Box(new Rect(100,100,1400,800),panel);
-            Text(new Rect(140,125,1320,53),"МОМЕНТ ДЛЯ РЕАКЦИИ",34,new Color(.73f,.65f,.98f),true);
-            Text(new Rect(140,191,1320,60),a.label+"  ·  "+Math.Max(0,Math.Ceiling(state.deadline-Clock))+" с",28);
-            Text(new Rect(140,261,1300,60),"Цель действия: "+string.Join(", ",a.targets.Select(t=>state.players[t.seat].name+(t.unit!=""?" / существо":" / герой"))),21,gold);
-            bool waiting=a.responded.Contains(seat);var me=state.players[seat];
-            var eligible=me.hand.Where(h=>a.targets.Any(t=>CanReact(catalog.Card(h.cardId),t))).ToList();
-            if(!waiting)
-            {
-                Text(new Rect(140,323,1320,45),"Можно сыграть одну реакцию. Выберите карту, затем цель защиты. QTE не нужен.",21,muted);
-                for(int i=0;i<eligible.Count;i++)
-                {
-                    var h=eligible[i];var r=new Rect(140+i*160,390,148,230);MiniCard(catalog.Card(h.cardId),r,selectedCard==h.uid);
-                    if(GUI.Button(r,"",GUIStyle.none))selectedCard=h.uid;
-                }
-                var selected=eligible.Find(h=>h.uid==selectedCard);
-                if(selected!=null)
-                {
-                    var c=catalog.Card(selected.cardId);Text(new Rect(140,640,1310,70),c.rules,22);
-                    var targets=a.targets.Where(t=>CanReact(c,t)).ToList();
-                    for(int i=0;i<targets.Count;i++)
-                    {
-                        var t=targets[i];if(Button(new Rect(140+i*325,737,305,55),"Защитить: "+state.players[t.seat].name,new Color(.73f,.65f,.98f)))
-                        {Send(new GameCommand{kind="react",cardUid=selected.uid,phaseId=a.id,targetSeat=t.seat,targetUnit=t.unit});selectedCard="";break;}
-                    }
-                }
-                if(Button(new Rect(1110,821,345,50),"Пропустить реакцию",muted))Send(new GameCommand{kind="pass",phaseId=a.id});
-            }
-            else
-            {
-                Text(new Rect(220,450,1160,150),"Ваш ответ принят или подходящих реакций нет.\nОжидаем остальных игроков.",31,muted,false,TextAnchor.MiddleCenter);
-            }
-            Text(new Rect(140,831,910,40),error,19,red);
         }
         void ScoreOverlay()
         {
@@ -530,10 +349,10 @@ namespace SummonersTable
             string[] tips={
                 "3 раунда. Победа в раунде: +3 очка; устранение соперника: +1. В конце побеждает лучший общий счёт.",
                 "В начале хода доберите карту. За ход: до 3 заклинаний ИЛИ 1 заклинание и 1 существо. Рука до 8 карт, поле — 5 ячеек.",
-                "Выберите карту → цель → свободное место для существа → «Начать ритуал». Все существа и заклинания требуют QTE: A S D F G H J.",
-                "Существо сначала атакует, затем выходит на стол и включает постоянный эффект. Атака в существо вызывает ответный урон. После призыва ход завершается.",
-                "Готовые существа атакуют в конце хода. Нажмите своё существо, затем цель. Без назначения они бьют случайного вражеского героя.",
-                "Реакции — ответ на объявленную атаку или заклинание, без QTE. До одной реакции от игрока за окно в 7 секунд.",
+                "Существо: выберите карту и свободный слот (или перетащите). Заклинание: выберите карту и цель. Центр означает случайную допустимую цель.",
+                "Карта показывается 2 секунды. Затем владелец вводит A S D F G H J, остальные видят огоньки прогресса. После QTE назначьте существу цель. Атаки — по кнопке «Закончить ход».",
+                "Стрелки показывают будущие атаки. Зажмите ЛКМ на своём существе, вытяните стрелку и отпустите над целью; центр — случайный герой. Назначение сохраняется.",
+                "Реакции: до одной на чужой розыгрыш, без QTE. Копирование и возврат — на призыв; защита — на заклинание. На атаки существ реакций нет. Камера: колесо и ПКМ.",
                 "Три ошибки или тайм-аут QTE: карта уходит показанному сопернику. Если закончить ход без QTE, получите бонусный добор. Пустая колода наносит растущую усталость."
             };
             for(int i=0;i<tips.Length;i++)
