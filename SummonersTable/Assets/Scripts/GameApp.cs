@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -14,34 +15,45 @@ namespace SummonersTable
         readonly Dictionary<int,GUIStyle> labels=new Dictionary<int,GUIStyle>();
         Catalog catalog; SteamSession steam; GameEngine local; MatchState state;
         GUIStyle buttonStyle,fieldStyle;Font font;
-        string page="menu",modal="",returnPage="menu",error="",selectedCard="",selectedUnit="",detailId="",joinCode="",roomName="Весёлый стол";
+        string page="menu",modal="",returnPage="menu",error="",selectedCard="",selectedUnit="",joinCode="",roomName="Весёлый стол";
         string[] localNames={"Игрок 1","Игрок 2","Игрок 3","Игрок 4"};
         int[] localDecks={0,1,2,0};int localCount=2,capacity=4,seat,selectedSlot=-1,catalogDeck=-1;
         bool handoff,initialized,quitConfirm;double localTime;int[] seq=new int[4];
         float scale;Vector2 offset,scroll;bool online;
         string seenPhase="";int seenTurn=-1;
         AudioSource audioSource;AudioClip tickTone,failTone,successTone;string lastQte="";int lastProgress,lastMistakes;
+        CardTableCanvas cardCanvas;
+        public bool IsReady {get{return steam!=null&&board!=null&&cardCanvas!=null;}}
         public Catalog Catalog {get {return catalog;}}
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         static void Boot(){if(FindFirstObjectByType<GameApp>()==null)new GameObject("SummonersTable").AddComponent<GameApp>();}
-        void Awake()
+        IEnumerator Start()
         {
+            yield return LoadPresentationScenes();
             Application.runInBackground=true;Application.targetFrameRate=60;
             catalog=JsonUtility.FromJson<Catalog>(Resources.Load<TextAsset>("Data/catalog").text);catalog.Validate();
-            font=Font.CreateDynamicFontFromOSFont("Arial",24);
+            font=Font.CreateDynamicFontFromOSFont("Arial",24);BindFrontEnd();
             foreach(var c in catalog.cards)art[c.id]=Resources.Load<Texture2D>("Art/"+c.id);
             foreach(var key in new[]{"menu","board","card_back"})art[key]=Resources.Load<Texture2D>("Art/"+key);
             board=FindFirstObjectByType<TableBoard>(FindObjectsInactive.Include);
             if(board==null)board=new GameObject("3D Table").AddComponent<TableBoard>();
             board.Initialize(catalog);
-            captureMode=Environment.GetCommandLineArgs().Contains("--capture-preview");
-            steam=new SteamSession(catalog);if(!captureMode)steam.Initialize();
+            cardCanvas=FindFirstObjectByType<CardTableCanvas>(FindObjectsInactive.Include);
+            if(cardCanvas==null){cardCanvas=new GameObject("Card display Canvas").AddComponent<CardTableCanvas>();cardCanvas.Build();}
+            cardCanvas.Initialize(font,key=>{if(state?.qte!=null)Send(new GameCommand{kind="key",phaseId=state.qte.id,key=key});});
+            if(FindFirstObjectByType<UnityEngine.EventSystems.EventSystem>()==null)
+            {var events=new GameObject("UI Event System");events.AddComponent<UnityEngine.EventSystems.EventSystem>();events.AddComponent<UnityEngine.EventSystems.StandaloneInputModule>();}
+            var eventSystems=FindObjectsByType<UnityEngine.EventSystems.EventSystem>(FindObjectsSortMode.InstanceID);
+            for(int i=1;i<eventSystems.Length;i++)eventSystems[i].gameObject.SetActive(false);
+            captureMode=Environment.GetCommandLineArgs().Contains("--capture-preview")||Environment.GetCommandLineArgs().Contains("--capture-lab");
+            steam=new SteamSession(catalog);if(!captureMode&&FindFirstObjectByType<PresentationLab>()==null)steam.Initialize();
             audioSource=gameObject.AddComponent<AudioSource>();audioSource.volume=.15f;
             tickTone=Tone(680,.045f);failTone=Tone(160,.12f);successTone=Tone(980,.14f);
             var args=Environment.GetCommandLineArgs();
             if(args.Contains("--local-test"))StartLocal(4);
-            if(captureMode)StartCoroutine(CapturePreview());
+            if(args.Contains("--capture-lab"))StartCoroutine(CaptureLabPreview());
+            else if(captureMode)StartCoroutine(CapturePreview());
         }
         AudioClip Tone(float frequency,float duration)
         {
@@ -59,13 +71,20 @@ namespace SummonersTable
         }
         void Update()
         {
-            if(!captureMode)UpdateSession();
+            if(!IsReady)return;
+            if(!captureMode)UpdateSession();SyncFrontEnd();
             if(page=="game"&&state!=null&&!handoff)
             {
+                board.inputEnabled=!captureMode&&modal==""&&!quitConfirm;
+                board.selectedUnit=selectedUnit;board.choosingTarget=selectedUnit!=""||(selectedCard!=""&&catalog.Card(state.players[seat].hand.Find(h=>h.uid==selectedCard)?.cardId)?.kind=="spell");
+                var selectedDefinition=catalog.Card(state.players[seat].hand.Find(h=>h.uid==selectedCard)?.cardId);
+                board.placingCreature=selectedDefinition?.kind=="creature";board.targetMode=selectedUnit!=""?"enemy":selectedDefinition?.target??"none";
                 board.Sync(state,seat,Clock,selectedSlot);
                 if(!captureMode)ReadQteKeys();
             }
             else board.gameObject.SetActive(false);
+            var inspected=InspectionAt(captureMode?previewPointer??new Vector2(-100,-100):(Vector2)Input.mousePosition);
+            cardCanvas.Present(state,seat,state==null?0:Clock,inspected,catalog,board,page=="game"&&!handoff&&modal==""&&!quitConfirm&&state.phase!="roundEnd"&&state.phase!="matchEnd");
             if(Input.GetKeyDown(KeyCode.Escape))
             {
                 if(modal!="")modal="";
@@ -81,7 +100,7 @@ namespace SummonersTable
             else if(local!=null){command.seq=++seq[seat];var result=local.Submit(seat,command,localTime);error=result.ok?"":result.message;state=local.View(seat,localTime);}
         }
         double Clock {get {return online?state.serverTime+Time.realtimeSinceStartupAsDouble-steam.ReceivedAt:localTime;}}
-        void ClearSelection(){selectedCard="";selectedUnit="";detailId="";selectedSlot=-1;mouseHeld=false;draggingCard=false;error="";}
+        void ClearSelection(){selectedCard="";selectedUnit="";selectedSlot=-1;mouseHeld=false;draggingCard=false;unitPointerHeld=false;unitDragMoved=false;error="";}
         void ExitMatch(){steam.Leave();local=null;state=null;online=false;page="menu";quitConfirm=false;ClearSelection();}
         void SetupStyles()
         {
@@ -116,6 +135,9 @@ namespace SummonersTable
         string TypeName(CardDef c){return catalog.typeColors.Find(t=>t.id==c.kind).name;}
         void OnGUI()
         {
+            if(!IsReady)return;
+            if(previewLobby)return;
+            if(modal==""&&!quitConfirm&&((page=="menu"&&menuCanvas!=null)||(page=="steam"&&steam.InRoom&&lobbyCanvas!=null)))return;
             SetupStyles();GUI.color=Color.white;
             if(page!="game"||handoff)Box(new Rect(0,0,Screen.width,Screen.height),Color.black);
             scale=Mathf.Min(Screen.width/W,Screen.height/H);offset=new Vector2((Screen.width-W*scale)/2,(Screen.height-H*scale)/2);
@@ -148,6 +170,7 @@ namespace SummonersTable
         void Back(string destination="menu") {if(Button(new Rect(42,32,150,44),"← Назад",new Color(.7f,.78f,.77f))){page=destination;scroll=Vector2.zero;}}
         void Menu()
         {
+            if(menuCanvas!=null)return;
             Image("menu",new Rect(0,0,W,H));Box(new Rect(0,0,700,H),new Color(.02f,.06f,.08f,.85f));
             Text(new Rect(75,85,550,38),"АРЕНА ПРИЗЫВА",22,teal,true);
             Text(new Rect(70,160,590,200),"За одним\nстолом",76,null,true);
@@ -157,7 +180,7 @@ namespace SummonersTable
             if(Button(new Rect(78,676,232,54),"Колоды и карты",new Color(.77f,.71f,.95f))){returnPage="menu";page="cards";}
             if(Button(new Rect(326,676,232,54),"Как играть",new Color(.7f,.78f,.77f)))modal="rules";
             Text(new Rect(78,780,520,65),steam.Status,17,muted);
-            Text(new Rect(78,870,510,50),"ТЕСТ 0.2.0  /  3 РАУНДА  /  30 КАРТ",16,teal,true);
+            Text(new Rect(78,870,510,50),"ТЕСТ "+Application.version+"  /  3 РАУНДА  /  30 КАРТ",16,teal,true);
             if(Button(new Rect(78,927,150,40),"Выход",new Color(.7f,.78f,.77f)))Application.Quit();
             Text(new Rect(1130,900,390,70),"Существа + заклинания + реакции\nНикаких серьёзных лиц",21,Color.white,false,TextAnchor.MiddleRight);
         }
@@ -218,6 +241,7 @@ namespace SummonersTable
         }
         void Lobby()
         {
+            if(lobbyCanvas!=null)return;
             Text(new Rect(90,167,1110,50),"Код: "+steam.RoomId,30,teal,true);
             if(Button(new Rect(1220,164,285,50),"Скопировать код",gold))GUIUtility.systemCopyBuffer=steam.RoomId.ToString();
             Text(new Rect(90,231,1350,54),"Выберите колоду и нажмите «Готов». Хост начнёт, когда за столом будет хотя бы два готовых игрока.",22,muted);
@@ -313,10 +337,10 @@ namespace SummonersTable
             string[] tips={
                 "3 раунда. Победа в раунде: +3 очка; устранение соперника: +1. В конце побеждает лучший общий счёт.",
                 "В начале хода доберите карту. За ход: до 3 заклинаний ИЛИ 1 заклинание и 1 существо. Рука до 8 карт, поле — 5 ячеек.",
-                "Выберите карту и укажите цель стрелкой. Центр стола означает случайную цель. Свободный слот выбирается автоматически; его можно сменить до цели.",
-                "Карта показывается всем 3 секунды. Затем только её владелец видит QTE: A S D F G H J. При успехе существо атакует, выходит на стол и завершает ход.",
+                "Существо: выберите карту и свободный слот (или перетащите). Заклинание: выберите карту и цель. Центр означает случайную допустимую цель.",
+                "Карта показывается 2 секунды. Затем владелец вводит A S D F G H J, остальные видят огоньки прогресса. После QTE назначьте существу цель. Атаки — по кнопке «Закончить ход».",
                 "Стрелки существ показывают будущие атаки. В свой ход нажмите существо и новую цель; центр — случайный герой. Назначение сохраняется между ходами.",
-                "Реакции играются только пока чужая карта показывается или проходит QTE. До одной от игрока, без QTE. На обычные атаки со стола реакций нет.",
+                "Реакции: до одной на чужой розыгрыш, без QTE. Копирование и возврат — на призыв; защита — на заклинание. На атаки существ реакций нет. Камера: колесо и ПКМ.",
                 "Три ошибки или тайм-аут QTE: карта уходит показанному сопернику. Если закончить ход без QTE, получите бонусный добор. Пустая колода наносит растущую усталость."
             };
             for(int i=0;i<tips.Length;i++)

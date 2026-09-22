@@ -19,7 +19,7 @@ namespace SummonersTable
     [Serializable] public sealed class RulesDef
     {
         public int heroHp=30, deckSize=30, startingHand=5, handLimit=8, boardSlots=5,
-            rounds=3, roundWinPoints=3, eliminationPoints=1, turnSeconds=45, revealSeconds=3, qteMistakes=3;
+            rounds=3, roundWinPoints=3, eliminationPoints=1, turnSeconds=45, revealSeconds=2, qteMistakes=3;
     }
     [Serializable] public sealed class Catalog
     {
@@ -55,7 +55,8 @@ namespace SummonersTable
     {
         public string uid, cardId, plannedUnit="";
         public int slot, hp, plannedSeat=-1, skipAttacks;
-        public bool exhausted;
+        public bool exhausted, deploying, targetAssigned;
+        public int openingBonus;
         public UnitState Copy() { return (UnitState)MemberwiseClone(); }
     }
     [Serializable] public sealed class PlayerState
@@ -95,7 +96,8 @@ namespace SummonersTable
         public string id,cardId,targetUnit="";
         public int owner,targetSeat=-1,slot=-1;
         public bool randomTarget;
-        public double revealUntil;
+        public double revealUntil, startedAt;
+        public int qteLength, qteProgress, qteMistakes;
         public CastState Copy(){return (CastState)MemberwiseClone();}
     }
     [Serializable] public sealed class TableReaction
@@ -121,9 +123,16 @@ namespace SummonersTable
             return p;
         }
     }
+    [Serializable] public sealed class CombatEvent
+    {
+        public string id, unitUid, targetUnit;
+        public int source, targetSeat, damage,sourceSlot=-1,targetSlot=-1;
+        public double startedAt;
+        public CombatEvent Copy(){return (CombatEvent)MemberwiseClone();}
+    }
     [Serializable] public sealed class MatchState
     {
-        public string version="0.2.0", phase="lobby", result="", lastEvent="", matchId;
+        public string version="0.3.0", phase="lobby", result="", lastEvent="", matchId;
         public int revision, round, turnNumber, activeSeat, creaturePlayed, spellsPlayed, riskBonus;
         public bool qteAttempted;
         public double serverTime, deadline;
@@ -134,15 +143,19 @@ namespace SummonersTable
         public List<TableReaction> tableReactions=new List<TableReaction>();
         public PendingAction pending;
         public List<int> winners=new List<int>();
+        public List<CombatEvent> combatEvents=new List<CombatEvent>();
         public MatchState View(int seat,double now)
         {
             var v=(MatchState)MemberwiseClone();
             v.players=players.Select(p=>p.View(p.seat==seat)).ToList();
             v.log=new List<string>(log);v.winners=new List<int>(winners);
-            // Keys, progress, mistakes and the QTE deadline belong only to the caster.
+            // Letters and timer remain private; cast exposes only counts for the public orbs.
             v.qte=qte!=null&&phase=="qte"&&qte.owner==seat?qte.Copy():null;
             if(phase=="qte"&&(qte==null||qte.owner!=seat))v.deadline=0;
-            v.cast=cast?.Copy();v.pending=pending==null?null:pending.Copy();
+            v.cast=cast?.Copy();
+            if(v.cast!=null&&qte!=null&&phase=="qte")
+            {v.cast.qteLength=qte.sequence.Length;v.cast.qteProgress=qte.index;v.cast.qteMistakes=qte.mistakes;}
+            v.combatEvents=combatEvents.Select(e=>e.Copy()).ToList();v.pending=pending==null?null:pending.Copy();
             v.tableReactions=tableReactions.Select(r=>r.Copy()).ToList();
             v.serverTime=now;
             return v;
@@ -163,7 +176,7 @@ namespace SummonersTable
     }
     [Serializable] public sealed class WireMessage
     {
-        public int protocol=2;
+        public int protocol=3;
         public string kind, text, matchId;
         public GameCommand command;
         public MatchState state;

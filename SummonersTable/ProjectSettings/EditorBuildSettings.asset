@@ -6,7 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main.unity
-    guid: 46e4c0975cfb92748a13e2faa72c2650
+    path: Assets/Scenes/MainMenu.unity
+    guid: f8502cb1bedf9d14ba78b8e4a3028f5f
+  - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: bfa622d26f274dd48b9fd5c060160569
+  - enabled: 1
+    path: Assets/Scenes/Match.unity
+    guid: d6725ac558972f14dbbcb253007d35d6
+  - enabled: 1
+    path: Assets/Scenes/PresentationLab.unity
+    guid: 615b68c40b0cdd444bf6bd4f74750a92
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
