@@ -31,6 +31,7 @@ namespace SummonersTable
         int requestGeneration, commandSequence;
         bool quickSearch;
         string selectedDeck="noise";
+        string previousMatchId="";
         string selectedHero="badger";int selectedOutfit,selectedPalette;
         public bool Available {get;private set;}
         public bool Busy {get;private set;}
@@ -147,10 +148,11 @@ namespace SummonersTable
         public void SetMember(string deck,bool ready)
         {
             if(catalog.Deck(deck)==null)return;selectedDeck=deck;
-            if(!Available||!InRoom||View!=null)return;
+            if(!Available||!InRoom||View!=null&&View.phase!="matchEnd")return;
             SteamMatchmaking.SetLobbyMemberData(lobby,"deck",deck);
             SteamMatchmaking.SetLobbyMemberData(lobby,"hero",selectedHero);
             SteamMatchmaking.SetLobbyMemberData(lobby,"outfit",selectedOutfit.ToString());SteamMatchmaking.SetLobbyMemberData(lobby,"palette",selectedPalette.ToString());
+            SteamMatchmaking.SetLobbyMemberData(lobby,"readyFor",View?.matchId??"lobby");
             SteamMatchmaking.SetLobbyMemberData(lobby,"ready",ready?"1":"0");RefreshMembers();
         }
         public void SetAppearance(string hero,int outfit,int palette)
@@ -171,18 +173,19 @@ namespace SummonersTable
                 string hero=SteamMatchmaking.GetLobbyMemberData(lobby,id,"hero");
                 int.TryParse(SteamMatchmaking.GetLobbyMemberData(lobby,id,"outfit"),out int outfit);int.TryParse(SteamMatchmaking.GetLobbyMemberData(lobby,id,"palette"),out int palette);
                 next.Add(new LobbyMember{id=id.m_SteamID.ToString(),name=Clean(SteamFriends.GetFriendPersonaName(id),28),
-                    heroId=HeroOptions.Normalize(hero),outfit=HeroOptions.Outfit(outfit),palette=HeroOptions.Palette(palette),deckId=valid?deck:"noise",ready=valid&&HeroOptions.Valid(hero)&&SteamMatchmaking.GetLobbyMemberData(lobby,id,"ready")=="1"});
+                    heroId=HeroOptions.Normalize(hero),outfit=HeroOptions.Outfit(outfit),palette=HeroOptions.Palette(palette),deckId=valid?deck:"noise",readyMatch=SteamMatchmaking.GetLobbyMemberData(lobby,id,"readyFor"),ready=valid&&HeroOptions.Valid(hero)&&SteamMatchmaking.GetLobbyMemberData(lobby,id,"ready")=="1"&&(View==null||SteamMatchmaking.GetLobbyMemberData(lobby,id,"readyFor")==View.matchId)});
             }
             Members=next.OrderBy(m=>m.id==owner.m_SteamID.ToString()?0:1).ThenBy(m=>m.id).ToList();
             if(View!=null&&owner!=matchHost){EndBrokenMatch("Хост покинул матч. Создайте новое лобби.");return;}
             if(Engine!=null)
                 foreach(var p in Engine.State.players.Where(p=>p.connected&&!Members.Any(m=>m.id==p.id)).ToList())Engine.Disconnect(p.seat,TimeNow);
         }
-        public bool CanStart {get {return IsHost&&!Busy&&View==null&&Members.Count>=2&&Members.All(m=>m.ready);}}
+        public bool CanStart {get {return IsHost&&!Busy&&(View==null?Members.Count>=2&&Members.All(m=>m.ready):RematchRules.CanRestart(View,Members));}}
+        public void ChooseAfterMatch(string choice){Submit(new GameCommand{kind="postMatch",choice=choice});if(choice=="deck")SetMember(selectedDeck,false);}
         public void StartMatch()
         {
             RefreshMembers();if(!CanStart)return;
-            matchHost=SteamUser.GetSteamID();commandSequence=0;
+            previousMatchId=View?.matchId??"";matchHost=SteamUser.GetSteamID();commandSequence=0;
             SteamMatchmaking.SetLobbyJoinable(lobby,false);SteamMatchmaking.SetLobbyData(lobby,"state","playing");
             Engine=new GameEngine(catalog,Members,Environment.TickCount,TimeNow);Seat=Engine.State.players.Find(p=>p.id==UserId.ToString()).seat;
             foreach(var m in Members)lastSeen[ulong.Parse(m.id)]=TimeNow;
@@ -222,7 +225,7 @@ namespace SummonersTable
             {
                 var view=Engine.View(p.seat,TimeNow);
                 if(p.id==UserId.ToString()){View=view;ReceivedAt=TimeNow;}
-                else Send(ulong.Parse(p.id),new WireMessage{kind="state",matchId=view.matchId,state=view});
+                else Send(ulong.Parse(p.id),new WireMessage{kind="state",matchId=view.matchId,previousMatchId=previousMatchId,state=view});
             }
             lastPublish=TimeNow;
         }
@@ -255,8 +258,8 @@ namespace SummonersTable
                     {
                         if(wire.state.players==null||wire.state.players.Count<2||wire.state.players.Count>4)continue;
                         var own=wire.state.players.Find(p=>p.id==UserId.ToString());if(own==null)continue;
-                        if(View!=null&&(View.matchId!=wire.matchId||wire.state.revision<View.revision))continue;
-                        if(View==null){matchHost=new CSteamID(sender);commandSequence=0;Error="";}
+                        if(!RematchRules.AcceptNext(View,wire))continue;
+                        if(View==null||View.matchId!=wire.matchId){matchHost=new CSteamID(sender);commandSequence=0;Error="";}
                         if(Error.StartsWith("Нет обновлений от хоста.")||Error.StartsWith("Ожидание Steam-соединения:"))Error="";
                         wire.state.RestoreViewPrivacy(own.seat);
                         Seat=own.seat;View=wire.state;ReceivedAt=TimeNow;
@@ -282,6 +285,7 @@ namespace SummonersTable
                 foreach(var p in Engine.State.players.Where(p=>p.connected&&p.seat!=Seat).ToList())
                     if(lastSeen.TryGetValue(ulong.Parse(p.id),out var seen)&&now-seen>45)Engine.Disconnect(p.seat,now);
                 if(now-lastPublish>.2)Publish();
+                if(Engine.State.phase=="matchEnd"&&CanStart)StartMatch();
             }
             else if(View!=null)
             {

@@ -6,13 +6,15 @@ namespace SummonersTable
 {
     [Serializable] public sealed class HistoryTarget
     {
-        public int seat=-1,amount;
+        public int seat=-1,amount,slot=-1;
+        public bool prevented;
         public string cardId="",unit="";
         public HistoryTarget Copy(){return (HistoryTarget)MemberwiseClone();}
     }
     [Serializable] public sealed class HistoryEntry
     {
         public int id,round,turn,turnSeat,actor;
+        public double at;
         public string kind="",cardId="",detail="";
         public List<HistoryTarget> targets=new List<HistoryTarget>();
         public HistoryEntry Copy(){var copy=(HistoryEntry)MemberwiseClone();copy.targets=targets.Select(t=>t.Copy()).ToList();return copy;}
@@ -37,8 +39,8 @@ namespace SummonersTable
         int historyId;
         void History(string kind,int actor,string cardId="",IEnumerable<TargetRef> targets=null,string detail="",int amount=0)
         {
-            var entry=new HistoryEntry{id=++historyId,round=State.round,turn=State.turnNumber,turnSeat=State.activeSeat,actor=actor,kind=kind,cardId=cardId,detail=detail};
-            if(targets!=null)foreach(var t in targets)entry.targets.Add(new HistoryTarget{seat=t.seat,unit=t.unit,cardId=Unit(t.seat,t.unit)?.cardId??"",amount=amount});
+            var entry=new HistoryEntry{id=++historyId,at=now,round=State.round,turn=State.turnNumber,turnSeat=State.activeSeat,actor=actor,kind=kind,cardId=cardId,detail=detail};
+            if(targets!=null)foreach(var t in targets)entry.targets.Add(new HistoryTarget{seat=t.seat,unit=t.unit,cardId=Unit(t.seat,t.unit)?.cardId??"",slot=Unit(t.seat,t.unit)?.slot??-1,amount=amount,prevented=kind=="effect"&&reactions.Values.Any(r=>r.effect=="deny"&&Same(r.target,t))});
             State.history.Add(entry);if(State.history.Count>80)State.history.RemoveAt(0);
         }
         void HistoryDamage(int actor,string cardId,TargetRef target,int amount,string detail="")

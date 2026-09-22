@@ -1,43 +1,38 @@
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 namespace SummonersTable
 {
     public sealed class PresentationLab : MonoBehaviour
     {
-        public PresentationSettings settings;
-        public AudioSource musicSource;
+        public PresentationSettings settings;public AudioSource musicSource;public WidgetScreen controls;
         public bool showPanel=true;
-        string status="";
-        int previewAnimation;
+        string status="";int previewAnimation,previewSpell;TableBoard board;
         readonly string[] animations={"Idle_Normal","Defend","AttackCombo04","Die","AttackCombo05","DashForward","DashBackward","DieRecover","Dizzy","GetHit","Sliding"};
-        System.Collections.IEnumerator Start(){var app=FindFirstObjectByType<GameApp>();while(!app.IsReady)yield return null;app.StartPresentationLab();}
-        void OnGUI()
+        System.Collections.IEnumerator Start()
         {
-            if(!showPanel)return;
-            var board=FindFirstObjectByType<TableBoard>();if(board==null||board.CameraRig==null)return;
-            var app=FindFirstObjectByType<GameApp>();var camera=board.CameraRig;var data=camera.Data;
-            var previousMatrix=GUI.matrix;float scale=Mathf.Min(Screen.width/1600f,Screen.height/1000f);
-            GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-1600*scale)/2,(Screen.height-1000*scale)/2,0),Quaternion.identity,new Vector3(scale,scale,1));
-            GUILayout.BeginArea(new Rect(12,110,280,630),GUI.skin.box);
-            GUILayout.Label("ЛАБОРАТОРИЯ ПРЕЗЕНТАЦИИ");GUILayout.Label("Камера: "+data.cameraModes[camera.Mode].name);
-            GUILayout.Label("Чувствительность: "+data.lookSensitivity.ToString("0.0"));data.lookSensitivity=GUILayout.HorizontalSlider(data.lookSensitivity,.2f,8);
-            var mode=data.cameraModes[camera.Mode];GUILayout.Label("Высота: "+mode.height.ToString("0.0"));mode.height=GUILayout.HorizontalSlider(mode.height,1.5f,24);
-            GUILayout.Label("Радиус: "+mode.distance.ToString("0.0"));mode.distance=GUILayout.HorizontalSlider(mode.distance,0,15);
-            GUILayout.Label("Угол обзора: "+mode.fieldOfView.ToString("0"));mode.fieldOfView=GUILayout.HorizontalSlider(mode.fieldOfView,30,90);
-            if(GUILayout.Button("Следующий вид"))camera.SetMode((camera.Mode+1)%3);
-            if(GUILayout.Button("Сбросить тестовый стол"))app.StartPresentationLab();
-            if(GUILayout.Button("Атаки / попадание / урон"))app.LabAttack();
-            if(GUILayout.Button("Завершить тестовый QTE"))app.LabFinishQte();
-            GUILayout.Label("Анимация: "+animations[previewAnimation]);
-            if(GUILayout.Button("Следующая анимация")){previewAnimation=(previewAnimation+1)%animations.Length;board.Actor(1)?.Play(animations[previewAnimation],3);}
-            if(GUILayout.Button("Проиграть анимацию"))board.Actor(1)?.Play(animations[previewAnimation],3);
-            if(GUILayout.Button("Пример Motion Titles"))FindFirstObjectByType<MotionAnnouncements>()?.Preview("ВАШ ХОД");
-            if(GUILayout.Button("Музыка: вкл / выкл")&&musicSource!=null){if(musicSource.isPlaying)musicSource.Stop();else if(musicSource.clip!=null)musicSource.Play();else status="Назначьте AudioClip в инспекторе.";}
-            if(GUILayout.Button("Сохранить presentation.json"))
-            {string path=Path.Combine(Application.persistentDataPath,"presentation.json");File.WriteAllText(path,JsonUtility.ToJson(data,true));status=path;}
-            if(GUILayout.Button("Загрузить presentation.json"))
-            {try{camera.Apply(JsonUtility.FromJson<PresentationData>(File.ReadAllText(Path.Combine(Application.persistentDataPath,"presentation.json"))));status="Настройки загружены";}catch(System.Exception e){status=e.Message;}}
-            GUILayout.Label(status);GUILayout.EndArea();GUI.matrix=previousMatrix;
+            var app=FindFirstObjectByType<GameApp>();while(!app.IsReady)yield return null;app.StartPresentationLab();board=FindFirstObjectByType<TableBoard>(FindObjectsInactive.Include);
+            controls.Click("camera",()=>board.CameraRig.SetMode((board.CameraRig.Mode+1)%3));controls.Click("reset",app.StartPresentationLab);
+            controls.Click("attack",app.LabAttack);controls.Click("qte",app.LabFinishQte);
+            controls.Click("nextAnimation",()=>{previewAnimation=(previewAnimation+1)%animations.Length;board.Actor(1)?.Play(animations[previewAnimation],3);});
+            controls.Click("animation",()=>board.Actor(1)?.Play(animations[previewAnimation],3));controls.Click("title",()=>FindFirstObjectByType<MotionAnnouncements>()?.Preview("ВАШ ХОД"));
+            controls.Click("nextSpell",()=>previewSpell=(previewSpell+1)%8);controls.Click("spell",()=>board.PreviewSpell("S"+(previewSpell+1).ToString("00")));
+            controls.Click("music",()=>{if(musicSource.isPlaying)musicSource.Stop();else musicSource.Play();});
+            controls.Click("save",()=>{status=Path.Combine(Application.persistentDataPath,"presentation.json");File.WriteAllText(status,JsonUtility.ToJson(board.CameraRig.Data,true));});
+            controls.Click("load",()=>{try{board.CameraRig.Apply(JsonUtility.FromJson<PresentationData>(File.ReadAllText(Path.Combine(Application.persistentDataPath,"presentation.json"))));status="Настройки загружены";}catch(System.Exception e){status=e.Message;}});
+            controls.Get<Slider>("sensitivity").onValueChanged.AddListener(v=>board.CameraRig.Data.lookSensitivity=v);
+            controls.Get<Slider>("height").onValueChanged.AddListener(v=>board.CameraRig.Data.cameraModes[board.CameraRig.Mode].height=v);
+            controls.Get<Slider>("distance").onValueChanged.AddListener(v=>board.CameraRig.Data.cameraModes[board.CameraRig.Mode].distance=v);
+            controls.Get<Slider>("fov").onValueChanged.AddListener(v=>board.CameraRig.Data.cameraModes[board.CameraRig.Mode].fieldOfView=v);
         }
+        void Update()
+        {
+            if(controls==null)return;controls.Show(showPanel);if(board==null||!showPanel)return;
+            var rig=board.CameraRig;var data=rig.Data;var mode=data.cameraModes[rig.Mode];
+            controls.Text("heading","ЛАБОРАТОРИЯ · "+mode.name);controls.Text("status",status);
+            SliderValue("sensitivity","Чувствительность",data.lookSensitivity);SliderValue("height","Высота",mode.height);SliderValue("distance","Радиус",mode.distance);SliderValue("fov","Угол обзора",mode.fieldOfView);
+            controls.Text("animationLabel",animations[previewAnimation]);controls.Text("spellLabel",board.cardLibrary.Find("S"+(previewSpell+1).ToString("00")).definition.name);
+        }
+        void SliderValue(string id,string name,float value){controls.Text(id+"Label",name+": "+value.ToString("0.0"));controls.Get<Slider>(id).SetValueWithoutNotify(value);}
     }
 }

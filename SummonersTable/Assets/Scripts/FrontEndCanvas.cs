@@ -15,7 +15,7 @@ namespace SummonersTable
         public void Bind(Font font,Action<string> click)
         {
             GetComponent<CanvasScaler>().screenMatchMode=CanvasScaler.ScreenMatchMode.Expand;
-            foreach(var t in GetComponentsInChildren<Text>(true))t.font=font;
+            foreach(var t in GetComponentsInChildren<Text>(true))if(t.font==null)t.font=font;
             for(int i=0;i<buttons.Length;i++){string action=actions[i];buttons[i].onClick.RemoveAllListeners();buttons[i].onClick.AddListener(()=>click(action));}
         }
         public void Visible(bool visible){gameObject.SetActive(visible);}

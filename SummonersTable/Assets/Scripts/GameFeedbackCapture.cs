@@ -33,18 +33,18 @@ namespace SummonersTable
             previewPointer=board.ViewCamera.WorldToScreenPoint(TableBoard.HeroPosition(1,4));
             yield return Shot(directory,"10a-hero-hover-info-and-hand-backs");previewPointer=null;
             historyOpen=true;yield return Shot(directory,"10b-history-dropdown");
-            var row=journalRows.First(r=>!r.header&&r.entry.kind=="damage"&&r.entry.targets.Any(t=>t.cardId!=""));
-            historyScroll.y=Mathf.Clamp(row.rect.y,0,Mathf.Max(0,journalHeight-HistoryViewport.height));
-            var source=HistorySource(row).center+HistoryViewport.position-historyScroll;
-            previewPointer=new Vector2(source.x*scale+offset.x,Screen.height-(source.y*scale+offset.y));
+            var entry=journal.Entries.First(e=>e.kind=="damage"&&e.targets.Any(t=>t.cardId!=""));
+            ui.history.ScrollTo(entry.id);yield return null;
+            var row=ui.history.GetComponentsInChildren<HistoryRowView>().First(r=>r.entry?.id==entry.id);
+            previewPointer=RectTransformUtility.WorldToScreenPoint(null,row.sourceHover.TransformPoint(row.sourceHover.rect.center));
             yield return Shot(directory,"10c-history-source-hover");
             if(!cardCanvas.rightSlot.gameObject.activeSelf||cardCanvas.rightSlot.CardId!=row.entry.cardId)throw new Exception("Journal source inspection failed");
             int targetIndex=row.entry.targets.FindIndex(t=>t.cardId!="");
-            var target=HistoryTargetCard(row,targetIndex).center+HistoryViewport.position-historyScroll;
-            previewPointer=new Vector2(target.x*scale+offset.x,Screen.height-(target.y*scale+offset.y));
+            var target=(RectTransform)row.targetGroups[targetIndex].transform;
+            previewPointer=RectTransformUtility.WorldToScreenPoint(null,target.TransformPoint(target.rect.center));
             yield return Shot(directory,"10d-history-target-hover");
             if(cardCanvas.rightSlot.CardId!=row.entry.targets[targetIndex].cardId)throw new Exception("Journal target inspection failed");
-            if(!JournalCoversScreen(previewPointer.Value))throw new Exception("Journal does not block board input");
+            if(!ui.history.Covers(previewPointer.Value))throw new Exception("Journal does not block board input");
             historyOpen=false;previewPointer=null;
         }
     }

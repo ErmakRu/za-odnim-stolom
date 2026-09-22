@@ -45,7 +45,7 @@ namespace SummonersTable
         void SyncFrontEnd()
         {
             if(previewLobby)return;
-            bool visible=modal==""&&!quitConfirm;
+            bool visible=modal==""&&!quitConfirm&&!settingsOpen;
             if(menuCanvas!=null){menuCanvas.Visible(page=="menu"&&visible);menuCanvas.status.text="ТЕСТ "+Application.version+" · "+steam.Status;}
             if(lobbyCanvas==null)return;
             bool localLobby=page=="local";

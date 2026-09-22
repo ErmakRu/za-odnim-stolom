@@ -148,6 +148,11 @@ namespace SummonersTable
             sequences[seat]=cmd.seq;
             Tick(time);
             if(cmd.kind=="leave"){Disconnect(seat,time);return CommandResult.Yes();}
+            if(cmd.kind=="postMatch")
+            {
+                if(State.phase!="matchEnd"||!P(seat).connected||!new[]{"again","deck"}.Contains(cmd.choice))return CommandResult.No("Выбор доступен после матча.");
+                P(seat).postMatchChoice=cmd.choice;State.revision++;return CommandResult.Yes();
+            }
             if(cmd.kind=="look")
             {
                 if(!P(seat).connected||float.IsNaN(cmd.lookYaw)||float.IsNaN(cmd.lookPitch)||float.IsInfinity(cmd.lookYaw)||float.IsInfinity(cmd.lookPitch)||cmd.cameraMode<0||cmd.cameraMode>2)return CommandResult.No("Некорректное направление взгляда.");
