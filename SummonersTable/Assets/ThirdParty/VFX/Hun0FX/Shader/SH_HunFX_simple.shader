@@ -23,7 +23,7 @@ Shader "HunFX/SH_HunFX_simple"
 		{
 		LOD 0
 
-			Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" "PreviewType"="Plane" }
+			Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" "PreviewType"="Plane" "RenderPipeline"="UniversalPipeline" }
 			Blend SrcAlpha OneMinusSrcAlpha
 			ColorMask RGB
 			Cull Off
@@ -32,6 +32,7 @@ Shader "HunFX/SH_HunFX_simple"
 			ZTest LEqual
 			
 			Pass {
+				Tags { "LightMode"="UniversalForward" }
 			
 				CGPROGRAM
 				

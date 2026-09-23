@@ -144,7 +144,7 @@ namespace SummonersTable
         CardDisplaySlot MakeSlot(string name,Vector2 position,Vector2 size)
         {var rect=Rect(name,transform,position,size);var slot=rect.gameObject.AddComponent<CardDisplaySlot>();slot.library=Resources.Load<CardLibrary>("CardLibrary");return slot;}
         public static RectTransform Rect(string name,Transform parent,Vector2 position,Vector2 size)
-        {var o=new GameObject(name,typeof(RectTransform));o.transform.SetParent(parent,false);var r=(RectTransform)o.transform;r.anchorMin=r.anchorMax=r.pivot=new Vector2(.5f,.5f);r.anchoredPosition=position;r.sizeDelta=size;return r;}
+        {var o=new GameObject(name,typeof(RectTransform),typeof(CanvasRenderer));o.transform.SetParent(parent,false);var r=(RectTransform)o.transform;r.anchorMin=r.anchorMax=r.pivot=new Vector2(.5f,.5f);r.anchoredPosition=position;r.sizeDelta=size;return r;}
         static RectTransform TopRect(string name,Transform parent,Rect bounds)
         {var r=Rect(name,parent,Vector2.zero,bounds.size);r.anchorMin=r.anchorMax=r.pivot=new Vector2(0,1);r.anchoredPosition=new Vector2(bounds.x,-bounds.y);return r;}
         static Image Panel(string name,Transform parent,Rect bounds,Color color)

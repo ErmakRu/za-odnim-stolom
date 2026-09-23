@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace SummonersTable
 {
+    [RequireComponent(typeof(CanvasRenderer))]
     public sealed class TargetArrowGraphic : MaskableGraphic
     {
         public float width=7,headLength=22,headWidth=12;Vector2 from,to;

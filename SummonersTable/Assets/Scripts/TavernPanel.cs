@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace SummonersTable
 {
+    [RequireComponent(typeof(CanvasRenderer))]
     public sealed class TavernPanel : MaskableGraphic
     {
         public Color border=new Color(.64f,.40f,.19f);public float corner=15,inset=4;

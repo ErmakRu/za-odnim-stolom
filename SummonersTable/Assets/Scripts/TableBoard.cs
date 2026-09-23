@@ -44,6 +44,7 @@ namespace SummonersTable
             ViewCamera.name="Table camera";ViewCamera.tag="MainCamera";ViewCamera.orthographic=false;
             ViewCamera.fieldOfView=48;ViewCamera.nearClipPlane=.1f;ViewCamera.farClipPlane=80;
             ViewCamera.clearFlags=CameraClearFlags.SolidColor;ViewCamera.backgroundColor=new Color(.085f,.10f,.12f);
+            var camData=ViewCamera.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>()??ViewCamera.gameObject.AddComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>();camData.renderPostProcessing=true;
             CameraRig=ViewCamera.GetComponent<ManualTableCamera>()??ViewCamera.gameObject.AddComponent<ManualTableCamera>();CameraRig.Initialize(ViewCamera);
             gray=Solid(new Color(.40f,.42f,.44f));seatGray=Solid(new Color(.49f,.51f,.53f));darkGray=Solid(new Color(.19f,.21f,.24f));
             if(authoredEnvironment!=null)
@@ -69,7 +70,23 @@ namespace SummonersTable
         }
         Material Solid(Color color)
         {
-            var m=new Material(Resources.Load<Shader>("BoardGray"));m.color=color;ownedMaterials.Add(m);return m;
+            var s = Shader.Find("Toon Shaders Pro/URP/Toon") ?? Resources.Load<Shader>("BoardGray");
+            var m = new Material(s);
+            if (m.HasProperty("_BaseColor")) m.SetColor("_BaseColor", color);
+            m.color = color;
+            if (m.HasProperty("_LightTint")) {
+                m.SetColor("_LightTint", Color.white);
+                m.SetColor("_MiddleTint", new Color(0.82f, 0.82f, 0.86f, 1f));
+                m.SetColor("_ShadowTint", new Color(0.45f, 0.45f, 0.54f, 1f));
+                m.SetVector("_DiffuseThresholds", new Vector4(0.1f, 0.15f, 0.55f, 0.60f));
+                m.SetVector("_ShadowThresholds", new Vector4(0.25f, 0.30f, 0f, 0f));
+                m.SetFloat("_UseSecondThreshold", 1f);
+                m.SetColor("_RimColor", new Color(1f, 0.95f, 0.85f, 1f));
+                m.SetVector("_RimThresholds", new Vector4(0.65f, 0.70f, 0f, 0f));
+                m.SetFloat("_RimExtension", 0.35f);
+            }
+            ownedMaterials.Add(m);
+            return m;
         }
         Material Flat(Color color)
         {
