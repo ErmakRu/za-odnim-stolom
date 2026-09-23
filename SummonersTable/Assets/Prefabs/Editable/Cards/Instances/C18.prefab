@@ -137,8 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5508621631403657562, guid: 88d2ee25808501a4f905868b9132ec8c, type: 3}
       propertyPath: definition.art
-      value: A curious pale blue friendly ghost peeking over a floating enchanted
-        keyboard with blank keys and a softly glowing helpful fingertip
+      value: art:C18
       objectReference: {fileID: 0}
     - target: {fileID: 5508621631403657562, guid: 88d2ee25808501a4f905868b9132ec8c, type: 3}
       propertyPath: definition.qte

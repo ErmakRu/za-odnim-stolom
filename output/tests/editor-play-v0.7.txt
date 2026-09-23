@@ -1,0 +1,1 @@
+PASS Unity Editor Play from MainMenu: Config Inspector validation, local 2/3/4 players, staged balance vs live world/audio reload, invalid JSON atomic rejection, all existing gameplay/UI regression assertions. Rendering screenshots skipped in batch Editor. No Player build.

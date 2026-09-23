@@ -11,7 +11,7 @@ namespace SummonersTable
             gameObject.SetActive(card!=null);if(card==null)return;
             if(library==null)library=Resources.Load<CardLibrary>("CardLibrary");
             if(view==null||current!=card.id){if(view!=null)Destroy(view.gameObject);var prefab=library.Find(card.id);if(prefab==null)throw new System.InvalidOperationException("Missing card variant: "+card.id);view=Instantiate(prefab,transform,false);current=card.id;}
-            view.Mode(presentation);Fit();
+            view.ApplyDefinition(catalog);view.Mode(presentation);Fit();
         }
         public void Fit()
         {

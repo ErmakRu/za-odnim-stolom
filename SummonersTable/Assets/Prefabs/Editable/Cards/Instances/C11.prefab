@@ -139,8 +139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5508621631403657562, guid: 88d2ee25808501a4f905868b9132ec8c, type: 3}
       propertyPath: definition.art
-      value: A charming brass clockwork turret with an expressive lens eye and a
-        little bow tie, firing bright confetti sparks
+      value: art:C11
       objectReference: {fileID: 0}
     - target: {fileID: 5508621631403657562, guid: 88d2ee25808501a4f905868b9132ec8c, type: 3}
       propertyPath: definition.qte

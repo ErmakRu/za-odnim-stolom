@@ -123,6 +123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6979887932945733133}
+  - component: {fileID: 4972773265072770040}
   m_Layer: 0
   m_Name: Round table placeholder
   m_TagString: Untagged
@@ -146,3 +147,16 @@ Transform:
   - {fileID: 7047602826475051812}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4972773265072770040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6577994993539422331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e1c0cf1608d9b4fb7ebf977eea2a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.PrefabConfigBinding
+  configId: Round table placeholder

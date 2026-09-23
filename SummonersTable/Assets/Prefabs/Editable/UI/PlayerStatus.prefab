@@ -318,6 +318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5811053215352272294}
   - component: {fileID: 5957527868086812942}
+  - component: {fileID: 2526069882182836774}
   m_Layer: 0
   m_Name: PlayerStatus
   m_TagString: Untagged
@@ -366,8 +367,23 @@ MonoBehaviour:
   healthTrail: {fileID: 5852962903776155115}
   nameOffset: {x: 0, y: 1.25, z: 0}
   healthBetweenHeroAndSlots: 0.5
-  healthHeight: 1.25
-  minimumNameGap: 48
+  healthHeight: 6.28
+  minimumNameGap: 20
+  nameScreenPadding: 70
+  nameCollisionPadding: 6
+--- !u!114 &2526069882182836774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3616930269191064081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e1c0cf1608d9b4fb7ebf977eea2a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.PrefabConfigBinding
+  configId: PlayerStatus
 --- !u!1 &5961124480705239184
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,7 +596,7 @@ RectTransform:
   m_GameObject: {fileID: 8117289782657437685}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 692874074393786526}

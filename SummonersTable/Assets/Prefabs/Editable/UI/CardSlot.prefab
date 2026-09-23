@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6366004092927819602}
   - component: {fileID: 3102339019376333811}
+  - component: {fileID: 4220870703145410283}
   m_Layer: 0
   m_Name: CardSlot
   m_TagString: Untagged
@@ -51,3 +52,16 @@ MonoBehaviour:
   library: {fileID: 11400000, guid: 41e00092404a1054ea5ac395d855ce04, type: 2}
   presentation: full
   view: {fileID: 0}
+--- !u!114 &4220870703145410283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605823536829967512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e1c0cf1608d9b4fb7ebf977eea2a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.PrefabConfigBinding
+  configId: CardSlot

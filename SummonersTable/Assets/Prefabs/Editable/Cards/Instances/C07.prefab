@@ -139,8 +139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5508621631403657562, guid: 88d2ee25808501a4f905868b9132ec8c, type: 3}
       propertyPath: definition.art
-      value: A cheerful skeleton with round spectacles counting luminous playing
-        cards on a wooden abacus, jaw slightly askew
+      value: art:C07
       objectReference: {fileID: 0}
     - target: {fileID: 5508621631403657562, guid: 88d2ee25808501a4f905868b9132ec8c, type: 3}
       propertyPath: definition.qte

@@ -1,0 +1,3 @@
+PASS PDF 0.6: 23 pages, all 30 card IDs/names, 3 decks of 30. Rendered and visually inspected updated rules and catalog pages.
+Catalog SHA256: 1d9410542cf6f1b11096e99568a1d1a442ec6189d771f94b2054e9839fdd35d2
+PDF SHA256: 475e65f522bc98a2b8f0d7e2d62c4cfd05a60694639dc9b0e80c07afb59f657d

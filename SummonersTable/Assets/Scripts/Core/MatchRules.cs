@@ -3,6 +3,16 @@ namespace SummonersTable
 {
     public static class MatchRules
     {
+        public const int QteBudget=10;
+        // The printed QTE is the resource cost. Interference changes the ritual, not its price.
+        public static int Cost(CardDef card)=>card.kind=="reaction"?0:System.Math.Max(0,card.qte);
+        public static int Stack(MatchState state,int amount,int cap)=>state.options.limitPower?System.Math.Min(cap,amount):amount;
+        public static bool CanSpend(MatchState state,CardDef card)
+        {
+            if(card==null||card.kind=="reaction")return false;
+            if(state.options.IsCommanders)return Cost(card)<=state.rules.commandersQte-state.qteSpent;
+            return card.kind=="creature"?state.creaturePlayed<state.rules.wizardCreatures&&state.spellsPlayed<=state.rules.wizardMixedSpells:state.spellsPlayed<(state.creaturePlayed>0?state.rules.wizardMixedSpells:state.rules.wizardSpells);
+        }
         public static bool CanUse(Catalog catalog,MatchState state,int seat,CardDef card)
         {
             if(state==null||seat<0||seat>=state.players.Count||card==null||!state.players[seat].connected)return false;
@@ -13,8 +23,8 @@ namespace SummonersTable
         {
             if(state.phase!="action"||state.activeSeat!=seat||!state.players[seat].alive||card==null||card.kind=="reaction")return false;
             var p=state.players[seat];
-            if(card.kind=="creature")return state.creaturePlayed==0&&state.spellsPlayed<=1&&p.units.Count<catalog.rules.boardSlots;
-            if(state.spellsPlayed>=(state.creaturePlayed>0?1:3))return false;
+            if(!CanSpend(state,card))return false;
+            if(card.kind=="creature")return p.units.Count<catalog.rules.boardSlots;
             if(card.target=="enemyUnit")return state.players.Any(x=>x.seat!=seat&&x.alive&&x.units.Count>0);
             if(card.target=="unit")return state.players.Any(x=>x.alive&&x.units.Count>0);
             if(card.effect=="swap")return p.hand.Count>=2&&state.players.Any(x=>x.seat!=seat&&x.alive&&x.handCount>0);

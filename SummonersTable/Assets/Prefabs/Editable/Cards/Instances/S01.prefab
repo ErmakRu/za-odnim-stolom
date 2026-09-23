@@ -144,8 +144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6140666943963998782, guid: 530e1546ce8a5f2459e7347ba6fbfee9, type: 3}
       propertyPath: definition.art
-      value: A comic burst of orange magical flame shaped like an enormous sneeze,
-        a tiny crumpled handkerchief flying away
+      value: art:S01
       objectReference: {fileID: 0}
     - target: {fileID: 6140666943963998782, guid: 530e1546ce8a5f2459e7347ba6fbfee9, type: 3}
       propertyPath: definition.qte

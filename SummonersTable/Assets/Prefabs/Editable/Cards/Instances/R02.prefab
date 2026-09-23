@@ -142,8 +142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5052774128483617739, guid: f4ba0da282ee7614d862cbf3f507e42e, type: 3}
       propertyPath: definition.art
-      value: Two friendly magical hands conjuring a small duplicate of a cheerful
-        creature in matching glowing circles
+      value: art:R02
       objectReference: {fileID: 0}
     - target: {fileID: 5052774128483617739, guid: f4ba0da282ee7614d862cbf3f507e42e, type: 3}
       propertyPath: definition.name

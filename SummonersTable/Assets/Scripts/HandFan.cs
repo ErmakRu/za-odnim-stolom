@@ -16,7 +16,7 @@ namespace SummonersTable
         public CardDisplaySlot Slot(string uid){return cards.TryGetValue(uid,out var s)?s:null;}
         public void Present(MatchState state,int seat,Catalog catalog,Font font,string selected,string hover,string shake,float shakeUntil,PresentationData settings)
         {
-            var hand=state.players[seat].hand;
+            var hand=state.players[seat].hand;var style=ConfigRuntime.Current?.ui.fan;if(style!=null)cardSize=style.cardSize;
             foreach(var key in cards.Keys.Where(k=>!hand.Any(h=>h.uid==k)).ToList()){Destroy(cards[key].gameObject);cards.Remove(key);}
             float middle=(hand.Count-1)*.5f,spread=Mathf.Min(spacing,maxSpread/Mathf.Max(1,hand.Count-1));
             for(int i=0;i<hand.Count;i++)
@@ -27,7 +27,8 @@ namespace SummonersTable
                 rect.sizeDelta=cardSize;rect.anchoredPosition=new Vector2((i-middle)*spread,-Mathf.Pow(Mathf.Abs(i-middle)/Mathf.Max(1,middle),2)*arc+(raised?hoverLift:0));
                 if(h.uid==shake&&Time.unscaledTime<shakeUntil)rect.anchoredPosition+=Vector2.right*Mathf.Sin(Time.unscaledTime*70)*9;
                 float tilt=0;if(h.uid==hover){RectTransformUtility.ScreenPointToLocalPointInRectangle(rect,Input.mousePosition,null,out var cursor);tilt=Mathf.Clamp(cursor.x/cardSize.x*2,-1,1)*settings.hoverTilt;}
-                rect.localRotation=Quaternion.Euler(0,tilt,raised?0:-(i-middle)*angle);rect.localScale=Vector3.one*factor;slot.Fit();rect.SetSiblingIndex(i);
+                if(style!=null){float degrees=FanGeometry.Angle(i,hand.Count,style.spread,style.maximumStep);float radians=degrees*Mathf.Deg2Rad;float radius=style.radius*style.uiUnitsPerMetre;rect.anchoredPosition=new Vector2(Mathf.Sin(radians)*radius,(Mathf.Cos(radians)-1)*radius*style.uiPerspective+(raised?hoverLift:0));}
+                rect.localRotation=Quaternion.Euler(0,tilt,raised?0:style!=null?-FanGeometry.Angle(i,hand.Count,style.spread,style.maximumStep)*style.uiPerspective:-(i-middle)*angle);rect.localScale=Vector3.one*factor;slot.Fit();rect.SetSiblingIndex(i);
                 slot.view.Highlight(MatchRules.CanUse(catalog,state,seat,catalog.Card(h.cardId)),h.uid==selected);
                 slot.view.pressed=e=>onPress?.Invoke(h,e);slot.view.dragged=e=>onDrag?.Invoke(h,e);slot.view.released=e=>onRelease?.Invoke(h,e);
             }

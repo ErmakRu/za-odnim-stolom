@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3263959840511637903}
   - component: {fileID: 8965148332600598149}
+  - component: {fileID: 7794310019214412872}
   m_Layer: 0
   m_Name: TargetArrow
   m_TagString: Untagged
@@ -59,3 +60,16 @@ MonoBehaviour:
   width: 7
   headLength: 22
   headWidth: 12
+--- !u!114 &7794310019214412872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4280730580729306638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e1c0cf1608d9b4fb7ebf977eea2a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.PrefabConfigBinding
+  configId: TargetArrow

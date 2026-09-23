@@ -1,0 +1,95 @@
+{
+    "schemaVersion": 1,
+    "version": "0.8.0",
+    "title": "За одним столом",
+    "rules": {
+        "heroHp": 30,
+        "deckSize": 30,
+        "startingHand": 5,
+        "handLimit": 8,
+        "boardSlots": 5,
+        "rounds": 1,
+        "roundWinPoints": 3,
+        "eliminationPoints": 1,
+        "turnSeconds": 45,
+        "revealSeconds": 2,
+        "qteMistakes": 3,
+        "commandersQte": 10,
+        "wizardSpells": 3,
+        "wizardMixedSpells": 1,
+        "wizardCreatures": 1,
+        "qteMaxLength": 11,
+        "qteBaseSeconds": 10.0,
+        "qteSecondsPerSymbol": 3.299999952316284,
+        "qteMinimumSeconds": 6.0,
+        "qteMistakePenalty": 2.0,
+        "effectLimits": [
+            {
+                "effect": "guard",
+                "maximum": 2
+            },
+            {
+                "effect": "attackAura",
+                "maximum": 2
+            },
+            {
+                "effect": "openingPower",
+                "maximum": 2
+            },
+            {
+                "effect": "spellPower",
+                "maximum": 2
+            },
+            {
+                "effect": "thorns",
+                "maximum": 2
+            },
+            {
+                "effect": "lifesteal",
+                "maximum": 2
+            },
+            {
+                "effect": "spellDraw",
+                "maximum": 2
+            },
+            {
+                "effect": "turnDraw",
+                "maximum": 2
+            },
+            {
+                "effect": "failDraw",
+                "maximum": 2
+            },
+            {
+                "effect": "turnHeal",
+                "maximum": 4
+            },
+            {
+                "effect": "forgive",
+                "maximum": 1
+            },
+            {
+                "effect": "qteExtra",
+                "maximum": 2
+            },
+            {
+                "effect": "timeBonus",
+                "maximum": 4
+            },
+            {
+                "effect": "timeTax",
+                "maximum": 4
+            },
+            {
+                "effect": "spellTax",
+                "maximum": 2
+            }
+        ]
+    },
+    "defaults": {
+        "mode": "wizards",
+        "limitPower": true,
+        "cards3D": false,
+        "revision": 0
+    }
+}

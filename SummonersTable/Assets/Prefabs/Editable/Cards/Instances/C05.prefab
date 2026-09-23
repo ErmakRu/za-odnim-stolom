@@ -138,8 +138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5508621631403657562, guid: 88d2ee25808501a4f905868b9132ec8c, type: 3}
       propertyPath: definition.art
-      value: A tiny red imp behind a mountain of blank parchment paperwork, stamping
-        a glowing scroll with a comically enormous rubber stamp
+      value: art:C05
       objectReference: {fileID: 0}
     - target: {fileID: 5508621631403657562, guid: 88d2ee25808501a4f905868b9132ec8c, type: 3}
       propertyPath: definition.qte

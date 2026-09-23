@@ -13,7 +13,7 @@ namespace SummonersTable.Editor
             var s=new Screen("Presentation laboratory",false,35);var canvas=s.view.GetComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;
             var scaler=s.view.gameObject.AddComponent<CanvasScaler>();scaler.uiScaleMode=CanvasScaler.ScaleMode.ScaleWithScreenSize;scaler.referenceResolution=new Vector2(1600,1000);scaler.screenMatchMode=CanvasScaler.ScreenMatchMode.Expand;
             I("Panel",s.Parent,new Rect(10,110,330,745),ink,true);s.Text("heading",new Rect(20,116,312,55),"ЛАБОРАТОРИЯ",17);
-            var ids=new[]{"sensitivity","height","distance","fov"};var min=new[]{.2f,1.5f,0,30};var max=new[]{8f,24f,15f,90f};
+            var ids=new[]{"sensitivity","height","distance","fov"};var min=new[]{.2f,1.5f,0,30};var max=new[]{8f,42f,26f,90f};
             for(int i=0;i<4;i++){s.Text(ids[i]+"Label",new Rect(25,176+i*55,295,23),"",16);var slider=s.Slider(ids[i],new Rect(25,204+i*55,287,18));slider.minValue=min[i];slider.maxValue=max[i];}
             s.Button("camera",new Rect(25,406,140,32),"Вид камеры");s.Button("reset",new Rect(177,406,140,32),"Сброс стола");
             s.Button("attack",new Rect(25,448,140,32),"Атаки / урон");s.Button("qte",new Rect(177,448,140,32),"Пройти QTE");

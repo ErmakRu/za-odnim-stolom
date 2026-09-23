@@ -1,0 +1,1 @@
+PASS 510 manager assertions: 1–8 shared seats, fixed room, linked scale/anchors, section snapshots and rollback, transactional validation, event player-turn frequency/duration, QTE damage, location timers, wire privacy, audio variants, user JSON roundtrip, effect/animation/card previews and cleanup. No Player build.

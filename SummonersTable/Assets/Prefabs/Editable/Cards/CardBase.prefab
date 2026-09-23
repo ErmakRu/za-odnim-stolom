@@ -296,6 +296,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7750018806524357517}
   - component: {fileID: 225539421127761481}
+  - component: {fileID: 7442167018334185184}
+  - component: {fileID: 1545218071958003045}
   m_Layer: 0
   m_Name: CardBase
   m_TagString: Untagged
@@ -380,6 +382,34 @@ MonoBehaviour:
   worldOutline: {fileID: 6989260390224016444}
   playableColor: {r: 0.38, g: 0.96, b: 0.67, a: 1}
   reactionPlayableColor: {r: 0.84, g: 0.63, b: 1, a: 1}
+--- !u!114 &7442167018334185184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374628071233099714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b7e6e8b775a26a41bf60c81f4667b08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.CardDepthVisual
+  uiMaterial: {fileID: 2100000, guid: 49cb2dee6d4415d4899dfb67f9be0fe0, type: 2}
+  worldMaterial: {fileID: 2100000, guid: f95aaaf2c9145d544a1c8c5ec5473084, type: 2}
+  pointerInfluence: 0.8
+--- !u!114 &1545218071958003045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374628071233099714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e1c0cf1608d9b4fb7ebf977eea2a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.PrefabConfigBinding
+  configId: CardBase
 --- !u!1 &1951020740146975439
 GameObject:
   m_ObjectHideFlags: 0

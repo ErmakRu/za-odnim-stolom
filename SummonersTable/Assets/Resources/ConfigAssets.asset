@@ -1,0 +1,2325 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22dc6157f6da4f341bb6e9d0bfac7e85, type: 3}
+  m_Name: ConfigAssets
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.ConfigAssets
+  entries:
+  - id: art:board
+    path: Assets/Resources/Art/board.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 8fef37d804217f04498ebac650ff4c7b, type: 3}
+  - id: art:C01
+    path: Assets/Resources/Art/C01.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 919e3d4d0d91ef3428b442692c87eb43, type: 3}
+  - id: art:C02
+    path: Assets/Resources/Art/C02.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 40c320fb0c82db149a8ba391725a6e29, type: 3}
+  - id: art:C03
+    path: Assets/Resources/Art/C03.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 498dc3eb086f9da48a0e7fc6111cb113, type: 3}
+  - id: art:C04
+    path: Assets/Resources/Art/C04.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 3575c85f259b96f4aa2cc746b8e731ed, type: 3}
+  - id: art:C05
+    path: Assets/Resources/Art/C05.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 6c3bdc71485e96e43b2eb446d398bc0e, type: 3}
+  - id: art:C06
+    path: Assets/Resources/Art/C06.png
+    kind: texture
+    asset: {fileID: 2800000, guid: ddea88da2fe87b849920913294e77f1b, type: 3}
+  - id: art:C07
+    path: Assets/Resources/Art/C07.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 10462d091a129d74baaa8e6b912ab5d3, type: 3}
+  - id: art:C08
+    path: Assets/Resources/Art/C08.png
+    kind: texture
+    asset: {fileID: 2800000, guid: bd37cfc16bb69ce44a82cf656b6661fc, type: 3}
+  - id: art:C09
+    path: Assets/Resources/Art/C09.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 718ca6ff0d40d5147ba55889ab33fee4, type: 3}
+  - id: art:C10
+    path: Assets/Resources/Art/C10.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 3342d85860333024abd03d1291f087ec, type: 3}
+  - id: art:C11
+    path: Assets/Resources/Art/C11.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 66d74a5e2db80744799cbfbb3f270530, type: 3}
+  - id: art:C12
+    path: Assets/Resources/Art/C12.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 112458239770f1840baa119d52ca35ea, type: 3}
+  - id: art:C13
+    path: Assets/Resources/Art/C13.png
+    kind: texture
+    asset: {fileID: 2800000, guid: bb180bff77e08444b9848783ff202bbb, type: 3}
+  - id: art:C14
+    path: Assets/Resources/Art/C14.png
+    kind: texture
+    asset: {fileID: 2800000, guid: dcbe8a4ef539a7243a499e678ebe6d02, type: 3}
+  - id: art:C15
+    path: Assets/Resources/Art/C15.png
+    kind: texture
+    asset: {fileID: 2800000, guid: b6c3646d3cfafc347ab2020d510b800a, type: 3}
+  - id: art:C16
+    path: Assets/Resources/Art/C16.png
+    kind: texture
+    asset: {fileID: 2800000, guid: f44e05e7d86832844a5b1f1cf0607798, type: 3}
+  - id: art:C17
+    path: Assets/Resources/Art/C17.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 5dda30f3ae766ed4abb3dc7af107bd64, type: 3}
+  - id: art:C18
+    path: Assets/Resources/Art/C18.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 9304e2b500f027642ac9e6074f8ee1f5, type: 3}
+  - id: art:card_back
+    path: Assets/Resources/Art/card_back.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 2f6684c3d691bb7479cbce3cecebe01b, type: 3}
+  - id: art:menu
+    path: Assets/Resources/Art/menu.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 27526391651afd0488b3363f8d746c8f, type: 3}
+  - id: art:R01
+    path: Assets/Resources/Art/R01.png
+    kind: texture
+    asset: {fileID: 2800000, guid: edac47cb95b8f994bb04f389a0dc94a5, type: 3}
+  - id: art:R02
+    path: Assets/Resources/Art/R02.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 3d091bf4e88c8ba4bbe67f55b68db8a6, type: 3}
+  - id: art:R03
+    path: Assets/Resources/Art/R03.png
+    kind: texture
+    asset: {fileID: 2800000, guid: a2559bb846d0f8248b993995633f42bf, type: 3}
+  - id: art:R04
+    path: Assets/Resources/Art/R04.png
+    kind: texture
+    asset: {fileID: 2800000, guid: b39fe4f2e595a844b8a943bee28dec99, type: 3}
+  - id: art:S01
+    path: Assets/Resources/Art/S01.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 14f84d57d2005a84dafe4fdd579816b4, type: 3}
+  - id: art:S02
+    path: Assets/Resources/Art/S02.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 6e6cb8a5e4c893e49b5f931269914f75, type: 3}
+  - id: art:S03
+    path: Assets/Resources/Art/S03.png
+    kind: texture
+    asset: {fileID: 2800000, guid: fa7861d6651b71046aac070f855a1ca0, type: 3}
+  - id: art:S04
+    path: Assets/Resources/Art/S04.png
+    kind: texture
+    asset: {fileID: 2800000, guid: ede7688d9ef78e949a89c740bd451ba8, type: 3}
+  - id: art:S05
+    path: Assets/Resources/Art/S05.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 5587209fe64d36745bf0c60dd638ad78, type: 3}
+  - id: art:S06
+    path: Assets/Resources/Art/S06.png
+    kind: texture
+    asset: {fileID: 2800000, guid: 5052af026dd50444ba9ee5b39caa8d7e, type: 3}
+  - id: art:S07
+    path: Assets/Resources/Art/S07.png
+    kind: texture
+    asset: {fileID: 2800000, guid: ee7131e95ca8f3341961cf2d0010dbdd, type: 3}
+  - id: art:S08
+    path: Assets/Resources/Art/S08.png
+    kind: texture
+    asset: {fileID: 2800000, guid: e708d7bca153ef14eba1bdc3fd147c76, type: 3}
+  - id: asset:0019f80c70c3448d29eb0a3498d4f408
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Collapse_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 0019f80c70c3448d29eb0a3498d4f408, type: 3}
+  - id: asset:00d3c0ce9bf1d4e4b9518a94c3c6f034
+    path: Assets/ThirdParty/Audio/Card_Game/Ambience_Loops/Card_Game_Ambience_Beach.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 00d3c0ce9bf1d4e4b9518a94c3c6f034, type: 3}
+  - id: asset:011aabb4b96b44d4a85cda80c1fcc50a
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Pour_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 011aabb4b96b44d4a85cda80c1fcc50a, type: 3}
+  - id: asset:01a0cc47bbe9642988b4a42b40fad767
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Silly_Click_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 01a0cc47bbe9642988b4a42b40fad767, type: 3}
+  - id: asset:01f46ee815ddf4bdb8e2b9799d9851b2
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Percussion_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 01f46ee815ddf4bdb8e2b9799d9851b2, type: 3}
+  - id: asset:0240dd0859a52407e83c6dbd42700a23
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Advance_Water_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 0240dd0859a52407e83c6dbd42700a23, type: 3}
+  - id: asset:025c8a9a95de84505846b1ce24e807af
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Bell_Tree_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 025c8a9a95de84505846b1ce24e807af, type: 3}
+  - id: asset:02d07d58a64fa483b8f4cc8dcf9d3852
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Time_Freeze_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 02d07d58a64fa483b8f4cc8dcf9d3852, type: 3}
+  - id: asset:03a2bd4262d354e7f99b808493d912d3
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Fracture_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 03a2bd4262d354e7f99b808493d912d3, type: 3}
+  - id: asset:042664d3bada9944ba1b1a609edc4fc4
+    path: Assets/ThirdParty/VFX/Motion Titles Pack/Prefabs/MTP-9.prefab
+    kind: prefab
+    asset: {fileID: 8747809221265491226, guid: 042664d3bada9944ba1b1a609edc4fc4, type: 3}
+  - id: asset:0457ced7d901f4e149a1de1b8a04e317
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Poof_Ascend_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 0457ced7d901f4e149a1de1b8a04e317, type: 3}
+  - id: asset:047a516b5cfc045a08440838c5b2aa00
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Lock_Water_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 047a516b5cfc045a08440838c5b2aa00, type: 3}
+  - id: asset:04fcd84edabbc436a95c0c81bc66b2b9
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Deal_Single_Whoosh_Light_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 04fcd84edabbc436a95c0c81bc66b2b9, type: 3}
+  - id: asset:05712b112680e45c4b17614bd9af4860
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Water_Shield_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 05712b112680e45c4b17614bd9af4860, type: 3}
+  - id: asset:058ddae7d62df441bba309169e430ca9
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Poof_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 058ddae7d62df441bba309169e430ca9, type: 3}
+  - id: asset:05c0fb8dfad4f407f80b158f70aab243
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Cymbal_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 05c0fb8dfad4f407f80b158f70aab243, type: 3}
+  - id: asset:067af249553f54236bc5fbb2eb695b0a
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Silly_Squawk_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 067af249553f54236bc5fbb2eb695b0a, type: 3}
+  - id: asset:067c6bb7e7529418b9403be18d734770
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Pour_Small_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 067c6bb7e7529418b9403be18d734770, type: 3}
+  - id: asset:06893a505a8dd47b7b29715660cb60c0
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Bubbly_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 06893a505a8dd47b7b29715660cb60c0, type: 3}
+  - id: asset:084225d596f6c4017b20882b5be09541
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Shatter_Ascend_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 084225d596f6c4017b20882b5be09541, type: 3}
+  - id: asset:09b2b9661d5ed4929ac0c550f64b5bd9
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Pop_Big_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 09b2b9661d5ed4929ac0c550f64b5bd9, type: 3}
+  - id: asset:09b30873452844fcd84a5a12c0276166
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Punch_Metal_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 09b30873452844fcd84a5a12c0276166, type: 3}
+  - id: asset:0a5c2e5973a0346dba634d376bb73970
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Earth_Punch_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 0a5c2e5973a0346dba634d376bb73970, type: 3}
+  - id: asset:0a7e1daae16184843ad68df90c79f9c8
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Reverse_Long_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 0a7e1daae16184843ad68df90c79f9c8, type: 3}
+  - id: asset:0b130825d8b94450891e6322d55fd73b
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Puncture_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 0b130825d8b94450891e6322d55fd73b, type: 3}
+  - id: asset:0b3a188867fab4b89af28c89fc2b1105
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Wind_Ascend_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 0b3a188867fab4b89af28c89fc2b1105, type: 3}
+  - id: asset:0b569506af39349caafdbaf86d975379
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Light_Metallic_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 0b569506af39349caafdbaf86d975379, type: 3}
+  - id: asset:0b7b8b267e62d471c86d8a488c4a2ea0
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Light_Click_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 0b7b8b267e62d471c86d8a488c4a2ea0, type: 3}
+  - id: asset:0b88202b656254971a73625bc17c00db
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Silly_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 0b88202b656254971a73625bc17c00db, type: 3}
+  - id: asset:0c0fa0102696c40c2ad30201b84c09d5
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Water_Splash_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 0c0fa0102696c40c2ad30201b84c09d5, type: 3}
+  - id: asset:0d3c8fe81cd4b417e9fcef05d099cd1c
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Glimmer_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 0d3c8fe81cd4b417e9fcef05d099cd1c, type: 3}
+  - id: asset:0dc8121a7fb7b4fcc8c0c33c45bf3b01
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Light_Reverb_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 0dc8121a7fb7b4fcc8c0c33c45bf3b01, type: 3}
+  - id: asset:0e6fd90fe395a4dc7ba209eb1d0ddb5d
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Shield_Earth_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 0e6fd90fe395a4dc7ba209eb1d0ddb5d, type: 3}
+  - id: asset:0f438e0af182c134c815a1c71f9e14d9
+    path: Assets/ThirdParty/VFX/Vefects/Trails VFX URP/Sounds/WAV/Vefects_SFX_Trail_Dark.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 0f438e0af182c134c815a1c71f9e14d9, type: 3}
+  - id: asset:0f4ee50e47e7449e3a0e5303016205b8
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Pour_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 0f4ee50e47e7449e3a0e5303016205b8, type: 3}
+  - id: asset:0f6599d54779a4ea383d91205ac8c246
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Wind_Upgrade_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 0f6599d54779a4ea383d91205ac8c246, type: 3}
+  - id: asset:100079852fffb4585bf82463d61c1ee4
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Tech_Release_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 100079852fffb4585bf82463d61c1ee4, type: 3}
+  - id: asset:102ca70a35ebe4bf2a857e8cf0a2635e
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Cursed_Wind_04.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 102ca70a35ebe4bf2a857e8cf0a2635e, type: 3}
+  - id: asset:1084dd21280034722805a6694858a76c
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Potion_Dud_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 1084dd21280034722805a6694858a76c, type: 3}
+  - id: asset:10be45cd111ca456a824c92ad1b17eed
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Increase_Mechanical_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 10be45cd111ca456a824c92ad1b17eed, type: 3}
+  - id: asset:11582210a54894b4aa4f1163c8fdf556:7400000
+    path: Assets/ThirdParty/3dModels/ModularAnimalKnightsPolyart/Animation/DIeRecover.fbx
+    kind: animation
+    asset: {fileID: 7400000, guid: 11582210a54894b4aa4f1163c8fdf556, type: 3}
+  - id: asset:11d1e03d13ec44d81bd27cf34dd1fea4
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Whoosh_Reverse_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 11d1e03d13ec44d81bd27cf34dd1fea4, type: 3}
+  - id: asset:1244b27a1ba9848a29f07c9a1a91a8cd
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Block_Earth_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 1244b27a1ba9848a29f07c9a1a91a8cd, type: 3}
+  - id: asset:1268ad9772fce4cedbd4a29d194263ef
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Reverse_Flutter_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 1268ad9772fce4cedbd4a29d194263ef, type: 3}
+  - id: asset:12d00816d59904f2f97bacead8b12c7f
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Potion_Big_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 12d00816d59904f2f97bacead8b12c7f, type: 3}
+  - id: asset:138efcae3dd2843b0a53e55b10b46444
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Potion_Release_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 138efcae3dd2843b0a53e55b10b46444, type: 3}
+  - id: asset:13a622d470b694ce79c011f6ce5eb379
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Wet_Silly_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 13a622d470b694ce79c011f6ce5eb379, type: 3}
+  - id: asset:13fb80f80770f4e41b1215abe2c158b8
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Crackle_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 13fb80f80770f4e41b1215abe2c158b8, type: 3}
+  - id: asset:140d8999b40de4427a8f7757327fdc4d
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Reverse_Medium_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 140d8999b40de4427a8f7757327fdc4d, type: 3}
+  - id: asset:145d5e4c83fe0454593e516575e07748
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Increase_Mechanical_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 145d5e4c83fe0454593e516575e07748, type: 3}
+  - id: asset:14b7aeebf6a8343a89fd0193200f523e
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Earth_Strength_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 14b7aeebf6a8343a89fd0193200f523e, type: 3}
+  - id: asset:167b67132680b44ecb540737f3cea725
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Release_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 167b67132680b44ecb540737f3cea725, type: 3}
+  - id: asset:170d0733733094473a7ad42d71aa47f5
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Tech_Fire_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 170d0733733094473a7ad42d71aa47f5, type: 3}
+  - id: asset:17100aece43964ca18910447958122b1
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Click_Bass_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 17100aece43964ca18910447958122b1, type: 3}
+  - id: asset:17ce07f9f0ceb44f6b6be6b1c182c982
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Potion_Dud_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 17ce07f9f0ceb44f6b6be6b1c182c982, type: 3}
+  - id: asset:1875dbac9b9dd45e48c4b166dff27d25
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Water_Wall_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 1875dbac9b9dd45e48c4b166dff27d25, type: 3}
+  - id: asset:1a4229f9773814562bc698a3cc0320d3
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Shield_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 1a4229f9773814562bc698a3cc0320d3, type: 3}
+  - id: asset:1aaa607fa47fda047903019af90ac782
+    path: Assets/ThirdParty/VFX/Vefects 1/Zap VFX URP/Audio/WAV/SFX_Vefects_Zap_Small_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 1aaa607fa47fda047903019af90ac782, type: 3}
+  - id: asset:1ababbe934a5b44778eb820a23e2cc52
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Shimmer_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 1ababbe934a5b44778eb820a23e2cc52, type: 3}
+  - id: asset:1b2a5cd316cc946f28933477ce7b12ac
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Collapse_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 1b2a5cd316cc946f28933477ce7b12ac, type: 3}
+  - id: asset:1b8cdf26d6f624347b708b8033c27157
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Earth_Strength_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 1b8cdf26d6f624347b708b8033c27157, type: 3}
+  - id: asset:1b8d3dd92fd934315b3300ee72f37ab8
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Wind_Upgrade_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 1b8d3dd92fd934315b3300ee72f37ab8, type: 3}
+  - id: asset:1c7d683d4d0694c73aef5cd04af74e5a
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Stones_Magical_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 1c7d683d4d0694c73aef5cd04af74e5a, type: 3}
+  - id: asset:1cb84efc08c9041a5b1491b09d77c11a
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Bubbly_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 1cb84efc08c9041a5b1491b09d77c11a, type: 3}
+  - id: asset:1d63d61abfd614b3b9eeaab0cc68b2e7
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Shield_PowerUp_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 1d63d61abfd614b3b9eeaab0cc68b2e7, type: 3}
+  - id: asset:1d70e108dd717408196d3d5970b0832a
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Click_Metal.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 1d70e108dd717408196d3d5970b0832a, type: 3}
+  - id: asset:1d95de4f5f8564e9f968153b756c04c2
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Percussion_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 1d95de4f5f8564e9f968153b756c04c2, type: 3}
+  - id: asset:1dabd037812bed242babbe28c8d4679d
+    path: Assets/ThirdParty/VFX/Vefects 1/Zap VFX URP/Audio/WAV/SFX_Vefects_Zap_Big_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 1dabd037812bed242babbe28c8d4679d, type: 3}
+  - id: asset:1de16d97726c84a8b9eef961b77834cd
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Shield_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 1de16d97726c84a8b9eef961b77834cd, type: 3}
+  - id: asset:1ea6921f631494edbab43c704e9feb64
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Break_Charm_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 1ea6921f631494edbab43c704e9feb64, type: 3}
+  - id: asset:20f44ec5f6606de49bb9cd293062373f
+    path: Assets/Presentation/Effects/Hit flash.prefab
+    kind: prefab
+    asset: {fileID: 6794032839613893828, guid: 20f44ec5f6606de49bb9cd293062373f, type: 3}
+  - id: asset:2189b1c22f00d4568840e7762f3869ac
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Gird_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 2189b1c22f00d4568840e7762f3869ac, type: 3}
+  - id: asset:218aee4016d9d49e583974f317bc52e5
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Light_Click_Tech_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 218aee4016d9d49e583974f317bc52e5, type: 3}
+  - id: asset:21ee7879cd34142edb750ff8d399dd6b
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Earth_Shield_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 21ee7879cd34142edb750ff8d399dd6b, type: 3}
+  - id: asset:221691dfc2a874daba31cdde47a10603
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Liquify_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 221691dfc2a874daba31cdde47a10603, type: 3}
+  - id: asset:226241a806a284dff813467344923abe
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Bubble_Small_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 226241a806a284dff813467344923abe, type: 3}
+  - id: asset:22981b29812b94859b831d09b6bd8f0f
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Spring_Up_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 22981b29812b94859b831d09b6bd8f0f, type: 3}
+  - id: asset:22e13d9a0dcc2427e81c743185715cbd
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Stones_Rattle_01wav.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 22e13d9a0dcc2427e81c743185715cbd, type: 3}
+  - id: asset:2412e0ed8026a4e4ca362378f5e67893
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Stones_Break_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 2412e0ed8026a4e4ca362378f5e67893, type: 3}
+  - id: asset:255d6d91418a94d73a4504a7289b6660
+    path: Assets/ThirdParty/Audio/Card_Game/Ambience_Loops/Card_Game_Ambience_Underwater.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 255d6d91418a94d73a4504a7289b6660, type: 3}
+  - id: asset:25d600dfa54054713a52e012b1d09bef
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Wind_Reverse_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 25d600dfa54054713a52e012b1d09bef, type: 3}
+  - id: asset:263829fb6f30b4cc8a4e67f893cbbb2a
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Light_Metallic_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 263829fb6f30b4cc8a4e67f893cbbb2a, type: 3}
+  - id: asset:2683cd4c24e6b4e99a0949dc1b414b1b
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Mechanical_Metal_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 2683cd4c24e6b4e99a0949dc1b414b1b, type: 3}
+  - id: asset:26e9c6b4052754f6ab64590953de9aa5
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Enshrine_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 26e9c6b4052754f6ab64590953de9aa5, type: 3}
+  - id: asset:273099f7163e74831adf1997b935b8ec
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Enshrine_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 273099f7163e74831adf1997b935b8ec, type: 3}
+  - id: asset:287bf1f2564414c47870a06f653bf4a7
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Water_Shot_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 287bf1f2564414c47870a06f653bf4a7, type: 3}
+  - id: asset:28bee01a7287948deb748c9032073617
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Tech_Release_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 28bee01a7287948deb748c9032073617, type: 3}
+  - id: asset:28c71ce92e83a498a9ac93549f55cddd
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Stones_Smack_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 28c71ce92e83a498a9ac93549f55cddd, type: 3}
+  - id: asset:29d249d697b844d2dad8349e4765874e
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Deal_Single_Whoosh_Light_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 29d249d697b844d2dad8349e4765874e, type: 3}
+  - id: asset:29eb6be4c8f3dfc4ab50a24095228078
+    path: Assets/ThirdParty/VFX/Vefects/Trails VFX URP/Sounds/WAV/Vefects_SFX_Trail_Cosmos.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 29eb6be4c8f3dfc4ab50a24095228078, type: 3}
+  - id: asset:2a76184ccc7384f238b1c49837689fd7
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Entrance_.01wav.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 2a76184ccc7384f238b1c49837689fd7, type: 3}
+  - id: asset:2b403f8feb0814086aac96a6bd81a0ff
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Reverse_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 2b403f8feb0814086aac96a6bd81a0ff, type: 3}
+  - id: asset:2c5508330b2aa45e899524635f86fb48
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Earth_Shield_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 2c5508330b2aa45e899524635f86fb48, type: 3}
+  - id: asset:2cda360d52a7345fd904f7b31a70e1c5
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Shot_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 2cda360d52a7345fd904f7b31a70e1c5, type: 3}
+  - id: asset:2d1f711cfccb54a26837b079121a3848
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Shuffle_Light_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 2d1f711cfccb54a26837b079121a3848, type: 3}
+  - id: asset:2dab63f75163e41fe86b19bae996fc24
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Reverse_Medium_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 2dab63f75163e41fe86b19bae996fc24, type: 3}
+  - id: asset:2de87d2273f0946d1b1e797e9ce31683
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Ice_Shield_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 2de87d2273f0946d1b1e797e9ce31683, type: 3}
+  - id: asset:2e016eb28c3a44894a87af7e0f75e376
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Crack_Shimmer_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 2e016eb28c3a44894a87af7e0f75e376, type: 3}
+  - id: asset:2e6dd0ccd618342f9a86ddd79f10627a
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Gird_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 2e6dd0ccd618342f9a86ddd79f10627a, type: 3}
+  - id: asset:2e8e4a54f9da64c91a29a50bfaf76021
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Ding_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 2e8e4a54f9da64c91a29a50bfaf76021, type: 3}
+  - id: asset:2e91f0d0ad64e7549b7358712c7e0816
+    path: Assets/ThirdParty/VFX/Vefects/Trails VFX URP/Sounds/WAV/Vefects_SFX_Trail_Electric.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 2e91f0d0ad64e7549b7358712c7e0816, type: 3}
+  - id: asset:2fdbd9517280ef741a40cb5f46c20e4c
+    path: Assets/Presentation/Effects/QTE attempt.prefab
+    kind: prefab
+    asset: {fileID: 5510580666179602521, guid: 2fdbd9517280ef741a40cb5f46c20e4c, type: 3}
+  - id: asset:300f367aee8a04370982ba0ce30fe3ec
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Water_Rush_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 300f367aee8a04370982ba0ce30fe3ec, type: 3}
+  - id: asset:3132f74030ad745b899f9327db4fd5c0
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Silly_Squawk_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 3132f74030ad745b899f9327db4fd5c0, type: 3}
+  - id: asset:3142963246b9f48e69d333da110afdc2
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Buff_Shield_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 3142963246b9f48e69d333da110afdc2, type: 3}
+  - id: asset:347d62abb8e6f4aceb525a4692845624
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Collapse_Gentle_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 347d62abb8e6f4aceb525a4692845624, type: 3}
+  - id: asset:352b65298f33146ea836f20a310d0ce9
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Blow_Wind_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 352b65298f33146ea836f20a310d0ce9, type: 3}
+  - id: asset:35349f516d25144babb7c13c3cdb08ed
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Seal_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 35349f516d25144babb7c13c3cdb08ed, type: 3}
+  - id: asset:353c7f220c9284e3ba12ec162463388a
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Poof_Ascend_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 353c7f220c9284e3ba12ec162463388a, type: 3}
+  - id: asset:353cf154982334325ba0803c2ca637c1
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Cycle_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 353cf154982334325ba0803c2ca637c1, type: 3}
+  - id: asset:35779339d76db49689c500c1eb0b9755
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Pop_Big_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 35779339d76db49689c500c1eb0b9755, type: 3}
+  - id: asset:36339f4d89a4a4ec98051ac0cfee4133
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Clap_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 36339f4d89a4a4ec98051ac0cfee4133, type: 3}
+  - id: asset:36482129490f84bfba7197acbad53eed
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Fracture_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 36482129490f84bfba7197acbad53eed, type: 3}
+  - id: asset:3829782cb1e954eb5b54ec303805c1eb
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Enshrine_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 3829782cb1e954eb5b54ec303805c1eb, type: 3}
+  - id: asset:3842ab2e7075543cc99158dbf8cc2214
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Swirl_Wind_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 3842ab2e7075543cc99158dbf8cc2214, type: 3}
+  - id: asset:390afb11bf8c6485482ca4e4962bb558
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Enhance_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 390afb11bf8c6485482ca4e4962bb558, type: 3}
+  - id: asset:393cbf0a1e6db477b9f782177f9d6582
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Mechanism_Small_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 393cbf0a1e6db477b9f782177f9d6582, type: 3}
+  - id: asset:3aa729941c5de44fcac7a4a38e00acb6
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Air_Rise_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 3aa729941c5de44fcac7a4a38e00acb6, type: 3}
+  - id: asset:3b58b8ebc9e4d4cbda99bdceb9f2f9c0
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Slow_Down_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 3b58b8ebc9e4d4cbda99bdceb9f2f9c0, type: 3}
+  - id: asset:3b6c8d44dc13042619437f237d5fe5e0
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Grand_04.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 3b6c8d44dc13042619437f237d5fe5e0, type: 3}
+  - id: asset:3bcb15c014f0c46e9be12a9bb18ab17b
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Miniaturize_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 3bcb15c014f0c46e9be12a9bb18ab17b, type: 3}
+  - id: asset:3beec234952d84126a1cd3bbd137580a
+    path: Assets/ThirdParty/Audio/Card_Game/Ambience_Loops/Card_Game_Ambience_Cave.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 3beec234952d84126a1cd3bbd137580a, type: 3}
+  - id: asset:3c3d07e4dcd3f4c30afb7e4cfa4109ab
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Shimmer_Earth_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 3c3d07e4dcd3f4c30afb7e4cfa4109ab, type: 3}
+  - id: asset:3c6954565839c4653ba17f91181095ba
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Guirro_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 3c6954565839c4653ba17f91181095ba, type: 3}
+  - id: asset:3c7c8ec337e194708b0e38a386fefb23
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Light_Magic_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 3c7c8ec337e194708b0e38a386fefb23, type: 3}
+  - id: asset:3e136455cdbb04a759e314e94f1e4d80
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Advance_Water_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 3e136455cdbb04a759e314e94f1e4d80, type: 3}
+  - id: asset:3e2f3f4543d334f19898e43ad3c3851b
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Poof_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 3e2f3f4543d334f19898e43ad3c3851b, type: 3}
+  - id: asset:3e3b02a560ad045ed99375c1b25e7094
+    path: Assets/ThirdParty/Audio/Card_Game/Ambience_Loops/Card_Game_Ambience_Dungeon.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 3e3b02a560ad045ed99375c1b25e7094, type: 3}
+  - id: asset:3f0f9cc00def644bc98873c7ec33a4cb
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Deal_Single_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 3f0f9cc00def644bc98873c7ec33a4cb, type: 3}
+  - id: asset:40791f3b1c2e24e31a575077f32d77a6
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Earth_Shield_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 40791f3b1c2e24e31a575077f32d77a6, type: 3}
+  - id: asset:40a237c465be0440dbbd86a601dd382e
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Reverse_Medium_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 40a237c465be0440dbbd86a601dd382e, type: 3}
+  - id: asset:40c22d64a80931b4b9450b46d37a659d:7400000
+    path: Assets/ThirdParty/3dModels/ModularAnimalKnightsPolyart/Animation/DashBackward.fbx
+    kind: animation
+    asset: {fileID: 7400000, guid: 40c22d64a80931b4b9450b46d37a659d, type: 3}
+  - id: asset:4128aa555bb344f3fa30b28f9dd332b2
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Guirro_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 4128aa555bb344f3fa30b28f9dd332b2, type: 3}
+  - id: asset:4134b895597d544a283e2da9c19b338e
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Time_Up_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 4134b895597d544a283e2da9c19b338e, type: 3}
+  - id: asset:42f2d45b7bcd3486aa8a6f0fb8d7af6c
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Negative_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 42f2d45b7bcd3486aa8a6f0fb8d7af6c, type: 3}
+  - id: asset:43239fcd8de394f4f847203a76a2a59c
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Reverse_Shimmer_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 43239fcd8de394f4f847203a76a2a59c, type: 3}
+  - id: asset:4370a18f965894345a09fb4942b7f5be
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Tornado_Swallow_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 4370a18f965894345a09fb4942b7f5be, type: 3}
+  - id: asset:43b4592e5691e402ab953222e961fcc9
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Ding_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 43b4592e5691e402ab953222e961fcc9, type: 3}
+  - id: asset:44a1bd7f3ba2240adb720e6a670513b2
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Wall_Fire_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 44a1bd7f3ba2240adb720e6a670513b2, type: 3}
+  - id: asset:44b4cc8be0d6a4e6b96a40840202301f
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Splash_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 44b4cc8be0d6a4e6b96a40840202301f, type: 3}
+  - id: asset:46046ea7e19754e4c894a72dc53b7522
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Water_Enhance_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 46046ea7e19754e4c894a72dc53b7522, type: 3}
+  - id: asset:46902ea27a4d14e5ab943dcd2e28ecf3
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Shimmer_Whoosh_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 46902ea27a4d14e5ab943dcd2e28ecf3, type: 3}
+  - id: asset:46e3c38926bcf48049418861dcb84e7d
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Chime_Light_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 46e3c38926bcf48049418861dcb84e7d, type: 3}
+  - id: asset:479e41a672e01504fb40657fc89c0dfb
+    path: Assets/ThirdParty/VFX/Vefects 1/Zap VFX URP/Audio/WAV/SFX_Vefects_Zap_Medium_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 479e41a672e01504fb40657fc89c0dfb, type: 3}
+  - id: asset:47bcdd0ef20d344dd8d561d2c0ddbc11
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Crystals_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 47bcdd0ef20d344dd8d561d2c0ddbc11, type: 3}
+  - id: asset:480eee085f20b429293544179b9698cc
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Cursed_Wind_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 480eee085f20b429293544179b9698cc, type: 3}
+  - id: asset:4817d6af28a8e40a4bd295bc46f6d5c2
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Heavy_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 4817d6af28a8e40a4bd295bc46f6d5c2, type: 3}
+  - id: asset:48498c2cace374e96ba489d55c1dadd5
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Collapse_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 48498c2cace374e96ba489d55c1dadd5, type: 3}
+  - id: asset:48764589cf02e471cbbb4ed7c89a5bdf
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Gong_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 48764589cf02e471cbbb4ed7c89a5bdf, type: 3}
+  - id: asset:49cd49e3f502743e78129b04ce21ba87
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Negative_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 49cd49e3f502743e78129b04ce21ba87, type: 3}
+  - id: asset:4a0a3b08dae224b81ab9ab58f88ebb2a
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Skip_Turn_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 4a0a3b08dae224b81ab9ab58f88ebb2a, type: 3}
+  - id: asset:4a37a3ced85d249c8a9e381f89c62ad4
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Earth_Smash_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 4a37a3ced85d249c8a9e381f89c62ad4, type: 3}
+  - id: asset:4ae550305fd2a457e9d5d4a4ef5e19df
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Tear_Fire_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 4ae550305fd2a457e9d5d4a4ef5e19df, type: 3}
+  - id: asset:4bf328517885647ff992621f869d0032
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Deal_Two.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 4bf328517885647ff992621f869d0032, type: 3}
+  - id: asset:4cb0505e00d0841469f2d013ba64e35f
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Turn_Pass_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 4cb0505e00d0841469f2d013ba64e35f, type: 3}
+  - id: asset:4cecdb91835544f12ab4c8d54c3b21bd
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Bubble_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 4cecdb91835544f12ab4c8d54c3b21bd, type: 3}
+  - id: asset:4d6cee69fe25c4f079e56a488261e91b
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Blow_Wind_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 4d6cee69fe25c4f079e56a488261e91b, type: 3}
+  - id: asset:4e08ea3d4ba5247b3968b41ab58f822f
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Bubble_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 4e08ea3d4ba5247b3968b41ab58f822f, type: 3}
+  - id: asset:4f04d64ef7fdf435ba5cc38007e010bc
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Deal_Single_Small_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 4f04d64ef7fdf435ba5cc38007e010bc, type: 3}
+  - id: asset:4fac2a7215c8b4fa883f6da6cd3f7874
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Punch_Metal_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 4fac2a7215c8b4fa883f6da6cd3f7874, type: 3}
+  - id: asset:502c7f21842e846fa978774d2cce23a7
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Poof_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 502c7f21842e846fa978774d2cce23a7, type: 3}
+  - id: asset:503613edb7c364ae68b35b3f9aa83244
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Deal_Three.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 503613edb7c364ae68b35b3f9aa83244, type: 3}
+  - id: asset:505fc53ace73b4267bfca4fbd8e589e9
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Tiny_Metal_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 505fc53ace73b4267bfca4fbd8e589e9, type: 3}
+  - id: asset:508a0848c6982fe47a6ec95074bc51ee
+    path: Assets/Presentation/Effects/QTE smoke.prefab
+    kind: prefab
+    asset: {fileID: 316626887494704670, guid: 508a0848c6982fe47a6ec95074bc51ee, type: 3}
+  - id: asset:5322f202a4d6f40939b85ed411d65a18
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Bash_Metal_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5322f202a4d6f40939b85ed411d65a18, type: 3}
+  - id: asset:53995e9c6193f2a49ad790f4779f5d32:7400000
+    path: Assets/ThirdParty/3dModels/ModularAnimalKnightsPolyart/Animation/AttackCombo05.fbx
+    kind: animation
+    asset: {fileID: 7400000, guid: 53995e9c6193f2a49ad790f4779f5d32, type: 3}
+  - id: asset:539a91438603b46a6887791fddd342b9
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Tech_Small_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 539a91438603b46a6887791fddd342b9, type: 3}
+  - id: asset:539e05de898f8494e99eca13efd59542
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Reverse_Shimmer_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 539e05de898f8494e99eca13efd59542, type: 3}
+  - id: asset:546cda65712a043519a50b9cea7809d0
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Dive_Water_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 546cda65712a043519a50b9cea7809d0, type: 3}
+  - id: asset:5483a97effb4846448c5cf7bab47dd81
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Bubbly_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5483a97effb4846448c5cf7bab47dd81, type: 3}
+  - id: asset:54b1a9a808bc6413dbdddfea32df1b08
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Pour_Big_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 54b1a9a808bc6413dbdddfea32df1b08, type: 3}
+  - id: asset:54b2141ddb69e43ef92100a037a26c96
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Slam_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 54b2141ddb69e43ef92100a037a26c96, type: 3}
+  - id: asset:55aec0952200f494eb36b63602dd4d60
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Pierce_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 55aec0952200f494eb36b63602dd4d60, type: 3}
+  - id: asset:5622e53e90c3d4259ba374df91f6a052
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Punch_Fire_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5622e53e90c3d4259ba374df91f6a052, type: 3}
+  - id: asset:563eda19cebbe4d7bbdfa4a7f5a76797
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Cycle_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 563eda19cebbe4d7bbdfa4a7f5a76797, type: 3}
+  - id: asset:569f327d9fc6748418d16d6ee3e1e9b9
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Crackle_Poof_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 569f327d9fc6748418d16d6ee3e1e9b9, type: 3}
+  - id: asset:5720358495fa84f789f9921973355b14
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Water_Missile_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5720358495fa84f789f9921973355b14, type: 3}
+  - id: asset:57958bf70fedf7942afdb69b086bf34d
+    path: Assets/Presentation/Effects/Spell violet flash.prefab
+    kind: prefab
+    asset: {fileID: 815406935812981969, guid: 57958bf70fedf7942afdb69b086bf34d, type: 3}
+  - id: asset:57c1aff95ef2b4e3796ec41861a60dd8
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Light_Click_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 57c1aff95ef2b4e3796ec41861a60dd8, type: 3}
+  - id: asset:5888901a70ebc40bf84d8bb3fb50513c
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Tap_05.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5888901a70ebc40bf84d8bb3fb50513c, type: 3}
+  - id: asset:58b95ab5c77e14f2e814b4706bc422e0
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Tap_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 58b95ab5c77e14f2e814b4706bc422e0, type: 3}
+  - id: asset:58cfbd1680b374b6d9e06a0133c22614
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Defense_Water_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 58cfbd1680b374b6d9e06a0133c22614, type: 3}
+  - id: asset:59a5dafa3d59f45899110a8a5f933dad
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Grand_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 59a5dafa3d59f45899110a8a5f933dad, type: 3}
+  - id: asset:59e4f4ac9c85e4edeb6cb8f579ed962d
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Earth_Punch_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 59e4f4ac9c85e4edeb6cb8f579ed962d, type: 3}
+  - id: asset:5a3e1b00a6aba4176b5434cd2075957e
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Switch_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5a3e1b00a6aba4176b5434cd2075957e, type: 3}
+  - id: asset:5a3f32d6624db486ab956d669db8e660
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Shimmer_Short_04.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5a3f32d6624db486ab956d669db8e660, type: 3}
+  - id: asset:5a4cfb96dc9c841d6b469a5bcb8a7266
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Tech_Small_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5a4cfb96dc9c841d6b469a5bcb8a7266, type: 3}
+  - id: asset:5a65314fc8ccd4dbda68e78f592620e9
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Spring_Up_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5a65314fc8ccd4dbda68e78f592620e9, type: 3}
+  - id: asset:5a9bb0e555e58384180555f82f97e00f
+    path: Assets/ThirdParty/VFX/Vefects 1/Zap VFX URP/Audio/WAV/SFX_Vefects_Zap_Big_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5a9bb0e555e58384180555f82f97e00f, type: 3}
+  - id: asset:5bcf74f6f08264bbfa2012a8213e1566
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Bubble_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5bcf74f6f08264bbfa2012a8213e1566, type: 3}
+  - id: asset:5c45021b806694586ada2e8755938a47
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Deflect_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5c45021b806694586ada2e8755938a47, type: 3}
+  - id: asset:5ccd64812efb84675924a1af6c15a44a
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Escalate_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5ccd64812efb84675924a1af6c15a44a, type: 3}
+  - id: asset:5cefc4c9876c44d8a99c0dcf590637e0
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Heavy_Metallic_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5cefc4c9876c44d8a99c0dcf590637e0, type: 3}
+  - id: asset:5ddbe05a445784ca4a8785276077dfa9
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Deal_Single_Whoosh_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5ddbe05a445784ca4a8785276077dfa9, type: 3}
+  - id: asset:5e970999aecfc4d80be62ea965848980
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Tear_Fire_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5e970999aecfc4d80be62ea965848980, type: 3}
+  - id: asset:5ea4531cf99894b3090bbf1221d56026
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Slow_Down_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5ea4531cf99894b3090bbf1221d56026, type: 3}
+  - id: asset:5ea6f416ddae34506a49c86aa5fe2582
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Cork_Pop_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5ea6f416ddae34506a49c86aa5fe2582, type: 3}
+  - id: asset:5ea77a264f3614127ac66069e202686c
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Miniaturize_Freeze_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 5ea77a264f3614127ac66069e202686c, type: 3}
+  - id: asset:60f03c28a36a2485ea15797c46cacaf0
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Water_Bass_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 60f03c28a36a2485ea15797c46cacaf0, type: 3}
+  - id: asset:6280f031e461549d38ad30b23e277355
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Wind_Shimmer_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 6280f031e461549d38ad30b23e277355, type: 3}
+  - id: asset:646ce90c4ac8549969740423f6cf09d9
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Crack_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 646ce90c4ac8549969740423f6cf09d9, type: 3}
+  - id: asset:64867357920664f1d88f4141b099989f
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Collapse_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 64867357920664f1d88f4141b099989f, type: 3}
+  - id: asset:6528ef4c5fac1414db07d5be2837bc2f
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Tap_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 6528ef4c5fac1414db07d5be2837bc2f, type: 3}
+  - id: asset:6530f9d84443e4741a13e073d3bffa10
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Seal_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 6530f9d84443e4741a13e073d3bffa10, type: 3}
+  - id: asset:656be0721b8854a57aabe7740d0eec5a
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Deal_Single_Whoosh_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 656be0721b8854a57aabe7740d0eec5a, type: 3}
+  - id: asset:66371dbe099ea43c6ba5decd93229e50
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Silly_Click_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 66371dbe099ea43c6ba5decd93229e50, type: 3}
+  - id: asset:667a78c9848234048a841b91fbd7a02c
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Glitter_Missile_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 667a78c9848234048a841b91fbd7a02c, type: 3}
+  - id: asset:67b91dc6f14ab42398519d287c50700d
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Earth_Smash_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 67b91dc6f14ab42398519d287c50700d, type: 3}
+  - id: asset:67ea4f5ca691348469ad3f69e5ee39a0
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Magic_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 67ea4f5ca691348469ad3f69e5ee39a0, type: 3}
+  - id: asset:681b6d54e73fd4062b3f807dd4a3a726
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Slow_Mini_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 681b6d54e73fd4062b3f807dd4a3a726, type: 3}
+  - id: asset:68384465b985d4b6aaa700f2737db6ae
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Lock_Wisp_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 68384465b985d4b6aaa700f2737db6ae, type: 3}
+  - id: asset:6867574eab75d41e2bf4fcfd9434ecce
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Turn_Pass_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 6867574eab75d41e2bf4fcfd9434ecce, type: 3}
+  - id: asset:6973ba58c45314283987b3e3bb00ba62
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Silly_Squawk_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 6973ba58c45314283987b3e3bb00ba62, type: 3}
+  - id: asset:69958cd6cb49e4c3590f978474f1f888
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Punch_Fire_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 69958cd6cb49e4c3590f978474f1f888, type: 3}
+  - id: asset:6a092df9e88094026a6770b5d907f520
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Light_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 6a092df9e88094026a6770b5d907f520, type: 3}
+  - id: asset:6a440ad6b30774a68919f4f50eb77751
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Shield_Earth_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 6a440ad6b30774a68919f4f50eb77751, type: 3}
+  - id: asset:6b291ba70be22475fbdc9ad3e3ae5b81
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Shield_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 6b291ba70be22475fbdc9ad3e3ae5b81, type: 3}
+  - id: asset:6b9eeaf626a9b46d6b6806ab1dd12e07
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Gong_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 6b9eeaf626a9b46d6b6806ab1dd12e07, type: 3}
+  - id: asset:6bb37fb13ce62414cbcf2633ce45a143
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Deal_Single_Whoosh_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 6bb37fb13ce62414cbcf2633ce45a143, type: 3}
+  - id: asset:6bec42c29934d425a977e0278b9b381a
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Hush_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 6bec42c29934d425a977e0278b9b381a, type: 3}
+  - id: asset:6c643825a386c489ea31920d433f3a15
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Wind_Blast_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 6c643825a386c489ea31920d433f3a15, type: 3}
+  - id: asset:6d3a1702d4d7442988dfd5995d9b249e
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Swirl_Click_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 6d3a1702d4d7442988dfd5995d9b249e, type: 3}
+  - id: asset:6df0646eb50b74f87a7443be842b6832
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Entrance_.02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 6df0646eb50b74f87a7443be842b6832, type: 3}
+  - id: asset:6efb7f04cb3bb480e9a90df32544bd8c
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Hush_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 6efb7f04cb3bb480e9a90df32544bd8c, type: 3}
+  - id: asset:6feeaa78478074e85bf46df3ff376256
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Wind_Shimmer_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 6feeaa78478074e85bf46df3ff376256, type: 3}
+  - id: asset:7070afe27b8394aeaa08efb174b6c620
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Buff_Shield_Bubble_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 7070afe27b8394aeaa08efb174b6c620, type: 3}
+  - id: asset:70752b7459e5845638842dd98ed7ddde
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Drum_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 70752b7459e5845638842dd98ed7ddde, type: 3}
+  - id: asset:7097fa3f92b314c1c9a84bf5c9f15e8f
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Launch_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 7097fa3f92b314c1c9a84bf5c9f15e8f, type: 3}
+  - id: asset:7109366971ef24971838076eb031c0d2
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Splash_Small_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 7109366971ef24971838076eb031c0d2, type: 3}
+  - id: asset:7144b31a78b2248b5bdd38c7fdae116f
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Genie_Uncover_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 7144b31a78b2248b5bdd38c7fdae116f, type: 3}
+  - id: asset:71e025727ca0dc5499adb08f31672886:7400000
+    path: Assets/ThirdParty/3dModels/ModularAnimalKnightsPolyart/Animation/Idle_Normal.fbx
+    kind: animation
+    asset: {fileID: 7400000, guid: 71e025727ca0dc5499adb08f31672886, type: 3}
+  - id: asset:71fc7822c951dee40a480802f0149878
+    path: Assets/ThirdParty/VFX/Vefects/Trails VFX URP/Sounds/WAV/Vefects_SFX_Trail_Void.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 71fc7822c951dee40a480802f0149878, type: 3}
+  - id: asset:720bb8d718a054624b7208b58f0831d3
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Click_Bass_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 720bb8d718a054624b7208b58f0831d3, type: 3}
+  - id: asset:72407f9db9c494ff98692a8564bb580f
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Light_Reverb_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 72407f9db9c494ff98692a8564bb580f, type: 3}
+  - id: asset:726a5f4da9291442d8d1e7a948d6ed69
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Splash_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 726a5f4da9291442d8d1e7a948d6ed69, type: 3}
+  - id: asset:7299b5daf393b424eb48be524d921731:7400000
+    path: Assets/ThirdParty/3dModels/ModularAnimalKnightsPolyart/Animation/Sliding.fbx
+    kind: animation
+    asset: {fileID: 7400000, guid: 7299b5daf393b424eb48be524d921731, type: 3}
+  - id: asset:7301e6acd58f94a599e59be3ee468466
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Click_Bubble_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 7301e6acd58f94a599e59be3ee468466, type: 3}
+  - id: asset:73206019d263440628abb982da861054
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Cymbal_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 73206019d263440628abb982da861054, type: 3}
+  - id: asset:736c3598a58a2413c9481016f5a3eec7
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Switch_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 736c3598a58a2413c9481016f5a3eec7, type: 3}
+  - id: asset:737ab57569ff649a4815deafbc7e43c1
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Push_Wind_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 737ab57569ff649a4815deafbc7e43c1, type: 3}
+  - id: asset:7387c951cf54f4519831b25edc9a01ff
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Tech_Release_Bubble_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 7387c951cf54f4519831b25edc9a01ff, type: 3}
+  - id: asset:73927f7994e724b12a0220658bfd0010
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Shuffle_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 73927f7994e724b12a0220658bfd0010, type: 3}
+  - id: asset:73bd3cb3e9c6b416cb08dd700a714291
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Deal_Single_Small_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 73bd3cb3e9c6b416cb08dd700a714291, type: 3}
+  - id: asset:7426a981e95caa54696ba616dad53259
+    path: Assets/Presentation/Effects/Spell gold flash.prefab
+    kind: prefab
+    asset: {fileID: 2864839684993179011, guid: 7426a981e95caa54696ba616dad53259, type: 3}
+  - id: asset:743a42c8f81994bd69493686499b5f18
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Deal_Multiple_Fast.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 743a42c8f81994bd69493686499b5f18, type: 3}
+  - id: asset:759a2d8259da5fa4996c08563e3908b8:7400000
+    path: Assets/ThirdParty/3dModels/ModularAnimalKnightsPolyart/Animation/Dizzy.fbx
+    kind: animation
+    asset: {fileID: 7400000, guid: 759a2d8259da5fa4996c08563e3908b8, type: 3}
+  - id: asset:764896491d7984fbb863e0b22414cbab
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Water_Shot_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 764896491d7984fbb863e0b22414cbab, type: 3}
+  - id: asset:7695acdb7fc539a4eb789ca501ffbdc2
+    path: Assets/Presentation/Effects/Spell healing ring.prefab
+    kind: prefab
+    asset: {fileID: 6527353175278130945, guid: 7695acdb7fc539a4eb789ca501ffbdc2, type: 3}
+  - id: asset:76b46fd655be3480099c1ab80a7c52b8
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Stones_Smack_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 76b46fd655be3480099c1ab80a7c52b8, type: 3}
+  - id: asset:7731b9d4cddfa48678d47fd306f2d2d2
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Increase_Mechanical_Reverse_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 7731b9d4cddfa48678d47fd306f2d2d2, type: 3}
+  - id: asset:78bc5437e42b24faabb1c3a7ca224367
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Lock_Mechanical_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 78bc5437e42b24faabb1c3a7ca224367, type: 3}
+  - id: asset:78fdf49b472074a27bdfb2bcf051ae5a
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Percussion_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 78fdf49b472074a27bdfb2bcf051ae5a, type: 3}
+  - id: asset:7956a87dd14154c0d91fd9708f77ae15
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Bless_Small_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 7956a87dd14154c0d91fd9708f77ae15, type: 3}
+  - id: asset:79886d2f4a12241b1a76857bea939f3e
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Bop_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 79886d2f4a12241b1a76857bea939f3e, type: 3}
+  - id: asset:7a6206027b147417ab141a552eac1e3c
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Tap_04.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 7a6206027b147417ab141a552eac1e3c, type: 3}
+  - id: asset:7b481675b9c1042e0adb883ace957b83
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Echo_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 7b481675b9c1042e0adb883ace957b83, type: 3}
+  - id: asset:7be8ea8e67814420f91c4e75d4305bb0
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Silly_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 7be8ea8e67814420f91c4e75d4305bb0, type: 3}
+  - id: asset:7bf8fb386044240d6ab1110b29224972
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Tiny_Metal_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 7bf8fb386044240d6ab1110b29224972, type: 3}
+  - id: asset:7c0a9134d7ac74c56942fc6c83b18e82
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Block_Earth_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 7c0a9134d7ac74c56942fc6c83b18e82, type: 3}
+  - id: asset:7c83bbe4dcc7748d792446a7e5d2e997
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Pierce_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 7c83bbe4dcc7748d792446a7e5d2e997, type: 3}
+  - id: asset:7cc8de3303469e64bbb10127c6293a7a
+    path: Assets/ThirdParty/VFX/Vefects/Trails VFX URP/Sounds/WAV/Vefects_SFX_Trail_Sound.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 7cc8de3303469e64bbb10127c6293a7a, type: 3}
+  - id: asset:7de6f34e8dc434783b3858180ce7744f
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Deal_Four.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 7de6f34e8dc434783b3858180ce7744f, type: 3}
+  - id: asset:7e1fe260158e14e3abdbf2880bb6f2ec
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Poof_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 7e1fe260158e14e3abdbf2880bb6f2ec, type: 3}
+  - id: asset:7fb2126bee4614ec3a8a49242a7af54e
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Slow_Down_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 7fb2126bee4614ec3a8a49242a7af54e, type: 3}
+  - id: asset:80801769f90d44a2eb86d5770c3baddb
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Punch_Metal_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 80801769f90d44a2eb86d5770c3baddb, type: 3}
+  - id: asset:80c1ffefe41de405e9848fdac4923c6e
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Mechanical_Large_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 80c1ffefe41de405e9848fdac4923c6e, type: 3}
+  - id: asset:8206a72d5aa0a41c2aae7f44d70a1259
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Bubble_Small_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 8206a72d5aa0a41c2aae7f44d70a1259, type: 3}
+  - id: asset:824fad01570404a0fa7bb8723d0dd29e
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Mechanism_Enhance_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 824fad01570404a0fa7bb8723d0dd29e, type: 3}
+  - id: asset:825091e64c566472990aaaf17a2f414f
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Bubble_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 825091e64c566472990aaaf17a2f414f, type: 3}
+  - id: asset:828dc6eb0deee423e905f83875e63c44
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Silly_Click_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 828dc6eb0deee423e905f83875e63c44, type: 3}
+  - id: asset:834bf92d4718d4dd884274232ddfff3f
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Bless_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 834bf92d4718d4dd884274232ddfff3f, type: 3}
+  - id: asset:837f9bb9b44274c9fb07f4a295c2615c
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Shimmer_Shot_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 837f9bb9b44274c9fb07f4a295c2615c, type: 3}
+  - id: asset:83997b009680a431dab33533c1c54cc3
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Silly_Shimmer_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 83997b009680a431dab33533c1c54cc3, type: 3}
+  - id: asset:839f67522dc3943ea80e8988ce9e85c0
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Tear_Fire_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 839f67522dc3943ea80e8988ce9e85c0, type: 3}
+  - id: asset:83c04b49ec42cbc48bae2b85c9bc40ad:7400000
+    path: Assets/ThirdParty/3dModels/ModularAnimalKnightsPolyart/Animation/Die.fbx
+    kind: animation
+    asset: {fileID: 7400000, guid: 83c04b49ec42cbc48bae2b85c9bc40ad, type: 3}
+  - id: asset:843d7ab639ac844cea54faf78baaa542
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Click_Deep_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 843d7ab639ac844cea54faf78baaa542, type: 3}
+  - id: asset:84734e4616ef240d0b2dd4459f88d9e8
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Tap_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 84734e4616ef240d0b2dd4459f88d9e8, type: 3}
+  - id: asset:84aa69f4ecdfd4c8b882f7a703503b09
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Your_Turn_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 84aa69f4ecdfd4c8b882f7a703503b09, type: 3}
+  - id: asset:869fa6d7692ed43c8990ddf07a682a54
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Bubble_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 869fa6d7692ed43c8990ddf07a682a54, type: 3}
+  - id: asset:86b3584dbc18f4532a5c3a3bab6c00e6
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Poof_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 86b3584dbc18f4532a5c3a3bab6c00e6, type: 3}
+  - id: asset:86e521ad00dbd48718b196c521a3d4c0
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Crystals_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 86e521ad00dbd48718b196c521a3d4c0, type: 3}
+  - id: asset:86f95769227ed4f699635faeaf99d4be
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Shield_PowerUp_Bass_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 86f95769227ed4f699635faeaf99d4be, type: 3}
+  - id: asset:87452a8c4662d45ffab2e67c34690c06
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Tiny_Splahs_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 87452a8c4662d45ffab2e67c34690c06, type: 3}
+  - id: asset:879431a7728f1440fb2e01adfaf8e967
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Bubble_Small_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 879431a7728f1440fb2e01adfaf8e967, type: 3}
+  - id: asset:87f5dad5aa7b84cc78a7cbfd68a0978f
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Heavy_Metallic_Bubble_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 87f5dad5aa7b84cc78a7cbfd68a0978f, type: 3}
+  - id: asset:8839914eec8554cae9ce0255178f2bf4
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Poof_Descend_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 8839914eec8554cae9ce0255178f2bf4, type: 3}
+  - id: asset:886f79f0003334ac9b8a74db4c7ac161
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Water_Shield_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 886f79f0003334ac9b8a74db4c7ac161, type: 3}
+  - id: asset:88863c656ed6e4668a43a9d173fc6eb5
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Earth_Shield_Large_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 88863c656ed6e4668a43a9d173fc6eb5, type: 3}
+  - id: asset:88c8b3465a5d144ecb16f4355d0978d0
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Wind_Upgrade_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 88c8b3465a5d144ecb16f4355d0978d0, type: 3}
+  - id: asset:88fd0f63c6db646f7b58f8548ba3b78e
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Tech_Small_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 88fd0f63c6db646f7b58f8548ba3b78e, type: 3}
+  - id: asset:88fea8489b16340edaf711f0940db7ac
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Health_Upgrade_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 88fea8489b16340edaf711f0940db7ac, type: 3}
+  - id: asset:89ae80ed0dc9d49f0bd8d997655d52da
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Shimmer_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 89ae80ed0dc9d49f0bd8d997655d52da, type: 3}
+  - id: asset:89d36ae2c247f4a2995c12c7e2a7bbe7
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Heavy_Metallic_Bubble_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 89d36ae2c247f4a2995c12c7e2a7bbe7, type: 3}
+  - id: asset:89dde994a5bea402b8b23b26684ce634
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Crack_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 89dde994a5bea402b8b23b26684ce634, type: 3}
+  - id: asset:89e43e7520a5047df8404057af3aeb12
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Water_Enhance_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 89e43e7520a5047df8404057af3aeb12, type: 3}
+  - id: asset:8a466d2d786794478849086d948092a8
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Reverse_Long_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 8a466d2d786794478849086d948092a8, type: 3}
+  - id: asset:8bd129ad8ff9c4c999634a76c30a93e8
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Light_Click_Bubble_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 8bd129ad8ff9c4c999634a76c30a93e8, type: 3}
+  - id: asset:8be21a09f5ecd4be8bafbd7f2947e335
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Air_Puff_Short_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 8be21a09f5ecd4be8bafbd7f2947e335, type: 3}
+  - id: asset:8c159d4a0582b4b34bfade2da7ddb7fb
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Mech_Arm_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 8c159d4a0582b4b34bfade2da7ddb7fb, type: 3}
+  - id: asset:8d1aa24f534e448d6b676ec2f825bf2b
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Thud_Splash_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 8d1aa24f534e448d6b676ec2f825bf2b, type: 3}
+  - id: asset:8dc6892d479bf4acab1189a117a9ed7e
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Slow_Down_Bubble_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 8dc6892d479bf4acab1189a117a9ed7e, type: 3}
+  - id: asset:8e846430cf06b4170ac0435bf7718b73
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Earth_Reenforce.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 8e846430cf06b4170ac0435bf7718b73, type: 3}
+  - id: asset:8ed2853ea1e084f088ca2bc8ea9ef3f4
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Reverse_Swish_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 8ed2853ea1e084f088ca2bc8ea9ef3f4, type: 3}
+  - id: asset:8ef9516779842487e80f0abea4a27d89
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Crack_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 8ef9516779842487e80f0abea4a27d89, type: 3}
+  - id: asset:8f136cf9786124e1091dcd3556ec3def
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Glitter_Missile_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 8f136cf9786124e1091dcd3556ec3def, type: 3}
+  - id: asset:8f225b72069ab4f1aaa26140613e43a2
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Shimmer_Long_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 8f225b72069ab4f1aaa26140613e43a2, type: 3}
+  - id: asset:8f807df2edde74ff5b760feb5006b6fd
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Tech_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 8f807df2edde74ff5b760feb5006b6fd, type: 3}
+  - id: asset:8ffd2384f344c46adbcee2d2091f7b63
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Reverse_Shimmer_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 8ffd2384f344c46adbcee2d2091f7b63, type: 3}
+  - id: asset:9002e5afd013f4bc98ec4f982c0587f9
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Shuffle_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9002e5afd013f4bc98ec4f982c0587f9, type: 3}
+  - id: asset:907e339bffe724714b22200941d9c902
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Puncture_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 907e339bffe724714b22200941d9c902, type: 3}
+  - id: asset:90a7d5a6aa5cc4548a1b99e607e8c9bc
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Splash_Small_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 90a7d5a6aa5cc4548a1b99e607e8c9bc, type: 3}
+  - id: asset:914a7cbe3426848a38c4f6b9640c1eb4
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Heavy_Metallic_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 914a7cbe3426848a38c4f6b9640c1eb4, type: 3}
+  - id: asset:9193ea7511b994479b5873ffb894df40
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Wall_Fire_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9193ea7511b994479b5873ffb894df40, type: 3}
+  - id: asset:91e8b7b0fa4e9403e90f9173f1ca6437
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Seal_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 91e8b7b0fa4e9403e90f9173f1ca6437, type: 3}
+  - id: asset:9296ccb7ce15142418d69ac87cdc2ae4
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Ding_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9296ccb7ce15142418d69ac87cdc2ae4, type: 3}
+  - id: asset:92ee51c097ffb44b190f2dc0ed032617
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Click_Air_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 92ee51c097ffb44b190f2dc0ed032617, type: 3}
+  - id: asset:934ab2c1efe3b4f6eab86d1afd9841aa
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Cork_Pop_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 934ab2c1efe3b4f6eab86d1afd9841aa, type: 3}
+  - id: asset:93a388ac45d674f7bb6a1650d79d983d
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Deal_Single_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 93a388ac45d674f7bb6a1650d79d983d, type: 3}
+  - id: asset:93babcae901d043cf975e1793bd2a6d9
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Silly_Thunk_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 93babcae901d043cf975e1793bd2a6d9, type: 3}
+  - id: asset:93c427f9eeb7f4305a30b4df36ca919c
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Mechanical_Boing_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 93c427f9eeb7f4305a30b4df36ca919c, type: 3}
+  - id: asset:94cab65f1f68043acb050bcf03b45f8f
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Shimmer_Short_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 94cab65f1f68043acb050bcf03b45f8f, type: 3}
+  - id: asset:95a07e384b70547b1a8dfdca7fda77ce
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Heavy_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 95a07e384b70547b1a8dfdca7fda77ce, type: 3}
+  - id: asset:95c9c5141a40346be982b93d8b8d5d7e
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Water_Rush_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 95c9c5141a40346be982b93d8b8d5d7e, type: 3}
+  - id: asset:95d479706b29b48bf84cb9e226e8bb5e
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Block_Magic_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 95d479706b29b48bf84cb9e226e8bb5e, type: 3}
+  - id: asset:95f649167560d8b44ab55084fc46f3ce
+    path: Assets/Presentation/Effects/Spell purple trail.prefab
+    kind: prefab
+    asset: {fileID: 5981616301810104588, guid: 95f649167560d8b44ab55084fc46f3ce, type: 3}
+  - id: asset:95f7d2734232e42b082ca9febf93b96b
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Fire_Rush_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 95f7d2734232e42b082ca9febf93b96b, type: 3}
+  - id: asset:978390ac91a6342058a4bd847b71f5a0
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Cycle_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 978390ac91a6342058a4bd847b71f5a0, type: 3}
+  - id: asset:981d8309b23ac45dfa22f6c8fd15ccc0
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Reverse_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 981d8309b23ac45dfa22f6c8fd15ccc0, type: 3}
+  - id: asset:9875732fa53794328a3513c6d47d4a5f
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Deal_Multiple.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9875732fa53794328a3513c6d47d4a5f, type: 3}
+  - id: asset:99840bc98dfe74ee093428e7cf5bc124
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Mechanical_Metal_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 99840bc98dfe74ee093428e7cf5bc124, type: 3}
+  - id: asset:999474a80619948f0930d8dd4d5735d5
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Earth_Smash_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 999474a80619948f0930d8dd4d5735d5, type: 3}
+  - id: asset:9a7fbf8942e3d407c98f69e8096dd8f5
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Deep_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9a7fbf8942e3d407c98f69e8096dd8f5, type: 3}
+  - id: asset:9ac9e3e7668134989a421591e639d459
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Click_Shimmer_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9ac9e3e7668134989a421591e639d459, type: 3}
+  - id: asset:9b3495654430f4ec8b5b73be1a971fe3
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Swirl_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9b3495654430f4ec8b5b73be1a971fe3, type: 3}
+  - id: asset:9b3d24a4a934747e6bcd28ffa11dca3c
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Mechanism_Enhance_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9b3d24a4a934747e6bcd28ffa11dca3c, type: 3}
+  - id: asset:9bc290db3c907442594f4e4564aabd24
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Wind_Blast_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9bc290db3c907442594f4e4564aabd24, type: 3}
+  - id: asset:9be1bfd0fb78f461ab06891d45625d43
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Light_Metallic_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9be1bfd0fb78f461ab06891d45625d43, type: 3}
+  - id: asset:9bf635ec69b3b4bd2bbc78f4a0204c70
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Poof_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9bf635ec69b3b4bd2bbc78f4a0204c70, type: 3}
+  - id: asset:9c247ac343898405fb69268da8f0869e
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Boulder_Slam_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9c247ac343898405fb69268da8f0869e, type: 3}
+  - id: asset:9cf506725f2cd467db5f752098d63e8b
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Buff_Shield_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9cf506725f2cd467db5f752098d63e8b, type: 3}
+  - id: asset:9eb8cc71783534a9b8da8dae4ba16d0a
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Dust_Throw_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9eb8cc71783534a9b8da8dae4ba16d0a, type: 3}
+  - id: asset:9efa973caee5c4723880dea37d51b31e
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Cycle_Light_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9efa973caee5c4723880dea37d51b31e, type: 3}
+  - id: asset:9f0310ebfe3a2514a959dba9418046fe
+    path: Assets/ThirdParty/VFX/Vefects/Trails VFX URP/Sounds/WAV/Vefects_SFX_Trail_Earth.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9f0310ebfe3a2514a959dba9418046fe, type: 3}
+  - id: asset:9f349724ec60d4ee5afcabd02a3cf6e1
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Increase_Mechanical_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9f349724ec60d4ee5afcabd02a3cf6e1, type: 3}
+  - id: asset:9f76c97ffc0074cccb2130ec304c7492
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Swirl_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9f76c97ffc0074cccb2130ec304c7492, type: 3}
+  - id: asset:9fa8ddacae93342e1900a3bbab43c792
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Gong_Warning_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: 9fa8ddacae93342e1900a3bbab43c792, type: 3}
+  - id: asset:a0aa18ecc6a8d4e7dbfe2eff963a2141
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Reverse_Short_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a0aa18ecc6a8d4e7dbfe2eff963a2141, type: 3}
+  - id: asset:a1503032f6fce41438858c3f5dc38dcb
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Water_Shimmer_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a1503032f6fce41438858c3f5dc38dcb, type: 3}
+  - id: asset:a1747d115298348678e1cdf396c9329f
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Shimmer_Big_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a1747d115298348678e1cdf396c9329f, type: 3}
+  - id: asset:a1c595f7b742e174cbd81d7061b3bd10:7400000
+    path: Assets/ThirdParty/3dModels/ModularAnimalKnightsPolyart/Animation/DashForward.fbx
+    kind: animation
+    asset: {fileID: 7400000, guid: a1c595f7b742e174cbd81d7061b3bd10, type: 3}
+  - id: asset:a1ddbf6e5ff8f460a93d9e09ef84bd9c
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Mech_Arm_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a1ddbf6e5ff8f460a93d9e09ef84bd9c, type: 3}
+  - id: asset:a20f18a0fcc654ee18886fe6969b3072
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Debris_Disperse_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a20f18a0fcc654ee18886fe6969b3072, type: 3}
+  - id: asset:a227adc532e9d44f392e043f52cbb0dd
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Shimmer_Long_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a227adc532e9d44f392e043f52cbb0dd, type: 3}
+  - id: asset:a23ba0f61a8bd48cf907c425822be708
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Mechanism_Small_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a23ba0f61a8bd48cf907c425822be708, type: 3}
+  - id: asset:a248aebbb734546fdbb870eb9ccb41f8
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Shimmer_Shot_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a248aebbb734546fdbb870eb9ccb41f8, type: 3}
+  - id: asset:a2e891a9bdb164513b3578cfe12fa537
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Poof_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a2e891a9bdb164513b3578cfe12fa537, type: 3}
+  - id: asset:a320401506aff4eee85ff2d3ad93e59c
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Swirl_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a320401506aff4eee85ff2d3ad93e59c, type: 3}
+  - id: asset:a3ce31a6afbf440e6bcdce37ac75bf49
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Bless_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a3ce31a6afbf440e6bcdce37ac75bf49, type: 3}
+  - id: asset:a3dc7afa86f5f4876bfeb9728e9610ac
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Earth
+      26-38.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a3dc7afa86f5f4876bfeb9728e9610ac, type: 3}
+  - id: asset:a4448621462614ba8abc31cb5c342729
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Earth_Punch_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a4448621462614ba8abc31cb5c342729, type: 3}
+  - id: asset:a496f14f74dc2ec47afa7a3c317da22a:7400000
+    path: Assets/ThirdParty/3dModels/ModularAnimalKnightsPolyart/Animation/AttackCombo04.fbx
+    kind: animation
+    asset: {fileID: 7400000, guid: a496f14f74dc2ec47afa7a3c317da22a, type: 3}
+  - id: asset:a4ecfacee86c84c939a71127b76041f0
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Slam_Water_Rise_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a4ecfacee86c84c939a71127b76041f0, type: 3}
+  - id: asset:a55145abb9e08492f9ac516ece695614
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Air_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a55145abb9e08492f9ac516ece695614, type: 3}
+  - id: asset:a558a475ecb3f461c97ed93f1789b8e7
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Water_Rush_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a558a475ecb3f461c97ed93f1789b8e7, type: 3}
+  - id: asset:a5648ceb06a714b23bf414e657f860e1
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Click_Swish_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a5648ceb06a714b23bf414e657f860e1, type: 3}
+  - id: asset:a59f52f7a2bf344fe820b92ae7db10db
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Stomp_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a59f52f7a2bf344fe820b92ae7db10db, type: 3}
+  - id: asset:a6b0ff1f9e5b54217aac5069716ca8dd
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Seal_Long_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a6b0ff1f9e5b54217aac5069716ca8dd, type: 3}
+  - id: asset:a6b88f690ebcc465cb00db35d4fd6dfb
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Shuffle_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a6b88f690ebcc465cb00db35d4fd6dfb, type: 3}
+  - id: asset:a7c2755664f83426c88f3e3ff303e7c7
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Light_Click_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a7c2755664f83426c88f3e3ff303e7c7, type: 3}
+  - id: asset:a8e60660aa0394e69966d8258d1e9eba
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Miniaturize_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a8e60660aa0394e69966d8258d1e9eba, type: 3}
+  - id: asset:a96194a391f4a410a9f59056706d2be0
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Shimmer_Short_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a96194a391f4a410a9f59056706d2be0, type: 3}
+  - id: asset:a977e18f2fac34e42bf204da46ac670a
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Water_Wall_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a977e18f2fac34e42bf204da46ac670a, type: 3}
+  - id: asset:a9a09ba43506f4eaaa733ac1434584ff
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Expose_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a9a09ba43506f4eaaa733ac1434584ff, type: 3}
+  - id: asset:a9f4329942be44f3dbd21a53e12067ec
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Escalate_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: a9f4329942be44f3dbd21a53e12067ec, type: 3}
+  - id: asset:aa26510be127f47f9be5cd1cdddcd100
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Wind_Reverse_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: aa26510be127f47f9be5cd1cdddcd100, type: 3}
+  - id: asset:aa5be3df6386041bfb6ccf3a9d618903
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Cycle_Light_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: aa5be3df6386041bfb6ccf3a9d618903, type: 3}
+  - id: asset:aa987a6d32453442e810b2a5d6894935
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Shimmer_Long_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: aa987a6d32453442e810b2a5d6894935, type: 3}
+  - id: asset:ab438cb0c1eaa4145849180c363e18ec
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Shield_PowerUp_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: ab438cb0c1eaa4145849180c363e18ec, type: 3}
+  - id: asset:ab93e1e0964ee4cfe8e992bfe2a4bf0b
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Glass_Container_Break_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: ab93e1e0964ee4cfe8e992bfe2a4bf0b, type: 3}
+  - id: asset:abb6b9d20f32e40a08a650da94c4f280
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Mechanical_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: abb6b9d20f32e40a08a650da94c4f280, type: 3}
+  - id: asset:ac37dc3b42e364f2785a8e42bdd51b93
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Bubble_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: ac37dc3b42e364f2785a8e42bdd51b93, type: 3}
+  - id: asset:acb7cdbfeba8f4b18988b230322c86bc
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Water_Shimmer_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: acb7cdbfeba8f4b18988b230322c86bc, type: 3}
+  - id: asset:ad0afbf79c98d42998fe0ad423451722
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Shield_Earth_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: ad0afbf79c98d42998fe0ad423451722, type: 3}
+  - id: asset:addaeccd1e14b46b58200163bd9f8066
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Your_Turn_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: addaeccd1e14b46b58200163bd9f8066, type: 3}
+  - id: asset:aebbd76dcf59e4f2781bdefe00a2bcfe
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Drip_Fire_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: aebbd76dcf59e4f2781bdefe00a2bcfe, type: 3}
+  - id: asset:aebf0c27145af446fb334ff5f188aa1e
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Gong_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: aebf0c27145af446fb334ff5f188aa1e, type: 3}
+  - id: asset:af1303f8c097e4b0e92699c7ce2d5b6e
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Grand_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: af1303f8c097e4b0e92699c7ce2d5b6e, type: 3}
+  - id: asset:af2ea59b2aac9445e8f970341c5bbdab
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Lock_Water_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: af2ea59b2aac9445e8f970341c5bbdab, type: 3}
+  - id: asset:af5c6f469e41e8548ae94900222b05d3
+    path: Assets/ThirdParty/VFX/Vefects/Trails VFX URP/Sounds/WAV/Vefects_SFX_Trail_Nature.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: af5c6f469e41e8548ae94900222b05d3, type: 3}
+  - id: asset:b037f60439d7d45c183f848d23ea8cca
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Silly_Spring_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b037f60439d7d45c183f848d23ea8cca, type: 3}
+  - id: asset:b0a975fd7e303451486ebea04c180d1d
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Water_Shot_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b0a975fd7e303451486ebea04c180d1d, type: 3}
+  - id: asset:b1680b041a2a844c39c799ed47cf12e5
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Lock_Mechanical_04.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b1680b041a2a844c39c799ed47cf12e5, type: 3}
+  - id: asset:b1aeefdf3d9f84dc28f667ac298dc9c0
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Shuffle_Light_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b1aeefdf3d9f84dc28f667ac298dc9c0, type: 3}
+  - id: asset:b1e43671a9beb4e1b80724e9bbe95163
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Mechanism_Magic_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b1e43671a9beb4e1b80724e9bbe95163, type: 3}
+  - id: asset:b2339a8bb48a746e2b0bc233f6adaef9
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Light_Reverb_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b2339a8bb48a746e2b0bc233f6adaef9, type: 3}
+  - id: asset:b2ed541d4d19941b8a77179db167bb2e
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Shaker_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b2ed541d4d19941b8a77179db167bb2e, type: 3}
+  - id: asset:b37004680fa2348c998e76b2148c5be7
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Shield_PowerUp_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b37004680fa2348c998e76b2148c5be7, type: 3}
+  - id: asset:b3945a0e078e74878a04d82f30c49efa
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Reverse_Flutter_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b3945a0e078e74878a04d82f30c49efa, type: 3}
+  - id: asset:b3d607601ac97463180f0b0b0652fed9
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Spring_Up_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b3d607601ac97463180f0b0b0652fed9, type: 3}
+  - id: asset:b4eb398b477ac4a0f9c744651ec5fd73
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Slam_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b4eb398b477ac4a0f9c744651ec5fd73, type: 3}
+  - id: asset:b56eba410a14849189c300806aec790a
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Shimmer_Short_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b56eba410a14849189c300806aec790a, type: 3}
+  - id: asset:b5a3d40df334a427c8231e588020e6ea
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Air_Rise_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b5a3d40df334a427c8231e588020e6ea, type: 3}
+  - id: asset:b5f40400847e24ce086cced4da94d044
+    path: Assets/ThirdParty/Audio/Card_Game/Ambience_Loops/Card_Game_Ambience_Snowy_Mountain.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b5f40400847e24ce086cced4da94d044, type: 3}
+  - id: asset:b6aeef319511b42ff8a853a252bce48a
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Poof_Chime_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b6aeef319511b42ff8a853a252bce48a, type: 3}
+  - id: asset:b707907cff06b4189bb5a150933b8b89
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Pop_Big_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b707907cff06b4189bb5a150933b8b89, type: 3}
+  - id: asset:b70d60c15fe5447578f95d4b2151845a
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Air_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b70d60c15fe5447578f95d4b2151845a, type: 3}
+  - id: asset:b74da3b9d583a403f94035a3ec46000d
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Expose_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b74da3b9d583a403f94035a3ec46000d, type: 3}
+  - id: asset:b7d71c1cef3004c9eacd7856d43f34e5
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Light_Magic_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b7d71c1cef3004c9eacd7856d43f34e5, type: 3}
+  - id: asset:b7dafbccd5aa94ddca49541b08550435
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Tornado_Swallow_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b7dafbccd5aa94ddca49541b08550435, type: 3}
+  - id: asset:b8ce96ccd461940b4b5ea1d0d3c3e7a1
+    path: Assets/ThirdParty/Audio/Card_Game/Ambience_Loops/Card_Game_Ambience_Swamp.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b8ce96ccd461940b4b5ea1d0d3c3e7a1, type: 3}
+  - id: asset:b8d77b1437a55405a94a375c05d2c674
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Mechanism_Magic_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b8d77b1437a55405a94a375c05d2c674, type: 3}
+  - id: asset:b8dbafbdec72e4f1fb68a160096e15aa
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Potion_Big_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b8dbafbdec72e4f1fb68a160096e15aa, type: 3}
+  - id: asset:b922fd6bff8994e2f8e00c23a3f4d82c
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Wisp_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b922fd6bff8994e2f8e00c23a3f4d82c, type: 3}
+  - id: asset:b96586514e9aa9f45bb18b74c3d83083
+    path: Assets/Presentation/Effects/Spell dizzy stars.prefab
+    kind: prefab
+    asset: {fileID: 4626503575430743250, guid: b96586514e9aa9f45bb18b74c3d83083, type: 3}
+  - id: asset:b96c5d44fe1c848c284b586d301a116d
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Deflect_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b96c5d44fe1c848c284b586d301a116d, type: 3}
+  - id: asset:b99bf517044b548da8c270b62b28a92c
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Cork_Break_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: b99bf517044b548da8c270b62b28a92c, type: 3}
+  - id: asset:bac66ffe5025e4ba88a0fe62caa066d3
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Block_Magic_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: bac66ffe5025e4ba88a0fe62caa066d3, type: 3}
+  - id: asset:bb995a6b65c774c11b791847ec9ce0ca
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Bash_Metal_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: bb995a6b65c774c11b791847ec9ce0ca, type: 3}
+  - id: asset:bba8cb45c90e24e2db1e127c9e404fe8
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Mechanical_Large_Chatter_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: bba8cb45c90e24e2db1e127c9e404fe8, type: 3}
+  - id: asset:bbb77b388d1f6490e8b9a6eca4df315a
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Twinkle_Dust_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: bbb77b388d1f6490e8b9a6eca4df315a, type: 3}
+  - id: asset:bc6ca4101968a49d7abc302395118721
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Glitter_Missile_.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: bc6ca4101968a49d7abc302395118721, type: 3}
+  - id: asset:bd34cda12d47e418cad849d49833d981
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Whoosh_Reverse_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: bd34cda12d47e418cad849d49833d981, type: 3}
+  - id: asset:bdcb028b8b7e24b84add9ce6bf182747
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Crackle_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: bdcb028b8b7e24b84add9ce6bf182747, type: 3}
+  - id: asset:beb4dc4aebeba40ef834138674f788b3
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Bop_Tiny_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: beb4dc4aebeba40ef834138674f788b3, type: 3}
+  - id: asset:bec65274311aa5f4d97534392e70be60
+    path: Assets/ThirdParty/VFX/Vefects 1/Zap VFX URP/Audio/WAV/SFX_Vefects_Zap_Medium_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: bec65274311aa5f4d97534392e70be60, type: 3}
+  - id: asset:beced66f6e9474f12b11cd80b18c7254
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Slam_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: beced66f6e9474f12b11cd80b18c7254, type: 3}
+  - id: asset:bf5893b8753c743c389c0f40cf79e317
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Mechanical_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: bf5893b8753c743c389c0f40cf79e317, type: 3}
+  - id: asset:bf7fe6b47af5a4080b58f7b2f9fb3527
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Expose_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: bf7fe6b47af5a4080b58f7b2f9fb3527, type: 3}
+  - id: asset:bf87c9915b5154115aac86e74b86c9c8
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Crackle_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: bf87c9915b5154115aac86e74b86c9c8, type: 3}
+  - id: asset:bf9077d287dba408fb0cce5740890c59
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Chime_Light_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: bf9077d287dba408fb0cce5740890c59, type: 3}
+  - id: asset:c01812782cdf2488c8d1ec8cd97f8f50
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Deal_Single_Whoosh_Light_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: c01812782cdf2488c8d1ec8cd97f8f50, type: 3}
+  - id: asset:c08a9f1caf60145ecaaa3a724c73e3e4
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Thud_Splash_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: c08a9f1caf60145ecaaa3a724c73e3e4, type: 3}
+  - id: asset:c08bf5f08a6ec457680089c6fc3eaca4
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Tornado_Swallow_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: c08bf5f08a6ec457680089c6fc3eaca4, type: 3}
+  - id: asset:c0b8160ce37c84b768a1526866ac517d
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Mechanism_Small_04.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: c0b8160ce37c84b768a1526866ac517d, type: 3}
+  - id: asset:c1b089cd69be38a478350cf07ffdafeb
+    path: Assets/Presentation/Effects/Attack trail.prefab
+    kind: prefab
+    asset: {fileID: 237099526826154970, guid: c1b089cd69be38a478350cf07ffdafeb, type: 3}
+  - id: asset:c1c81d127692749b6ad2e23f4ed7e6b3
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Heavy_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: c1c81d127692749b6ad2e23f4ed7e6b3, type: 3}
+  - id: asset:c282ef25baf204c2299babb45aa9f21c
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Shatter_Ascend_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: c282ef25baf204c2299babb45aa9f21c, type: 3}
+  - id: asset:c35963f445dc24d54b00259214eb618f
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Lock_Mechanical_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: c35963f445dc24d54b00259214eb618f, type: 3}
+  - id: asset:c36e2e08f36c24ad687c361f8e062ec7
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Grand_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: c36e2e08f36c24ad687c361f8e062ec7, type: 3}
+  - id: asset:c462771765132ac4d9747f83645adb3b
+    path: Assets/Presentation/Effects/Spell flame burst.prefab
+    kind: prefab
+    asset: {fileID: 980573640993047689, guid: c462771765132ac4d9747f83645adb3b, type: 3}
+  - id: asset:c50bdb43edb3cbc46a8ec14a2f935284
+    path: Assets/Presentation/Effects/QTE fire.prefab
+    kind: prefab
+    asset: {fileID: 3636385554672925191, guid: c50bdb43edb3cbc46a8ec14a2f935284, type: 3}
+  - id: asset:c9065c0765cf94145909d33ed670e438
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Thud_Splash_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: c9065c0765cf94145909d33ed670e438, type: 3}
+  - id: asset:c95d37cbb77884b16a622cfa287d288a
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Lock_Wisp_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: c95d37cbb77884b16a622cfa287d288a, type: 3}
+  - id: asset:ca8f9195dbdea4f4facec8b6c1646d45
+    path: Assets/ThirdParty/Audio/Card_Game/Achievements/Card_Game_Achievement_Chime_Light_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: ca8f9195dbdea4f4facec8b6c1646d45, type: 3}
+  - id: asset:cbe46b0f3570b4e91bc45d1e9521c8cd
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Health_Upgrade_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: cbe46b0f3570b4e91bc45d1e9521c8cd, type: 3}
+  - id: asset:ccc25dbcb8e964cc99e85957cef64b26
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Poof_Ascend_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: ccc25dbcb8e964cc99e85957cef64b26, type: 3}
+  - id: asset:cdf77bb156ec6412fb76303836af5036
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Hush_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: cdf77bb156ec6412fb76303836af5036, type: 3}
+  - id: asset:ce14b3032e4f04d1a9ad770855c74d9d
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Slam_Water_Rise_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: ce14b3032e4f04d1a9ad770855c74d9d, type: 3}
+  - id: asset:ce22b22cdf80a4b29a1bccb405f5ea25
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Crackle_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: ce22b22cdf80a4b29a1bccb405f5ea25, type: 3}
+  - id: asset:ce69bcf02c2d6473aa87f3fc5359d487
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Silly_Shimmer_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: ce69bcf02c2d6473aa87f3fc5359d487, type: 3}
+  - id: asset:ce7087981cbb64b758260f485c62790e
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Click_Deep_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: ce7087981cbb64b758260f485c62790e, type: 3}
+  - id: asset:cec33e4ddd3e14891a99827e08ae081f
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Slam_Wind_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: cec33e4ddd3e14891a99827e08ae081f, type: 3}
+  - id: asset:d01b21359976845f492e32a26806b4cc
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Earth_Strength_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d01b21359976845f492e32a26806b4cc, type: 3}
+  - id: asset:d04b02a1c2b524c198417805a153c341
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Cursed_Wind_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d04b02a1c2b524c198417805a153c341, type: 3}
+  - id: asset:d0b3955dc831843658062dc3733509b6
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Mechanical_Large_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d0b3955dc831843658062dc3733509b6, type: 3}
+  - id: asset:d0cbb7f41605b427f880caff0a52fa58
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Mechanical_Metal_05.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d0cbb7f41605b427f880caff0a52fa58, type: 3}
+  - id: asset:d0f323ea00236c1438d5da5d9a6414e0
+    path: Assets/ThirdParty/VFX/Vefects/Trails VFX URP/Sounds/WAV/Vefects_SFX_Trail_Water.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d0f323ea00236c1438d5da5d9a6414e0, type: 3}
+  - id: asset:d242307039d804d97b0b2cd6a7fe2f4a
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Deal_Single_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d242307039d804d97b0b2cd6a7fe2f4a, type: 3}
+  - id: asset:d281ab8ead10c4f4d91e78d19af17a89
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Stones_Break_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d281ab8ead10c4f4d91e78d19af17a89, type: 3}
+  - id: asset:d2e6bc9b2eaeb471d8a376b007a33522
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Crack_Shimmer_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d2e6bc9b2eaeb471d8a376b007a33522, type: 3}
+  - id: asset:d372c3c1265b3428b93b791dd44035a1
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Shuffle_Light_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d372c3c1265b3428b93b791dd44035a1, type: 3}
+  - id: asset:d3d3f3d5bf47d4b7787bdcd99640177a
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Poof_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d3d3f3d5bf47d4b7787bdcd99640177a, type: 3}
+  - id: asset:d3dba4fd4b56d4a17ba1c0bc0bd62886
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Mechanism_Glass_Break_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d3dba4fd4b56d4a17ba1c0bc0bd62886, type: 3}
+  - id: asset:d477d51f6b7ea438e80871df697fe0a7
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Glitter_Missile_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d477d51f6b7ea438e80871df697fe0a7, type: 3}
+  - id: asset:d5219354e03cf4e5ca7cdb48524e4758
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Entrance_.03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d5219354e03cf4e5ca7cdb48524e4758, type: 3}
+  - id: asset:d53c4050fa4cc40aeaf943e62bf7b918
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Cursed_Wind_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d53c4050fa4cc40aeaf943e62bf7b918, type: 3}
+  - id: asset:d578ed43251234c3095bc682e1a03bf3
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Crackle_Poof_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d578ed43251234c3095bc682e1a03bf3, type: 3}
+  - id: asset:d65ba33f8b511d6448fbf3aaeabf0305
+    path: Assets/Presentation/Effects/Death smoke.prefab
+    kind: prefab
+    asset: {fileID: 85531819248082666, guid: d65ba33f8b511d6448fbf3aaeabf0305, type: 3}
+  - id: asset:d772eef9cd1d94a28bf8a3e46b3703a8
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Light_Click_Bubble_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d772eef9cd1d94a28bf8a3e46b3703a8, type: 3}
+  - id: asset:d8470aee806d74f4181ae52eef3bf1a8
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Lock_Mechanical_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d8470aee806d74f4181ae52eef3bf1a8, type: 3}
+  - id: asset:d8d5674a1f74a4d79a63b1135e69ccb7
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Percussion_04.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d8d5674a1f74a4d79a63b1135e69ccb7, type: 3}
+  - id: asset:d93588cc0d42a449db0afb6b39cba0c5
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Deflect_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d93588cc0d42a449db0afb6b39cba0c5, type: 3}
+  - id: asset:d949bf49028214718bef17aed6907bce
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Air_Rush_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d949bf49028214718bef17aed6907bce, type: 3}
+  - id: asset:d9c59557b70d8467e8af5a4052e12e47
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Deep_Splash_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: d9c59557b70d8467e8af5a4052e12e47, type: 3}
+  - id: asset:da5d6d820571840bc9dcee9d84c3fa17
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Crystals_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: da5d6d820571840bc9dcee9d84c3fa17, type: 3}
+  - id: asset:dbf23b69ee7864270ad9f81a08529b4e
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Bop_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: dbf23b69ee7864270ad9f81a08529b4e, type: 3}
+  - id: asset:dd11be5f1a4084b4e8deadf0e148b58f
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Splash_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: dd11be5f1a4084b4e8deadf0e148b58f, type: 3}
+  - id: asset:dd4c0c204089b46baaca3d1684cc8d86
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Water_Shield_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: dd4c0c204089b46baaca3d1684cc8d86, type: 3}
+  - id: asset:dd7f6bb1d4d954604a9eb5fc95913211
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Bash_Metal_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: dd7f6bb1d4d954604a9eb5fc95913211, type: 3}
+  - id: asset:ddf0c6ae54edc4bff9894ece2bb2d728
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_End_Round_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: ddf0c6ae54edc4bff9894ece2bb2d728, type: 3}
+  - id: asset:de410e4042c165e4880349e7e965be9d
+    path: Assets/Prefabs/Locations/TavernInterior.prefab
+    kind: interior
+    asset: {fileID: 5305910952421542777, guid: de410e4042c165e4880349e7e965be9d, type: 3}
+  - id: asset:de4d9b8849b8b45e1badd1216148962b
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Magic_Water_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: de4d9b8849b8b45e1badd1216148962b, type: 3}
+  - id: asset:de8f6a61c831f4086a6e56aa756655c1
+    path: Assets/ThirdParty/Audio/Card_Game/Card_Movement/Card_Game_Movement_Cycle_Light_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: de8f6a61c831f4086a6e56aa756655c1, type: 3}
+  - id: asset:df5ad823cb81b4fe1a5c49eeed9199a7
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Next_Round_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: df5ad823cb81b4fe1a5c49eeed9199a7, type: 3}
+  - id: asset:df9176d4faf664b1fb8b2bd970e2b38f
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Reverse_Swish_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: df9176d4faf664b1fb8b2bd970e2b38f, type: 3}
+  - id: asset:df9e646dc38274711825a89e2828d72b
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Mechanical_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: df9e646dc38274711825a89e2828d72b, type: 3}
+  - id: asset:e025e1c07da894e5a975fbfd31938bcc
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Mechanical_Metal_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: e025e1c07da894e5a975fbfd31938bcc, type: 3}
+  - id: asset:e12c82ae743e9469da05321b3ec4a771
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Shield_Earth_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: e12c82ae743e9469da05321b3ec4a771, type: 3}
+  - id: asset:e17602ed9ed064da4903e96386d328c7
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Mechanical_Large_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: e17602ed9ed064da4903e96386d328c7, type: 3}
+  - id: asset:e1df6fe4073094919a19ec175ac885bb
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Earth_Lockdown_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: e1df6fe4073094919a19ec175ac885bb, type: 3}
+  - id: asset:e2b9787ef691a4774b51432a4d12d925
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Wind_Blast_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: e2b9787ef691a4774b51432a4d12d925, type: 3}
+  - id: asset:e2fd6ac50341141428656f496202151e
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Shield_Earth_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: e2fd6ac50341141428656f496202151e, type: 3}
+  - id: asset:e303031d2ce4e4c6f81705aa7caec315
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Break_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: e303031d2ce4e4c6f81705aa7caec315, type: 3}
+  - id: asset:e30d1dcdcbf514a76a2039124cc3900d
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Splash_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: e30d1dcdcbf514a76a2039124cc3900d, type: 3}
+  - id: asset:e43bcafdd57764451a6f1c03696fc541
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Potion_Release_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: e43bcafdd57764451a6f1c03696fc541, type: 3}
+  - id: asset:e49df721fd639c8489efb41c87f78d9d:7400000
+    path: Assets/ThirdParty/3dModels/ModularAnimalKnightsPolyart/Animation/Defend.fbx
+    kind: animation
+    asset: {fileID: 7400000, guid: e49df721fd639c8489efb41c87f78d9d, type: 3}
+  - id: asset:e4be764cc54f442998de047bbb9fcf75
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Punch_Fire_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: e4be764cc54f442998de047bbb9fcf75, type: 3}
+  - id: asset:e4fd2588baf974388a192f2e97d67687
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Shaker_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: e4fd2588baf974388a192f2e97d67687, type: 3}
+  - id: asset:e57d00c85dfb14c63911c028d954588d
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Earth
+      26-42.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: e57d00c85dfb14c63911c028d954588d, type: 3}
+  - id: asset:e62778a5ba1914da0bb8ee8471bf5d41
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Glitter_Break_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: e62778a5ba1914da0bb8ee8471bf5d41, type: 3}
+  - id: asset:e9081c2fe088948e6b7615b8d3f258d8
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Silly_Spring_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: e9081c2fe088948e6b7615b8d3f258d8, type: 3}
+  - id: asset:e94a379fcfc8040d5aba38387622012a
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Dive_Water_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: e94a379fcfc8040d5aba38387622012a, type: 3}
+  - id: asset:eb2d1543afc66472e967d7cb4274c7cc
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Water_Poof_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: eb2d1543afc66472e967d7cb4274c7cc, type: 3}
+  - id: asset:eb52f129f52054b67a04c334fd1afc47
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Heavy_Metallic_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: eb52f129f52054b67a04c334fd1afc47, type: 3}
+  - id: asset:eb5ef0f4013be4454b6597e7cb418da1
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Air_Rush_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: eb5ef0f4013be4454b6597e7cb418da1, type: 3}
+  - id: asset:ec62f7447cc7345f1a39b5c3c68139a6
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Earth_Lockdown_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: ec62f7447cc7345f1a39b5c3c68139a6, type: 3}
+  - id: asset:ec67d03d511364c79be1eb66db7e8bee
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Water_Splash_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: ec67d03d511364c79be1eb66db7e8bee, type: 3}
+  - id: asset:ec6b7fe896c544f94b1ddffcb8adfcb4
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Gird_Water_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: ec6b7fe896c544f94b1ddffcb8adfcb4, type: 3}
+  - id: asset:ecd54097783b98a439603d4fd1dd32b9:7400000
+    path: Assets/ThirdParty/3dModels/ModularAnimalKnightsPolyart/Animation/GetHit.fbx
+    kind: animation
+    asset: {fileID: 7400000, guid: ecd54097783b98a439603d4fd1dd32b9, type: 3}
+  - id: asset:ee07b07df066841ee9238396ea56f46c
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrades_Shimmer_Earth_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: ee07b07df066841ee9238396ea56f46c, type: 3}
+  - id: asset:eef0b4c2f254548768e94fa2364378c5
+    path: Assets/ThirdParty/Audio/Card_Game/Magic/Card_Game_Magic_Invisible_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: eef0b4c2f254548768e94fa2364378c5, type: 3}
+  - id: asset:ef4e273cbcb0442d5ab1f3925c731c2c
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Click_Bass_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: ef4e273cbcb0442d5ab1f3925c731c2c, type: 3}
+  - id: asset:efc569499a72d499bbd7f63f0cc1255c
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Bop_Tiny_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: efc569499a72d499bbd7f63f0cc1255c, type: 3}
+  - id: asset:efd7030715f9a46bfad9b86bc6f0f6ae
+    path: Assets/ThirdParty/Audio/Card_Game/Ambience_Loops/Card_Game_Ambience_Pasture.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: efd7030715f9a46bfad9b86bc6f0f6ae, type: 3}
+  - id: asset:f003f43465dc944f9bacf5d30dbd8490
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Bop_Tiny_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f003f43465dc944f9bacf5d30dbd8490, type: 3}
+  - id: asset:f07e4825848dc487e949b442cd0946f0
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Light_Metallic_Dull_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f07e4825848dc487e949b442cd0946f0, type: 3}
+  - id: asset:f22e87740453ac248871d5e33e57d4d8
+    path: Assets/ThirdParty/VFX/Vefects/Trails VFX URP/Sounds/WAV/Vefects_SFX_Trail_Ice.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f22e87740453ac248871d5e33e57d4d8, type: 3}
+  - id: asset:f31f7f4edc4224e14993ff15a1958767
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Click_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f31f7f4edc4224e14993ff15a1958767, type: 3}
+  - id: asset:f34d30c74afb14d7cba68e12498ad2e5
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Magic_Sword_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f34d30c74afb14d7cba68e12498ad2e5, type: 3}
+  - id: asset:f3bd10f0e22ed451db1af6bf28351884
+    path: Assets/ThirdParty/Audio/Card_Game/Plays/Card_Game_Play_Mech_Arm_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f3bd10f0e22ed451db1af6bf28351884, type: 3}
+  - id: asset:f3dc7ffbd04b64b31bd171add0a9fd88
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_Advance_Water_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f3dc7ffbd04b64b31bd171add0a9fd88, type: 3}
+  - id: asset:f3eca8125742d4aa085a620765e9ad89
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Tech_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f3eca8125742d4aa085a620765e9ad89, type: 3}
+  - id: asset:f4b91ece8e32746a0a8691497f37e9bd
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Air_Glitter_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f4b91ece8e32746a0a8691497f37e9bd, type: 3}
+  - id: asset:f4f8b9f6d5b52334798a2de62d7e5a32
+    path: Assets/ThirdParty/Shaders/Toon Shaders Pro/Demo/Audio/rumble.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f4f8b9f6d5b52334798a2de62d7e5a32, type: 3}
+  - id: asset:f4f944144f3c04a2496c5857f31a18f0
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Water_Missile_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f4f944144f3c04a2496c5857f31a18f0, type: 3}
+  - id: asset:f5108122cb2034346a0a06a43935b958
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Buff_Shield_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f5108122cb2034346a0a06a43935b958, type: 3}
+  - id: asset:f604196db11554139844021637d42b0e
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Mechanical_Metal_04.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f604196db11554139844021637d42b0e, type: 3}
+  - id: asset:f64037c6835ef465a8645ccdeefe683d
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/General/Card_Game_UI_General_Air_Rise_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f64037c6835ef465a8645ccdeefe683d, type: 3}
+  - id: asset:f65eb4588d5e14ece9770ac458e01502
+    path: Assets/ThirdParty/Audio/Card_Game/Abilities/Card_Game_Abilities_Air_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f65eb4588d5e14ece9770ac458e01502, type: 3}
+  - id: asset:f67a0c94f09d048e5a5177cd0482e8db
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Fracture_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f67a0c94f09d048e5a5177cd0482e8db, type: 3}
+  - id: asset:f7e26080fc6ad4873b7f74327b2f3742
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Block_Earth_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f7e26080fc6ad4873b7f74327b2f3742, type: 3}
+  - id: asset:f7ef2fa267735db46bca7db1b9ebce60
+    path: Assets/ThirdParty/VFX/Vefects/Trails VFX URP/Sounds/WAV/Vefects_SFX_Trail_Fire.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f7ef2fa267735db46bca7db1b9ebce60, type: 3}
+  - id: asset:f856ee5b342ea4938a7f4f88e0e849fd
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Mechanism_Small_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f856ee5b342ea4938a7f4f88e0e849fd, type: 3}
+  - id: asset:f870dac4878a64a3b85d7d73c71dd70a
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Tech_Release_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f870dac4878a64a3b85d7d73c71dd70a, type: 3}
+  - id: asset:f872fbeed870c452f990f9f27884a45a
+    path: Assets/ThirdParty/Audio/Card_Game/Ambience_Loops/Card_Game_Ambience_Forest.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f872fbeed870c452f990f9f27884a45a, type: 3}
+  - id: asset:f920243cc9ca44c67882745520f2b0cb
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Notifictions/Card_Game_UI_Notification_Collapse_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f920243cc9ca44c67882745520f2b0cb, type: 3}
+  - id: asset:f92c05b840e3d43a4b7bdc50339c349d
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Silly_Shimmer_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: f92c05b840e3d43a4b7bdc50339c349d, type: 3}
+  - id: asset:fb5fd1268b8d64e11bc4bdcc37b6e670
+    path: Assets/ThirdParty/Audio/Card_Game/Alerts/Card_Game_Alert_End_Turn_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: fb5fd1268b8d64e11bc4bdcc37b6e670, type: 3}
+  - id: asset:fbd8cfc189a7c4b059f20339b4a66a45
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Push_Wind_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: fbd8cfc189a7c4b059f20339b4a66a45, type: 3}
+  - id: asset:fc1d1d640df74483195489b3dd4fac7f
+    path: Assets/ThirdParty/Audio/Card_Game/Effects/Card_Game_Effect_Tear_Fire_04.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: fc1d1d640df74483195489b3dd4fac7f, type: 3}
+  - id: asset:fe04b1bf132694550adf9b218e5d7f34
+    path: Assets/ThirdParty/Audio/Card_Game/Items/Card_Game_Items_Potion_Release_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: fe04b1bf132694550adf9b218e5d7f34, type: 3}
+  - id: asset:fe63fc2662b56472381b1c275eaaeb89
+    path: Assets/ThirdParty/Audio/Card_Game/Actions/Card_Game_Action_Tech_Fire_01.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: fe63fc2662b56472381b1c275eaaeb89, type: 3}
+  - id: asset:feca5b08f757b455fbf90585e3e5fb06
+    path: Assets/ThirdParty/Audio/Card_Game/Upgrades/Card_Game_Upgrade_Tech_02.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: feca5b08f757b455fbf90585e3e5fb06, type: 3}
+  - id: asset:ff0cdaf9533bd48278c64806793d39d6
+    path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Silly_Spring_03.wav
+    kind: audio
+    asset: {fileID: 8300000, guid: ff0cdaf9533bd48278c64806793d39d6, type: 3}

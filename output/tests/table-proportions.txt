@@ -1,0 +1,3 @@
+PASS 1.5 m circular tabletop, 0.75 m table height, 0.46 m seat reference; consistent seated rig/feet and raised slots across all 2/3/4 layouts.
+Reference: 1.8 m human; seated crown 1.35 m. Stylized animal ears and antlers preserve their additional height.
+Scene units per metre: 8; avatar scale: 6,403

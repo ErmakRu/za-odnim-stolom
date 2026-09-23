@@ -1,0 +1,1 @@
+PASS style shader compilation, two presets, three prefab buttons in lobby/settings, larger avatars in every 2/3/4 layout, repeated switching and exact original-material restoration, submesh count, albedo UV mapping, armor masks/palette, natural fur and source asset preservation.

@@ -1,0 +1,1 @@
+PASS shared chair/seat instances; external JSON reload; world and audio immediately change; live cards/HP/rules unchanged; next match receives HP19, QTE7, renamed bear and attack9; invalid JSON preserves whole snapshot; defaults restored. No production Config edited.

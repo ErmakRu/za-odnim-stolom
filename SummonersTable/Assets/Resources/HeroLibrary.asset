@@ -16,30 +16,38 @@ MonoBehaviour:
   - id: badger
     name: "\u0411\u0430\u0440\u0441\u0443\u043A"
     prefab: {fileID: 6064639517951582858, guid: a92e5bf39523f424ea10914b4b8879a9, type: 3}
+    crownAboveHead: 0.3069849
   - id: deer
     name: "\u041E\u043B\u0435\u043D\u044C"
     prefab: {fileID: 4904039686075700902, guid: cd0959572dfbb7c499940e7f1348dbd4, type: 3}
+    crownAboveHead: 0.6306473
   - id: dog
     name: "\u041F\u0451\u0441"
     prefab: {fileID: 4239400458202364188, guid: 8f4e246cb36af0d4dabe9b2552d21616, type: 3}
+    crownAboveHead: 0.46300638
   - id: lion
     name: "\u041B\u0435\u0432"
     prefab: {fileID: 6575232085011231517, guid: 7c35c694e6a798245b3e7828c926a3d5, type: 3}
+    crownAboveHead: 0.40049922
   - id: lizard
     name: "\u042F\u0449\u0435\u0440"
     prefab: {fileID: 1665321117667822782, guid: 2b33b6280e35d4b4f832f23ae9a8c6eb, type: 3}
+    crownAboveHead: 0.40235782
   - id: owl
     name: "\u0421\u043E\u0432\u0430"
     prefab: {fileID: 2093564993126062185, guid: 82b51fab07d420c4a8fecfd9af99bbd9, type: 3}
+    crownAboveHead: 0.32561123
   - id: rabbit
     name: "\u041A\u0440\u043E\u043B\u0438\u043A"
     prefab: {fileID: 850119635213332476, guid: cd60685f70e20784891755c9eba594fe, type: 3}
+    crownAboveHead: 0.49942875
   - id: rat
     name: "\u041A\u0440\u044B\u0441"
     prefab: {fileID: 6445658157039139078, guid: e4695cc31ae1f034eafa4c9e8149fb1e, type: 3}
+    crownAboveHead: 0.2954141
   controller: {fileID: 9100000, guid: 11bff39717ad3964093849200685f89d, type: 2}
   naturalMaterial: {fileID: 2100000, guid: cf1b5d010013b6d4c933cfa090f60c00, type: 2}
   chair: {fileID: 919132149155446097, guid: 807ef42296cae8140a50e6c49d47e16b, type: 3}
   table: {fileID: 919132149155446097, guid: cef5ef99d86c11d44b33cc683c74819d, type: 3}
-  heroScale: 1.65
+  heroScale: 6.4029565
   seatedHeight: 0

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9117657308865806778}
   - component: {fileID: 5602892596318154872}
+  - component: {fileID: 1578214838449729020}
   m_Layer: 0
   m_Name: HandFan
   m_TagString: Untagged
@@ -33,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -359}
+  m_AnchoredPosition: {x: -40, y: -310}
   m_SizeDelta: {x: 1000, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5602892596318154872
@@ -49,9 +50,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.HandFan
   cardSlotPrefab: {fileID: 3102339019376333811, guid: bb2565411051a0041b126e323d2db559, type: 3}
-  cardSize: {x: 150, y: 210}
-  spacing: 132
-  maxSpread: 830
-  arc: 18
-  angle: 3.2
-  hoverLift: 35
+  cardSize: {x: 178, y: 248}
+  spacing: 126
+  maxSpread: 740
+  arc: 38
+  angle: 7.5
+  hoverLift: 55
+--- !u!114 &1578214838449729020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7813429266766569358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e1c0cf1608d9b4fb7ebf977eea2a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.PrefabConfigBinding
+  configId: HandFan

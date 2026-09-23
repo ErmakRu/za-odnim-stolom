@@ -13,10 +13,10 @@ namespace SummonersTable
         Camera view;
         public void Initialize(Camera camera)
         {
-            view=camera;if(settings==null)settings=Resources.Load<PresentationSettings>("PresentationSettings");
+            view=camera;if(ConfigRuntime.Available)settings=ConfigRuntime.Settings();else if(settings==null)settings=Resources.Load<PresentationSettings>("PresentationSettings");
             Data=settings!=null?JsonUtility.FromJson<PresentationData>(settings.ToJson()):new PresentationData();
             string path=System.IO.Path.Combine(Application.persistentDataPath,"presentation.json");
-            if(loadJsonOverride&&System.IO.File.Exists(path))
+            if(!ConfigRuntime.Available&&loadJsonOverride&&System.IO.File.Exists(path))
             {try{var data=JsonUtility.FromJson<PresentationData>(System.IO.File.ReadAllText(path));data.Validate();Data=data;}catch(System.Exception e){Debug.LogWarning("Settings override rejected: "+e.Message);}}
             Mode=Data.initialCameraMode;
         }
@@ -37,8 +37,8 @@ namespace SummonersTable
                 if(Input.GetMouseButton(1))RotateView(new Vector2(Input.GetAxisRaw("Mouse X"),-Input.GetAxisRaw("Mouse Y"))*Data.lookSensitivity);
             }
             var mode=Data.cameraModes[Mode];var away=TableBoard.Away(viewer,players);
-            var pos=away*mode.distance+Vector3.up*mode.height;
-            var rotation=Quaternion.LookRotation(new Vector3(0,mode.focusHeight,0)-pos)*Quaternion.Euler(Look.y,Look.x,0);
+            var center=TableBoard.Center;var pos=center+away*mode.distance+Vector3.up*mode.height;
+            var rotation=Quaternion.LookRotation(center+Vector3.up*mode.focusHeight-pos)*Quaternion.Euler(Look.y,Look.x,0);
             float t=snap?1:1-Mathf.Exp(-Time.unscaledDeltaTime*Data.cameraSmoothing);
             view.transform.SetPositionAndRotation(Vector3.Lerp(view.transform.position,pos,t),Quaternion.Slerp(view.transform.rotation,rotation,t));
             view.fieldOfView=Mathf.Lerp(view.fieldOfView,mode.fieldOfView,t);

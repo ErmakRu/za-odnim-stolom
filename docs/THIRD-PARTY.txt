@@ -37,4 +37,13 @@ Their existing publisher terms apply; this project does not relicense these pack
 Selected particles have separate built-in-renderer materials in Assets/Presentation.
 Motion Titles uses its supplied Roboto-Bold font; TMP Essential Resources are included.
 Additional unused asset packages from stuff remain in the Unity project, not the Player.
+Toon Shaders Pro and PainterlyAsset: supplied in the same stuff branch.
+Built-in style adapter derives threshold/rim lighting from ToonFunctions.hlsl
+and directly includes PainterlyAsset/Shaders/Painterly.hlsl. The armor mask
+formula is retained from ModularAnimalKnightsPolyart/Shader/PolyArtMaskTint.shader.
+The original shader packages and their notices remain under Assets/ThirdParty/Shaders.
 LobbyBackdrop.png: generated with built-in OpenAI image_gen; prompt in docs/lobby-background-prompt.md.
+CardWindow UI/world shaders and parallax helper: original implementation for this project.
+Concept references (no source code or media copied):
+https://www.youtube.com/watch?v=f-ca4lAf_Gw
+https://www.cyanilux.com/tutorials/holofoil-card-shader-breakdown/

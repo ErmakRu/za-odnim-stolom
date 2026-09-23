@@ -1,0 +1,811 @@
+{
+  "schemaVersion": 1,
+  "prefabs": [
+    {
+      "id": "Avatar placeholder",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "CardTableCanvas",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "Chair placeholder",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "HeroSittingPlace",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "LobbyCanvas",
+      "components": [
+        {
+          "path": "Carved title plaque",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 15,
+            "inset": 4
+          }
+        },
+        {
+          "path": "leave",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        },
+        {
+          "path": "copy",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        },
+        {
+          "path": "ready",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        },
+        {
+          "path": "start",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        },
+        {
+          "path": "Local player count/players:2",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        },
+        {
+          "path": "Local player count/players:3",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        },
+        {
+          "path": "Local player count/players:4",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        },
+        {
+          "path": "Appearance controls/outfit-prev",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        },
+        {
+          "path": "Appearance controls/outfit-next",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        },
+        {
+          "path": "Appearance controls/palette:0",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        },
+        {
+          "path": "Appearance controls/palette:1",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        },
+        {
+          "path": "Appearance controls/palette:2",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        },
+        {
+          "path": "Appearance controls/palette:3",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        },
+        {
+          "path": "Appearance controls/customize-close",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "MainMenuCanvas",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "MotionAnnouncements",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "Round table placeholder",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "TableWorld",
+      "components": [
+        {
+          "path": "",
+          "type": "SummonersTable.EffectsVolume",
+          "values": {
+            "baseVolume": 0.1
+          }
+        },
+        {
+          "path": "",
+          "type": "SummonersTable.WorldHandFanSettings",
+          "values": {
+            "cardSize": {
+              "x": 1.04999995231628,
+              "y": 1.48000001907349
+            },
+            "radius": 1.7,
+            "sweep": 116,
+            "maximumStep": 23,
+            "sideOffset": 3.1,
+            "inwardOffset": 0.8,
+            "height": 1.35,
+            "tilt": 12,
+            "roll": 0.28
+          }
+        }
+      ]
+    },
+    {
+      "id": "CardBase",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "S01",
+      "components": [
+        {
+          "path": "",
+          "type": "SummonersTable.EffectsVolume",
+          "values": {
+            "baseVolume": 0.18
+          }
+        }
+      ]
+    },
+    {
+      "id": "S02",
+      "components": [
+        {
+          "path": "",
+          "type": "SummonersTable.EffectsVolume",
+          "values": {
+            "baseVolume": 0.18
+          }
+        }
+      ]
+    },
+    {
+      "id": "S03",
+      "components": [
+        {
+          "path": "",
+          "type": "SummonersTable.EffectsVolume",
+          "values": {
+            "baseVolume": 0.18
+          }
+        }
+      ]
+    },
+    {
+      "id": "S04",
+      "components": [
+        {
+          "path": "",
+          "type": "SummonersTable.EffectsVolume",
+          "values": {
+            "baseVolume": 0.18
+          }
+        }
+      ]
+    },
+    {
+      "id": "S05",
+      "components": [
+        {
+          "path": "",
+          "type": "SummonersTable.EffectsVolume",
+          "values": {
+            "baseVolume": 0.18
+          }
+        }
+      ]
+    },
+    {
+      "id": "S06",
+      "components": [
+        {
+          "path": "",
+          "type": "SummonersTable.EffectsVolume",
+          "values": {
+            "baseVolume": 0.18
+          }
+        }
+      ]
+    },
+    {
+      "id": "S07",
+      "components": [
+        {
+          "path": "",
+          "type": "SummonersTable.EffectsVolume",
+          "values": {
+            "baseVolume": 0.18
+          }
+        }
+      ]
+    },
+    {
+      "id": "S08",
+      "components": [
+        {
+          "path": "",
+          "type": "SummonersTable.EffectsVolume",
+          "values": {
+            "baseVolume": 0.18
+          }
+        }
+      ]
+    },
+    {
+      "id": "CardBrowser",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "CardSlot",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "ConfigControls",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "ExitConfirmation",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "GameInterface",
+      "components": [
+        {
+          "path": "",
+          "type": "SummonersTable.EffectsVolume",
+          "values": {
+            "baseVolume": 0.15
+          }
+        }
+      ]
+    },
+    {
+      "id": "HandFan",
+      "components": [
+        {
+          "path": "",
+          "type": "SummonersTable.HandFan",
+          "values": {
+            "cardSize": {
+              "x": 178,
+              "y": 248
+            },
+            "spacing": 126,
+            "maxSpread": 740,
+            "arc": 38,
+            "angle": 7.5,
+            "hoverLift": 55
+          }
+        }
+      ]
+    },
+    {
+      "id": "HistoryPanel",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "HistoryRow",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "LabControls",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "LobbyPlayerPanel",
+      "components": [
+        {
+          "path": "Wooden player panel",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 15,
+            "inset": 4
+          }
+        },
+        {
+          "path": "Deck card 0/Card frame",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 15,
+            "inset": 4
+          }
+        },
+        {
+          "path": "Deck card 1/Card frame",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 15,
+            "inset": 4
+          }
+        },
+        {
+          "path": "Deck card 2/Card frame",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 15,
+            "inset": 4
+          }
+        },
+        {
+          "path": "Player ribbon",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 15,
+            "inset": 4
+          }
+        },
+        {
+          "path": "deck-prev:0",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        },
+        {
+          "path": "deck-next:0",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        },
+        {
+          "path": "hero-prev:0",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        },
+        {
+          "path": "hero-next:0",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        },
+        {
+          "path": "customize:0",
+          "type": "SummonersTable.TavernPanel",
+          "values": {
+            "border": {
+              "r": 0.639999985694885,
+              "g": 0.400000005960464,
+              "b": 0.189999997615814,
+              "a": 1
+            },
+            "corner": 8,
+            "inset": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "LocalHandoff",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "MatchHUD",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "MatchOptions",
+      "components": [
+        {
+          "path": "",
+          "type": "SummonersTable.MatchOptionsView",
+          "values": {
+            "selected": {
+              "r": 0.939999997615814,
+              "g": 0.660000026226044,
+              "b": 0.25,
+              "a": 1
+            },
+            "unselected": {
+              "r": 0.219999998807907,
+              "g": 0.140000000596046,
+              "b": 0.0900000035762787,
+              "a": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "MatchResults",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "PlayerStatus",
+      "components": [
+        {
+          "path": "",
+          "type": "SummonersTable.PlayerStatusView",
+          "values": {
+            "nameOffset": {
+              "x": 0,
+              "y": 1.25,
+              "z": 0
+            },
+            "healthBetweenHeroAndSlots": 0.5,
+            "healthHeight": 6.28,
+            "minimumNameGap": 20,
+            "nameScreenPadding": 70,
+            "nameCollisionPadding": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "RoomRow",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "RulesPanel",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "SettingsPanel",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "ShaderChoice",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "SteamSearch",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "TargetArrow",
+      "components": [
+        {
+          "path": "",
+          "type": "SummonersTable.TargetArrowGraphic",
+          "values": {
+            "width": 7,
+            "headLength": 22,
+            "headWidth": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "TurnBudget",
+      "components": [
+        {
+          "path": "",
+          "type": "SummonersTable.TurnBudgetView",
+          "values": {
+            "active": {
+              "r": 0.980000019073486,
+              "g": 0.790000021457672,
+              "b": 0.419999986886978,
+              "a": 1
+            },
+            "inactive": {
+              "r": 0.430000007152557,
+              "g": 0.490000009536743,
+              "b": 0.5,
+              "a": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "UnitStats",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "AttackArrow",
+      "components": [
+        {
+          "path": "",
+          "type": "SummonersTable.WorldArrowView",
+          "values": {
+            "segments": 25,
+            "headLength": 0.26,
+            "headWidth": 0.14,
+            "widthMultiplier": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "CardBack",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "Chair",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "CreatureSlot",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "HealthNumber",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "PlayerAvatar",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "PlayerSeat",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "PlayerTarget",
+      "components": [
+        
+      ]
+    },
+    {
+      "id": "LobbyPortraitStage",
+      "components": [
+        
+      ]
+    }
+  ]
+}

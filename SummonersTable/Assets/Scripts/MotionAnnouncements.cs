@@ -5,7 +5,15 @@ namespace SummonersTable
 {
     public sealed class MotionAnnouncements : MonoBehaviour
     {
-        public StyleManager style;string last="";
+        public StyleManager style;string last="",configStyle="";
+        public void Configure(string id)
+        {
+            if(configStyle==id)return;var prefab=ConfigRuntime.Assets.Get<GameObject>(id);if(prefab==null)return;
+            var previous=style.transform;while(previous.parent!=transform&&previous.parent!=null)previous=previous.parent;
+            var font=style.GetComponentInChildren<TMPro.TMP_Text>(true)?.font;var created=Instantiate(prefab,transform);created.transform.localPosition=previous.localPosition;created.transform.localRotation=previous.localRotation;created.transform.localScale=previous.localScale;
+            foreach(var text in created.GetComponentsInChildren<TMPro.TMP_Text>(true))if(font!=null)text.font=font;
+            style=created.GetComponentInChildren<StyleManager>(true);style.playOnEnable=false;style.loopAnimations=false;style.disableOnOut=true;style.Stop();foreach(var item in style.textItems.Where(t=>t!=null)){item.text="";item.UpdateText();}previous.gameObject.SetActive(false);Destroy(previous.gameObject);configStyle=id;last="";
+        }
         public void Present(string page,MatchState state,int members)
         {
             string key="",text="";

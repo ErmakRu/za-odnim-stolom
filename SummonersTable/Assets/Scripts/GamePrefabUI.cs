@@ -10,6 +10,7 @@ namespace SummonersTable
     {
         PrefabInterface ui;bool settingsOpen,postMatchLobby;string interfaceMatch="",browserKey="",roomsKey="";int localVoter;
         readonly Dictionary<string,WidgetScreen> unitBadges=new Dictionary<string,WidgetScreen>();
+        readonly List<RectTransform> nameBlockers=new List<RectTransform>();
         readonly List<GameObject> browserCards=new List<GameObject>(),roomRows=new List<GameObject>();
         Vector2 Pointer=>captureMode?previewPointer??new Vector2(-100,-100):(Vector2)Input.mousePosition;
         bool InputBlocked=>settingsOpen||modal!=""||quitConfirm||handoff||state==null||state.phase=="matchEnd";
@@ -17,6 +18,7 @@ namespace SummonersTable
         {
             ui=FindFirstObjectByType<PrefabInterface>(FindObjectsInactive.Include);if(ui==null)throw new InvalidOperationException("GameInterface prefab is missing from the scene.");
             audioSource=ui.GetComponent<AudioSource>();AudioSettings.Initialize();
+            foreach(var label in ui.playerStatus)if(label!=null&&!label.seatOwned)label.gameObject.SetActive(false);
             ui.hud.Click("end",()=>Send(new GameCommand{kind="end"}));ui.hud.Click("cancel",ClearSelection);
             ui.hud.Click("rules",()=>modal="rules");ui.hud.Click("settings",()=>{settingsOpen=true;ClearSelection();});ui.hud.Click("journal",()=>{historyOpen=!historyOpen;ClearSelection();});
             ui.hud.Click("pass",()=>{if(state.cast!=null)Send(new GameCommand{kind="pass",phaseId=state.cast.id});});
@@ -52,6 +54,11 @@ namespace SummonersTable
             ui.history.gameObject.SetActive(game&&!ended&&historyOpen&&!settingsOpen&&modal==""&&!quitConfirm);
             if(ui.history.gameObject.activeSelf)ui.history.Present(journal,state,catalog,font);
             ui.settings.Text("masterLabel","Общая громкость: "+Mathf.RoundToInt(AudioSettings.Master*100)+"%");ui.settings.Text("effectsLabel","Звуковые эффекты: "+Mathf.RoundToInt(AudioSettings.Effects*100)+"%");
+            if(ui.rules.gameObject.activeSelf)
+            {
+                var options=CardPresentationContext.Options;
+                ui.rules.Text("body",ConfigRuntime.GameplaySummary(catalog.rules)+(options.limitPower?"\n\nПределы усилений включены.":"\n\nПределы сложения усилений отключены."));
+            }
             ui.quit.Text("note",online&&steam.IsHost?"Вы хост. Ваш выход завершит игру для остальных участников.":"Вернуться в главное меню?");
             if(ui.search.gameObject.activeSelf)PresentSearch();if(ui.browser.gameObject.activeSelf)PresentBrowser();
             if(ui.handoff.gameObject.activeSelf){ui.handoff.Text("name",state.players[seat].name);ui.handoff.Text("hint",Casting&&state.cast.owner!=seat?"Выберите реакцию или пропустите.\nQTE владельца приостановлен на время локального ответа.":"Сейчас появится ваша рука.\nОстальные игроки, отвернитесь от экрана.");}
@@ -63,14 +70,14 @@ namespace SummonersTable
             hud.Text("timer",state.phase=="action"?"Решение: "+Math.Max(0,Math.Ceiling(state.deadline-Clock))+" с":state.phase=="reveal"?"Общий показ: "+Math.Max(0,Math.Ceiling(state.cast.revealUntil-Clock))+" с":state.phase=="qte"?(state.qte!=null?"QTE видно только вам":"Буквы и таймер скрыты, прогресс виден на столе."):"");
             hud.Text("name",me.name);hud.Text("personal","HP "+me.hp+" · Очки "+me.score+" · Колода "+me.deckCount);
             hud.Enabled("end",MyAction&&!InputBlocked);hud.Get<Image>("end").color=MatchRules.ReadyToEnd(catalog,state,seat)?gold:muted;
-            hud.Text("endhint",MyAction?"Заклинаний: "+state.spellsPlayed:"Наблюдаем за столом");hud.Visible("pass",!online&&Casting&&state.cast.owner!=seat);hud.Visible("cancel",selectedCard!=""||selectedUnit!="");
+            hud.Text("endhint",MyAction?"Можно закончить ход раньше":"Наблюдаем за столом");hud.GetComponentInChildren<TurnBudgetView>(true).Present(state,seat);hud.Visible("pass",!online&&Casting&&state.cast.owner!=seat);hud.Visible("cancel",selectedCard!=""||selectedUnit!="");
             hud.Text("journal",historyOpen?"▲ Скрыть журнал":"▼ Журнал действий");
             string feedback=online&&steam.Error!=""?steam.Error:error;hud.Text("feedback",feedback);
-            hud.Text("cast",Casting?catalog.Card(state.cast.cardId).name+"\nРеакции открыты":"");
+            hud.Text("cast",Casting?catalog.Card(state.cast.cardId).name+"\nРеакции открыты":string.Join("\n",state.worldEvents.Select(e=>(catalog.events.events.FirstOrDefault(d=>d.id==e.eventId)?.name??"Событие")+" · "+(e.expiresTurn-state.turnNumber)+" хода"))+(state.matchDeadline>0?"\nДо конца партии: "+Math.Max(0,Math.Ceiling(state.matchDeadline-Clock))+" с":""));
             var chosen=catalog.Card(me.hand.Find(h=>h.uid==selectedCard)?.cardId);bool placing=chosen?.kind=="creature";
             hud.Text("hint",selectedUnit!=""?"Отпустите стрелку над целью · центр = случайный противник":selectedCard!=""?(placing?"Выберите свободный слот перед собой":"Укажите цель заклинания"):Casting&&state.cast.owner!=seat?CanAnyReact()?"Подходящие реакции подсвечены":"Наблюдаем за розыгрышем":"");
             string hot=!InputBlocked&&!historyOpen?ui.hand.Hit(Pointer):"";
-            if(hot!=""&&hot!=hoverHandUid&&!captureMode){audioSource.pitch=UnityEngine.Random.Range(.92f,1.08f);audioSource.PlayOneShot(board.CameraRig.settings.cardHover);}
+            if(hot!=""&&hot!=hoverHandUid&&!captureMode){audioSource.pitch=UnityEngine.Random.Range(.92f,1.08f);ConfigAudio.Play("card.hover");}
             hoverHandUid=hot;ui.hand.Present(state,seat,catalog,font,selectedCard,hot,shakeHand,shakeUntil,board.CameraRig.Data);
             ui.arrow.gameObject.SetActive(!InputBlocked&&!placing&&(selectedCard!=""||selectedUnit!=""&&(unitDragMoved||previewAim)));
             if(ui.arrow.gameObject.activeSelf){var from=selectedUnit!=""?board.ViewCamera.WorldToScreenPoint(board.TargetPosition(seat,selectedUnit,state)):new Vector3(aimStart.x*scale+offset.x,Screen.height-aimStart.y*scale-offset.y);var to=previewAim?new Vector2(previewAimEnd.x*scale+offset.x,Screen.height-previewAimEnd.y*scale-offset.y):Pointer;ui.arrow.Set(from,to);}
@@ -78,16 +85,20 @@ namespace SummonersTable
         }
         void PresentWorldLabels()
         {
-            for(int i=0;i<ui.playerStatus.Length;i++){bool visible=i<state.players.Count&&!(i==seat&&board.CameraRig.Mode==0);ui.playerStatus[i].gameObject.SetActive(visible);if(visible)ui.playerStatus[i].Present(state.players[i],state,board,catalog.rules.heroHp);}
+            for(int i=0;i<ui.playerStatus.Length;i++){var owned=board.Seat(i)?.status;if(owned!=null)ui.playerStatus[i]=owned;if(ui.playerStatus[i]==null)continue;bool visible=i<state.players.Count&&!(i==seat&&board.CameraRig.Mode==0);ui.playerStatus[i].gameObject.SetActive(visible);if(visible)ui.playerStatus[i].Present(state.players[i],state,board,catalog.rules.heroHp);}
             var active=new HashSet<string>();
             foreach(var p in state.players)foreach(var unit in p.units)
             {
                 active.Add(unit.uid);if(!unitBadges.TryGetValue(unit.uid,out var badge)){badge=Instantiate(ui.unitBadgePrefab,ui.worldOverlay,false);unitBadges[unit.uid]=badge;}
-                badge.Show(true);var d=catalog.Card(unit.cardId);int attack=d.attack+Math.Min(2,p.units.Where(u=>!u.deploying&&u.uid!=unit.uid&&catalog.Card(u.cardId).effect=="attackAura").Sum(u=>catalog.Card(u.cardId).value));badge.Text("stats",attack+"/"+unit.hp);badge.Get<Image>("group").color=RoleColor(d);
+                badge.Show(true);var d=catalog.Card(unit.cardId);int attack=d.attack+MatchRules.Stack(state,p.units.Where(u=>!u.deploying&&u.uid!=unit.uid&&catalog.Card(u.cardId).effect=="attackAura").Sum(u=>catalog.Card(u.cardId).value),state.rules.Limit("attackAura",2));badge.Text("stats",attack+"/"+unit.hp);badge.Get<Image>("group").color=RoleColor(d);
                 SetWorldRect((RectTransform)badge.transform,TableBoard.SlotPosition(p.seat,unit.slot,state.players.Count)+Vector3.up*.1f,new Vector2(-24,-35));
             }
             foreach(var k in unitBadges.Keys.Where(k=>!active.Contains(k)).ToList()){Destroy(unitBadges[k].gameObject);unitBadges.Remove(k);}
             ui.hud.Visible("center",!Casting);SetWorldRect(ui.hud.Get<RectTransform>("center"),new Vector3(0,TableBoard.TableTop+.1f,0),new Vector2(-90,24));
+            nameBlockers.Clear();nameBlockers.Add(ui.hud.Get<RectTransform>("journal"));
+            foreach(var badge in unitBadges.Values)nameBlockers.Add((RectTransform)badge.transform);
+            foreach(var status in ui.playerStatus)if(status!=null&&status.gameObject.activeInHierarchy)nameBlockers.Add(status.healthAnchor);
+            foreach(var status in ui.playerStatus)if(status!=null&&status.gameObject.activeInHierarchy)status.AvoidNameOverlap(nameBlockers,board.ViewCamera);
         }
         void SetWorldRect(RectTransform r,Vector3 world,Vector2 padding)
         {var p=board.ViewCamera.WorldToScreenPoint(world);RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)r.parent,p,null,out var local);r.position=((RectTransform)r.parent).TransformPoint(local+padding);}

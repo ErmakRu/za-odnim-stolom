@@ -18,7 +18,7 @@ PrefabInstance:
         \u043E\u0442 \u0430\u0442\u0430\u043A \u0438 \u0437\u0430\u043A\u043B\u0438\u043D\u0430\u043D\u0438\u0439
         \u0443\u043C\u0435\u043D\u044C\u0448\u0435\u043D \u043D\u0430 1. \u041E\u0431\u0449\u0430\u044F
         \u0437\u0430\u0449\u0438\u0442\u0430 \u0441\u0443\u0449\u0435\u0441\u0442\u0432
-        \u043D\u0435 \u0432\u044B\u0448\u0435 3; \u0443\u0441\u0442\u0430\u043B\u043E\u0441\u0442\u044C
+        \u043D\u0435 \u0432\u044B\u0448\u0435 2; \u0443\u0441\u0442\u0430\u043B\u043E\u0441\u0442\u044C
         \u043D\u0435 \u0443\u043C\u0435\u043D\u044C\u0448\u0430\u0435\u0442\u0441\u044F."
       objectReference: {fileID: 0}
     - target: {fileID: 1784995937377117767, guid: 88d2ee25808501a4f905868b9132ec8c, type: 3}
@@ -139,8 +139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5508621631403657562, guid: 88d2ee25808501a4f905868b9132ec8c, type: 3}
       propertyPath: definition.art
-      value: A huge gentle brown bear in a knitted scarf hugging a tiny glowing fireball
-        safely against its belly
+      value: art:C02
       objectReference: {fileID: 0}
     - target: {fileID: 5508621631403657562, guid: 88d2ee25808501a4f905868b9132ec8c, type: 3}
       propertyPath: definition.qte
@@ -160,7 +159,7 @@ PrefabInstance:
         \u043E\u0442 \u0430\u0442\u0430\u043A \u0438 \u0437\u0430\u043A\u043B\u0438\u043D\u0430\u043D\u0438\u0439
         \u0443\u043C\u0435\u043D\u044C\u0448\u0435\u043D \u043D\u0430 1. \u041E\u0431\u0449\u0430\u044F
         \u0437\u0430\u0449\u0438\u0442\u0430 \u0441\u0443\u0449\u0435\u0441\u0442\u0432
-        \u043D\u0435 \u0432\u044B\u0448\u0435 3; \u0443\u0441\u0442\u0430\u043B\u043E\u0441\u0442\u044C
+        \u043D\u0435 \u0432\u044B\u0448\u0435 2; \u0443\u0441\u0442\u0430\u043B\u043E\u0441\u0442\u044C
         \u043D\u0435 \u0443\u043C\u0435\u043D\u044C\u0448\u0430\u0435\u0442\u0441\u044F."
       objectReference: {fileID: 0}
     - target: {fileID: 5508621631403657562, guid: 88d2ee25808501a4f905868b9132ec8c, type: 3}

@@ -24,9 +24,12 @@ namespace SummonersTable
         {
             foreach(var front in FindObjectsByType<FrontEndCanvas>(FindObjectsInactive.Include,FindObjectsSortMode.None))
             {front.Bind(font,FrontEndAction);if(front.lobby)lobbyCanvas=front;else menuCanvas=front;}
+            lobbyCanvas.GetComponentInChildren<MatchOptionsView>(true).changed=options=>
+            {if(page=="local")localOptions=options.Copy();else if(page=="steam"&&steam.IsHost)steam.SetOptions(options);};
         }
         void FrontEndAction(string action)
         {
+            if(!string.IsNullOrEmpty(ConfigRuntime.Error)&&(action=="local"||action=="steam"||action=="start"||action=="ready")){error=ConfigRuntime.Message;return;}
             if(HandleLobbyChoice(action))return;
             switch(action)
             {
@@ -35,6 +38,7 @@ namespace SummonersTable
                 case "cards":returnPage="menu";page="cards";break;
                 case "rules":modal="rules";break;
                 case "quit":Application.Quit();break;
+                case "settings":settingsOpen=true;break;
                 case "ready":var me=steam.Members.Find(m=>m.id==steam.UserId.ToString());steam.SetMember(me?.deckId??"noise",me?.ready!=true);break;
                 case "start":if(page=="local")StartLocal(localCount);else steam.StartMatch();break;
                 case "leave":if(page=="local")page="menu";else steam.Leave();break;
@@ -46,12 +50,13 @@ namespace SummonersTable
         {
             if(previewLobby)return;
             bool visible=modal==""&&!quitConfirm&&!settingsOpen;
-            if(menuCanvas!=null){menuCanvas.Visible(page=="menu"&&visible);menuCanvas.status.text="ТЕСТ "+Application.version+" · "+steam.Status;}
+            if(menuCanvas!=null){menuCanvas.Visible(page=="menu"&&visible);menuCanvas.status.text=string.IsNullOrEmpty(ConfigRuntime.Error)?"ТЕСТ "+catalog.version+" · "+steam.Status:ConfigRuntime.Message;}
             if(lobbyCanvas==null)return;
             bool localLobby=page=="local";
             lobbyCanvas.Visible((localLobby||page=="steam"&&steam.InRoom)&&visible);
-            if(localLobby)lobbyCanvas.PresentLobby(LocalLobbyMembers(),"",true,true,true,catalog,"ЗА ОДНИМ ПК · "+localCount+" ИГРОКА","Выберите каждому колоду и героя. Во время матча передавайте управление.");
+            if(localLobby)lobbyCanvas.PresentLobby(LocalLobbyMembers(),"",true,true,localCount>=catalog.world.playerRange.x&&localCount<=catalog.world.playerRange.y,catalog,"ЗА ОДНИМ ПК · "+localCount+" ИГРОКА","Локация: "+catalog.world.name+" · "+catalog.world.playerRange.x+"–"+catalog.world.playerRange.y+" места; матч 2–4 игрока. "+error);
             else if(steam.InRoom)lobbyCanvas.PresentLobby(steam.Members,steam.UserId.ToString(),false,steam.IsHost,steam.CanStart,catalog,steam.RoomName+" · КОД "+steam.RoomId,steam.Error);
+            lobbyCanvas.GetComponentInChildren<MatchOptionsView>(true).Present(localLobby?localOptions:steam.Options,localLobby||steam.IsHost&&(steam.View==null||steam.View.phase=="matchEnd"));
         }
         System.Collections.Generic.List<LobbyMember> LocalLobbyMembers()
         {

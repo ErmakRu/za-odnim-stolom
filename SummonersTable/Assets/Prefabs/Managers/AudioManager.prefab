@@ -1,0 +1,455 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &202310602163260427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1374474194759585460}
+  - component: {fileID: 553754968997219615}
+  - component: {fileID: 5823372509305667953}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1374474194759585460
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202310602163260427}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &553754968997219615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202310602163260427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e1c0cf1608d9b4fb7ebf977eea2a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.PrefabConfigBinding
+  configId: AudioManager
+--- !u!114 &5823372509305667953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202310602163260427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: affdba421c2e20548a97a1b57e625d01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.AuthoringManager
+  section: 1
+  world:
+    schemaVersion: 1
+    id: 0
+    name: "\u0422\u0430\u0432\u0435\u0440\u043D\u0430"
+    timeChanges: 0
+    playersTurnTime: -1
+    qte: -1
+    revealTime: -1
+    gameTimer: -1
+    playerRange: {x: 2, y: 4}
+    scale: 1
+    scene: 
+    events: []
+  audio:
+    schemaVersion: 1
+    cues:
+    - action: card.hover
+      bus: 0
+      sounds:
+      - clip: asset:067c6bb7e7529418b9403be18d734770
+        volume: 0.15
+        randomPitch: 1
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: action.invalid
+      bus: 0
+      sounds:
+      - clip: asset:84aa69f4ecdfd4c8b882f7a703503b09
+        volume: 0.15
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: creature.attack
+      bus: 0
+      sounds:
+      - clip: asset:8be21a09f5ecd4be8bafbd7f2947e335
+        volume: 0.15
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: damage.hit
+      bus: 0
+      sounds:
+      - clip: asset:35779339d76db49689c500c1eb0b9755
+        volume: 0.15
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: qte.correct
+      bus: 0
+      sounds:
+      - clip: asset:9296ccb7ce15142418d69ac87cdc2ae4
+        volume: 0.15
+        randomPitch: 1
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: qte.error
+      bus: 0
+      sounds:
+      - clip: asset:6973ba58c45314283987b3e3bb00ba62
+        volume: 0.15
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: turn.start
+      bus: 0
+      sounds:
+      - clip: asset:84aa69f4ecdfd4c8b882f7a703503b09
+        volume: 0.15
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: ambience
+      bus: 1
+      sounds:
+      - clip: asset:f872fbeed870c452f990f9f27884a45a
+        volume: 0.08
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: S01.launch
+      bus: 0
+      sounds:
+      - clip: asset:8be21a09f5ecd4be8bafbd7f2947e335
+        volume: 1
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: S01.impact
+      bus: 0
+      sounds:
+      - clip: asset:35779339d76db49689c500c1eb0b9755
+        volume: 1
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: S02.launch
+      bus: 0
+      sounds:
+      - clip: asset:89e43e7520a5047df8404057af3aeb12
+        volume: 1
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: S02.impact
+      bus: 0
+      sounds:
+      - clip: asset:6feeaa78478074e85bf46df3ff376256
+        volume: 1
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: S03.launch
+      bus: 0
+      sounds:
+      - clip: asset:b70d60c15fe5447578f95d4b2151845a
+        volume: 1
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: S03.impact
+      bus: 0
+      sounds:
+      - clip: asset:b707907cff06b4189bb5a150933b8b89
+        volume: 1
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: S04.launch
+      bus: 0
+      sounds:
+      - clip: asset:6973ba58c45314283987b3e3bb00ba62
+        volume: 1
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: S04.impact
+      bus: 0
+      sounds:
+      - clip: asset:9296ccb7ce15142418d69ac87cdc2ae4
+        volume: 1
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: S05.launch
+      bus: 0
+      sounds:
+      - clip: asset:f65eb4588d5e14ece9770ac458e01502
+        volume: 1
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: S05.impact
+      bus: 0
+      sounds:
+      - clip: asset:a55145abb9e08492f9ac516ece695614
+        volume: 1
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: S06.launch
+      bus: 0
+      sounds:
+      - clip: asset:f4b91ece8e32746a0a8691497f37e9bd
+        volume: 1
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: S06.impact
+      bus: 0
+      sounds:
+      - clip: asset:43b4592e5691e402ab953222e961fcc9
+        volume: 1
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: S07.launch
+      bus: 0
+      sounds:
+      - clip: asset:0f6599d54779a4ea383d91205ac8c246
+        volume: 1
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: S07.impact
+      bus: 0
+      sounds:
+      - clip: asset:6280f031e461549d38ad30b23e277355
+        volume: 1
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: S08.launch
+      bus: 0
+      sounds:
+      - clip: asset:8839914eec8554cae9ce0255178f2bf4
+        volume: 1
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+    - action: S08.impact
+      bus: 0
+      sounds:
+      - clip: asset:502c7f21842e846fa978774d2cce23a7
+        volume: 1
+        randomPitch: 0
+        pitch: 1
+        pitchRange: {x: 0.92, y: 1.08}
+        delay: 0
+  vfx:
+    schemaVersion: 1
+    effects: []
+    attack: 
+    hit: 
+    death: 
+    qteFire: 
+    qteSmoke: 
+    qteAttempt: 
+    motionTitle: 
+    attackScale: 0.3
+    impactScale: 0.35
+    qteScale: 0.17
+  playeranimations:
+    schemaVersion: 1
+    states: []
+  events:
+    schemaVersion: 1
+    events: []
+  cards:
+    schemaVersion: 1
+    cards: []
+    typeColors: []
+    roleColors: []
+  decks:
+    schemaVersion: 1
+    decks: []
+  rules:
+    schemaVersion: 1
+    version: 0.7.0
+    title: "\u0417\u0430 \u043E\u0434\u043D\u0438\u043C \u0441\u0442\u043E\u043B\u043E\u043C"
+    rules:
+      heroHp: 30
+      deckSize: 30
+      startingHand: 5
+      handLimit: 8
+      boardSlots: 5
+      rounds: 1
+      roundWinPoints: 3
+      eliminationPoints: 1
+      turnSeconds: 45
+      revealSeconds: 2
+      qteMistakes: 3
+      commandersQte: 10
+      wizardSpells: 3
+      wizardMixedSpells: 1
+      wizardCreatures: 1
+      qteMaxLength: 11
+      qteBaseSeconds: 10
+      qteSecondsPerSymbol: 3.3
+      qteMinimumSeconds: 6
+      qteMistakePenalty: 2
+      effectLimits:
+      - effect: guard
+        maximum: 2
+      - effect: attackAura
+        maximum: 2
+      - effect: openingPower
+        maximum: 2
+      - effect: spellPower
+        maximum: 2
+      - effect: thorns
+        maximum: 2
+      - effect: lifesteal
+        maximum: 2
+      - effect: spellDraw
+        maximum: 2
+      - effect: turnDraw
+        maximum: 2
+      - effect: failDraw
+        maximum: 2
+      - effect: turnHeal
+        maximum: 4
+      - effect: forgive
+        maximum: 1
+      - effect: qteExtra
+        maximum: 2
+      - effect: timeBonus
+        maximum: 4
+      - effect: timeTax
+        maximum: 4
+      - effect: spellTax
+        maximum: 2
+    defaults:
+      mode: wizards
+      limitPower: 1
+      cards3D: 0
+      revision: 0
+  presentation:
+    schemaVersion: 1
+    camera:
+      lookSensitivity: 3
+      cameraSmoothing: 8
+      hoverScale: 1.1
+      hoverTilt: 7
+      cardFlightSeconds: 0.5
+      initialCameraMode: 1
+      cameraModes:
+      - name: "\u041E\u0442 \u043F\u0435\u0440\u0432\u043E\u0433\u043E \u043B\u0438\u0446\u0430"
+        distance: 8
+        height: 9.6
+        focusHeight: 7.2
+        fieldOfView: 74
+        yawLimit: 90
+        downLimit: 45
+        upLimit: 90
+      - name: "\u041D\u0430\u0434 \u0433\u043E\u043B\u043E\u0432\u043E\u0439"
+        distance: 12
+        height: 24
+        focusHeight: 8
+        fieldOfView: 60
+        yawLimit: 30
+        downLimit: 10
+        upLimit: 10
+      - name: "\u041D\u0430\u0434 \u0441\u0442\u043E\u043B\u043E\u043C"
+        distance: 0.3
+        height: 34
+        focusHeight: 6
+        fieldOfView: 57
+        yawLimit: 30
+        downLimit: 10
+        upLimit: 10
+    cardDepth: 0.16
+    cardFoil: 0.22
+  ui:
+    schemaVersion: 1
+    fan:
+      radius: 1.7
+      spread: 116
+      maximumStep: 23
+      cardSize: {x: 174, y: 244}
+      uiUnitsPerMetre: 155
+      worldCardSize: {x: 1.05, y: 1.48}
+    arrow:
+      width: 7
+      headLength: 22
+      headWidth: 12
+      worldWidth: 0.045
+      worldHeadLength: 0.26
+      worldHeadWidth: 0.14
+      uiMaterial: 
+      worldMaterial: 
+      beginEffect: 
+      dragEffect: 
+      selectEffect: 
+      beginSound: 
+      dragSound: 
+      selectSound: 
+      effectScale: 0.2
+      effectLifetime: 1
+      color: {r: 0.97, g: 0.74, b: 0.36, a: 1}
+    healthSize: {x: 170, y: 26}
+    healthColor: {r: 0.3, g: 0.85, b: 0.76, a: 1}
+    healthTrailColor: {r: 1, g: 0.7, b: 0.25, a: 1}
+    healthUsesPlayerColor: 0
+    highlightMaterial: 
+    highlightColor: {r: 0.97, g: 0.74, b: 0.36, a: 1}
+  previewPlayers: 4
+  previewIndex: 0
+  previewHero: badger
+  previewAnchor: {fileID: 0}
+  table: {fileID: 0}

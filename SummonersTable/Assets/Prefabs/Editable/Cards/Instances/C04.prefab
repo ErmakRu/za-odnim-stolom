@@ -138,9 +138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5508621631403657562, guid: 88d2ee25808501a4f905868b9132ec8c, type: 3}
       propertyPath: definition.art
-      value: A friendly small purple horned demon wearing a headset, carefully repairing
-        floating magical letter-shaped abstract symbols with a wrench, no readable
-        letters
+      value: art:C04
       objectReference: {fileID: 0}
     - target: {fileID: 5508621631403657562, guid: 88d2ee25808501a4f905868b9132ec8c, type: 3}
       propertyPath: definition.qte

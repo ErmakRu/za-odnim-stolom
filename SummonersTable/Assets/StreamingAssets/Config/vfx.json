@@ -1,0 +1,159 @@
+{
+    "schemaVersion": 1,
+    "effects": [
+        {
+            "id": "S01",
+            "travel": "asset:c1b089cd69be38a478350cf07ffdafeb",
+            "impact": "asset:c462771765132ac4d9747f83645adb3b",
+            "persistent": "",
+            "motion": 0,
+            "cardCount": 2,
+            "travelScale": 0.20000000298023225,
+            "impactScale": 0.23999999463558198,
+            "persistentScale": 0.12999999523162843,
+            "travelSeconds": 0.550000011920929,
+            "lifetime": 1.7999999523162842,
+            "arc": 0.6499999761581421,
+            "cardSize": {
+                "x": 0.6499999761581421,
+                "y": 0.8500000238418579
+            }
+        },
+        {
+            "id": "S02",
+            "travel": "asset:7695acdb7fc539a4eb789ca501ffbdc2",
+            "impact": "asset:7695acdb7fc539a4eb789ca501ffbdc2",
+            "persistent": "",
+            "motion": 1,
+            "cardCount": 2,
+            "travelScale": 0.20000000298023225,
+            "impactScale": 0.2199999988079071,
+            "persistentScale": 0.12999999523162843,
+            "travelSeconds": 0.550000011920929,
+            "lifetime": 1.7999999523162842,
+            "arc": 0.6499999761581421,
+            "cardSize": {
+                "x": 0.6499999761581421,
+                "y": 0.8500000238418579
+            }
+        },
+        {
+            "id": "S03",
+            "travel": "asset:7426a981e95caa54696ba616dad53259",
+            "impact": "asset:20f44ec5f6606de49bb9cd293062373f",
+            "persistent": "",
+            "motion": 0,
+            "cardCount": 2,
+            "travelScale": 0.10999999940395355,
+            "impactScale": 0.3499999940395355,
+            "persistentScale": 0.12999999523162843,
+            "travelSeconds": 0.550000011920929,
+            "lifetime": 1.7999999523162842,
+            "arc": 0.6499999761581421,
+            "cardSize": {
+                "x": 0.6499999761581421,
+                "y": 0.8500000238418579
+            }
+        },
+        {
+            "id": "S04",
+            "travel": "asset:b96586514e9aa9f45bb18b74c3d83083",
+            "impact": "asset:b96586514e9aa9f45bb18b74c3d83083",
+            "persistent": "asset:b96586514e9aa9f45bb18b74c3d83083",
+            "motion": 1,
+            "cardCount": 2,
+            "travelScale": 0.20000000298023225,
+            "impactScale": 0.3499999940395355,
+            "persistentScale": 0.12999999523162843,
+            "travelSeconds": 0.550000011920929,
+            "lifetime": 1.7999999523162842,
+            "arc": 0.6499999761581421,
+            "cardSize": {
+                "x": 0.6499999761581421,
+                "y": 0.8500000238418579
+            }
+        },
+        {
+            "id": "S05",
+            "travel": "asset:95f649167560d8b44ab55084fc46f3ce",
+            "impact": "asset:57958bf70fedf7942afdb69b086bf34d",
+            "persistent": "",
+            "motion": 2,
+            "cardCount": 2,
+            "travelScale": 0.20000000298023225,
+            "impactScale": 0.3499999940395355,
+            "persistentScale": 0.12999999523162843,
+            "travelSeconds": 0.550000011920929,
+            "lifetime": 1.7999999523162842,
+            "arc": 0.6499999761581421,
+            "cardSize": {
+                "x": 0.6499999761581421,
+                "y": 0.8500000238418579
+            }
+        },
+        {
+            "id": "S06",
+            "travel": "asset:7426a981e95caa54696ba616dad53259",
+            "impact": "asset:7426a981e95caa54696ba616dad53259",
+            "persistent": "",
+            "motion": 3,
+            "cardCount": 2,
+            "travelScale": 0.20000000298023225,
+            "impactScale": 0.3499999940395355,
+            "persistentScale": 0.12999999523162843,
+            "travelSeconds": 0.550000011920929,
+            "lifetime": 1.7999999523162842,
+            "arc": 0.6499999761581421,
+            "cardSize": {
+                "x": 0.6499999761581421,
+                "y": 0.8500000238418579
+            }
+        },
+        {
+            "id": "S07",
+            "travel": "asset:7426a981e95caa54696ba616dad53259",
+            "impact": "asset:7426a981e95caa54696ba616dad53259",
+            "persistent": "",
+            "motion": 5,
+            "cardCount": 2,
+            "travelScale": 0.20000000298023225,
+            "impactScale": 0.3499999940395355,
+            "persistentScale": 0.12999999523162843,
+            "travelSeconds": 0.550000011920929,
+            "lifetime": 1.7999999523162842,
+            "arc": 0.6499999761581421,
+            "cardSize": {
+                "x": 0.6499999761581421,
+                "y": 0.8500000238418579
+            }
+        },
+        {
+            "id": "S08",
+            "travel": "asset:d65ba33f8b511d6448fbf3aaeabf0305",
+            "impact": "asset:d65ba33f8b511d6448fbf3aaeabf0305",
+            "persistent": "",
+            "motion": 4,
+            "cardCount": 2,
+            "travelScale": 0.20000000298023225,
+            "impactScale": 0.3499999940395355,
+            "persistentScale": 0.12999999523162843,
+            "travelSeconds": 0.550000011920929,
+            "lifetime": 1.7999999523162842,
+            "arc": 0.6499999761581421,
+            "cardSize": {
+                "x": 0.6499999761581421,
+                "y": 0.8500000238418579
+            }
+        }
+    ],
+    "attack": "asset:c1b089cd69be38a478350cf07ffdafeb",
+    "hit": "asset:20f44ec5f6606de49bb9cd293062373f",
+    "death": "asset:d65ba33f8b511d6448fbf3aaeabf0305",
+    "qteFire": "asset:c50bdb43edb3cbc46a8ec14a2f935284",
+    "qteSmoke": "asset:508a0848c6982fe47a6ec95074bc51ee",
+    "qteAttempt": "asset:2fdbd9517280ef741a40cb5f46c20e4c",
+    "motionTitle": "asset:042664d3bada9944ba1b1a609edc4fc4",
+    "attackScale": 0.30000001192092898,
+    "impactScale": 0.3499999940395355,
+    "qteScale": 0.41999998688697817
+}

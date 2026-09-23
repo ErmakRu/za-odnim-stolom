@@ -1,752 +1,759 @@
 {
-  "version": "0.5.0",
-  "title": "Арена призыва: За одним столом",
-  "rules": {
-    "heroHp": 30,
-    "deckSize": 30,
-    "startingHand": 5,
-    "handLimit": 8,
-    "boardSlots": 5,
-    "rounds": 1,
-    "roundWinPoints": 3,
-    "eliminationPoints": 1,
-    "turnSeconds": 45,
-    "revealSeconds": 2,
-    "qteMistakes": 3
-  },
-  "typeColors": [
-    {
-      "id": "creature",
-      "name": "Существо",
-      "hex": "#3FC5AD"
+    "version": "0.6.0",
+    "title": "Арена призыва: За одним столом",
+    "rules": {
+        "heroHp": 30,
+        "deckSize": 30,
+        "startingHand": 5,
+        "handLimit": 8,
+        "boardSlots": 5,
+        "rounds": 1,
+        "roundWinPoints": 3,
+        "eliminationPoints": 1,
+        "turnSeconds": 45,
+        "revealSeconds": 2,
+        "qteMistakes": 3
     },
-    {
-      "id": "spell",
-      "name": "Заклинание",
-      "hex": "#F0B354"
-    },
-    {
-      "id": "reaction",
-      "name": "Реакция",
-      "hex": "#AF9AF6"
-    }
-  ],
-  "roleColors": [
-    {
-      "name": "Защитник",
-      "hex": "#5D9CEB"
-    },
-    {
-      "name": "Лекарь",
-      "hex": "#78C66B"
-    },
-    {
-      "name": "Снабженец",
-      "hex": "#E5C85B"
-    },
-    {
-      "name": "Усилитель",
-      "hex": "#F49454"
-    },
-    {
-      "name": "Ритуалист",
-      "hex": "#6BD7D8"
-    },
-    {
-      "name": "Вредитель",
-      "hex": "#CF7CBF"
-    },
-    {
-      "name": "Провокатор",
-      "hex": "#EF7983"
-    }
-  ],
-  "cards": [
-    {
-      "id": "C01",
-      "name": "Енот-карманник",
-      "kind": "creature",
-      "faction": "Звери",
-      "role": "Снабженец",
-      "attack": 2,
-      "health": 3,
-      "qte": 3,
-      "effect": "spellDraw",
-      "value": 1,
-      "target": "enemy",
-      "rules": "Первое успешное заклинание в ваш ход: доберите 1 карту. Несколько таких эффектов дают не более 2 карт.",
-      "flavor": "Он просто проверял, хорошо ли лежит.",
-      "art": "A cheeky raccoon in an oversized wizard hood secretly pulling a glowing blank playing card from its sleeve, playful expression"
-    },
-    {
-      "id": "C02",
-      "name": "Медведь-обниматель",
-      "kind": "creature",
-      "faction": "Звери",
-      "role": "Защитник",
-      "attack": 3,
-      "health": 6,
-      "qte": 4,
-      "effect": "guard",
-      "value": 1,
-      "target": "enemy",
-      "rules": "Урон вашему герою от атак и заклинаний уменьшен на 1. Общая защита существ не выше 3; усталость не уменьшается.",
-      "flavor": "Обнимет крепко. Особенно огненный шар.",
-      "art": "A huge gentle brown bear in a knitted scarf hugging a tiny glowing fireball safely against its belly"
-    },
-    {
-      "id": "C03",
-      "name": "Боевой гусь",
-      "kind": "creature",
-      "faction": "Звери",
-      "role": "Усилитель",
-      "attack": 4,
-      "health": 3,
-      "qte": 4,
-      "effect": "attackAura",
-      "value": 1,
-      "target": "enemy",
-      "rules": "Другие ваши существа получают +1 к атаке, пока гусь на столе. Сумма таких усилений не выше +2.",
-      "flavor": "Мир был вариантом. Но не сегодня.",
-      "art": "An indignant white goose wearing a tiny crooked battle helmet, raising a wooden spoon like a commanding general"
-    },
-    {
-      "id": "C04",
-      "name": "Суккуб техподдержки",
-      "kind": "creature",
-      "faction": "Демоны",
-      "role": "Ритуалист",
-      "attack": 2,
-      "health": 4,
-      "qte": 3,
-      "effect": "forgive",
-      "value": 1,
-      "target": "enemy",
-      "rules": "Первый промах в каждом вашем QTE не считается ошибкой и не отнимает время. Эффект не складывается.",
-      "flavor": "Вы пробовали перепризвать?",
-      "art": "A friendly small purple horned demon wearing a headset, carefully repairing floating magical letter-shaped abstract symbols with a wrench, no readable letters"
-    },
-    {
-      "id": "C05",
-      "name": "Бес-бюрократ",
-      "kind": "creature",
-      "faction": "Демоны",
-      "role": "Вредитель",
-      "attack": 2,
-      "health": 4,
-      "qte": 3,
-      "effect": "qteExtra",
-      "value": 1,
-      "target": "enemy",
-      "rules": "QTE противников длиннее на 1 символ. Все подобные помехи вместе добавляют не более 2 символов.",
-      "flavor": "Ритуал принят. Приложите ещё один ритуал.",
-      "art": "A tiny red imp behind a mountain of blank parchment paperwork, stamping a glowing scroll with a comically enormous rubber stamp"
-    },
-    {
-      "id": "C06",
-      "name": "Демон-пожарник",
-      "kind": "creature",
-      "faction": "Демоны",
-      "role": "Провокатор",
-      "attack": 4,
-      "health": 4,
-      "qte": 4,
-      "effect": "thorns",
-      "value": 1,
-      "target": "enemy",
-      "rules": "Когда атака или заклинание противника наносит урон вашему герою, его герой получает 1 ответного урона. Максимум 2; ответный урон не вызывает новый ответ.",
-      "flavor": "Огонь на себя! А потом обратно.",
-      "art": "A round orange horned demon in a firefighter helmet holding a hose that sprays small harmless glowing sparks backwards"
-    },
-    {
-      "id": "C07",
-      "name": "Скелет-бухгалтер",
-      "kind": "creature",
-      "faction": "Нежить",
-      "role": "Снабженец",
-      "attack": 2,
-      "health": 4,
-      "qte": 3,
-      "effect": "turnDraw",
-      "value": 1,
-      "target": "enemy",
-      "rules": "В начале вашего хода доберите 1 дополнительную карту. Дополнительный добор от существ ограничен 2 картами.",
-      "flavor": "У него всё сходится. Кроме челюсти.",
-      "art": "A cheerful skeleton with round spectacles counting luminous playing cards on a wooden abacus, jaw slightly askew"
-    },
-    {
-      "id": "C08",
-      "name": "Вампир на диете",
-      "kind": "creature",
-      "faction": "Нежить",
-      "role": "Лекарь",
-      "attack": 3,
-      "health": 4,
-      "qte": 3,
-      "effect": "lifesteal",
-      "value": 1,
-      "target": "enemy",
-      "rules": "Когда ваше существо наносит урон вражескому герою, восстановите своему герою 1 HP. Не более 2 HP за одну атаку от всех таких эффектов.",
-      "flavor": "После шести только группа крови ноль.",
-      "art": "A bashful aristocratic cartoon vampire sipping red berry juice from a tiny cup through a curly straw, elegant cape"
-    },
-    {
-      "id": "C09",
-      "name": "Рыцарь последней смены",
-      "kind": "creature",
-      "faction": "Нежить",
-      "role": "Защитник",
-      "attack": 3,
-      "health": 6,
-      "qte": 4,
-      "effect": "guard",
-      "value": 1,
-      "target": "enemy",
-      "rules": "Урон вашему герою от атак и заклинаний уменьшен на 1. Общая защита существ не выше 3; усталость не уменьшается.",
-      "flavor": "Мёртвый, уставший, всё ещё на посту.",
-      "art": "A sleepy skeletal knight leaning on a broad dented shield with a cushion tied to it, warm friendly fantasy illustration"
-    },
-    {
-      "id": "C10",
-      "name": "Голем-подушка",
-      "kind": "creature",
-      "faction": "Механоиды",
-      "role": "Защитник",
-      "attack": 1,
-      "health": 7,
-      "qte": 4,
-      "effect": "guard",
-      "value": 2,
-      "target": "enemy",
-      "rules": "Урон вашему герою от атак и заклинаний уменьшен на 2. Общая защита существ не выше 3; усталость не уменьшается.",
-      "flavor": "Принимает удар. И вашу усталость.",
-      "art": "A stout magical stone golem entirely wrapped in colorful soft pillows, standing protectively with open arms"
-    },
-    {
-      "id": "C11",
-      "name": "Турель-комплиментатор",
-      "kind": "creature",
-      "faction": "Механоиды",
-      "role": "Усилитель",
-      "attack": 4,
-      "health": 3,
-      "qte": 4,
-      "effect": "spellPower",
-      "value": 1,
-      "target": "enemy",
-      "rules": "Ваши заклинания прямого и массового урона наносят на 1 больше. Общая прибавка не выше +2.",
-      "flavor": "Отличная осанка! Пли!",
-      "art": "A charming brass clockwork turret with an expressive lens eye and a little bow tie, firing bright confetti sparks"
-    },
-    {
-      "id": "C12",
-      "name": "Принтер заклинаний",
-      "kind": "creature",
-      "faction": "Механоиды",
-      "role": "Снабженец",
-      "attack": 2,
-      "health": 3,
-      "qte": 3,
-      "effect": "failDraw",
-      "value": 1,
-      "target": "enemy",
-      "rules": "После первого сорванного QTE в ваш ход доберите 1 карту. Несколько принтеров дают не более 2 карт.",
-      "flavor": "Замятие маны. Откройте крышку.",
-      "art": "A whimsical brass and wooden magical printer coughing out a tangled ribbon of blank glowing spell scrolls"
-    },
-    {
-      "id": "C13",
-      "name": "Дракон-стажёр",
-      "kind": "creature",
-      "faction": "Драконы",
-      "role": "Вредитель",
-      "attack": 4,
-      "health": 4,
-      "qte": 4,
-      "effect": "spellTax",
-      "value": 1,
-      "target": "enemy",
-      "rules": "После успешного заклинания противника его герой получает 1 урон. Общий штраф от таких существ не выше 2. Этот урон не вызывает ответных эффектов.",
-      "flavor": "Я только посмотреть. Ой, загорелось.",
-      "art": "A small clumsy teal dragon apprentice sneezing a tiny flame onto its own blank notebook, embarrassed cheerful expression"
-    },
-    {
-      "id": "C14",
-      "name": "Дракон-грелка",
-      "kind": "creature",
-      "faction": "Драконы",
-      "role": "Лекарь",
-      "attack": 3,
-      "health": 5,
-      "qte": 4,
-      "effect": "turnHeal",
-      "value": 2,
-      "target": "enemy",
-      "rules": "В начале вашего хода восстановите герою 2 HP. Все такие существа вместе лечат не более 4 HP за ход.",
-      "flavor": "Тридцать градусов заботы.",
-      "art": "A plump friendly coral dragon curled around a warm teapot and knitted blanket, comforting golden glow"
-    },
-    {
-      "id": "C15",
-      "name": "Дракон-фанат",
-      "kind": "creature",
-      "faction": "Драконы",
-      "role": "Усилитель",
-      "attack": 3,
-      "health": 4,
-      "qte": 3,
-      "effect": "openingPower",
-      "value": 1,
-      "target": "enemy",
-      "rules": "Первая атака ваших разыгрываемых существ наносит на 1 больше урона. Общая прибавка не выше +2.",
-      "flavor": "Лучший призыв! Ещё! Ещё!",
-      "art": "An enthusiastic little emerald dragon waving two oversized foam cheering hands beside a magical summoning circle"
-    },
-    {
-      "id": "C16",
-      "name": "Дух дедлайна",
-      "kind": "creature",
-      "faction": "Духи",
-      "role": "Вредитель",
-      "attack": 3,
-      "health": 3,
-      "qte": 3,
-      "effect": "timeTax",
-      "value": 2,
-      "target": "enemy",
-      "rules": "У противников на QTE на 2 секунды меньше. Общий штраф не выше 4 секунд; итоговый таймер не короче 6 секунд.",
-      "flavor": "Надо было призвать вчера.",
-      "art": "A mischievous translucent violet ghost emerging from an oversized hourglass, pointing impatiently at a tiny pocket watch with no numerals"
-    },
-    {
-      "id": "C17",
-      "name": "Дух аптечки",
-      "kind": "creature",
-      "faction": "Духи",
-      "role": "Лекарь",
-      "attack": 2,
-      "health": 5,
-      "qte": 3,
-      "effect": "turnHeal",
-      "value": 2,
-      "target": "enemy",
-      "rules": "В начале вашего хода восстановите герою 2 HP. Все такие существа вместе лечат не более 4 HP за ход.",
-      "flavor": "На рану подуем, само пройдёт.",
-      "art": "A gentle mint-green floating spirit carrying a small satchel of bandages and glowing medicinal leaves, friendly smile, no medical cross logo"
-    },
-    {
-      "id": "C18",
-      "name": "Призрак подсказки",
-      "kind": "creature",
-      "faction": "Духи",
-      "role": "Ритуалист",
-      "attack": 2,
-      "health": 4,
-      "qte": 3,
-      "effect": "timeBonus",
-      "value": 2,
-      "target": "enemy",
-      "rules": "Ваши QTE получают +2 секунды. Несколько таких эффектов дают не более +4 секунд.",
-      "flavor": "Я бы нажал вот эту. Но рук нет.",
-      "art": "A curious pale blue friendly ghost peeking over a floating enchanted keyboard with blank keys and a softly glowing helpful fingertip"
-    },
-    {
-      "id": "S01",
-      "name": "Огненный чих",
-      "kind": "spell",
-      "faction": "",
-      "role": "",
-      "attack": 0,
-      "health": 0,
-      "qte": 3,
-      "effect": "damage",
-      "value": 4,
-      "target": "enemy",
-      "rules": "Нанесите 4 урона выбранному вражескому герою или существу.",
-      "flavor": "Будьте здоровы. Остальные - как получится.",
-      "art": "A comic burst of orange magical flame shaped like an enormous sneeze, a tiny crumpled handkerchief flying away"
-    },
-    {
-      "id": "S02",
-      "name": "Обнимашки по расписанию",
-      "kind": "spell",
-      "faction": "",
-      "role": "",
-      "attack": 0,
-      "health": 0,
-      "qte": 3,
-      "effect": "heal",
-      "value": 5,
-      "target": "hero",
-      "rules": "Восстановите выбранному живому герою 5 HP, не выше 30. Можно помочь противнику.",
-      "flavor": "Пять единиц заботы, без очереди.",
-      "art": "Two oversized glowing friendly magical hands gently embracing a small heart-shaped amber light"
-    },
-    {
-      "id": "S03",
-      "name": "Всем по крошке",
-      "kind": "spell",
-      "faction": "",
-      "role": "",
-      "attack": 0,
-      "health": 0,
-      "qte": 4,
-      "effect": "areaDamage",
-      "value": 2,
-      "target": "none",
-      "rules": "Нанесите каждому живому вражескому герою 2 урона. Защита и реакции применяются отдельно к каждому.",
-      "flavor": "Делить надо поровну. Даже неприятности.",
-      "art": "A mischievous enchanted pie bursting into several little glowing crumbs flying in different directions, playful magical explosion"
-    },
-    {
-      "id": "S04",
-      "name": "Технический перерыв",
-      "kind": "spell",
-      "faction": "",
-      "role": "",
-      "attack": 0,
-      "health": 0,
-      "qte": 3,
-      "effect": "stun",
-      "value": 1,
-      "target": "enemyUnit",
-      "rules": "Выбранное вражеское существо пропускает следующую атаку в конце хода. Его постоянный эффект продолжает работать.",
-      "flavor": "Существо отошло на пять минуточек.",
-      "art": "An enchanted battle helmet resting on a tiny deckchair beside a steaming mug, an abstract magical pause symbol formed from two glowing bars"
-    },
-    {
-      "id": "S05",
-      "name": "Карманная перестановка",
-      "kind": "spell",
-      "faction": "",
-      "role": "",
-      "attack": 0,
-      "health": 0,
-      "qte": 4,
-      "effect": "swap",
-      "value": 1,
-      "target": "enemyHero",
-      "rules": "Обменяйте случайную карту своей руки на случайную карту выбранного противника. Для розыгрыша у обоих должна оставаться карта для обмена.",
-      "flavor": "У тебя было лучше. Теперь спорный вопрос.",
-      "art": "Two mischievous magical gloved hands exchanging colorful face-down cards inside a swirling circular portal"
-    },
-    {
-      "id": "S06",
-      "name": "Чужой конспект",
-      "kind": "spell",
-      "faction": "",
-      "role": "",
-      "attack": 0,
-      "health": 0,
-      "qte": 3,
-      "effect": "draw",
-      "value": 2,
-      "target": "self",
-      "rules": "Доберите 2 карты. Всё сверх лимита руки в 8 карт сгорает.",
-      "flavor": "Почерк непонятный. Магия рабочая.",
-      "art": "A battered open spell notebook with abstract glowing doodles and two blank playing cards rising out of its pages, no readable writing"
-    },
-    {
-      "id": "S07",
-      "name": "Слабо ещё две?",
-      "kind": "spell",
-      "faction": "",
-      "role": "",
-      "attack": 0,
-      "health": 0,
-      "qte": 2,
-      "effect": "riskBoost",
-      "value": 3,
-      "target": "self",
-      "rules": "Ваше следующее существо в этот ход получает +2 символа к QTE и +3 урона к первой атаке в конце хода. Усиление одноразовое, действует только в этот ход и не складывается.",
-      "flavor": "Последние слова уверенного мага.",
-      "art": "Two extra luminous blank keyboard keys balanced daringly on top of a wobbling magical tower, energetic amber sparks"
-    },
-    {
-      "id": "S08",
-      "name": "Вы ошиблись столиком",
-      "kind": "spell",
-      "faction": "",
-      "role": "",
-      "attack": 0,
-      "health": 0,
-      "qte": 4,
-      "effect": "bounce",
-      "value": 1,
-      "target": "unit",
-      "rules": "Верните выбранное существо в руку его владельца. Его постоянный эффект сразу исчезает. При полной руке карта сгорает.",
-      "flavor": "Ваш ритуал в соседнем зале.",
-      "art": "A tiny bewildered friendly summoned creature sliding backwards through a round purple return portal while holding a dinner reservation card without text"
-    },
-    {
-      "id": "R01",
-      "name": "Я вообще мимо",
-      "kind": "reaction",
-      "faction": "",
-      "role": "",
-      "attack": 0,
-      "health": 0,
-      "qte": 0,
-      "effect": "reduce",
-      "value": 3,
-      "target": "pending",
-      "rules": "Во время розыгрыша чужого заклинания: уменьшите урон этой карты вам либо вашему существу на 3. Не действует на обычные атаки со стола и усталость.",
-      "flavor": "Меня здесь даже нарисовали случайно.",
-      "art": "A comical wizard-shaped empty coat sidestepping a glowing orange magic bolt, the coat flapping with exaggerated movement"
-    },
-    {
-      "id": "R02",
-      "name": "Мне такого же!",
-      "kind": "reaction",
-      "faction": "",
-      "role": "",
-      "attack": 0,
-      "health": 0,
-      "qte": 0,
-      "effect": "copySummon",
-      "value": 1,
-      "target": "pending",
-      "rules": "На чужой призыв: после успешного QTE создайте копию существа в слоте с тем же номером у себя. Слот должен быть свободен. Копия не атакует до вашего хода; её постоянный эффект работает сразу. При срыве QTE копии нет.",
-      "flavor": "Повторите заказ. Особенно рога.",
-      "art": "Two friendly magical hands conjuring a small duplicate of a cheerful creature in matching glowing circles"
-    },
-    {
-      "id": "R03",
-      "name": "Заходи в другой раз",
-      "kind": "reaction",
-      "faction": "",
-      "role": "",
-      "attack": 0,
-      "health": 0,
-      "qte": 0,
-      "effect": "returnSummon",
-      "value": 1,
-      "target": "pending",
-      "rules": "На чужой призыв: после успешного QTE верните разыгранную карту владельцу в руку. При полной руке она сгорает. Уже созданные копии остаются. При срыве QTE действует обычная передача карты сопернику.",
-      "flavor": "Столик ещё не освободился.",
-      "art": "A cheeky enchanted hand mirror returning a bewildered small summoned creature along a curved trail of pink sparks"
-    },
-    {
-      "id": "R04",
-      "name": "Руки прочь",
-      "kind": "reaction",
-      "faction": "",
-      "role": "",
-      "attack": 0,
-      "health": 0,
-      "qte": 0,
-      "effect": "deny",
-      "value": 1,
-      "target": "pending",
-      "rules": "Во время розыгрыша вражеского заклинания: отмените его эффект для вас или вашего существа. Не отменяет призыв, атаки существ, добор и усиления самого заклинателя.",
-      "flavor": "Это моё. Даже если мне не нравится.",
-      "art": "A small assertive purple magical stop-hand shielding a glowing playing card from sneaky fingers, no letters or text"
-    }
-  ],
-  "decks": [
-    {
-      "id": "noise",
-      "name": "Шумная компания",
-      "subtitle": "Давление, усиления, возврат призывов",
-      "guide": "Начните с существа и не отдавайте стол без борьбы. Усилители увеличивают урон следующих карт. Слабо ещё две? разыгрывайте до существа, когда уверены в QTE. Выбирайте между атакой героя и устранением опасного постоянного эффекта.",
-      "entries": [
+    "cards": [
         {
-          "cardId": "C03",
-          "count": 3
+            "id": "C01",
+            "name": "Енот-карманник",
+            "kind": "creature",
+            "faction": "Звери",
+            "role": "Снабженец",
+            "effect": "spellDraw",
+            "target": "enemy",
+            "rules": "Первое успешное заклинание в ваш ход: доберите 1 карту. Несколько таких эффектов дают не более 2 карт.",
+            "flavor": "Он просто проверял, хорошо ли лежит.",
+            "art": "A cheeky raccoon in an oversized wizard hood secretly pulling a glowing blank playing card from its sleeve, playful expression",
+            "attack": 2,
+            "health": 3,
+            "qte": 3,
+            "value": 1
         },
         {
-          "cardId": "C06",
-          "count": 3
+            "id": "C02",
+            "name": "Медведь-обниматель",
+            "kind": "creature",
+            "faction": "Звери",
+            "role": "Защитник",
+            "effect": "guard",
+            "target": "enemy",
+            "rules": "Урон вашему герою от атак и заклинаний уменьшен на 1. Общая защита существ не выше 2; усталость не уменьшается.",
+            "flavor": "Обнимет крепко. Особенно огненный шар.",
+            "art": "A huge gentle brown bear in a knitted scarf hugging a tiny glowing fireball safely against its belly",
+            "attack": 3,
+            "health": 6,
+            "qte": 4,
+            "value": 1
         },
         {
-          "cardId": "C09",
-          "count": 3
+            "id": "C03",
+            "name": "Боевой гусь",
+            "kind": "creature",
+            "faction": "Звери",
+            "role": "Усилитель",
+            "effect": "attackAura",
+            "target": "enemy",
+            "rules": "Другие ваши существа получают +1 к атаке, пока гусь на столе. Сумма таких усилений не выше +2.",
+            "flavor": "Мир был вариантом. Но не сегодня.",
+            "art": "An indignant white goose wearing a tiny crooked battle helmet, raising a wooden spoon like a commanding general",
+            "attack": 4,
+            "health": 3,
+            "qte": 4,
+            "value": 1
         },
         {
-          "cardId": "C11",
-          "count": 2
+            "id": "C04",
+            "name": "Суккуб техподдержки",
+            "kind": "creature",
+            "faction": "Демоны",
+            "role": "Ритуалист",
+            "effect": "forgive",
+            "target": "enemy",
+            "rules": "Первый промах в каждом вашем QTE не считается ошибкой и не отнимает время. Эффект не складывается.",
+            "flavor": "Вы пробовали перепризвать?",
+            "art": "A friendly small purple horned demon wearing a headset, carefully repairing floating magical letter-shaped abstract symbols with a wrench, no readable letters",
+            "attack": 2,
+            "health": 4,
+            "qte": 3,
+            "value": 1
         },
         {
-          "cardId": "C13",
-          "count": 2
+            "id": "C05",
+            "name": "Бес-бюрократ",
+            "kind": "creature",
+            "faction": "Демоны",
+            "role": "Вредитель",
+            "effect": "qteExtra",
+            "target": "enemy",
+            "rules": "QTE противников длиннее на 1 символ. Все подобные помехи вместе добавляют не более 2 символов.",
+            "flavor": "Ритуал принят. Приложите ещё один ритуал.",
+            "art": "A tiny red imp behind a mountain of blank parchment paperwork, stamping a glowing scroll with a comically enormous rubber stamp",
+            "attack": 2,
+            "health": 4,
+            "qte": 3,
+            "value": 1
         },
         {
-          "cardId": "C15",
-          "count": 2
+            "id": "C06",
+            "name": "Демон-пожарник",
+            "kind": "creature",
+            "faction": "Демоны",
+            "role": "Провокатор",
+            "effect": "thorns",
+            "target": "enemy",
+            "rules": "Когда атака или заклинание противника наносит урон вашему герою, его герой получает 1 ответного урона. Максимум 2; ответный урон не вызывает новый ответ.",
+            "flavor": "Огонь на себя! А потом обратно.",
+            "art": "A round orange horned demon in a firefighter helmet holding a hose that sprays small harmless glowing sparks backwards",
+            "attack": 4,
+            "health": 4,
+            "qte": 4,
+            "value": 1
         },
         {
-          "cardId": "S01",
-          "count": 2
+            "id": "C07",
+            "name": "Скелет-бухгалтер",
+            "kind": "creature",
+            "faction": "Нежить",
+            "role": "Снабженец",
+            "effect": "turnDraw",
+            "target": "enemy",
+            "rules": "В начале вашего хода доберите 1 дополнительную карту. Дополнительный добор от существ ограничен 2 картами.",
+            "flavor": "У него всё сходится. Кроме челюсти.",
+            "art": "A cheerful skeleton with round spectacles counting luminous playing cards on a wooden abacus, jaw slightly askew",
+            "attack": 2,
+            "health": 4,
+            "qte": 3,
+            "value": 1
         },
         {
-          "cardId": "S03",
-          "count": 2
+            "id": "C08",
+            "name": "Вампир на диете",
+            "kind": "creature",
+            "faction": "Нежить",
+            "role": "Лекарь",
+            "effect": "lifesteal",
+            "target": "enemy",
+            "rules": "Когда ваше существо наносит урон вражескому герою, восстановите своему герою 1 HP. Не более 2 HP за одну атаку от всех таких эффектов.",
+            "flavor": "После шести только группа крови ноль.",
+            "art": "A bashful aristocratic cartoon vampire sipping red berry juice from a tiny cup through a curly straw, elegant cape",
+            "attack": 3,
+            "health": 4,
+            "qte": 3,
+            "value": 1
         },
         {
-          "cardId": "S04",
-          "count": 2
+            "id": "C09",
+            "name": "Рыцарь последней смены",
+            "kind": "creature",
+            "faction": "Нежить",
+            "role": "Защитник",
+            "effect": "guard",
+            "target": "enemy",
+            "rules": "Урон вашему герою от атак и заклинаний уменьшен на 1. Общая защита существ не выше 2; усталость не уменьшается.",
+            "flavor": "Мёртвый, уставший, всё ещё на посту.",
+            "art": "A sleepy skeletal knight leaning on a broad dented shield with a cushion tied to it, warm friendly fantasy illustration",
+            "attack": 3,
+            "health": 6,
+            "qte": 4,
+            "value": 1
         },
         {
-          "cardId": "S06",
-          "count": 2
+            "id": "C10",
+            "name": "Голем-подушка",
+            "kind": "creature",
+            "faction": "Механоиды",
+            "role": "Защитник",
+            "effect": "guard",
+            "target": "enemy",
+            "rules": "Урон вашему герою от атак и заклинаний уменьшен на 2. Общая защита существ не выше 2; усталость не уменьшается.",
+            "flavor": "Принимает удар. И вашу усталость.",
+            "art": "A stout magical stone golem entirely wrapped in colorful soft pillows, standing protectively with open arms",
+            "attack": 1,
+            "health": 7,
+            "qte": 4,
+            "value": 2
         },
         {
-          "cardId": "S07",
-          "count": 2
+            "id": "C11",
+            "name": "Турель-комплиментатор",
+            "kind": "creature",
+            "faction": "Механоиды",
+            "role": "Усилитель",
+            "effect": "spellPower",
+            "target": "enemy",
+            "rules": "Ваши заклинания прямого и массового урона наносят на 1 больше. Общая прибавка не выше +2.",
+            "flavor": "Отличная осанка! Пли!",
+            "art": "A charming brass clockwork turret with an expressive lens eye and a little bow tie, firing bright confetti sparks",
+            "attack": 4,
+            "health": 3,
+            "qte": 4,
+            "value": 1
         },
         {
-          "cardId": "S08",
-          "count": 2
+            "id": "C12",
+            "name": "Принтер заклинаний",
+            "kind": "creature",
+            "faction": "Механоиды",
+            "role": "Снабженец",
+            "effect": "failDraw",
+            "target": "enemy",
+            "rules": "После первого сорванного QTE в ваш ход доберите 1 карту. Несколько принтеров дают не более 2 карт.",
+            "flavor": "Замятие маны. Откройте крышку.",
+            "art": "A whimsical brass and wooden magical printer coughing out a tangled ribbon of blank glowing spell scrolls",
+            "attack": 2,
+            "health": 3,
+            "qte": 3,
+            "value": 1
         },
         {
-          "cardId": "R01",
-          "count": 1
+            "id": "C13",
+            "name": "Дракон-стажёр",
+            "kind": "creature",
+            "faction": "Драконы",
+            "role": "Вредитель",
+            "effect": "spellTax",
+            "target": "enemy",
+            "rules": "После успешного заклинания противника его герой получает 1 урон. Общий штраф от таких существ не выше 2. Этот урон не вызывает ответных эффектов.",
+            "flavor": "Я только посмотреть. Ой, загорелось.",
+            "art": "A small clumsy teal dragon apprentice sneezing a tiny flame onto its own blank notebook, embarrassed cheerful expression",
+            "attack": 4,
+            "health": 4,
+            "qte": 4,
+            "value": 1
         },
         {
-          "cardId": "R03",
-          "count": 1
+            "id": "C14",
+            "name": "Дракон-грелка",
+            "kind": "creature",
+            "faction": "Драконы",
+            "role": "Лекарь",
+            "effect": "turnHeal",
+            "target": "enemy",
+            "rules": "В начале вашего хода восстановите герою 2 HP. Все такие существа вместе лечат не более 4 HP за ход.",
+            "flavor": "Тридцать градусов заботы.",
+            "art": "A plump friendly coral dragon curled around a warm teapot and knitted blanket, comforting golden glow",
+            "attack": 3,
+            "health": 5,
+            "qte": 4,
+            "value": 2
         },
         {
-          "cardId": "R04",
-          "count": 1
+            "id": "C15",
+            "name": "Дракон-фанат",
+            "kind": "creature",
+            "faction": "Драконы",
+            "role": "Усилитель",
+            "effect": "openingPower",
+            "target": "enemy",
+            "rules": "Первая атака ваших разыгрываемых существ наносит на 1 больше урона. Общая прибавка не выше +2.",
+            "flavor": "Лучший призыв! Ещё! Ещё!",
+            "art": "An enthusiastic little emerald dragon waving two oversized foam cheering hands beside a magical summoning circle",
+            "attack": 3,
+            "health": 4,
+            "qte": 3,
+            "value": 1
+        },
+        {
+            "id": "C16",
+            "name": "Дух дедлайна",
+            "kind": "creature",
+            "faction": "Духи",
+            "role": "Вредитель",
+            "effect": "timeTax",
+            "target": "enemy",
+            "rules": "У противников на QTE на 2 секунды меньше. Общий штраф не выше 4 секунд; итоговый таймер не короче 6 секунд.",
+            "flavor": "Надо было призвать вчера.",
+            "art": "A mischievous translucent violet ghost emerging from an oversized hourglass, pointing impatiently at a tiny pocket watch with no numerals",
+            "attack": 3,
+            "health": 3,
+            "qte": 3,
+            "value": 2
+        },
+        {
+            "id": "C17",
+            "name": "Дух аптечки",
+            "kind": "creature",
+            "faction": "Духи",
+            "role": "Лекарь",
+            "effect": "turnHeal",
+            "target": "enemy",
+            "rules": "В начале вашего хода восстановите герою 2 HP. Все такие существа вместе лечат не более 4 HP за ход.",
+            "flavor": "На рану подуем, само пройдёт.",
+            "art": "A gentle mint-green floating spirit carrying a small satchel of bandages and glowing medicinal leaves, friendly smile, no medical cross logo",
+            "attack": 2,
+            "health": 5,
+            "qte": 3,
+            "value": 2
+        },
+        {
+            "id": "C18",
+            "name": "Призрак подсказки",
+            "kind": "creature",
+            "faction": "Духи",
+            "role": "Ритуалист",
+            "effect": "timeBonus",
+            "target": "enemy",
+            "rules": "Ваши QTE получают +2 секунды. Несколько таких эффектов дают не более +4 секунд.",
+            "flavor": "Я бы нажал вот эту. Но рук нет.",
+            "art": "A curious pale blue friendly ghost peeking over a floating enchanted keyboard with blank keys and a softly glowing helpful fingertip",
+            "attack": 2,
+            "health": 4,
+            "qte": 3,
+            "value": 2
+        },
+        {
+            "id": "S01",
+            "name": "Огненный чих",
+            "kind": "spell",
+            "faction": "",
+            "role": "",
+            "effect": "damage",
+            "target": "enemy",
+            "rules": "Нанесите 4 урона выбранному вражескому герою или существу.",
+            "flavor": "Будьте здоровы. Остальные - как получится.",
+            "art": "A comic burst of orange magical flame shaped like an enormous sneeze, a tiny crumpled handkerchief flying away",
+            "attack": 0,
+            "health": 0,
+            "qte": 3,
+            "value": 4
+        },
+        {
+            "id": "S02",
+            "name": "Обнимашки по расписанию",
+            "kind": "spell",
+            "faction": "",
+            "role": "",
+            "effect": "heal",
+            "target": "hero",
+            "rules": "Восстановите выбранному живому герою 5 HP, не выше 30. Можно помочь противнику.",
+            "flavor": "Пять единиц заботы, без очереди.",
+            "art": "Two oversized glowing friendly magical hands gently embracing a small heart-shaped amber light",
+            "attack": 0,
+            "health": 0,
+            "qte": 3,
+            "value": 5
+        },
+        {
+            "id": "S03",
+            "name": "Всем по крошке",
+            "kind": "spell",
+            "faction": "",
+            "role": "",
+            "effect": "areaDamage",
+            "target": "none",
+            "rules": "Нанесите каждому живому вражескому герою 2 урона. Защита и реакции применяются отдельно к каждому.",
+            "flavor": "Делить надо поровну. Даже неприятности.",
+            "art": "A mischievous enchanted pie bursting into several little glowing crumbs flying in different directions, playful magical explosion",
+            "attack": 0,
+            "health": 0,
+            "qte": 4,
+            "value": 2
+        },
+        {
+            "id": "S04",
+            "name": "Технический перерыв",
+            "kind": "spell",
+            "faction": "",
+            "role": "",
+            "effect": "stun",
+            "target": "enemyUnit",
+            "rules": "Выбранное вражеское существо пропускает следующую атаку в конце хода. Его постоянный эффект продолжает работать.",
+            "flavor": "Существо отошло на пять минуточек.",
+            "art": "An enchanted battle helmet resting on a tiny deckchair beside a steaming mug, an abstract magical pause symbol formed from two glowing bars",
+            "attack": 0,
+            "health": 0,
+            "qte": 3,
+            "value": 1
+        },
+        {
+            "id": "S05",
+            "name": "Карманная перестановка",
+            "kind": "spell",
+            "faction": "",
+            "role": "",
+            "effect": "swap",
+            "target": "enemyHero",
+            "rules": "Обменяйте случайную карту своей руки на случайную карту выбранного противника. Для розыгрыша у обоих должна оставаться карта для обмена.",
+            "flavor": "У тебя было лучше. Теперь спорный вопрос.",
+            "art": "Two mischievous magical gloved hands exchanging colorful face-down cards inside a swirling circular portal",
+            "attack": 0,
+            "health": 0,
+            "qte": 4,
+            "value": 1
+        },
+        {
+            "id": "S06",
+            "name": "Чужой конспект",
+            "kind": "spell",
+            "faction": "",
+            "role": "",
+            "effect": "draw",
+            "target": "self",
+            "rules": "Доберите 2 карты. Всё сверх лимита руки в 8 карт сгорает.",
+            "flavor": "Почерк непонятный. Магия рабочая.",
+            "art": "A battered open spell notebook with abstract glowing doodles and two blank playing cards rising out of its pages, no readable writing",
+            "attack": 0,
+            "health": 0,
+            "qte": 3,
+            "value": 2
+        },
+        {
+            "id": "S07",
+            "name": "Слабо ещё две?",
+            "kind": "spell",
+            "faction": "",
+            "role": "",
+            "effect": "riskBoost",
+            "target": "self",
+            "rules": "Ваше следующее существо в этот ход получает +2 символа к QTE и +3 урона к первой атаке в конце хода. Усиление одноразовое, действует только в этот ход и не складывается.",
+            "flavor": "Последние слова уверенного мага.",
+            "art": "Two extra luminous blank keyboard keys balanced daringly on top of a wobbling magical tower, energetic amber sparks",
+            "attack": 0,
+            "health": 0,
+            "qte": 2,
+            "value": 3
+        },
+        {
+            "id": "S08",
+            "name": "Вы ошиблись столиком",
+            "kind": "spell",
+            "faction": "",
+            "role": "",
+            "effect": "bounce",
+            "target": "unit",
+            "rules": "Верните выбранное существо в руку его владельца. Его постоянный эффект сразу исчезает. При полной руке карта сгорает.",
+            "flavor": "Ваш ритуал в соседнем зале.",
+            "art": "A tiny bewildered friendly summoned creature sliding backwards through a round purple return portal while holding a dinner reservation card without text",
+            "attack": 0,
+            "health": 0,
+            "qte": 4,
+            "value": 1
+        },
+        {
+            "id": "R01",
+            "name": "Я вообще мимо",
+            "kind": "reaction",
+            "faction": "",
+            "role": "",
+            "effect": "reduce",
+            "target": "pending",
+            "rules": "Во время розыгрыша чужого заклинания: уменьшите урон этой карты вам либо вашему существу на 3. Не действует на обычные атаки со стола и усталость.",
+            "flavor": "Меня здесь даже нарисовали случайно.",
+            "art": "A comical wizard-shaped empty coat sidestepping a glowing orange magic bolt, the coat flapping with exaggerated movement",
+            "attack": 0,
+            "health": 0,
+            "qte": 0,
+            "value": 3
+        },
+        {
+            "id": "R02",
+            "name": "Мне такого же!",
+            "kind": "reaction",
+            "faction": "",
+            "role": "",
+            "effect": "copySummon",
+            "target": "pending",
+            "rules": "На чужой призыв: после успешного QTE создайте копию существа в слоте с тем же номером у себя. Слот должен быть свободен. Копия не атакует до вашего хода; её постоянный эффект работает сразу. При срыве QTE копии нет.",
+            "flavor": "Повторите заказ. Особенно рога.",
+            "art": "Two friendly magical hands conjuring a small duplicate of a cheerful creature in matching glowing circles",
+            "attack": 0,
+            "health": 0,
+            "qte": 0,
+            "value": 1
+        },
+        {
+            "id": "R03",
+            "name": "Заходи в другой раз",
+            "kind": "reaction",
+            "faction": "",
+            "role": "",
+            "effect": "returnSummon",
+            "target": "pending",
+            "rules": "На чужой призыв: после успешного QTE верните разыгранную карту владельцу в руку. При полной руке она сгорает. Уже созданные копии остаются. При срыве QTE действует обычная передача карты сопернику.",
+            "flavor": "Столик ещё не освободился.",
+            "art": "A cheeky enchanted hand mirror returning a bewildered small summoned creature along a curved trail of pink sparks",
+            "attack": 0,
+            "health": 0,
+            "qte": 0,
+            "value": 1
+        },
+        {
+            "id": "R04",
+            "name": "Руки прочь",
+            "kind": "reaction",
+            "faction": "",
+            "role": "",
+            "effect": "deny",
+            "target": "pending",
+            "rules": "Во время розыгрыша вражеского заклинания: отмените его эффект для вас или вашего существа. Не отменяет призыв, атаки существ, добор и усиления самого заклинателя.",
+            "flavor": "Это моё. Даже если мне не нравится.",
+            "art": "A small assertive purple magical stop-hand shielding a glowing playing card from sneaky fingers, no letters or text",
+            "attack": 0,
+            "health": 0,
+            "qte": 0,
+            "value": 1
         }
-      ]
-    },
-    {
-      "id": "cozy",
-      "name": "Живём дальше",
-      "subtitle": "Защита, лечение, спокойные ритуалы",
-      "guide": "Поставьте защитника, затем источник лечения. Сохраняйте реакции для большого урона и защищайте полезных существ. Лечение можно направлять сопернику ради временного союза. Вы ошиблись столиком убирает опасные эффекты или спасает вашего бойца.",
-      "entries": [
+    ],
+    "decks": [
         {
-          "cardId": "C02",
-          "count": 3
+            "id": "noise",
+            "name": "Шумная компания",
+            "subtitle": "Давление, усиления, возврат призывов",
+            "guide": "Начните с существа и не отдавайте стол без борьбы. Усилители увеличивают урон следующих карт. Слабо ещё две? разыгрывайте до существа, когда уверены в QTE. Выбирайте между атакой героя и устранением опасного постоянного эффекта.",
+            "entries": [
+                {
+                    "cardId": "C03",
+                    "count": 3
+                },
+                {
+                    "cardId": "C06",
+                    "count": 3
+                },
+                {
+                    "cardId": "C09",
+                    "count": 3
+                },
+                {
+                    "cardId": "C11",
+                    "count": 2
+                },
+                {
+                    "cardId": "C13",
+                    "count": 2
+                },
+                {
+                    "cardId": "C15",
+                    "count": 2
+                },
+                {
+                    "cardId": "S01",
+                    "count": 2
+                },
+                {
+                    "cardId": "S03",
+                    "count": 2
+                },
+                {
+                    "cardId": "S04",
+                    "count": 2
+                },
+                {
+                    "cardId": "S06",
+                    "count": 2
+                },
+                {
+                    "cardId": "S07",
+                    "count": 2
+                },
+                {
+                    "cardId": "S08",
+                    "count": 2
+                },
+                {
+                    "cardId": "R01",
+                    "count": 1
+                },
+                {
+                    "cardId": "R03",
+                    "count": 1
+                },
+                {
+                    "cardId": "R04",
+                    "count": 1
+                }
+            ]
         },
         {
-          "cardId": "C08",
-          "count": 3
+            "id": "cozy",
+            "name": "Живём дальше",
+            "subtitle": "Защита, лечение, спокойные ритуалы",
+            "guide": "Поставьте защитника, затем источник лечения. Сохраняйте реакции для большого урона и защищайте полезных существ. Лечение можно направлять сопернику ради временного союза. Вы ошиблись столиком убирает опасные эффекты или спасает вашего бойца.",
+            "entries": [
+                {
+                    "cardId": "C02",
+                    "count": 3
+                },
+                {
+                    "cardId": "C08",
+                    "count": 3
+                },
+                {
+                    "cardId": "C10",
+                    "count": 3
+                },
+                {
+                    "cardId": "C14",
+                    "count": 2
+                },
+                {
+                    "cardId": "C17",
+                    "count": 2
+                },
+                {
+                    "cardId": "C18",
+                    "count": 2
+                },
+                {
+                    "cardId": "S01",
+                    "count": 2
+                },
+                {
+                    "cardId": "S02",
+                    "count": 2
+                },
+                {
+                    "cardId": "S03",
+                    "count": 2
+                },
+                {
+                    "cardId": "S04",
+                    "count": 2
+                },
+                {
+                    "cardId": "S06",
+                    "count": 2
+                },
+                {
+                    "cardId": "S08",
+                    "count": 2
+                },
+                {
+                    "cardId": "R01",
+                    "count": 1
+                },
+                {
+                    "cardId": "R02",
+                    "count": 1
+                },
+                {
+                    "cardId": "R04",
+                    "count": 1
+                }
+            ]
         },
         {
-          "cardId": "C10",
-          "count": 3
-        },
-        {
-          "cardId": "C14",
-          "count": 2
-        },
-        {
-          "cardId": "C17",
-          "count": 2
-        },
-        {
-          "cardId": "C18",
-          "count": 2
-        },
-        {
-          "cardId": "S01",
-          "count": 2
-        },
-        {
-          "cardId": "S02",
-          "count": 2
-        },
-        {
-          "cardId": "S03",
-          "count": 2
-        },
-        {
-          "cardId": "S04",
-          "count": 2
-        },
-        {
-          "cardId": "S06",
-          "count": 2
-        },
-        {
-          "cardId": "S08",
-          "count": 2
-        },
-        {
-          "cardId": "R01",
-          "count": 1
-        },
-        {
-          "cardId": "R02",
-          "count": 1
-        },
-        {
-          "cardId": "R04",
-          "count": 1
+            "id": "tricks",
+            "name": "Мелкие пакости",
+            "subtitle": "Добор, обмены, помехи QTE",
+            "guide": "Развивайте добор, но следите за лимитом руки. Помехи усложняют ритуалы всех противников. Техподдержка страхует ваши ошибки. Обмен и возврат существ меняют планы соперников; реакции копируют чужие призывы или возвращают их в руку. Копирование требует свободного слота с тем же номером.",
+            "entries": [
+                {
+                    "cardId": "C01",
+                    "count": 3
+                },
+                {
+                    "cardId": "C04",
+                    "count": 3
+                },
+                {
+                    "cardId": "C05",
+                    "count": 3
+                },
+                {
+                    "cardId": "C07",
+                    "count": 2
+                },
+                {
+                    "cardId": "C12",
+                    "count": 2
+                },
+                {
+                    "cardId": "C16",
+                    "count": 2
+                },
+                {
+                    "cardId": "S01",
+                    "count": 2
+                },
+                {
+                    "cardId": "S02",
+                    "count": 2
+                },
+                {
+                    "cardId": "S04",
+                    "count": 2
+                },
+                {
+                    "cardId": "S05",
+                    "count": 2
+                },
+                {
+                    "cardId": "S06",
+                    "count": 2
+                },
+                {
+                    "cardId": "S08",
+                    "count": 2
+                },
+                {
+                    "cardId": "R01",
+                    "count": 1
+                },
+                {
+                    "cardId": "R02",
+                    "count": 1
+                },
+                {
+                    "cardId": "R03",
+                    "count": 1
+                }
+            ]
         }
-      ]
-    },
-    {
-      "id": "tricks",
-      "name": "Мелкие пакости",
-      "subtitle": "Добор, обмены, помехи QTE",
-      "guide": "Развивайте добор, но следите за лимитом руки. Помехи усложняют ритуалы всех противников. Техподдержка страхует ваши ошибки. Обмен и возврат существ меняют планы соперников; реакции копируют чужие призывы или возвращают их в руку. Копирование требует свободного слота с тем же номером.",
-      "entries": [
+    ],
+    "typeColors": [
         {
-          "cardId": "C01",
-          "count": 3
+            "id": "creature",
+            "name": "Существо",
+            "hex": "#3FC5AD"
         },
         {
-          "cardId": "C04",
-          "count": 3
+            "id": "spell",
+            "name": "Заклинание",
+            "hex": "#F0B354"
         },
         {
-          "cardId": "C05",
-          "count": 3
-        },
-        {
-          "cardId": "C07",
-          "count": 2
-        },
-        {
-          "cardId": "C12",
-          "count": 2
-        },
-        {
-          "cardId": "C16",
-          "count": 2
-        },
-        {
-          "cardId": "S01",
-          "count": 2
-        },
-        {
-          "cardId": "S02",
-          "count": 2
-        },
-        {
-          "cardId": "S04",
-          "count": 2
-        },
-        {
-          "cardId": "S05",
-          "count": 2
-        },
-        {
-          "cardId": "S06",
-          "count": 2
-        },
-        {
-          "cardId": "S08",
-          "count": 2
-        },
-        {
-          "cardId": "R01",
-          "count": 1
-        },
-        {
-          "cardId": "R02",
-          "count": 1
-        },
-        {
-          "cardId": "R03",
-          "count": 1
+            "id": "reaction",
+            "name": "Реакция",
+            "hex": "#AF9AF6"
         }
-      ]
-    }
-  ]
+    ],
+    "roleColors": [
+        {
+            "id": "",
+            "name": "Защитник",
+            "hex": "#5D9CEB"
+        },
+        {
+            "id": "",
+            "name": "Лекарь",
+            "hex": "#78C66B"
+        },
+        {
+            "id": "",
+            "name": "Снабженец",
+            "hex": "#E5C85B"
+        },
+        {
+            "id": "",
+            "name": "Усилитель",
+            "hex": "#F49454"
+        },
+        {
+            "id": "",
+            "name": "Ритуалист",
+            "hex": "#6BD7D8"
+        },
+        {
+            "id": "",
+            "name": "Вредитель",
+            "hex": "#CF7CBF"
+        },
+        {
+            "id": "",
+            "name": "Провокатор",
+            "hex": "#EF7983"
+        }
+    ]
 }
