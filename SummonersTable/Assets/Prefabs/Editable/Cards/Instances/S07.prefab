@@ -149,8 +149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6140666943963998782, guid: 530e1546ce8a5f2459e7347ba6fbfee9, type: 3}
       propertyPath: definition.art
-      value: Two extra luminous blank keyboard keys balanced daringly on top of a
-        wobbling magical tower, energetic amber sparks
+      value: art:S07
       objectReference: {fileID: 0}
     - target: {fileID: 6140666943963998782, guid: 530e1546ce8a5f2459e7347ba6fbfee9, type: 3}
       propertyPath: definition.qte

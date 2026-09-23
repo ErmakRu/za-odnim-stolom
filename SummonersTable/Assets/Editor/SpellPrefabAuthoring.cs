@@ -34,15 +34,15 @@ namespace SummonersTable.Editor
         }
         static AudioClip FindSound(string suffix)
         {string path=AssetDatabase.GetAllAssetPaths().First(p=>p.EndsWith("Card_Game_"+suffix+".wav"));return AssetDatabase.LoadAssetAtPath<AudioClip>(path);}
-        [MenuItem("Summoners Table/Export prefab card definitions and refresh labels")]
+        [MenuItem("Summoners Table/Config/Refresh card prefab previews from JSON")]
         public static void ExportCards()
         {
-            var catalog=CardLibrary.LoadCatalog();catalog.Validate();
+            var catalog=ConfigBundle.Read(ConfigAuthoring.Folder).Catalog();catalog.Validate();
             foreach(var entry in Resources.Load<CardLibrary>("CardLibrary").cards)
             {
                 string path=AssetDatabase.GetAssetPath(entry);var root=PrefabUtility.LoadPrefabContents(path);root.GetComponent<CardView>().Import(catalog.Card(entry.definition.id),catalog);PrefabUtility.SaveAsPrefabAsset(root,path);PrefabUtility.UnloadPrefabContents(root);
             }
-            File.WriteAllText("Assets/Resources/Data/catalog.json",JsonUtility.ToJson(catalog,true)+"\n");AssetDatabase.Refresh();
+            AssetDatabase.Refresh();
         }
     }
 }

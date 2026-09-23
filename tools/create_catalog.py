@@ -21,7 +21,7 @@ creature('C01','Енот-карманник','Звери','Снабженец',2
  'Он просто проверял, хорошо ли лежит.',
  'A cheeky raccoon in an oversized wizard hood secretly pulling a glowing blank playing card from its sleeve, playful expression')
 creature('C02','Медведь-обниматель','Звери','Защитник',3,6,4,'guard',1,
- 'Урон вашему герою от атак и заклинаний уменьшен на 1. Общая защита существ не выше 3; усталость не уменьшается.',
+ 'Урон вашему герою от атак и заклинаний уменьшен на 1. Общая защита существ не выше 2; усталость не уменьшается.',
  'Обнимет крепко. Особенно огненный шар.',
  'A huge gentle brown bear in a knitted scarf hugging a tiny glowing fireball safely against its belly')
 creature('C03','Боевой гусь','Звери','Усилитель',4,3,4,'attackAura',1,
@@ -49,11 +49,11 @@ creature('C08','Вампир на диете','Нежить','Лекарь',3,4,
  'После шести только группа крови ноль.',
  'A bashful aristocratic cartoon vampire sipping red berry juice from a tiny cup through a curly straw, elegant cape')
 creature('C09','Рыцарь последней смены','Нежить','Защитник',3,6,4,'guard',1,
- 'Урон вашему герою от атак и заклинаний уменьшен на 1. Общая защита существ не выше 3; усталость не уменьшается.',
+ 'Урон вашему герою от атак и заклинаний уменьшен на 1. Общая защита существ не выше 2; усталость не уменьшается.',
  'Мёртвый, уставший, всё ещё на посту.',
  'A sleepy skeletal knight leaning on a broad dented shield with a cushion tied to it, warm friendly fantasy illustration')
 creature('C10','Голем-подушка','Механоиды','Защитник',1,7,4,'guard',2,
- 'Урон вашему герою от атак и заклинаний уменьшен на 2. Общая защита существ не выше 3; усталость не уменьшается.',
+ 'Урон вашему герою от атак и заклинаний уменьшен на 2. Общая защита существ не выше 2; усталость не уменьшается.',
  'Принимает удар. И вашу усталость.',
  'A stout magical stone golem entirely wrapped in colorful soft pillows, standing protectively with open arms')
 creature('C11','Турель-комплиментатор','Механоиды','Усилитель',4,3,4,'spellPower',1,
@@ -144,7 +144,7 @@ decks = [
  'Развивайте добор, но следите за лимитом руки. Помехи усложняют ритуалы всех противников. Техподдержка страхует ваши ошибки. Обмен и возврат существ меняют планы соперников; реакции копируют чужие призывы или возвращают их в руку. Копирование требует свободного слота с тем же номером.')
 ]
 
-catalog = dict(version='0.5.0',title='Арена призыва: За одним столом',
+catalog = dict(version='0.6.0',title='Арена призыва: За одним столом',
  rules=dict(heroHp=30,deckSize=30,startingHand=5,handLimit=8,boardSlots=5,rounds=1,
             roundWinPoints=3,eliminationPoints=1,turnSeconds=45,revealSeconds=2,qteMistakes=3),
  typeColors=[dict(id='creature',name='Существо',hex='#3FC5AD'),dict(id='spell',name='Заклинание',hex='#F0B354'),dict(id='reaction',name='Реакция',hex='#AF9AF6')],

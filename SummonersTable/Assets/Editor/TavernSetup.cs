@@ -25,7 +25,7 @@ namespace SummonersTable.Editor
             if(library==null){library=ScriptableObject.CreateInstance<HeroLibrary>();AssetDatabase.CreateAsset(library,"Assets/Resources/HeroLibrary.asset");}
             var animalFiles=new[]{"Badger","Deer","Dog","Lion","Lizard","Owl","Rabit","Rat"};
             library.heroes=Enumerable.Range(0,8).Select(i=>new HeroDefinition{id=HeroOptions.Ids[i],name=HeroOptions.Names[i],prefab=Load<GameObject>(Animal+"Prefab/MaskTint/"+animalFiles[i]+"MaskTint.prefab")}).ToArray();
-            library.heroScale=1.65f;library.seatedHeight=0;
+            library.heroScale=2.25f;library.seatedHeight=0;
             library.chair=Load<GameObject>(Root+"3dModels/room_items/SM_Armchair.fbx");
             library.table=Load<GameObject>(Root+"3dModels/room_items/SM_Table.fbx");
             library.naturalMaterial=Load<Material>(Animal+"Material/PolyartStandard.mat");

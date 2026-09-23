@@ -1307,6 +1307,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6235430787347329825}
   - component: {fileID: 6946949252714595053}
+  - component: {fileID: 5282196177900430078}
   m_Layer: 0
   m_Name: HistoryRow
   m_TagString: Untagged
@@ -1380,6 +1381,19 @@ MonoBehaviour:
   - {fileID: 2383745555401022856}
   - {fileID: 1362588765316459498}
   - {fileID: 2265042972084231713}
+--- !u!114 &5282196177900430078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5309894982434151330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e1c0cf1608d9b4fb7ebf977eea2a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.PrefabConfigBinding
+  configId: HistoryRow
 --- !u!1 &5313272262090082487
 GameObject:
   m_ObjectHideFlags: 0

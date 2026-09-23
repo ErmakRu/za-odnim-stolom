@@ -53,7 +53,7 @@ namespace SummonersTable
                 local.Tick(localTime);state=local.View(seat,localTime);
             }
             if(state==null||page!="game")return;
-            if(seenTurn!=state.turnNumber){ClearSelection();seenTurn=state.turnNumber;}
+            if(seenTurn!=state.turnNumber){ClearSelection();seenTurn=state.turnNumber;if(!captureMode)ConfigAudio.Play("turn.start");}
             if(seenPhase!=state.phase)
             {seenPhase=state.phase;if(state.phase!="action")ClearSelection();}
         }
@@ -62,8 +62,8 @@ namespace SummonersTable
             var q=state.qte;
             if(q==null){lastQte="";return;}
             if(lastQte!=q.id){lastQte=q.id;lastProgress=q.index;lastMistakes=q.mistakes;}
-            if(q.index>lastProgress)audioSource.PlayOneShot(board.CameraRig.settings?.qteSuccess??tickTone);
-            if(q.mistakes>lastMistakes)audioSource.PlayOneShot(board.CameraRig.settings?.qteError??failTone);
+            if(q.index>lastProgress)ConfigAudio.Play("qte.correct");
+            if(q.mistakes>lastMistakes)ConfigAudio.Play("qte.error");
             lastProgress=q.index;lastMistakes=q.mistakes;
             if(q.owner!=seat||modal!=""||quitConfirm)return;
             foreach(char key in "ASDFGHJ")
@@ -140,7 +140,7 @@ namespace SummonersTable
             }
         }
         void InvalidCard(string uid,string message)
-        {error=message;shakeHand=uid;shakeUntil=Time.unscaledTime+.35f;audioSource.pitch=1;audioSource.PlayOneShot(board.CameraRig.settings?.invalidAction??failTone);}
+        {error=message;shakeHand=uid;shakeUntil=Time.unscaledTime+.35f;audioSource.pitch=1;ConfigAudio.Play("action.invalid");}
 
         // Offline deterministic render fixtures. No Steam traffic, external UI control or AI player.
         IEnumerator CaptureLabPreview()
@@ -325,10 +325,14 @@ namespace SummonersTable
             yield return Shot(directory,"12-three-player-layout");
             CheckHandBackCounts();yield return CaptureFailedSummon(directory);
             yield return CaptureEditableFeatures(directory);
-            int captured=Directory.GetFiles(directory,"*.png").Length;
+            int captured=editorSmokeNoCapture?editorSmokeFrames:Directory.GetFiles(directory,"*.png").Length;
             if(captured<36)throw new Exception("Runtime screenshots are missing");
-            File.WriteAllText(Path.Combine(directory,"capture-report.txt"),"PASS "+captured+" nonblank runtime screenshots without missing shaders or duplicate worlds/Canvas. Tavern lobby, all eight imported hero rigs, Weapon disabled, deck/hero/armor/palette callbacks, appearance preserved in match. Three manual cameras, 2/3/4 seating and exact public 3D hand counts. Revealed card goes left for caster and observer; right slot follows hand/world/reaction/history hover and clears on leave. One/three UI reaction overlays tilt about 20 degrees and follow the cast. Summon previews clear on success and failure for caster and observer. Private QTE and public progress. Persistent hero names and numeric HP bars. Editable UI prefabs, master/effects controls, eight spell VFX, unanimous rematch, lobby return and menu exit. History source and target inspection, input coverage, damage and retaliation ownership. Journal suppresses QTE click-through. Four hero and 12 unit raycasts. Summon lands on table without automatic selection. Short/long segmented arrows without aim VFX; explicit drag to hero/center, click and invalid/empty drop preserve old target. Spell target before QTE; deferred combat; camera unchanged by turn.\n");
-            Debug.Log("PREVIEW_CAPTURE_COMPLETE "+directory);Application.Quit();
+            File.WriteAllText(Path.Combine(directory,"capture-report.txt"),"PASS "+captured+(editorSmokeNoCapture?" Editor Play checkpoints (offscreen capture when requested). ":" nonblank runtime screenshots without missing shaders or duplicate worlds/Canvas. ")+"Tavern lobby, all eight imported hero rigs, Weapon disabled, deck/hero/armor/palette callbacks, appearance preserved in match. Three manual cameras, 2/3/4 seating and exact public 3D hand counts. Revealed card goes left for caster and observer; right slot follows hand/world/reaction/history hover and clears on leave. One/three UI reaction overlays tilt about 20 degrees and follow the cast. Summon previews clear on success and failure for caster and observer. Private QTE and public progress. Persistent hero names and numeric HP bars. Editable UI prefabs, master/effects controls, eight spell VFX, unanimous rematch, lobby return and menu exit. History source and target inspection, input coverage, damage and retaliation ownership. Journal suppresses QTE click-through. Four hero and 12 unit raycasts. Summon lands on table without automatic selection. Short/long segmented arrows without aim VFX; explicit drag to hero/center, click and invalid/empty drop preserve old target. Spell target before QTE; deferred combat; camera unchanged by turn.\n");
+            Debug.Log("PREVIEW_CAPTURE_COMPLETE "+directory);
+#if UNITY_EDITOR
+            if(editorSmokeNoCapture){EditorRegressionSmokeDone=true;yield break;}
+#endif
+            Application.Quit();
         }
         void CheckCardPanels(string id,bool ownQte)
         {
@@ -347,8 +351,24 @@ namespace SummonersTable
             var top=cardCanvas.reactionSlots[count-1];var pointer=RectTransformUtility.WorldToScreenPoint(null,top.transform.position);
             if(cardCanvas.InspectAt(pointer)!=id||!cardCanvas.Covers(pointer))throw new Exception("Reaction hover/input coverage failed");
         }
+        bool editorSmokeNoCapture;int editorSmokeFrames;
+        Vector2 CaptureHandPoint(string uid)
+        {
+            var rect=(RectTransform)ui.hand.Slot(uid).transform;
+            foreach(float x in new[]{-.35f,-.2f,0,.2f,.35f})foreach(float y in new[]{0f,.2f,-.2f,.35f,-.35f})
+            {
+                var point=RectTransformUtility.WorldToScreenPoint(null,rect.TransformPoint(new Vector3(x*rect.rect.width,y*rect.rect.height)));
+                if(ui.hand.Hit(point)==uid)return point;
+            }
+            throw new Exception("Hand card has no reachable inspection point: "+uid);
+        }
         IEnumerator Shot(string directory,string name)
         {
+            if(editorSmokeNoCapture){yield return new WaitForSeconds(.4f);yield return null;yield return null;editorSmokeFrames++;
+#if UNITY_EDITOR
+                EditorCapture?.Invoke(Path.Combine(directory,name+".png"));
+#endif
+                yield break;}
             yield return new WaitForSeconds(.4f);yield return new WaitForEndOfFrame();
             var capture=ScreenCapture.CaptureScreenshotAsTexture();
             if(capture==null){Debug.LogError("Frame capture failed: "+name+" "+Screen.width+"x"+Screen.height);Application.Quit(2);yield break;}

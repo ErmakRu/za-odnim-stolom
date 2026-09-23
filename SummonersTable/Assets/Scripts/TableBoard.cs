@@ -11,6 +11,18 @@ namespace SummonersTable
         public GameObject tablePrefab,chairPrefab,avatarPrefab;
         public Transform authoredEnvironment;
         public TableLayout[] layouts;
+        public SeatingLayout seating;
+        public PlayerSeatView Seat(int seat)=>activeLayout!=null&&seat>=0&&seat<activeLayout.heroes.Length?activeLayout.heroes[seat].GetComponentInParent<PlayerSeatView>():null;
+        public void RefreshSeating(){count=0;}
+        public static Vector3 Center=>activeLayout!=null?activeLayout.transform.position:Vector3.zero;
+#if UNITY_EDITOR
+        public void PreviewCamera(PresentationData data,int seat,int players)
+        {
+            activeLayout=seating.Build(players,seating.bodyScale);activeProportions=GetComponent<TableProportions>();
+            var rig=tableCamera.GetComponent<ManualTableCamera>();if(rig==null)rig=tableCamera.gameObject.AddComponent<ManualTableCamera>();
+            rig.Initialize(tableCamera);rig.Apply(data);rig.SetMode(data.initialCameraMode);rig.Sync(seat,players,false,true);foreach(var place in seating.Seats)place.status?.PreviewPose(tableCamera);
+        }
+#endif
         public Camera tableCamera;
         public CardLibrary cardLibrary;
         public WorldArrowView arrowPrefab;
@@ -23,8 +35,9 @@ namespace SummonersTable
         bool ownAction;
         Catalog catalog;
         static TableLayout activeLayout;
+        static TableProportions activeProportions;
         public Camera ViewCamera {get;private set;}
-        public const float TableTop=1.02f;
+        public static float TableTop=>activeProportions!=null?activeProportions.tableHeight*activeProportions.unitsPerMetre:6f;
         public static readonly Color[] SeatColors={new Color(.3f,.85f,.76f),new Color(1,.67f,.35f),new Color(.69f,.57f,.95f),new Color(.42f,.71f,.96f)};
         readonly Dictionary<string,GameObject> units=new Dictionary<string,GameObject>();
         readonly Dictionary<string,float> landingStarted=new Dictionary<string,float>();
@@ -36,9 +49,11 @@ namespace SummonersTable
         GameObject environment,playersRoot,floatingCard,centerMarker;Material gray,seatGray,darkGray;
         Light keyLight;int count;string visibleCast="",visibleCardId="";int cameraSeat=-1;Arrow castArrow;
 
+        public void SetCatalog(Catalog data){catalog=data;}
         public void Initialize(Catalog data)
         {
             catalog=data;
+            activeProportions=GetComponent<TableProportions>();
             ViewCamera=tableCamera??Camera.main??FindFirstObjectByType<Camera>();
             if(ViewCamera==null)ViewCamera=new GameObject("Table camera").AddComponent<Camera>();
             ViewCamera.name="Table camera";ViewCamera.tag="MainCamera";ViewCamera.orthographic=false;
@@ -55,7 +70,7 @@ namespace SummonersTable
             else
             {
                 environment=new GameObject("Replaceable graybox environment");environment.transform.SetParent(transform);
-                var table=GameObject.CreatePrimitive(PrimitiveType.Cylinder);table.name="Round table placeholder";table.transform.SetParent(environment.transform);table.transform.position=new Vector3(0,.7f,0);table.transform.localScale=new Vector3(12,.3f,12);table.GetComponent<Renderer>().sharedMaterial=gray;
+                var table=GameObject.CreatePrimitive(PrimitiveType.Cylinder);table.name="Round table placeholder";table.transform.SetParent(environment.transform);table.transform.position=new Vector3(0,TableTop-.18f,0);table.transform.localScale=new Vector3(12,.18f,12);table.GetComponent<Renderer>().sharedMaterial=gray;
                 Cube("Floor",new Vector3(0,-.13f,0),new Vector3(28,.2f,28),darkGray,environment.transform);
                 centerMarker=Cube("Random target — table center",new Vector3(0,TableTop,0),new Vector3(1.5f,.035f,1.5f),Flat(new Color(.68f,.70f,.72f)),environment.transform);
                 centerMarker.AddComponent<BoardTarget>().kind="center";
@@ -92,14 +107,14 @@ namespace SummonersTable
             var obj=Instantiate(prefab,parent);obj.name=name;obj.transform.localPosition=position;return obj;
         }
         public static Vector3 Away(int seat,int players)
-        {return Quaternion.Euler(0,45+seat*360f/players,0)*Vector3.back;}
+        {if(activeLayout!=null&&activeLayout.playerCount==players&&activeLayout.heroes[seat].parent.GetComponent<PlayerSeatView>()!=null)return -activeLayout.heroes[seat].parent.forward;return Quaternion.Euler(0,45+seat*360f/players,0)*Vector3.back;}
         public static Vector3 SlotPosition(int seat,int slot,int players)
         {
             if(activeLayout!=null&&activeLayout.playerCount==players&&activeLayout.slotAnchors.Length>seat*5+slot)return activeLayout.slotAnchors[seat*5+slot].position;
             var away=Away(seat,players);var tangent=Vector3.Cross(Vector3.up,away);
             return away*4.15f+tangent*((slot-2)*1.07f)+Vector3.up*TableTop;
         }
-        public static Vector3 HeroPosition(int seat,int players){if(activeLayout!=null&&activeLayout.playerCount==players)return activeLayout.heroes[seat].position;return Away(seat,players)*6.8f+Vector3.up*1.55f;}
+        public static Vector3 HeroPosition(int seat,int players){if(activeLayout!=null&&activeLayout.playerCount==players)return activeLayout.heroes[seat].position;return Away(seat,players)*8.48f+Vector3.up*8.2f;}
         public Vector3 TargetPosition(int seat,string uid,MatchState state)
         {
             if(seat<0||seat>=state.players.Count||!state.players[seat].alive)return new Vector3(0,TableTop+.12f,0);
@@ -109,6 +124,7 @@ namespace SummonersTable
         void Seats(int n)
         {
             if(count==n)return;count=n;cameraSeat=-1;activeLayout=null;
+            if(seating!=null){var generated=seating.Build(n,ConfigRuntime.Current?.world.scale??1);layouts=new[]{generated};}
             if(layouts!=null&&layouts.Any(l=>l!=null&&l.playerCount==n))
             {
                 foreach(var l in layouts)if(l!=null)l.gameObject.SetActive(l.playerCount==n);
@@ -141,7 +157,7 @@ namespace SummonersTable
         {
             GameObject root;
             if(cardId=="card_back"){root=Instantiate(cardLibrary.cardBackPrefab,transform);root.transform.GetChild(0).localScale=new Vector3(size.x,size.y,1);}
-            else {var view=Instantiate(cardLibrary.Find(cardId),transform);view.Mode("world");view.Highlight(false,false);view.worldFace.transform.localScale=new Vector3(size.x,size.y,1);root=view.gameObject;}
+            else {var view=Instantiate(cardLibrary.Find(cardId),transform);view.ApplyDefinition(catalog);view.Mode("world");view.Highlight(false,false);view.worldFace.transform.localScale=new Vector3(size.x,size.y,1);root=view.gameObject;}
             root.name=name;root.transform.position=position;root.transform.rotation=rotation;return root;
         }
         public void Sync(MatchState state,int viewer,double clock,int selectedSlot=-1)
@@ -215,7 +231,7 @@ namespace SummonersTable
         public Vector2 Project(Vector3 point,float scale,Vector2 offset)
         {var p=ViewCamera.WorldToScreenPoint(point);return new Vector2((p.x-offset.x)/scale,(Screen.height-p.y-offset.y)/scale);}
         public void SnapCamera(int seat,bool ownTurn){MoveCamera(seat,ownTurn,true);}
-        void OnDestroy(){activeLayout=null;foreach(var material in ownedMaterials)if(material!=null)Destroy(material);}
+        void OnDestroy(){activeLayout=null;activeProportions=null;foreach(var material in ownedMaterials)if(material!=null)Destroy(material);}
         sealed class Arrow
         {
             readonly WorldArrowView view;readonly Color color;

@@ -1,10 +1,11 @@
 """Package only distributable build/project files; verify every ZIP entry."""
 import argparse, hashlib, json, re, zipfile
+from pypdf import PdfReader
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'output'
-BALANCE_VERSION = json.loads((ROOT/'SummonersTable/Assets/Resources/Data/catalog.json').read_text(encoding='utf-8'))['version']
+BALANCE_VERSION = json.loads((ROOT/'SummonersTable/Assets/StreamingAssets/Config/rules.json').read_text(encoding='utf-8'))['version']
 parser=argparse.ArgumentParser()
 player_version=re.search(r'^\s*bundleVersion: (\S+)',(ROOT/'SummonersTable/ProjectSettings/ProjectSettings.asset').read_text(encoding='utf-8'),re.MULTILINE).group(1)
 parser.add_argument('--version',default=player_version,help='Player build version (defaults to Unity project settings)')
@@ -39,7 +40,7 @@ for name in ['README.md','.gitignore','.gitattributes','SummonersTable/steam_app
     project_items.append((ROOT/name,'ZaOdnimStolom-Unity/'+name))
 protocol=int(re.search(r'CurrentProtocol=(\d+)',(ROOT/'SummonersTable/Assets/Scripts/Core/Models.cs').read_text(encoding='utf-8')).group(1))
 manifest={'version':VERSION,'balanceVersion':BALANCE_VERSION,'steamAppId':480,'networkProtocol':protocol,'unity':'6000.3.21f1','artAssets':34,'uniqueCards':30,'selectableHeroes':8,
-          'artMode':'built-in image_gen','pdfPages':22,'archives':[
+          'artMode':'built-in image_gen','pdfPages':len(PdfReader(BUILD/'Cards-and-rules-RU.pdf').pages),'archives':[
     package(OUTPUT/('ZaOdnimStolom-Windows-v'+VERSION+'.zip'),build_items),
     package(OUTPUT/('ZaOdnimStolom-Unity-v'+VERSION+'.zip'),project_items)]}
 (OUTPUT/'release-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')

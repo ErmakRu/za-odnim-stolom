@@ -1,0 +1,413 @@
+{
+    "schemaVersion": 1,
+    "cues": [
+        {
+            "action": "card.hover",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:067c6bb7e7529418b9403be18d734770",
+                    "volume": 0.15000000596046449,
+                    "randomPitch": true,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "action.invalid",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:84aa69f4ecdfd4c8b882f7a703503b09",
+                    "volume": 0.15000000596046449,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "creature.attack",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:8be21a09f5ecd4be8bafbd7f2947e335",
+                    "volume": 0.15000000596046449,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "damage.hit",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:35779339d76db49689c500c1eb0b9755",
+                    "volume": 0.15000000596046449,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "qte.correct",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:9296ccb7ce15142418d69ac87cdc2ae4",
+                    "volume": 0.15000000596046449,
+                    "randomPitch": true,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "qte.error",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:6973ba58c45314283987b3e3bb00ba62",
+                    "volume": 0.15000000596046449,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "turn.start",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:84aa69f4ecdfd4c8b882f7a703503b09",
+                    "volume": 0.15000000596046449,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "ambience",
+            "bus": 1,
+            "sounds": [
+                {
+                    "clip": "asset:f872fbeed870c452f990f9f27884a45a",
+                    "volume": 0.07999999821186066,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "S01.launch",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:8be21a09f5ecd4be8bafbd7f2947e335",
+                    "volume": 1.0,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "S01.impact",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:35779339d76db49689c500c1eb0b9755",
+                    "volume": 1.0,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "S02.launch",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:89e43e7520a5047df8404057af3aeb12",
+                    "volume": 1.0,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "S02.impact",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:6feeaa78478074e85bf46df3ff376256",
+                    "volume": 1.0,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "S03.launch",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:b70d60c15fe5447578f95d4b2151845a",
+                    "volume": 1.0,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "S03.impact",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:b707907cff06b4189bb5a150933b8b89",
+                    "volume": 1.0,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "S04.launch",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:6973ba58c45314283987b3e3bb00ba62",
+                    "volume": 1.0,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "S04.impact",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:9296ccb7ce15142418d69ac87cdc2ae4",
+                    "volume": 1.0,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "S05.launch",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:f65eb4588d5e14ece9770ac458e01502",
+                    "volume": 1.0,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "S05.impact",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:a55145abb9e08492f9ac516ece695614",
+                    "volume": 1.0,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "S06.launch",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:f4b91ece8e32746a0a8691497f37e9bd",
+                    "volume": 1.0,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "S06.impact",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:43b4592e5691e402ab953222e961fcc9",
+                    "volume": 1.0,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "S07.launch",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:0f6599d54779a4ea383d91205ac8c246",
+                    "volume": 1.0,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "S07.impact",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:6280f031e461549d38ad30b23e277355",
+                    "volume": 1.0,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "S08.launch",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:8839914eec8554cae9ce0255178f2bf4",
+                    "volume": 1.0,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        },
+        {
+            "action": "S08.impact",
+            "bus": 0,
+            "sounds": [
+                {
+                    "clip": "asset:502c7f21842e846fa978774d2cce23a7",
+                    "volume": 1.0,
+                    "randomPitch": false,
+                    "pitch": 1.0,
+                    "pitchRange": {
+                        "x": 0.9200000166893005,
+                        "y": 1.0800000429153443
+                    },
+                    "delay": 0.0
+                }
+            ]
+        }
+    ]
+}

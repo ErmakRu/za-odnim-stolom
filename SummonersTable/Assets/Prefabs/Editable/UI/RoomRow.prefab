@@ -131,6 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8634260491434339841}
   - component: {fileID: 5287425259772282718}
+  - component: {fileID: 7529690908052794530}
   m_Layer: 0
   m_Name: RoomRow
   m_TagString: Untagged
@@ -177,6 +178,19 @@ MonoBehaviour:
     widget: {fileID: 4234524839560726824}
   - id: join
     widget: {fileID: 269364419197977138}
+--- !u!114 &7529690908052794530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899442291029804052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e1c0cf1608d9b4fb7ebf977eea2a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.PrefabConfigBinding
+  configId: RoomRow
 --- !u!1 &3884642261348654008
 GameObject:
   m_ObjectHideFlags: 0

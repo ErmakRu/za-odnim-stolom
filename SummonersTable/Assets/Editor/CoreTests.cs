@@ -82,7 +82,7 @@ namespace SummonersTable.Editor
                 Check(q.mistakes==0&&q.forgiven==1&&q.deadline==deadline,"forgiven");Success(g);Check(g.State.players[1].hp==26,"spell damage");Check(g.State.activeSeat==0,"spell does not end turn");
             });
             Test("guard caps and aura excludes its owner",()=>{
-                var g=New();Clean(g);Unit(g,1,"C10");Unit(g,1,"C02",1);Unit(g,1,"C09",2);Play(g,0,"S01");Success(g);Check(g.State.players[1].hp==29,"guard capped at 3");
+                var g=New();Clean(g);Unit(g,1,"C10");Unit(g,1,"C02",1);Unit(g,1,"C09",2);Play(g,0,"S01");Success(g);Check(g.State.players[1].hp==28,"guard capped at 2");
                 var goose=Unit(g,0,"C03");var raccoon=Unit(g,0,"C01",1);Check(g.Attack(0,goose)==4&&g.Attack(0,raccoon)==3,"attack aura other units only");
             });
             Test("two-second reveal, public progress, private keys and timer",()=>{
@@ -210,7 +210,7 @@ namespace SummonersTable.Editor
                     var view=g.View(n,g.State.serverTime);
                     var received=JsonUtility.FromJson<WireMessage>(JsonUtility.ToJson(new WireMessage{kind="state",state=view}));
                     received.state.RestoreViewPrivacy(n);
-                    Check(received.protocol==WireMessage.CurrentProtocol&&received.protocol==6,"new network protocol");
+                    Check(received.protocol==WireMessage.CurrentProtocol&&received.protocol==9,"new network protocol");
                     Check(received.state.cast.qteLength==q.sequence.Length,"public progress survives wire");
                     Check(n==0?received.state.qte.sequence==q.sequence:received.state.qte==null&&received.state.deadline==0,"wire QTE is private");
                 }

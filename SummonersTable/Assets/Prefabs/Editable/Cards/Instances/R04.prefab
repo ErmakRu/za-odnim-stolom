@@ -137,8 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5052774128483617739, guid: f4ba0da282ee7614d862cbf3f507e42e, type: 3}
       propertyPath: definition.art
-      value: A small assertive purple magical stop-hand shielding a glowing playing
-        card from sneaky fingers, no letters or text
+      value: art:R04
       objectReference: {fileID: 0}
     - target: {fileID: 5052774128483617739, guid: f4ba0da282ee7614d862cbf3f507e42e, type: 3}
       propertyPath: definition.name

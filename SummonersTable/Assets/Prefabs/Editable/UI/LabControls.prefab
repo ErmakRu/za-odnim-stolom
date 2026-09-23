@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 4709577758202836432}
   - component: {fileID: 908590839910714042}
   - component: {fileID: 903459046742815555}
+  - component: {fileID: 8813250363576577802}
   m_Layer: 0
   m_Name: LabControls
   m_TagString: Untagged
@@ -459,6 +460,19 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
+--- !u!114 &8813250363576577802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364787717708287266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e1c0cf1608d9b4fb7ebf977eea2a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.PrefabConfigBinding
+  configId: LabControls
 --- !u!1 &433443011447580472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,7 +1068,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7444211987850506516}
   m_Direction: 0
   m_MinValue: 1.5
-  m_MaxValue: 24
+  m_MaxValue: 42
   m_WholeNumbers: 0
   m_Value: 1.5
   m_OnValueChanged:
@@ -3882,7 +3896,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1540524150116983688}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 15
+  m_MaxValue: 26
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:

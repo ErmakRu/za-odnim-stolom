@@ -1,0 +1,1 @@
+PASS 11 config files, source-of-truth cards, strict parse/unknown fields/duplicates/ranges, asset IDs, gameplay vs cosmetic hash, match boundary, generated shared seats/chairs and creature slots, 4 shared lobby panels, prefab config bindings, Unity Inspector JSON editor.

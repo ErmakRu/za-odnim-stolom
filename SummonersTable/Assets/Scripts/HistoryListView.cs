@@ -35,7 +35,7 @@ namespace SummonersTable
                 var rt=(RectTransform)view.transform;rt.anchoredPosition=new Vector2(0,-row.y);rt.sizeDelta=new Vector2(scroll.content.rect.width,row.height);
                 view.header.SetActive(row.header);view.body.SetActive(!row.header);view.entry=row.header?null:e;
                 if(row.header){view.heading.text="РАУНД "+e.round+" · ХОД "+e.turn+" · "+Name(state,e.turnSeat);continue;}
-                view.actor.text=Name(state,e.actor);view.actor.color=Tint(e.actor);view.sourceName.text=catalog.Card(e.cardId)?.name??e.detail;view.verb.text=e.detail;
+                view.actor.text=e.actor<0?"Локация":Name(state,e.actor);view.actor.color=Tint(e.actor);view.sourceName.text=catalog.Card(e.cardId)?.name??e.detail;view.verb.text=e.detail;
                 view.sourceCard.Show(catalog.Card(e.cardId),catalog,font);
                 for(int n=0;n<view.targetGroups.Length;n++)
                 {

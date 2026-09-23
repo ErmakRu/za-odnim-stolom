@@ -21,9 +21,10 @@ namespace SummonersTable
         double now, actionRemaining, combatImpactAt, nextAttackAt;
         sealed class Reaction { public int player;public string effect, name;public int value;public TargetRef target; }
 
-        public GameEngine(Catalog catalog,IList<LobbyMember> members,int seed,double time=0)
+        public GameEngine(Catalog catalog,IList<LobbyMember> members,int seed,double time=0,MatchOptions options=null)
         {
-            Catalog=catalog;catalog.Validate();random=new Random(seed);now=time;
+            Catalog=catalog;catalog.Validate();State.rules=catalog.rules;random=new Random(seed);now=time;
+            State.options=(options??new MatchOptions()).Copy();State.options.Validate();
             if(members.Count<2||members.Count>4)throw new ArgumentException("Need 2-4 players.");
             if(members.Select(m=>m.id).Distinct().Count()!=members.Count)throw new ArgumentException("Duplicate player ID.");
             State.matchId=Guid.NewGuid().ToString("N");State.version=catalog.version;
@@ -33,7 +34,7 @@ namespace SummonersTable
                 State.players.Add(new PlayerState{seat=i,id=m.id,name=m.name,deckId=m.deckId,heroId=HeroOptions.Normalize(m.heroId),outfit=HeroOptions.Outfit(m.outfit),palette=HeroOptions.Palette(m.palette)});
                 sequences[i]=0;
             }
-            State.round=1;StartRound();
+            InitializeLocation();State.round=1;StartRound();
         }
         public MatchState View(int seat,double time) { return State.View(seat,time); }
         string NextId() { return (++uid).ToString(); }
@@ -47,10 +48,10 @@ namespace SummonersTable
         int Sum(int seat,string effect,int cap=int.MaxValue,string except="")
         {
             if(!Live(seat))return 0;
-            return Math.Min(cap,P(seat).units.Where(u=>u.hp>0&&!u.deploying&&u.uid!=except&&Def(u).effect==effect).Sum(u=>Def(u).value));
+            return MatchRules.Stack(State,P(seat).units.Where(u=>u.hp>0&&!u.deploying&&u.uid!=except&&Def(u).effect==effect).Sum(u=>Def(u).value),Catalog.rules.Limit(effect,cap));
         }
         int EnemySum(int seat,string effect,int cap)
-        { return Math.Min(cap,State.players.Where(p=>p.seat!=seat&&Live(p.seat)).Sum(p=>Sum(p.seat,effect))); }
+        { return MatchRules.Stack(State,State.players.Where(p=>p.seat!=seat&&Live(p.seat)).Sum(p=>Sum(p.seat,effect)),Catalog.rules.Limit(effect,cap)); }
         public int Attack(int owner,UnitState u) { return Def(u).attack+Sum(owner,"attackAura",2,u.uid); }
         void Log(string text)
         {
@@ -80,8 +81,9 @@ namespace SummonersTable
         void BeginTurn()
         {
             State.turnNumber++;State.creaturePlayed=0;State.spellsPlayed=0;State.qteAttempted=false;
+            State.qteSpent=0;
             State.riskBonus=0;successfulSpells=0;failDrawUsed=false;killers.Clear();
-            State.phase="action";State.deadline=now+Catalog.rules.turnSeconds;actionRemaining=Catalog.rules.turnSeconds;
+            State.phase="action";State.deadline=now+MatchTurnSeconds;actionRemaining=MatchTurnSeconds;WorldTurn();
             foreach(var u in P(State.activeSeat).units)u.exhausted=false;
             NormalizePlans();
             Log("Ход "+State.turnNumber+": "+P(State.activeSeat).name);
@@ -198,8 +200,7 @@ namespace SummonersTable
             if(hc==null)return CommandResult.No("Карты нет в вашей руке.");
             var card=Catalog.Card(hc.cardId);if(card.kind=="reaction")return CommandResult.No("Реакция ждёт подходящего события.");
             bool creature=card.kind=="creature";
-            if(creature&&(State.creaturePlayed>0||State.spellsPlayed>1))return CommandResult.No("Лимит призыва на этот ход исчерпан.");
-            if(!creature&&State.spellsPlayed>=(State.creaturePlayed>0?1:3))return CommandResult.No("Лимит заклинаний исчерпан.");
+            if(!MatchRules.CanSpend(State,card))return CommandResult.No(State.options.IsCommanders?"Недостаточно QTE: осталось "+(State.rules.commandersQte-State.qteSpent)+" из "+State.rules.commandersQte+".":"Лимит розыгрышей в этот ход исчерпан.");
             if(creature&&(cmd.slot<0||cmd.slot>=Catalog.rules.boardSlots||p.units.Any(u=>u.slot==cmd.slot)))return CommandResult.No("Выберите свободную ячейку.");
             var target=creature?new TargetRef(-1):new TargetRef(cmd.targetSeat,cmd.targetUnit);
             bool randomTarget=!creature&&cmd.targetSeat<0&&card.target!="none"&&card.target!="self";
@@ -211,8 +212,10 @@ namespace SummonersTable
             int bonus=creature?State.riskBonus:0;
             if(creature){State.creaturePlayed++;State.riskBonus=0;}else State.spellsPlayed++;
             p.hand.Remove(hc);p.handCount=p.hand.Count;State.qteAttempted=true;
-            int length=card.qte+EnemySum(seat,"qteExtra",2)+(bonus>0?2:0);
-            length=Math.Max(2,Math.Min(11,length));
+            State.qteSpent+=MatchRules.Cost(card);
+            int riskSymbols=bonus<=0?0:State.options.limitPower?2:2*Math.Max(1,bonus/Math.Max(1,Catalog.Card("S07").value));
+            int length=card.qte+EnemySum(seat,"qteExtra",2)+riskSymbols;
+            length=Math.Max(2,State.options.limitPower?Math.Min(Catalog.rules.qteMaxLength,length):length);
             const string keys="ASDFGHJ";string sequence="";
             while(sequence.Length<length)
             {
@@ -220,12 +223,13 @@ namespace SummonersTable
                 if(sequence.Length>=2&&sequence[sequence.Length-1]==k&&sequence[sequence.Length-2]==k)continue;
                 sequence+=k;
             }
-            double duration=Math.Max(6,10+(length-2)*3.3+Sum(seat,"timeBonus",4)-EnemySum(seat,"timeTax",4));
+            double duration=Math.Max(Catalog.rules.qteMinimumSeconds,Catalog.rules.qteBaseSeconds+(length-2)*Catalog.rules.qteSecondsPerSymbol+Sum(seat,"timeBonus",4)-EnemySum(seat,"timeTax",4));
+            if(Catalog.world?.timeChanges==true&&Catalog.world.qte>0)duration=Catalog.world.qte;
             State.qte=new QteState{id=NextId(),cardId=card.id,cardUid=hc.uid,owner=seat,
                 recipient=RandomHero(seat).seat,targetSeat=target?.seat??seat,targetUnit=target?.unit??"",slot=cmd.slot,
                 sequence=sequence,duration=duration,deadline=0,openingBonus=bonus,randomTarget=randomTarget};
             State.cast=new CastState{id=State.qte.id,cardId=card.id,owner=seat,targetSeat=target.seat,targetUnit=target.unit,
-                slot=cmd.slot,randomTarget=randomTarget,startedAt=now,revealUntil=now+Catalog.rules.revealSeconds};
+                slot=cmd.slot,randomTarget=randomTarget,startedAt=now,revealUntil=now+MatchRevealSeconds};
             State.pending=BuildAction(State.qte,true);reactions.Clear();
             History("play",seat,card.id,creature||card.target=="self"||card.target=="none"?new[]{new TargetRef(seat)}:randomTarget?new[]{new TargetRef(-1)}:State.pending.targets,creature?"Призыв в слот "+(cmd.slot+1):"Розыгрыш");
             State.phase="reveal";State.deadline=State.cast.revealUntil;
@@ -275,9 +279,9 @@ namespace SummonersTable
             if(State.phase!="qte"||q==null||q.owner!=seat||cmd.phaseId!=q.id)return CommandResult.No("Эта попытка QTE уже недоступна.");
             if(now>=q.deadline){FailQte();return CommandResult.No("Время QTE истекло.");}
             if(cmd.key==null||cmd.key.Length!=1||!"ASDFGHJ".Contains(cmd.key))return CommandResult.No("Недопустимая клавиша.");
-            if(q.sequence[q.index]==cmd.key[0])q.index++;
-            else if(q.forgiven==0&&Sum(seat,"forgive",1)>0)q.forgiven++;
-            else {q.mistakes++;q.deadline-=2;State.deadline=q.deadline;}
+            if(q.sequence[q.index]==cmd.key[0]){q.index++;WorldQteSymbol(q.index);}
+            else if(q.forgiven<Sum(seat,"forgive",1))q.forgiven++;
+            else {q.mistakes++;q.deadline-=Catalog.rules.qteMistakePenalty;State.deadline=q.deadline;}
             if(q.mistakes>=Catalog.rules.qteMistakes||now>=q.deadline)FailQte();
             else if(q.index==q.sequence.Length)CompleteQte();
             return CommandResult.Yes();
@@ -362,7 +366,7 @@ namespace SummonersTable
             int n=Math.Max(0,amount-Reduction(t));
             if(Hero(t))
             {
-                n=Math.Max(0,n-Sum(t.seat,"guard",3));int thorns=Sum(t.seat,"thorns",2);
+                n=Math.Max(0,n-Sum(t.seat,"guard",2));int thorns=Sum(t.seat,"thorns",2);
                 RawHeroDamage(t.seat,n,source);
                 if(n==0)HistoryDamage(source,State.pending?.cardId??"",t,0,"Урон предотвращён");
                 if(n>0)
@@ -409,7 +413,7 @@ namespace SummonersTable
                 foreach(var t in a.targets)Damage(t,a.damage,a.source,false);
             else if(a.kind=="heal") {var t=a.targets.FirstOrDefault();if(Valid(t)&&!Denied(t))Heal(t.seat,c.value);}
             else if(a.kind=="draw")Draw(a.source,c.value);
-            else if(a.kind=="riskBoost")State.riskBonus=c.value;
+            else if(a.kind=="riskBoost")State.riskBonus=State.options.limitPower?c.value:State.riskBonus+c.value;
             else if(a.kind=="stun")
             {
                 var t=a.targets.FirstOrDefault();if(Valid(t)&&!Denied(t))Unit(t.seat,t.unit).skipAttacks=Math.Max(1,Unit(t.seat,t.unit).skipAttacks);
@@ -432,7 +436,7 @@ namespace SummonersTable
             {
                 successfulSpells++;
                 if(successfulSpells==1&&Live(a.source))Draw(a.source,Sum(a.source,"spellDraw",2));
-                int taxLeft=2;
+                int taxLeft=State.options.limitPower?Catalog.rules.Limit("spellTax",2):int.MaxValue;
                 foreach(var owner in State.players.Where(p=>p.seat!=a.source&&Live(p.seat)))
                 {
                     int tax=Math.Min(taxLeft,Sum(owner.seat,"spellTax"));taxLeft-=tax;
@@ -525,7 +529,7 @@ namespace SummonersTable
         void NextRound() { State.round++;StartRound(); }
         public void Tick(double time)
         {
-            now=time;State.serverTime=time;
+            now=time;State.serverTime=time;if(LocationTimedOut())return;
             if(State.phase=="reveal"&&State.cast!=null&&now>=State.cast.revealUntil)
             {
                 State.phase="qte";State.qte.deadline=State.cast.revealUntil+State.qte.duration;State.deadline=State.qte.deadline;

@@ -148,9 +148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6140666943963998782, guid: 530e1546ce8a5f2459e7347ba6fbfee9, type: 3}
       propertyPath: definition.art
-      value: A tiny bewildered friendly summoned creature sliding backwards through
-        a round purple return portal while holding a dinner reservation card without
-        text
+      value: art:S08
       objectReference: {fileID: 0}
     - target: {fileID: 6140666943963998782, guid: 530e1546ce8a5f2459e7347ba6fbfee9, type: 3}
       propertyPath: definition.qte

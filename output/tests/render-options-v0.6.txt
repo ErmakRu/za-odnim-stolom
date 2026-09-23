@@ -1,0 +1,1 @@
+PASS lobby buttons/toggles, non-leader input rejection, commanders 4+4+2 UI, wizard route dimming, larger fan in 2/3/4 layouts, camera-invariant concealed world cards, depth on/off and parallax directions, conditional bear description, 3 camera views, no missing shaders. Steam transport rules covered by serialization tests; no multi-PC Steam playtest performed.

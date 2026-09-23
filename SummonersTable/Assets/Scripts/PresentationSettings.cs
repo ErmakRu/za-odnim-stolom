@@ -14,9 +14,9 @@ namespace SummonersTable
         public float lookSensitivity=3, cameraSmoothing=8, hoverScale=1.1f, hoverTilt=7, cardFlightSeconds=.5f;
         public int initialCameraMode=1;
         public CameraModeSettings[] cameraModes={
-            new CameraModeSettings{name="От первого лица",distance=6.3f,height=2.3f,yawLimit=90,downLimit=45,upLimit=90,fieldOfView=66},
-            new CameraModeSettings{name="Над головой",distance=8.4f,height=7,fieldOfView=60},
-            new CameraModeSettings{name="Над столом",distance=2.4f,height=18,fieldOfView=57}
+            new CameraModeSettings{name="От первого лица",distance=8,height=9.6f,focusHeight=7.2f,yawLimit=90,downLimit=45,upLimit=90,fieldOfView=74},
+            new CameraModeSettings{name="Над головой",distance=12,height=24,focusHeight=8,fieldOfView=60},
+            new CameraModeSettings{name="Над столом",distance=.3f,height=34,focusHeight=6,fieldOfView=57}
         };
         public void Validate()
         {

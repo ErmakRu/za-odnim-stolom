@@ -805,6 +805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4740128868380989302}
   - component: {fileID: 8809812487068379208}
+  - component: {fileID: 8432097671836322132}
   m_Layer: 0
   m_Name: CardBrowser
   m_TagString: Untagged
@@ -869,6 +870,19 @@ MonoBehaviour:
     widget: {fileID: 5228259047909987873}
   - id: cards
     widget: {fileID: 4289451643625495535}
+--- !u!114 &8432097671836322132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5605660206739797346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e1c0cf1608d9b4fb7ebf977eea2a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.PrefabConfigBinding
+  configId: CardBrowser
 --- !u!1 &5894579986065796549
 GameObject:
   m_ObjectHideFlags: 0

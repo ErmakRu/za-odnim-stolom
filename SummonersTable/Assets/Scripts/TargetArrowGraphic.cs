@@ -4,8 +4,10 @@ namespace SummonersTable
 {
     public sealed class TargetArrowGraphic : MaskableGraphic
     {
-        public float width=7,headLength=22,headWidth=12;Vector2 from,to;
-        public void Set(Vector2 a,Vector2 b){RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform,a,null,out from);RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform,b,null,out to);SetVerticesDirty();}
+        public float width=7,headLength=22,headWidth=12;Vector2 from,to;ArrowFeedback feedback;
+        public void SelectTarget(){feedback?.Select();}
+        public void Set(Vector2 a,Vector2 b){var style=ConfigRuntime.Current?.ui.arrow;if(style!=null){width=style.width;headLength=style.headLength;headWidth=style.headWidth;color=UserSettings.Data.highlightColor;material=ConfigRuntime.Assets.Get<Material>(style.uiMaterial);if(feedback==null)feedback=gameObject.GetComponent<ArrowFeedback>()??gameObject.AddComponent<ArrowFeedback>();feedback.Move(a,b);}
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform,a,null,out from);RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform,b,null,out to);SetVerticesDirty();}
         protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear();var p=TargetArrowGeometry.Build(from,to);if(p.Length==0)return;

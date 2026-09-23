@@ -1757,6 +1757,7 @@ GameObject:
   m_Component:
   - component: {fileID: 955965068547016475}
   - component: {fileID: 7566584626743426074}
+  - component: {fileID: 1074360380313449876}
   m_Layer: 0
   m_Name: SteamSearch
   m_TagString: Untagged
@@ -1860,6 +1861,19 @@ MonoBehaviour:
     widget: {fileID: 3167993224644735425}
   - id: cancel
     widget: {fileID: 7658567264656996917}
+--- !u!114 &1074360380313449876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5895226907406571429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e1c0cf1608d9b4fb7ebf977eea2a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.PrefabConfigBinding
+  configId: SteamSearch
 --- !u!1 &6053009989453104326
 GameObject:
   m_ObjectHideFlags: 0

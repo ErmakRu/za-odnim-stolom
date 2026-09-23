@@ -1,0 +1,1 @@
+PASS three actual shader buttons in lobby and ESC settings; selection carried across lobby/match/return; eight animal rigs; armor and palette changes; 2/3/4 enlarged-avatar layouts in all styles; first-person and overhead; no missing shaders or blank frames.

@@ -18,7 +18,7 @@ namespace SummonersTable
     {
         const string GameTag="gamejams.summoners-table.20260921";
         const int Channel=17423, MaxPacket=65536;
-        readonly Catalog catalog;
+        Catalog catalog;
         readonly IntPtr[] inbox=new IntPtr[32];
         readonly Dictionary<ulong,double> lastSeen=new Dictionary<ulong,double>();
         readonly Dictionary<ulong,int> rateCount=new Dictionary<ulong,int>();
@@ -30,6 +30,8 @@ namespace SummonersTable
         double lastPublish, lastHeartbeat, lastRefresh, operationStarted, rateWindow;
         int requestGeneration, commandSequence;
         bool quickSearch;
+        public MatchOptions Options {get;private set;}=new MatchOptions();
+        bool optionsValid=true;
         string selectedDeck="noise";
         string previousMatchId="";
         string selectedHero="badger";int selectedOutfit,selectedPalette;
@@ -51,6 +53,14 @@ namespace SummonersTable
         public int Seat=-1;
         public double ReceivedAt {get;private set;}
         public SteamSession(Catalog catalog) {this.catalog=catalog;}
+        public void SetCatalog(Catalog next)
+        {
+            if(View!=null&&View.phase!="matchEnd")return;catalog=next;
+            if(!InRoom)return;
+            if(IsHost){SteamMatchmaking.SetLobbyData(lobby,"configHash",catalog.configHash??"");SteamMatchmaking.SetLobbyData(lobby,"version",catalog.version);if(Engine!=null){foreach(var p in Engine.State.players)p.postMatchChoice="";Engine.State.revision++;Publish();}}
+            SetMember(selectedDeck,false);
+        }
+        bool SameConfig=>!InRoom||SteamMatchmaking.GetLobbyData(lobby,"configHash")== (catalog.configHash??"");
         static double TimeNow {get {return Time.realtimeSinceStartupAsDouble;}}
         public void Initialize()
         {
@@ -83,7 +93,7 @@ namespace SummonersTable
         bool Compatible(CSteamID room)
         {
             return SteamMatchmaking.GetLobbyData(room,"game")==GameTag&&
-                SteamMatchmaking.GetLobbyData(room,"version")==catalog.version&&SteamMatchmaking.GetLobbyData(room,"protocol")==WireMessage.CurrentProtocol.ToString();
+                SteamMatchmaking.GetLobbyData(room,"configHash")==(catalog.configHash??"")&&SteamMatchmaking.GetLobbyData(room,"version")==catalog.version&&SteamMatchmaking.GetLobbyData(room,"protocol")==WireMessage.CurrentProtocol.ToString();
         }
         public void Search(bool quick=false)
         {
@@ -91,6 +101,7 @@ namespace SummonersTable
             Busy=true;quickSearch=quick;Error="";Rooms.Clear();operationStarted=TimeNow;int token=++requestGeneration;
             SteamMatchmaking.AddRequestLobbyListStringFilter("game",GameTag,ELobbyComparison.k_ELobbyComparisonEqual);
             SteamMatchmaking.AddRequestLobbyListStringFilter("version",catalog.version,ELobbyComparison.k_ELobbyComparisonEqual);
+            SteamMatchmaking.AddRequestLobbyListStringFilter("configHash",catalog.configHash??"",ELobbyComparison.k_ELobbyComparisonEqual);
             SteamMatchmaking.AddRequestLobbyListStringFilter("protocol",WireMessage.CurrentProtocol.ToString(),ELobbyComparison.k_ELobbyComparisonEqual);
             SteamMatchmaking.AddRequestLobbyListStringFilter("state","waiting",ELobbyComparison.k_ELobbyComparisonEqual);
             SteamMatchmaking.AddRequestLobbyListDistanceFilter(ELobbyDistanceFilter.k_ELobbyDistanceFilterWorldwide);
@@ -122,6 +133,7 @@ namespace SummonersTable
                 lobby=new CSteamID(result.m_ulSteamIDLobby);Debug.Log("STEAM_LOBBY_CREATED");
                 SteamMatchmaking.SetLobbyData(lobby,"game",GameTag);SteamMatchmaking.SetLobbyData(lobby,"version",catalog.version);
                 SteamMatchmaking.SetLobbyData(lobby,"protocol",WireMessage.CurrentProtocol.ToString());
+                Options=ConfigRuntime.Available?ConfigRuntime.Current.rules.defaults.Copy():new MatchOptions();SteamMatchmaking.SetLobbyData(lobby,"rules",JsonUtility.ToJson(Options));SteamMatchmaking.SetLobbyData(lobby,"configHash",catalog.configHash??"");
                 SteamMatchmaking.SetLobbyData(lobby,"state","waiting");SteamMatchmaking.SetLobbyData(lobby,"name",RoomName);
                 SteamMatchmaking.SetLobbyJoinable(lobby,true);SetMember(selectedDeck,false);RefreshMembers();
             });
@@ -153,6 +165,8 @@ namespace SummonersTable
             SteamMatchmaking.SetLobbyMemberData(lobby,"hero",selectedHero);
             SteamMatchmaking.SetLobbyMemberData(lobby,"outfit",selectedOutfit.ToString());SteamMatchmaking.SetLobbyMemberData(lobby,"palette",selectedPalette.ToString());
             SteamMatchmaking.SetLobbyMemberData(lobby,"readyFor",View?.matchId??"lobby");
+            SteamMatchmaking.SetLobbyMemberData(lobby,"readyRules",Options.Signature);
+            SteamMatchmaking.SetLobbyMemberData(lobby,"configHash",catalog.configHash??"");
             SteamMatchmaking.SetLobbyMemberData(lobby,"ready",ready?"1":"0");RefreshMembers();
         }
         public void SetAppearance(string hero,int outfit,int palette)
@@ -160,11 +174,27 @@ namespace SummonersTable
             if(!HeroOptions.Valid(hero)||outfit<0||outfit>7||palette<0||palette>3)return;
             selectedHero=hero;selectedOutfit=outfit;selectedPalette=palette;SetMember(selectedDeck,false);
         }
+        public void SetOptions(MatchOptions options)
+        {
+            if(!IsHost||View!=null&&View.phase!="matchEnd")return;
+            options.Validate();if(Options.SameRules(options))return;
+            var next=options.Copy();next.revision=Options.revision+1;
+            if(!SteamMatchmaking.SetLobbyData(lobby,"rules",JsonUtility.ToJson(next))){Error="Не удалось сохранить правила лобби.";return;}
+            Options=next;SetMember(selectedDeck,false);
+            if(Engine!=null)
+            {
+                foreach(var p in Engine.State.players)p.postMatchChoice=p.id==UserId.ToString()?"deck":"";
+                Engine.State.revision++;Publish();
+            }
+            RefreshMembers();
+        }
         public void SubmitLook(float yaw,float pitch,int mode)
         {string previous=Error;Submit(new GameCommand{kind="look",lookYaw=yaw,lookPitch=pitch,cameraMode=mode});Error=previous;}
         public void RefreshMembers()
         {
             if(!Available||!InRoom)return;
+            try{string json=SteamMatchmaking.GetLobbyData(lobby,"rules");var parsedOptions=string.IsNullOrEmpty(json)?new MatchOptions():JsonUtility.FromJson<MatchOptions>(json);if(parsedOptions==null)throw new ArgumentException("Empty rules");parsedOptions.Validate();Options=parsedOptions;optionsValid=true;}
+            catch(Exception){optionsValid=false;Error="Правила лобби повреждены. Лидер должен создать новый стол.";}
             var next=new List<LobbyMember>();var owner=SteamMatchmaking.GetLobbyOwner(lobby);
             for(int i=0;i<SteamMatchmaking.GetNumLobbyMembers(lobby);i++)
             {
@@ -173,21 +203,22 @@ namespace SummonersTable
                 string hero=SteamMatchmaking.GetLobbyMemberData(lobby,id,"hero");
                 int.TryParse(SteamMatchmaking.GetLobbyMemberData(lobby,id,"outfit"),out int outfit);int.TryParse(SteamMatchmaking.GetLobbyMemberData(lobby,id,"palette"),out int palette);
                 next.Add(new LobbyMember{id=id.m_SteamID.ToString(),name=Clean(SteamFriends.GetFriendPersonaName(id),28),
-                    heroId=HeroOptions.Normalize(hero),outfit=HeroOptions.Outfit(outfit),palette=HeroOptions.Palette(palette),deckId=valid?deck:"noise",readyMatch=SteamMatchmaking.GetLobbyMemberData(lobby,id,"readyFor"),ready=valid&&HeroOptions.Valid(hero)&&SteamMatchmaking.GetLobbyMemberData(lobby,id,"ready")=="1"&&(View==null||SteamMatchmaking.GetLobbyMemberData(lobby,id,"readyFor")==View.matchId)});
+                    heroId=HeroOptions.Normalize(hero),outfit=HeroOptions.Outfit(outfit),palette=HeroOptions.Palette(palette),deckId=valid?deck:"noise",readyRules=SteamMatchmaking.GetLobbyMemberData(lobby,id,"readyRules"),readyMatch=SteamMatchmaking.GetLobbyMemberData(lobby,id,"readyFor"),ready=valid&&optionsValid&&SameConfig&&SteamMatchmaking.GetLobbyMemberData(lobby,id,"configHash")== (catalog.configHash??"")&&HeroOptions.Valid(hero)&&SteamMatchmaking.GetLobbyMemberData(lobby,id,"ready")=="1"&&SteamMatchmaking.GetLobbyMemberData(lobby,id,"readyRules")==Options.Signature&&(View==null||SteamMatchmaking.GetLobbyMemberData(lobby,id,"readyFor")==View.matchId)});
             }
+            if(!SameConfig)Error="Разные Config баланса. Загрузите те же cards/decks/rules JSON, что у лидера.";
             Members=next.OrderBy(m=>m.id==owner.m_SteamID.ToString()?0:1).ThenBy(m=>m.id).ToList();
             if(View!=null&&owner!=matchHost){EndBrokenMatch("Хост покинул матч. Создайте новое лобби.");return;}
             if(Engine!=null)
                 foreach(var p in Engine.State.players.Where(p=>p.connected&&!Members.Any(m=>m.id==p.id)).ToList())Engine.Disconnect(p.seat,TimeNow);
         }
-        public bool CanStart {get {return IsHost&&!Busy&&(View==null?Members.Count>=2&&Members.All(m=>m.ready):RematchRules.CanRestart(View,Members));}}
-        public void ChooseAfterMatch(string choice){Submit(new GameCommand{kind="postMatch",choice=choice});if(choice=="deck")SetMember(selectedDeck,false);}
+        public bool CanStart {get {return IsHost&&!Busy&&optionsValid&&Members.Count>=Math.Max(2,catalog.world.playerRange.x)&&Members.Count<=Math.Min(4,catalog.world.playerRange.y)&&SameConfig&&Members.All(m=>SteamMatchmaking.GetLobbyMemberData(lobby,new CSteamID(ulong.Parse(m.id)),"configHash")==(catalog.configHash??""))&&(View==null?Members.Count>=2&&Members.All(m=>m.ready):RematchRules.CanRestart(View,Members)&&Members.All(m=>m.readyRules==Options.Signature||Options.Signature==View.options.Signature));}}
+        public void ChooseAfterMatch(string choice){Submit(new GameCommand{kind="postMatch",choice=choice});SetMember(selectedDeck,choice=="again");}
         public void StartMatch()
         {
             RefreshMembers();if(!CanStart)return;
             previousMatchId=View?.matchId??"";matchHost=SteamUser.GetSteamID();commandSequence=0;
             SteamMatchmaking.SetLobbyJoinable(lobby,false);SteamMatchmaking.SetLobbyData(lobby,"state","playing");
-            Engine=new GameEngine(catalog,Members,Environment.TickCount,TimeNow);Seat=Engine.State.players.Find(p=>p.id==UserId.ToString()).seat;
+            Engine=new GameEngine(catalog,Members,Environment.TickCount,TimeNow,Options);Seat=Engine.State.players.Find(p=>p.id==UserId.ToString()).seat;
             foreach(var m in Members)lastSeen[ulong.Parse(m.id)]=TimeNow;
             Publish();
         }
@@ -262,6 +293,7 @@ namespace SummonersTable
                         if(View==null||View.matchId!=wire.matchId){matchHost=new CSteamID(sender);commandSequence=0;Error="";}
                         if(Error.StartsWith("Нет обновлений от хоста.")||Error.StartsWith("Ожидание Steam-соединения:"))Error="";
                         wire.state.RestoreViewPrivacy(own.seat);
+                        if(wire.state.options==null)continue;wire.state.options.Validate();
                         Seat=own.seat;View=wire.state;ReceivedAt=TimeNow;
                     }
                     else if(wire.kind=="error"&&View!=null&&View.matchId==wire.matchId)Error=Clean(wire.text,180);
@@ -305,6 +337,7 @@ namespace SummonersTable
                 SteamMatchmaking.LeaveLobby(lobby);
             }
             lobby=new CSteamID(0);matchHost=new CSteamID(0);Members.Clear();lastSeen.Clear();Engine=null;View=null;Seat=-1;
+            Options=new MatchOptions();optionsValid=true;
         }
         public void Dispose()
         {

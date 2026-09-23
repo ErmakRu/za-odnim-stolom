@@ -8,6 +8,8 @@ namespace SummonersTable
     {
         public enum Motion { Projectile, Area, Exchange, Draw, Return, Boost }
         public Motion motion;
+        public string configId;
+        void Awake(){if(!string.IsNullOrEmpty(configId))ConfigRuntime.ConfigureSpell(this,configId);}
         public GameObject travelPrefab,impactPrefab,cardBackPrefab,persistentPrefab;
         public AudioClip launchSound,impactSound;
         public AudioSource sound;
@@ -20,11 +22,11 @@ namespace SummonersTable
         {if(persistentPrefab==null)return null;var fx=Instantiate(persistentPrefab,position,Quaternion.identity,parent);fx.transform.localScale*=persistentScale;return fx;}
         IEnumerator Run(Vector3 source,IList<Vector3> targets,Camera camera)
         {
-            if(sound!=null&&launchSound!=null)sound.PlayOneShot(launchSound);
+            if(sound!=null&&launchSound!=null){if(ConfigRuntime.Available)ConfigAudio.Play(configId+".launch");else sound.PlayOneShot(launchSound);}
             if(motion==Motion.Area||motion==Motion.Boost)
             {
                 foreach(var target in targets)Impact(target);
-                if(sound!=null&&impactSound!=null)sound.PlayOneShot(impactSound);
+                if(sound!=null&&impactSound!=null){if(ConfigRuntime.Available)ConfigAudio.Play(configId+".impact");else sound.PlayOneShot(impactSound);}
             }
             else
             {
@@ -38,7 +40,7 @@ namespace SummonersTable
                 for(float t=0;t<travelSeconds;t+=Time.unscaledDeltaTime)
                 {float u=Mathf.Clamp01(t/Mathf.Max(.01f,travelSeconds));for(int i=0;i<movers.Count;i++)movers[i].transform.position=Vector3.Lerp(starts[i],ends[i],u)+Vector3.up*Mathf.Sin(u*Mathf.PI)*arc;yield return null;}
                 for(int i=0;i<movers.Count;i++){Impact(ends[i]);Destroy(movers[i]);}
-                if(sound!=null&&impactSound!=null)sound.PlayOneShot(impactSound);
+                if(sound!=null&&impactSound!=null){if(ConfigRuntime.Available)ConfigAudio.Play(configId+".impact");else sound.PlayOneShot(impactSound);}
             }
             yield return new WaitForSecondsRealtime(lifetime);Destroy(gameObject);
         }

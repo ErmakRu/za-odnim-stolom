@@ -137,8 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5052774128483617739, guid: f4ba0da282ee7614d862cbf3f507e42e, type: 3}
       propertyPath: definition.art
-      value: A comical wizard-shaped empty coat sidestepping a glowing orange magic
-        bolt, the coat flapping with exaggerated movement
+      value: art:R01
       objectReference: {fileID: 0}
     - target: {fileID: 5052774128483617739, guid: f4ba0da282ee7614d862cbf3f507e42e, type: 3}
       propertyPath: definition.name

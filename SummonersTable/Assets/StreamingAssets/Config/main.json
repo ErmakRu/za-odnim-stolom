@@ -1,0 +1,2618 @@
+{
+  "schemaVersion": 1,
+  "managers": {
+    "cards": {
+      "schemaVersion": 1,
+      "cards": [
+        {
+          "id": "C01",
+          "name": "Енот-карманник",
+          "kind": "creature",
+          "faction": "Звери",
+          "role": "Снабженец",
+          "effect": "spellDraw",
+          "target": "enemy",
+          "rules": "Первое успешное заклинание в ваш ход: доберите 1 карту. Несколько таких эффектов дают не более 2 карт.",
+          "flavor": "Он просто проверял, хорошо ли лежит.",
+          "art": "art:C01",
+          "attack": 2,
+          "health": 3,
+          "qte": 3,
+          "value": 1
+        },
+        {
+          "id": "C02",
+          "name": "Медведь-обниматель",
+          "kind": "creature",
+          "faction": "Звери",
+          "role": "Защитник",
+          "effect": "guard",
+          "target": "enemy",
+          "rules": "Урон вашему герою от атак и заклинаний уменьшен на 1. Общая защита существ не выше 2; усталость не уменьшается.",
+          "flavor": "Обнимет крепко. Особенно огненный шар.",
+          "art": "art:C02",
+          "attack": 3,
+          "health": 6,
+          "qte": 4,
+          "value": 1
+        },
+        {
+          "id": "C03",
+          "name": "Боевой гусь",
+          "kind": "creature",
+          "faction": "Звери",
+          "role": "Усилитель",
+          "effect": "attackAura",
+          "target": "enemy",
+          "rules": "Другие ваши существа получают +1 к атаке, пока гусь на столе. Сумма таких усилений не выше +2.",
+          "flavor": "Мир был вариантом. Но не сегодня.",
+          "art": "art:C03",
+          "attack": 4,
+          "health": 3,
+          "qte": 4,
+          "value": 1
+        },
+        {
+          "id": "C04",
+          "name": "Суккуб техподдержки",
+          "kind": "creature",
+          "faction": "Демоны",
+          "role": "Ритуалист",
+          "effect": "forgive",
+          "target": "enemy",
+          "rules": "Первый промах в каждом вашем QTE не считается ошибкой и не отнимает время. Эффект не складывается.",
+          "flavor": "Вы пробовали перепризвать?",
+          "art": "art:C04",
+          "attack": 2,
+          "health": 4,
+          "qte": 3,
+          "value": 1
+        },
+        {
+          "id": "C05",
+          "name": "Бес-бюрократ",
+          "kind": "creature",
+          "faction": "Демоны",
+          "role": "Вредитель",
+          "effect": "qteExtra",
+          "target": "enemy",
+          "rules": "QTE противников длиннее на 1 символ. Все подобные помехи вместе добавляют не более 2 символов.",
+          "flavor": "Ритуал принят. Приложите ещё один ритуал.",
+          "art": "art:C05",
+          "attack": 2,
+          "health": 4,
+          "qte": 3,
+          "value": 1
+        },
+        {
+          "id": "C06",
+          "name": "Демон-пожарник",
+          "kind": "creature",
+          "faction": "Демоны",
+          "role": "Провокатор",
+          "effect": "thorns",
+          "target": "enemy",
+          "rules": "Когда атака или заклинание противника наносит урон вашему герою, его герой получает 1 ответного урона. Максимум 2; ответный урон не вызывает новый ответ.",
+          "flavor": "Огонь на себя! А потом обратно.",
+          "art": "art:C06",
+          "attack": 4,
+          "health": 4,
+          "qte": 4,
+          "value": 1
+        },
+        {
+          "id": "C07",
+          "name": "Скелет-бухгалтер",
+          "kind": "creature",
+          "faction": "Нежить",
+          "role": "Снабженец",
+          "effect": "turnDraw",
+          "target": "enemy",
+          "rules": "В начале вашего хода доберите 1 дополнительную карту. Дополнительный добор от существ ограничен 2 картами.",
+          "flavor": "У него всё сходится. Кроме челюсти.",
+          "art": "art:C07",
+          "attack": 2,
+          "health": 4,
+          "qte": 3,
+          "value": 1
+        },
+        {
+          "id": "C08",
+          "name": "Вампир на диете",
+          "kind": "creature",
+          "faction": "Нежить",
+          "role": "Лекарь",
+          "effect": "lifesteal",
+          "target": "enemy",
+          "rules": "Когда ваше существо наносит урон вражескому герою, восстановите своему герою 1 HP. Не более 2 HP за одну атаку от всех таких эффектов.",
+          "flavor": "После шести только группа крови ноль.",
+          "art": "art:C08",
+          "attack": 3,
+          "health": 4,
+          "qte": 3,
+          "value": 1
+        },
+        {
+          "id": "C09",
+          "name": "Рыцарь последней смены",
+          "kind": "creature",
+          "faction": "Нежить",
+          "role": "Защитник",
+          "effect": "guard",
+          "target": "enemy",
+          "rules": "Урон вашему герою от атак и заклинаний уменьшен на 1. Общая защита существ не выше 2; усталость не уменьшается.",
+          "flavor": "Мёртвый, уставший, всё ещё на посту.",
+          "art": "art:C09",
+          "attack": 3,
+          "health": 6,
+          "qte": 4,
+          "value": 1
+        },
+        {
+          "id": "C10",
+          "name": "Голем-подушка",
+          "kind": "creature",
+          "faction": "Механоиды",
+          "role": "Защитник",
+          "effect": "guard",
+          "target": "enemy",
+          "rules": "Урон вашему герою от атак и заклинаний уменьшен на 2. Общая защита существ не выше 2; усталость не уменьшается.",
+          "flavor": "Принимает удар. И вашу усталость.",
+          "art": "art:C10",
+          "attack": 1,
+          "health": 7,
+          "qte": 4,
+          "value": 2
+        },
+        {
+          "id": "C11",
+          "name": "Турель-комплиментатор",
+          "kind": "creature",
+          "faction": "Механоиды",
+          "role": "Усилитель",
+          "effect": "spellPower",
+          "target": "enemy",
+          "rules": "Ваши заклинания прямого и массового урона наносят на 1 больше. Общая прибавка не выше +2.",
+          "flavor": "Отличная осанка! Пли!",
+          "art": "art:C11",
+          "attack": 4,
+          "health": 3,
+          "qte": 4,
+          "value": 1
+        },
+        {
+          "id": "C12",
+          "name": "Принтер заклинаний",
+          "kind": "creature",
+          "faction": "Механоиды",
+          "role": "Снабженец",
+          "effect": "failDraw",
+          "target": "enemy",
+          "rules": "После первого сорванного QTE в ваш ход доберите 1 карту. Несколько принтеров дают не более 2 карт.",
+          "flavor": "Замятие маны. Откройте крышку.",
+          "art": "art:C12",
+          "attack": 2,
+          "health": 3,
+          "qte": 3,
+          "value": 1
+        },
+        {
+          "id": "C13",
+          "name": "Дракон-стажёр",
+          "kind": "creature",
+          "faction": "Драконы",
+          "role": "Вредитель",
+          "effect": "spellTax",
+          "target": "enemy",
+          "rules": "После успешного заклинания противника его герой получает 1 урон. Общий штраф от таких существ не выше 2. Этот урон не вызывает ответных эффектов.",
+          "flavor": "Я только посмотреть. Ой, загорелось.",
+          "art": "art:C13",
+          "attack": 4,
+          "health": 4,
+          "qte": 4,
+          "value": 1
+        },
+        {
+          "id": "C14",
+          "name": "Дракон-грелка",
+          "kind": "creature",
+          "faction": "Драконы",
+          "role": "Лекарь",
+          "effect": "turnHeal",
+          "target": "enemy",
+          "rules": "В начале вашего хода восстановите герою 2 HP. Все такие существа вместе лечат не более 4 HP за ход.",
+          "flavor": "Тридцать градусов заботы.",
+          "art": "art:C14",
+          "attack": 3,
+          "health": 5,
+          "qte": 4,
+          "value": 2
+        },
+        {
+          "id": "C15",
+          "name": "Дракон-фанат",
+          "kind": "creature",
+          "faction": "Драконы",
+          "role": "Усилитель",
+          "effect": "openingPower",
+          "target": "enemy",
+          "rules": "Первая атака ваших разыгрываемых существ наносит на 1 больше урона. Общая прибавка не выше +2.",
+          "flavor": "Лучший призыв! Ещё! Ещё!",
+          "art": "art:C15",
+          "attack": 3,
+          "health": 4,
+          "qte": 3,
+          "value": 1
+        },
+        {
+          "id": "C16",
+          "name": "Дух дедлайна",
+          "kind": "creature",
+          "faction": "Духи",
+          "role": "Вредитель",
+          "effect": "timeTax",
+          "target": "enemy",
+          "rules": "У противников на QTE на 2 секунды меньше. Общий штраф не выше 4 секунд; итоговый таймер не короче 6 секунд.",
+          "flavor": "Надо было призвать вчера.",
+          "art": "art:C16",
+          "attack": 3,
+          "health": 3,
+          "qte": 3,
+          "value": 2
+        },
+        {
+          "id": "C17",
+          "name": "Дух аптечки",
+          "kind": "creature",
+          "faction": "Духи",
+          "role": "Лекарь",
+          "effect": "turnHeal",
+          "target": "enemy",
+          "rules": "В начале вашего хода восстановите герою 2 HP. Все такие существа вместе лечат не более 4 HP за ход.",
+          "flavor": "На рану подуем, само пройдёт.",
+          "art": "art:C17",
+          "attack": 2,
+          "health": 5,
+          "qte": 3,
+          "value": 2
+        },
+        {
+          "id": "C18",
+          "name": "Призрак подсказки",
+          "kind": "creature",
+          "faction": "Духи",
+          "role": "Ритуалист",
+          "effect": "timeBonus",
+          "target": "enemy",
+          "rules": "Ваши QTE получают +2 секунды. Несколько таких эффектов дают не более +4 секунд.",
+          "flavor": "Я бы нажал вот эту. Но рук нет.",
+          "art": "art:C18",
+          "attack": 2,
+          "health": 4,
+          "qte": 3,
+          "value": 2
+        },
+        {
+          "id": "S01",
+          "name": "Огненный чих",
+          "kind": "spell",
+          "faction": "",
+          "role": "",
+          "effect": "damage",
+          "target": "enemy",
+          "rules": "Нанесите 4 урона выбранному вражескому герою или существу.",
+          "flavor": "Будьте здоровы. Остальные - как получится.",
+          "art": "art:S01",
+          "attack": 0,
+          "health": 0,
+          "qte": 3,
+          "value": 4
+        },
+        {
+          "id": "S02",
+          "name": "Обнимашки по расписанию",
+          "kind": "spell",
+          "faction": "",
+          "role": "",
+          "effect": "heal",
+          "target": "hero",
+          "rules": "Восстановите выбранному живому герою 5 HP, не выше 30. Можно помочь противнику.",
+          "flavor": "Пять единиц заботы, без очереди.",
+          "art": "art:S02",
+          "attack": 0,
+          "health": 0,
+          "qte": 3,
+          "value": 5
+        },
+        {
+          "id": "S03",
+          "name": "Всем по крошке",
+          "kind": "spell",
+          "faction": "",
+          "role": "",
+          "effect": "areaDamage",
+          "target": "none",
+          "rules": "Нанесите каждому живому вражескому герою 2 урона. Защита и реакции применяются отдельно к каждому.",
+          "flavor": "Делить надо поровну. Даже неприятности.",
+          "art": "art:S03",
+          "attack": 0,
+          "health": 0,
+          "qte": 4,
+          "value": 2
+        },
+        {
+          "id": "S04",
+          "name": "Технический перерыв",
+          "kind": "spell",
+          "faction": "",
+          "role": "",
+          "effect": "stun",
+          "target": "enemyUnit",
+          "rules": "Выбранное вражеское существо пропускает следующую атаку в конце хода. Его постоянный эффект продолжает работать.",
+          "flavor": "Существо отошло на пять минуточек.",
+          "art": "art:S04",
+          "attack": 0,
+          "health": 0,
+          "qte": 3,
+          "value": 1
+        },
+        {
+          "id": "S05",
+          "name": "Карманная перестановка",
+          "kind": "spell",
+          "faction": "",
+          "role": "",
+          "effect": "swap",
+          "target": "enemyHero",
+          "rules": "Обменяйте случайную карту своей руки на случайную карту выбранного противника. Для розыгрыша у обоих должна оставаться карта для обмена.",
+          "flavor": "У тебя было лучше. Теперь спорный вопрос.",
+          "art": "art:S05",
+          "attack": 0,
+          "health": 0,
+          "qte": 4,
+          "value": 1
+        },
+        {
+          "id": "S06",
+          "name": "Чужой конспект",
+          "kind": "spell",
+          "faction": "",
+          "role": "",
+          "effect": "draw",
+          "target": "self",
+          "rules": "Доберите 2 карты. Всё сверх лимита руки в 8 карт сгорает.",
+          "flavor": "Почерк непонятный. Магия рабочая.",
+          "art": "art:S06",
+          "attack": 0,
+          "health": 0,
+          "qte": 3,
+          "value": 2
+        },
+        {
+          "id": "S07",
+          "name": "Слабо ещё две?",
+          "kind": "spell",
+          "faction": "",
+          "role": "",
+          "effect": "riskBoost",
+          "target": "self",
+          "rules": "Ваше следующее существо в этот ход получает +2 символа к QTE и +3 урона к первой атаке в конце хода. Усиление одноразовое, действует только в этот ход и не складывается.",
+          "flavor": "Последние слова уверенного мага.",
+          "art": "art:S07",
+          "attack": 0,
+          "health": 0,
+          "qte": 2,
+          "value": 3
+        },
+        {
+          "id": "S08",
+          "name": "Вы ошиблись столиком",
+          "kind": "spell",
+          "faction": "",
+          "role": "",
+          "effect": "bounce",
+          "target": "unit",
+          "rules": "Верните выбранное существо в руку его владельца. Его постоянный эффект сразу исчезает. При полной руке карта сгорает.",
+          "flavor": "Ваш ритуал в соседнем зале.",
+          "art": "art:S08",
+          "attack": 0,
+          "health": 0,
+          "qte": 4,
+          "value": 1
+        },
+        {
+          "id": "R01",
+          "name": "Я вообще мимо",
+          "kind": "reaction",
+          "faction": "",
+          "role": "",
+          "effect": "reduce",
+          "target": "pending",
+          "rules": "Во время розыгрыша чужого заклинания: уменьшите урон этой карты вам либо вашему существу на 3. Не действует на обычные атаки со стола и усталость.",
+          "flavor": "Меня здесь даже нарисовали случайно.",
+          "art": "art:R01",
+          "attack": 0,
+          "health": 0,
+          "qte": 0,
+          "value": 3
+        },
+        {
+          "id": "R02",
+          "name": "Мне такого же!",
+          "kind": "reaction",
+          "faction": "",
+          "role": "",
+          "effect": "copySummon",
+          "target": "pending",
+          "rules": "На чужой призыв: после успешного QTE создайте копию существа в слоте с тем же номером у себя. Слот должен быть свободен. Копия не атакует до вашего хода; её постоянный эффект работает сразу. При срыве QTE копии нет.",
+          "flavor": "Повторите заказ. Особенно рога.",
+          "art": "art:R02",
+          "attack": 0,
+          "health": 0,
+          "qte": 0,
+          "value": 1
+        },
+        {
+          "id": "R03",
+          "name": "Заходи в другой раз",
+          "kind": "reaction",
+          "faction": "",
+          "role": "",
+          "effect": "returnSummon",
+          "target": "pending",
+          "rules": "На чужой призыв: после успешного QTE верните разыгранную карту владельцу в руку. При полной руке она сгорает. Уже созданные копии остаются. При срыве QTE действует обычная передача карты сопернику.",
+          "flavor": "Столик ещё не освободился.",
+          "art": "art:R03",
+          "attack": 0,
+          "health": 0,
+          "qte": 0,
+          "value": 1
+        },
+        {
+          "id": "R04",
+          "name": "Руки прочь",
+          "kind": "reaction",
+          "faction": "",
+          "role": "",
+          "effect": "deny",
+          "target": "pending",
+          "rules": "Во время розыгрыша вражеского заклинания: отмените его эффект для вас или вашего существа. Не отменяет призыв, атаки существ, добор и усиления самого заклинателя.",
+          "flavor": "Это моё. Даже если мне не нравится.",
+          "art": "art:R04",
+          "attack": 0,
+          "health": 0,
+          "qte": 0,
+          "value": 1
+        }
+      ],
+      "typeColors": [
+        {
+          "id": "creature",
+          "name": "Существо",
+          "hex": "#3FC5AD"
+        },
+        {
+          "id": "spell",
+          "name": "Заклинание",
+          "hex": "#F0B354"
+        },
+        {
+          "id": "reaction",
+          "name": "Реакция",
+          "hex": "#AF9AF6"
+        }
+      ],
+      "roleColors": [
+        {
+          "id": "",
+          "name": "Защитник",
+          "hex": "#5D9CEB"
+        },
+        {
+          "id": "",
+          "name": "Лекарь",
+          "hex": "#78C66B"
+        },
+        {
+          "id": "",
+          "name": "Снабженец",
+          "hex": "#E5C85B"
+        },
+        {
+          "id": "",
+          "name": "Усилитель",
+          "hex": "#F49454"
+        },
+        {
+          "id": "",
+          "name": "Ритуалист",
+          "hex": "#6BD7D8"
+        },
+        {
+          "id": "",
+          "name": "Вредитель",
+          "hex": "#CF7CBF"
+        },
+        {
+          "id": "",
+          "name": "Провокатор",
+          "hex": "#EF7983"
+        }
+      ]
+    },
+    "decks": {
+      "schemaVersion": 1,
+      "decks": [
+        {
+          "id": "noise",
+          "name": "Шумная компания",
+          "subtitle": "Давление, усиления, возврат призывов",
+          "guide": "Начните с существа и не отдавайте стол без борьбы. Усилители увеличивают урон следующих карт. Слабо ещё две? разыгрывайте до существа, когда уверены в QTE. Выбирайте между атакой героя и устранением опасного постоянного эффекта.",
+          "entries": [
+            {
+              "cardId": "C03",
+              "count": 3
+            },
+            {
+              "cardId": "C06",
+              "count": 3
+            },
+            {
+              "cardId": "C09",
+              "count": 3
+            },
+            {
+              "cardId": "C11",
+              "count": 2
+            },
+            {
+              "cardId": "C13",
+              "count": 2
+            },
+            {
+              "cardId": "C15",
+              "count": 2
+            },
+            {
+              "cardId": "S01",
+              "count": 2
+            },
+            {
+              "cardId": "S03",
+              "count": 2
+            },
+            {
+              "cardId": "S04",
+              "count": 2
+            },
+            {
+              "cardId": "S06",
+              "count": 2
+            },
+            {
+              "cardId": "S07",
+              "count": 2
+            },
+            {
+              "cardId": "S08",
+              "count": 2
+            },
+            {
+              "cardId": "R01",
+              "count": 1
+            },
+            {
+              "cardId": "R03",
+              "count": 1
+            },
+            {
+              "cardId": "R04",
+              "count": 1
+            }
+          ]
+        },
+        {
+          "id": "cozy",
+          "name": "Живём дальше",
+          "subtitle": "Защита, лечение, спокойные ритуалы",
+          "guide": "Поставьте защитника, затем источник лечения. Сохраняйте реакции для большого урона и защищайте полезных существ. Лечение можно направлять сопернику ради временного союза. Вы ошиблись столиком убирает опасные эффекты или спасает вашего бойца.",
+          "entries": [
+            {
+              "cardId": "C02",
+              "count": 3
+            },
+            {
+              "cardId": "C08",
+              "count": 3
+            },
+            {
+              "cardId": "C10",
+              "count": 3
+            },
+            {
+              "cardId": "C14",
+              "count": 2
+            },
+            {
+              "cardId": "C17",
+              "count": 2
+            },
+            {
+              "cardId": "C18",
+              "count": 2
+            },
+            {
+              "cardId": "S01",
+              "count": 2
+            },
+            {
+              "cardId": "S02",
+              "count": 2
+            },
+            {
+              "cardId": "S03",
+              "count": 2
+            },
+            {
+              "cardId": "S04",
+              "count": 2
+            },
+            {
+              "cardId": "S06",
+              "count": 2
+            },
+            {
+              "cardId": "S08",
+              "count": 2
+            },
+            {
+              "cardId": "R01",
+              "count": 1
+            },
+            {
+              "cardId": "R02",
+              "count": 1
+            },
+            {
+              "cardId": "R04",
+              "count": 1
+            }
+          ]
+        },
+        {
+          "id": "tricks",
+          "name": "Мелкие пакости",
+          "subtitle": "Добор, обмены, помехи QTE",
+          "guide": "Развивайте добор, но следите за лимитом руки. Помехи усложняют ритуалы всех противников. Техподдержка страхует ваши ошибки. Обмен и возврат существ меняют планы соперников; реакции копируют чужие призывы или возвращают их в руку. Копирование требует свободного слота с тем же номером.",
+          "entries": [
+            {
+              "cardId": "C01",
+              "count": 3
+            },
+            {
+              "cardId": "C04",
+              "count": 3
+            },
+            {
+              "cardId": "C05",
+              "count": 3
+            },
+            {
+              "cardId": "C07",
+              "count": 2
+            },
+            {
+              "cardId": "C12",
+              "count": 2
+            },
+            {
+              "cardId": "C16",
+              "count": 2
+            },
+            {
+              "cardId": "S01",
+              "count": 2
+            },
+            {
+              "cardId": "S02",
+              "count": 2
+            },
+            {
+              "cardId": "S04",
+              "count": 2
+            },
+            {
+              "cardId": "S05",
+              "count": 2
+            },
+            {
+              "cardId": "S06",
+              "count": 2
+            },
+            {
+              "cardId": "S08",
+              "count": 2
+            },
+            {
+              "cardId": "R01",
+              "count": 1
+            },
+            {
+              "cardId": "R02",
+              "count": 1
+            },
+            {
+              "cardId": "R03",
+              "count": 1
+            }
+          ]
+        }
+      ]
+    },
+    "rules": {
+      "schemaVersion": 1,
+      "version": "0.8.0",
+      "title": "За одним столом",
+      "rules": {
+        "heroHp": 30,
+        "deckSize": 30,
+        "startingHand": 5,
+        "handLimit": 8,
+        "boardSlots": 5,
+        "rounds": 1,
+        "roundWinPoints": 3,
+        "eliminationPoints": 1,
+        "turnSeconds": 45,
+        "revealSeconds": 2,
+        "qteMistakes": 3,
+        "commandersQte": 10,
+        "wizardSpells": 3,
+        "wizardMixedSpells": 1,
+        "wizardCreatures": 1,
+        "qteMaxLength": 11,
+        "qteBaseSeconds": 10,
+        "qteSecondsPerSymbol": 3.29999995231628,
+        "qteMinimumSeconds": 6,
+        "qteMistakePenalty": 2,
+        "effectLimits": [
+          {
+            "effect": "guard",
+            "maximum": 2
+          },
+          {
+            "effect": "attackAura",
+            "maximum": 2
+          },
+          {
+            "effect": "openingPower",
+            "maximum": 2
+          },
+          {
+            "effect": "spellPower",
+            "maximum": 2
+          },
+          {
+            "effect": "thorns",
+            "maximum": 2
+          },
+          {
+            "effect": "lifesteal",
+            "maximum": 2
+          },
+          {
+            "effect": "spellDraw",
+            "maximum": 2
+          },
+          {
+            "effect": "turnDraw",
+            "maximum": 2
+          },
+          {
+            "effect": "failDraw",
+            "maximum": 2
+          },
+          {
+            "effect": "turnHeal",
+            "maximum": 4
+          },
+          {
+            "effect": "forgive",
+            "maximum": 1
+          },
+          {
+            "effect": "qteExtra",
+            "maximum": 2
+          },
+          {
+            "effect": "timeBonus",
+            "maximum": 4
+          },
+          {
+            "effect": "timeTax",
+            "maximum": 4
+          },
+          {
+            "effect": "spellTax",
+            "maximum": 2
+          }
+        ]
+      },
+      "defaults": {
+        "mode": "wizards",
+        "limitPower": true,
+        "cards3D": false,
+        "revision": 0
+      }
+    },
+    "audio": {
+      "schemaVersion": 1,
+      "cues": [
+        {
+          "action": "card.hover",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:067c6bb7e7529418b9403be18d734770",
+              "volume": 0.150000005960464,
+              "randomPitch": true,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "action.invalid",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:84aa69f4ecdfd4c8b882f7a703503b09",
+              "volume": 0.150000005960464,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "creature.attack",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:8be21a09f5ecd4be8bafbd7f2947e335",
+              "volume": 0.150000005960464,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "damage.hit",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:35779339d76db49689c500c1eb0b9755",
+              "volume": 0.150000005960464,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "qte.correct",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:9296ccb7ce15142418d69ac87cdc2ae4",
+              "volume": 0.150000005960464,
+              "randomPitch": true,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "qte.error",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:6973ba58c45314283987b3e3bb00ba62",
+              "volume": 0.150000005960464,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "turn.start",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:84aa69f4ecdfd4c8b882f7a703503b09",
+              "volume": 0.150000005960464,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "ambience",
+          "bus": 1,
+          "sounds": [
+            {
+              "clip": "asset:f872fbeed870c452f990f9f27884a45a",
+              "volume": 0.0799999982118607,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "S01.launch",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:8be21a09f5ecd4be8bafbd7f2947e335",
+              "volume": 1,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "S01.impact",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:35779339d76db49689c500c1eb0b9755",
+              "volume": 1,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "S02.launch",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:89e43e7520a5047df8404057af3aeb12",
+              "volume": 1,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "S02.impact",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:6feeaa78478074e85bf46df3ff376256",
+              "volume": 1,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "S03.launch",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:b70d60c15fe5447578f95d4b2151845a",
+              "volume": 1,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "S03.impact",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:b707907cff06b4189bb5a150933b8b89",
+              "volume": 1,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "S04.launch",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:6973ba58c45314283987b3e3bb00ba62",
+              "volume": 1,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "S04.impact",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:9296ccb7ce15142418d69ac87cdc2ae4",
+              "volume": 1,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "S05.launch",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:f65eb4588d5e14ece9770ac458e01502",
+              "volume": 1,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "S05.impact",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:a55145abb9e08492f9ac516ece695614",
+              "volume": 1,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "S06.launch",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:f4b91ece8e32746a0a8691497f37e9bd",
+              "volume": 1,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "S06.impact",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:43b4592e5691e402ab953222e961fcc9",
+              "volume": 1,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "S07.launch",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:0f6599d54779a4ea383d91205ac8c246",
+              "volume": 1,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "S07.impact",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:6280f031e461549d38ad30b23e277355",
+              "volume": 1,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "S08.launch",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:8839914eec8554cae9ce0255178f2bf4",
+              "volume": 1,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "action": "S08.impact",
+          "bus": 0,
+          "sounds": [
+            {
+              "clip": "asset:502c7f21842e846fa978774d2cce23a7",
+              "volume": 1,
+              "randomPitch": false,
+              "pitch": 1,
+              "pitchRange": {
+                "x": 0.920000016689301,
+                "y": 1.08000004291534
+              },
+              "delay": 0
+            }
+          ]
+        }
+      ]
+    },
+    "vfx": {
+      "schemaVersion": 1,
+      "effects": [
+        {
+          "id": "S01",
+          "travel": "asset:c1b089cd69be38a478350cf07ffdafeb",
+          "impact": "asset:c462771765132ac4d9747f83645adb3b",
+          "persistent": "",
+          "motion": 0,
+          "cardCount": 2,
+          "travelScale": 0.200000002980232,
+          "impactScale": 0.239999994635582,
+          "persistentScale": 0.129999995231628,
+          "travelSeconds": 0.550000011920929,
+          "lifetime": 1.79999995231628,
+          "arc": 0.649999976158142,
+          "cardSize": {
+            "x": 0.649999976158142,
+            "y": 0.850000023841858
+          }
+        },
+        {
+          "id": "S02",
+          "travel": "asset:7695acdb7fc539a4eb789ca501ffbdc2",
+          "impact": "asset:7695acdb7fc539a4eb789ca501ffbdc2",
+          "persistent": "",
+          "motion": 1,
+          "cardCount": 2,
+          "travelScale": 0.200000002980232,
+          "impactScale": 0.219999998807907,
+          "persistentScale": 0.129999995231628,
+          "travelSeconds": 0.550000011920929,
+          "lifetime": 1.79999995231628,
+          "arc": 0.649999976158142,
+          "cardSize": {
+            "x": 0.649999976158142,
+            "y": 0.850000023841858
+          }
+        },
+        {
+          "id": "S03",
+          "travel": "asset:7426a981e95caa54696ba616dad53259",
+          "impact": "asset:20f44ec5f6606de49bb9cd293062373f",
+          "persistent": "",
+          "motion": 0,
+          "cardCount": 2,
+          "travelScale": 0.109999999403954,
+          "impactScale": 0.349999994039536,
+          "persistentScale": 0.129999995231628,
+          "travelSeconds": 0.550000011920929,
+          "lifetime": 1.79999995231628,
+          "arc": 0.649999976158142,
+          "cardSize": {
+            "x": 0.649999976158142,
+            "y": 0.850000023841858
+          }
+        },
+        {
+          "id": "S04",
+          "travel": "asset:b96586514e9aa9f45bb18b74c3d83083",
+          "impact": "asset:b96586514e9aa9f45bb18b74c3d83083",
+          "persistent": "asset:b96586514e9aa9f45bb18b74c3d83083",
+          "motion": 1,
+          "cardCount": 2,
+          "travelScale": 0.200000002980232,
+          "impactScale": 0.349999994039536,
+          "persistentScale": 0.129999995231628,
+          "travelSeconds": 0.550000011920929,
+          "lifetime": 1.79999995231628,
+          "arc": 0.649999976158142,
+          "cardSize": {
+            "x": 0.649999976158142,
+            "y": 0.850000023841858
+          }
+        },
+        {
+          "id": "S05",
+          "travel": "asset:95f649167560d8b44ab55084fc46f3ce",
+          "impact": "asset:57958bf70fedf7942afdb69b086bf34d",
+          "persistent": "",
+          "motion": 2,
+          "cardCount": 2,
+          "travelScale": 0.200000002980232,
+          "impactScale": 0.349999994039536,
+          "persistentScale": 0.129999995231628,
+          "travelSeconds": 0.550000011920929,
+          "lifetime": 1.79999995231628,
+          "arc": 0.649999976158142,
+          "cardSize": {
+            "x": 0.649999976158142,
+            "y": 0.850000023841858
+          }
+        },
+        {
+          "id": "S06",
+          "travel": "asset:7426a981e95caa54696ba616dad53259",
+          "impact": "asset:7426a981e95caa54696ba616dad53259",
+          "persistent": "",
+          "motion": 3,
+          "cardCount": 2,
+          "travelScale": 0.200000002980232,
+          "impactScale": 0.349999994039536,
+          "persistentScale": 0.129999995231628,
+          "travelSeconds": 0.550000011920929,
+          "lifetime": 1.79999995231628,
+          "arc": 0.649999976158142,
+          "cardSize": {
+            "x": 0.649999976158142,
+            "y": 0.850000023841858
+          }
+        },
+        {
+          "id": "S07",
+          "travel": "asset:7426a981e95caa54696ba616dad53259",
+          "impact": "asset:7426a981e95caa54696ba616dad53259",
+          "persistent": "",
+          "motion": 5,
+          "cardCount": 2,
+          "travelScale": 0.200000002980232,
+          "impactScale": 0.349999994039536,
+          "persistentScale": 0.129999995231628,
+          "travelSeconds": 0.550000011920929,
+          "lifetime": 1.79999995231628,
+          "arc": 0.649999976158142,
+          "cardSize": {
+            "x": 0.649999976158142,
+            "y": 0.850000023841858
+          }
+        },
+        {
+          "id": "S08",
+          "travel": "asset:d65ba33f8b511d6448fbf3aaeabf0305",
+          "impact": "asset:d65ba33f8b511d6448fbf3aaeabf0305",
+          "persistent": "",
+          "motion": 4,
+          "cardCount": 2,
+          "travelScale": 0.200000002980232,
+          "impactScale": 0.349999994039536,
+          "persistentScale": 0.129999995231628,
+          "travelSeconds": 0.550000011920929,
+          "lifetime": 1.79999995231628,
+          "arc": 0.649999976158142,
+          "cardSize": {
+            "x": 0.649999976158142,
+            "y": 0.850000023841858
+          }
+        }
+      ],
+      "attack": "asset:c1b089cd69be38a478350cf07ffdafeb",
+      "hit": "asset:20f44ec5f6606de49bb9cd293062373f",
+      "death": "asset:d65ba33f8b511d6448fbf3aaeabf0305",
+      "qteFire": "asset:c50bdb43edb3cbc46a8ec14a2f935284",
+      "qteSmoke": "asset:508a0848c6982fe47a6ec95074bc51ee",
+      "qteAttempt": "asset:2fdbd9517280ef741a40cb5f46c20e4c",
+      "motionTitle": "asset:042664d3bada9944ba1b1a609edc4fc4",
+      "attackScale": 0.300000011920929,
+      "impactScale": 0.349999994039536,
+      "qteScale": 0.419999986886978
+    },
+    "world": {
+      "schemaVersion": 1,
+      "id": 0,
+      "name": "Таверна",
+      "timeChanges": false,
+      "playersTurnTime": -1,
+      "qte": -1,
+      "revealTime": -1,
+      "gameTimer": -1,
+      "playerRange": {
+        "x": 2,
+        "y": 4
+      },
+      "scale": 1,
+      "scene": "asset:de410e4042c165e4880349e7e965be9d",
+      "events": [
+        {
+          "id": 0,
+          "enabled": false,
+          "eventId": 3,
+          "chance": 30,
+          "everyTurns": 1,
+          "randomDuration": false,
+          "duration": 2,
+          "durationRange": {
+            "x": 1,
+            "y": 3
+          }
+        }
+      ]
+    },
+    "presentation": {
+      "schemaVersion": 1,
+      "camera": {
+        "lookSensitivity": 3,
+        "cameraSmoothing": 8,
+        "hoverScale": 1.10000002384186,
+        "hoverTilt": 7,
+        "cardFlightSeconds": 0.5,
+        "initialCameraMode": 1,
+        "cameraModes": [
+          {
+            "name": "От первого лица",
+            "distance": 8,
+            "height": 9.60000038146973,
+            "focusHeight": 7.19999980926514,
+            "fieldOfView": 74,
+            "yawLimit": 90,
+            "downLimit": 45,
+            "upLimit": 90
+          },
+          {
+            "name": "Над головой",
+            "distance": 12,
+            "height": 24,
+            "focusHeight": 8,
+            "fieldOfView": 60,
+            "yawLimit": 30,
+            "downLimit": 10,
+            "upLimit": 10
+          },
+          {
+            "name": "Над столом",
+            "distance": 0.300000011920929,
+            "height": 34,
+            "focusHeight": 6,
+            "fieldOfView": 57,
+            "yawLimit": 30,
+            "downLimit": 10,
+            "upLimit": 10
+          }
+        ]
+      },
+      "cardDepth": 0.159999996423721,
+      "cardFoil": 0.219999998807907
+    },
+    "prefabs": {
+      "schemaVersion": 1,
+      "prefabs": [
+        {
+          "id": "Avatar placeholder",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "CardTableCanvas",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "Chair placeholder",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "HeroSittingPlace",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "LobbyCanvas",
+          "components": [
+            {
+              "path": "Carved title plaque",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 15,
+                "inset": 4
+              }
+            },
+            {
+              "path": "leave",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            },
+            {
+              "path": "copy",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            },
+            {
+              "path": "ready",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            },
+            {
+              "path": "start",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            },
+            {
+              "path": "Local player count/players:2",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            },
+            {
+              "path": "Local player count/players:3",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            },
+            {
+              "path": "Local player count/players:4",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            },
+            {
+              "path": "Appearance controls/outfit-prev",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            },
+            {
+              "path": "Appearance controls/outfit-next",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            },
+            {
+              "path": "Appearance controls/palette:0",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            },
+            {
+              "path": "Appearance controls/palette:1",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            },
+            {
+              "path": "Appearance controls/palette:2",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            },
+            {
+              "path": "Appearance controls/palette:3",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            },
+            {
+              "path": "Appearance controls/customize-close",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            }
+          ]
+        },
+        {
+          "id": "MainMenuCanvas",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "MotionAnnouncements",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "Round table placeholder",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "TableWorld",
+          "components": [
+            {
+              "path": "",
+              "type": "SummonersTable.EffectsVolume",
+              "values": {
+                "baseVolume": 0.1
+              }
+            },
+            {
+              "path": "",
+              "type": "SummonersTable.WorldHandFanSettings",
+              "values": {
+                "cardSize": {
+                  "x": 1.04999995231628,
+                  "y": 1.48000001907349
+                },
+                "radius": 1.7,
+                "sweep": 116,
+                "maximumStep": 23,
+                "sideOffset": 3.1,
+                "inwardOffset": 0.8,
+                "height": 1.35,
+                "tilt": 12,
+                "roll": 0.28
+              }
+            }
+          ]
+        },
+        {
+          "id": "CardBase",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "S01",
+          "components": [
+            {
+              "path": "",
+              "type": "SummonersTable.EffectsVolume",
+              "values": {
+                "baseVolume": 0.18
+              }
+            }
+          ]
+        },
+        {
+          "id": "S02",
+          "components": [
+            {
+              "path": "",
+              "type": "SummonersTable.EffectsVolume",
+              "values": {
+                "baseVolume": 0.18
+              }
+            }
+          ]
+        },
+        {
+          "id": "S03",
+          "components": [
+            {
+              "path": "",
+              "type": "SummonersTable.EffectsVolume",
+              "values": {
+                "baseVolume": 0.18
+              }
+            }
+          ]
+        },
+        {
+          "id": "S04",
+          "components": [
+            {
+              "path": "",
+              "type": "SummonersTable.EffectsVolume",
+              "values": {
+                "baseVolume": 0.18
+              }
+            }
+          ]
+        },
+        {
+          "id": "S05",
+          "components": [
+            {
+              "path": "",
+              "type": "SummonersTable.EffectsVolume",
+              "values": {
+                "baseVolume": 0.18
+              }
+            }
+          ]
+        },
+        {
+          "id": "S06",
+          "components": [
+            {
+              "path": "",
+              "type": "SummonersTable.EffectsVolume",
+              "values": {
+                "baseVolume": 0.18
+              }
+            }
+          ]
+        },
+        {
+          "id": "S07",
+          "components": [
+            {
+              "path": "",
+              "type": "SummonersTable.EffectsVolume",
+              "values": {
+                "baseVolume": 0.18
+              }
+            }
+          ]
+        },
+        {
+          "id": "S08",
+          "components": [
+            {
+              "path": "",
+              "type": "SummonersTable.EffectsVolume",
+              "values": {
+                "baseVolume": 0.18
+              }
+            }
+          ]
+        },
+        {
+          "id": "CardBrowser",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "CardSlot",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "ConfigControls",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "ExitConfirmation",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "GameInterface",
+          "components": [
+            {
+              "path": "",
+              "type": "SummonersTable.EffectsVolume",
+              "values": {
+                "baseVolume": 0.15
+              }
+            }
+          ]
+        },
+        {
+          "id": "HandFan",
+          "components": [
+            {
+              "path": "",
+              "type": "SummonersTable.HandFan",
+              "values": {
+                "cardSize": {
+                  "x": 178,
+                  "y": 248
+                },
+                "spacing": 126,
+                "maxSpread": 740,
+                "arc": 38,
+                "angle": 7.5,
+                "hoverLift": 55
+              }
+            }
+          ]
+        },
+        {
+          "id": "HistoryPanel",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "HistoryRow",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "LabControls",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "LobbyPlayerPanel",
+          "components": [
+            {
+              "path": "Wooden player panel",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 15,
+                "inset": 4
+              }
+            },
+            {
+              "path": "Deck card 0/Card frame",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 15,
+                "inset": 4
+              }
+            },
+            {
+              "path": "Deck card 1/Card frame",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 15,
+                "inset": 4
+              }
+            },
+            {
+              "path": "Deck card 2/Card frame",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 15,
+                "inset": 4
+              }
+            },
+            {
+              "path": "Player ribbon",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 15,
+                "inset": 4
+              }
+            },
+            {
+              "path": "deck-prev:0",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            },
+            {
+              "path": "deck-next:0",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            },
+            {
+              "path": "hero-prev:0",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            },
+            {
+              "path": "hero-next:0",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            },
+            {
+              "path": "customize:0",
+              "type": "SummonersTable.TavernPanel",
+              "values": {
+                "border": {
+                  "r": 0.639999985694885,
+                  "g": 0.400000005960464,
+                  "b": 0.189999997615814,
+                  "a": 1
+                },
+                "corner": 8,
+                "inset": 4
+              }
+            }
+          ]
+        },
+        {
+          "id": "LocalHandoff",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "MatchHUD",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "MatchOptions",
+          "components": [
+            {
+              "path": "",
+              "type": "SummonersTable.MatchOptionsView",
+              "values": {
+                "selected": {
+                  "r": 0.939999997615814,
+                  "g": 0.660000026226044,
+                  "b": 0.25,
+                  "a": 1
+                },
+                "unselected": {
+                  "r": 0.219999998807907,
+                  "g": 0.140000000596046,
+                  "b": 0.0900000035762787,
+                  "a": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "MatchResults",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "PlayerStatus",
+          "components": [
+            {
+              "path": "",
+              "type": "SummonersTable.PlayerStatusView",
+              "values": {
+                "nameOffset": {
+                  "x": 0,
+                  "y": 1.25,
+                  "z": 0
+                },
+                "healthBetweenHeroAndSlots": 0.5,
+                "healthHeight": 6.28,
+                "minimumNameGap": 20,
+                "nameScreenPadding": 70,
+                "nameCollisionPadding": 6
+              }
+            }
+          ]
+        },
+        {
+          "id": "RoomRow",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "RulesPanel",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "SettingsPanel",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "ShaderChoice",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "SteamSearch",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "TargetArrow",
+          "components": [
+            {
+              "path": "",
+              "type": "SummonersTable.TargetArrowGraphic",
+              "values": {
+                "width": 7,
+                "headLength": 22,
+                "headWidth": 12
+              }
+            }
+          ]
+        },
+        {
+          "id": "TurnBudget",
+          "components": [
+            {
+              "path": "",
+              "type": "SummonersTable.TurnBudgetView",
+              "values": {
+                "active": {
+                  "r": 0.980000019073486,
+                  "g": 0.790000021457672,
+                  "b": 0.419999986886978,
+                  "a": 1
+                },
+                "inactive": {
+                  "r": 0.430000007152557,
+                  "g": 0.490000009536743,
+                  "b": 0.5,
+                  "a": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "UnitStats",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "AttackArrow",
+          "components": [
+            {
+              "path": "",
+              "type": "SummonersTable.WorldArrowView",
+              "values": {
+                "segments": 25,
+                "headLength": 0.26,
+                "headWidth": 0.14,
+                "widthMultiplier": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "CardBack",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "Chair",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "CreatureSlot",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "HealthNumber",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "PlayerAvatar",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "PlayerSeat",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "PlayerTarget",
+          "components": [
+            
+          ]
+        },
+        {
+          "id": "LobbyPortraitStage",
+          "components": [
+            
+          ]
+        }
+      ]
+    },
+    "playeranimations": {
+      "schemaVersion": 1,
+      "states": [
+        {
+          "id": "idle",
+          "steps": [
+            {
+              "clip": "asset:71e025727ca0dc5499adb08f31672886:7400000",
+              "speed": 1,
+              "loop": true,
+              "vfx": "",
+              "sound": "",
+              "effectOffset": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+              },
+              "effectScale": 0.300000011920929,
+              "effectLifetime": 2
+            }
+          ]
+        },
+        {
+          "id": "turn",
+          "steps": [
+            {
+              "clip": "asset:e49df721fd639c8489efb41c87f78d9d:7400000",
+              "speed": 1,
+              "loop": true,
+              "vfx": "",
+              "sound": "",
+              "effectOffset": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+              },
+              "effectScale": 0.300000011920929,
+              "effectLifetime": 2
+            }
+          ]
+        },
+        {
+          "id": "attack",
+          "steps": [
+            {
+              "clip": "asset:a496f14f74dc2ec47afa7a3c317da22a:7400000",
+              "speed": 1,
+              "loop": false,
+              "vfx": "",
+              "sound": "",
+              "effectOffset": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+              },
+              "effectScale": 0.300000011920929,
+              "effectLifetime": 2
+            }
+          ]
+        },
+        {
+          "id": "hit",
+          "steps": [
+            {
+              "clip": "asset:ecd54097783b98a439603d4fd1dd32b9:7400000",
+              "speed": 1,
+              "loop": false,
+              "vfx": "",
+              "sound": "",
+              "effectOffset": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+              },
+              "effectScale": 0.300000011920929,
+              "effectLifetime": 2
+            }
+          ]
+        },
+        {
+          "id": "dead",
+          "steps": [
+            {
+              "clip": "asset:83c04b49ec42cbc48bae2b85c9bc40ad:7400000",
+              "speed": 1,
+              "loop": false,
+              "vfx": "",
+              "sound": "",
+              "effectOffset": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+              },
+              "effectScale": 0.300000011920929,
+              "effectLifetime": 2
+            },
+            {
+              "clip": "asset:53995e9c6193f2a49ad790f4779f5d32:7400000",
+              "speed": 1,
+              "loop": true,
+              "vfx": "",
+              "sound": "",
+              "effectOffset": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+              },
+              "effectScale": 0.300000011920929,
+              "effectLifetime": 2
+            }
+          ]
+        },
+        {
+          "id": "revive",
+          "steps": [
+            {
+              "clip": "asset:11582210a54894b4aa4f1163c8fdf556:7400000",
+              "speed": 1,
+              "loop": false,
+              "vfx": "",
+              "sound": "",
+              "effectOffset": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+              },
+              "effectScale": 0.300000011920929,
+              "effectLifetime": 2
+            }
+          ]
+        },
+        {
+          "id": "cameraForward",
+          "steps": [
+            {
+              "clip": "asset:a1c595f7b742e174cbd81d7061b3bd10:7400000",
+              "speed": 1,
+              "loop": false,
+              "vfx": "",
+              "sound": "",
+              "effectOffset": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+              },
+              "effectScale": 0.300000011920929,
+              "effectLifetime": 2
+            }
+          ]
+        },
+        {
+          "id": "cameraBack",
+          "steps": [
+            {
+              "clip": "asset:40c22d64a80931b4b9450b46d37a659d:7400000",
+              "speed": 1,
+              "loop": false,
+              "vfx": "",
+              "sound": "",
+              "effectOffset": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+              },
+              "effectScale": 0.300000011920929,
+              "effectLifetime": 2
+            }
+          ]
+        },
+        {
+          "id": "dizzy",
+          "steps": [
+            {
+              "clip": "asset:759a2d8259da5fa4996c08563e3908b8:7400000",
+              "speed": 1,
+              "loop": false,
+              "vfx": "",
+              "sound": "",
+              "effectOffset": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+              },
+              "effectScale": 0.300000011920929,
+              "effectLifetime": 2
+            }
+          ]
+        },
+        {
+          "id": "reaction",
+          "steps": [
+            {
+              "clip": "asset:7299b5daf393b424eb48be524d921731:7400000",
+              "speed": 1,
+              "loop": false,
+              "vfx": "",
+              "sound": "",
+              "effectOffset": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+              },
+              "effectScale": 0.300000011920929,
+              "effectLifetime": 2
+            }
+          ]
+        },
+        {
+          "id": "victory",
+          "steps": [
+            {
+              "clip": "asset:a496f14f74dc2ec47afa7a3c317da22a:7400000",
+              "speed": 1,
+              "loop": true,
+              "vfx": "",
+              "sound": "",
+              "effectOffset": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+              },
+              "effectScale": 0.300000011920929,
+              "effectLifetime": 2
+            }
+          ]
+        }
+      ]
+    },
+    "events": {
+      "schemaVersion": 1,
+      "events": [
+        {
+          "id": 3,
+          "name": "Да не бомбит у меня!",
+          "description": "Каждый второй верный символ QTE наносит 1 урон случайному существу на столе.",
+          "mechanic": 0,
+          "everySymbols": 2,
+          "value": 1,
+          "vfx": "asset:20f44ec5f6606de49bb9cd293062373f",
+          "sound": "damage.hit",
+          "vfxScale": 0.25,
+          "lifetime": 1.5
+        }
+      ]
+    },
+    "interface": {
+      "schemaVersion": 1,
+      "fan": {
+        "radius": 1.70000004768372,
+        "spread": 116,
+        "maximumStep": 23,
+        "cardSize": {
+          "x": 174,
+          "y": 244
+        },
+        "uiUnitsPerMetre": 240,
+        "uiPerspective": 0.219999998807907,
+        "worldCardSize": {
+          "x": 1.04999995231628,
+          "y": 1.48000001907349
+        }
+      },
+      "arrow": {
+        "width": 7,
+        "headLength": 22,
+        "headWidth": 12,
+        "worldWidth": 0.0450000017881393,
+        "worldHeadLength": 0.259999990463257,
+        "worldHeadWidth": 0.140000000596046,
+        "uiMaterial": "",
+        "worldMaterial": "",
+        "beginEffect": "",
+        "dragEffect": "",
+        "selectEffect": "",
+        "beginSound": "",
+        "dragSound": "",
+        "selectSound": "",
+        "effectScale": 0.200000002980232,
+        "effectLifetime": 1,
+        "color": {
+          "r": 0.970000028610229,
+          "g": 0.740000009536743,
+          "b": 0.360000014305115,
+          "a": 1
+        }
+      },
+      "healthSize": {
+        "x": 170,
+        "y": 26
+      },
+      "healthColor": {
+        "r": 0.300000011920929,
+        "g": 0.850000023841858,
+        "b": 0.759999990463257,
+        "a": 1
+      },
+      "healthTrailColor": {
+        "r": 1,
+        "g": 0.699999988079071,
+        "b": 0.25,
+        "a": 1
+      },
+      "healthUsesPlayerColor": false,
+      "highlightMaterial": "",
+      "highlightColor": {
+        "r": 0.970000028610229,
+        "g": 0.740000009536743,
+        "b": 0.360000014305115,
+        "a": 1
+      }
+    }
+  }
+}

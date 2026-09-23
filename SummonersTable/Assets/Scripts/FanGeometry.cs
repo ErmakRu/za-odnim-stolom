@@ -1,0 +1,1 @@
+namespace SummonersTable {public static class FanGeometry {public static float Angle(int index,int count,float spread,float maxStep)=>(index-(count-1)*.5f)*UnityEngine.Mathf.Min(maxStep,spread/UnityEngine.Mathf.Max(1,count-1));}}

@@ -1,0 +1,228 @@
+{
+    "schemaVersion": 1,
+    "states": [
+        {
+            "id": "idle",
+            "steps": [
+                {
+                    "clip": "asset:71e025727ca0dc5499adb08f31672886:7400000",
+                    "speed": 1.0,
+                    "loop": true,
+                    "vfx": "",
+                    "sound": "",
+                    "effectOffset": {
+                        "x": 0.0,
+                        "y": 1.0,
+                        "z": 0.0
+                    },
+                    "effectScale": 0.30000001192092898,
+                    "effectLifetime": 2.0
+                }
+            ]
+        },
+        {
+            "id": "turn",
+            "steps": [
+                {
+                    "clip": "asset:e49df721fd639c8489efb41c87f78d9d:7400000",
+                    "speed": 1.0,
+                    "loop": true,
+                    "vfx": "",
+                    "sound": "",
+                    "effectOffset": {
+                        "x": 0.0,
+                        "y": 1.0,
+                        "z": 0.0
+                    },
+                    "effectScale": 0.30000001192092898,
+                    "effectLifetime": 2.0
+                }
+            ]
+        },
+        {
+            "id": "attack",
+            "steps": [
+                {
+                    "clip": "asset:a496f14f74dc2ec47afa7a3c317da22a:7400000",
+                    "speed": 1.0,
+                    "loop": false,
+                    "vfx": "",
+                    "sound": "",
+                    "effectOffset": {
+                        "x": 0.0,
+                        "y": 1.0,
+                        "z": 0.0
+                    },
+                    "effectScale": 0.30000001192092898,
+                    "effectLifetime": 2.0
+                }
+            ]
+        },
+        {
+            "id": "hit",
+            "steps": [
+                {
+                    "clip": "asset:ecd54097783b98a439603d4fd1dd32b9:7400000",
+                    "speed": 1.0,
+                    "loop": false,
+                    "vfx": "",
+                    "sound": "",
+                    "effectOffset": {
+                        "x": 0.0,
+                        "y": 1.0,
+                        "z": 0.0
+                    },
+                    "effectScale": 0.30000001192092898,
+                    "effectLifetime": 2.0
+                }
+            ]
+        },
+        {
+            "id": "dead",
+            "steps": [
+                {
+                    "clip": "asset:83c04b49ec42cbc48bae2b85c9bc40ad:7400000",
+                    "speed": 1.0,
+                    "loop": false,
+                    "vfx": "",
+                    "sound": "",
+                    "effectOffset": {
+                        "x": 0.0,
+                        "y": 1.0,
+                        "z": 0.0
+                    },
+                    "effectScale": 0.30000001192092898,
+                    "effectLifetime": 2.0
+                },
+                {
+                    "clip": "asset:53995e9c6193f2a49ad790f4779f5d32:7400000",
+                    "speed": 1.0,
+                    "loop": true,
+                    "vfx": "",
+                    "sound": "",
+                    "effectOffset": {
+                        "x": 0.0,
+                        "y": 1.0,
+                        "z": 0.0
+                    },
+                    "effectScale": 0.30000001192092898,
+                    "effectLifetime": 2.0
+                }
+            ]
+        },
+        {
+            "id": "revive",
+            "steps": [
+                {
+                    "clip": "asset:11582210a54894b4aa4f1163c8fdf556:7400000",
+                    "speed": 1.0,
+                    "loop": false,
+                    "vfx": "",
+                    "sound": "",
+                    "effectOffset": {
+                        "x": 0.0,
+                        "y": 1.0,
+                        "z": 0.0
+                    },
+                    "effectScale": 0.30000001192092898,
+                    "effectLifetime": 2.0
+                }
+            ]
+        },
+        {
+            "id": "cameraForward",
+            "steps": [
+                {
+                    "clip": "asset:a1c595f7b742e174cbd81d7061b3bd10:7400000",
+                    "speed": 1.0,
+                    "loop": false,
+                    "vfx": "",
+                    "sound": "",
+                    "effectOffset": {
+                        "x": 0.0,
+                        "y": 1.0,
+                        "z": 0.0
+                    },
+                    "effectScale": 0.30000001192092898,
+                    "effectLifetime": 2.0
+                }
+            ]
+        },
+        {
+            "id": "cameraBack",
+            "steps": [
+                {
+                    "clip": "asset:40c22d64a80931b4b9450b46d37a659d:7400000",
+                    "speed": 1.0,
+                    "loop": false,
+                    "vfx": "",
+                    "sound": "",
+                    "effectOffset": {
+                        "x": 0.0,
+                        "y": 1.0,
+                        "z": 0.0
+                    },
+                    "effectScale": 0.30000001192092898,
+                    "effectLifetime": 2.0
+                }
+            ]
+        },
+        {
+            "id": "dizzy",
+            "steps": [
+                {
+                    "clip": "asset:759a2d8259da5fa4996c08563e3908b8:7400000",
+                    "speed": 1.0,
+                    "loop": false,
+                    "vfx": "",
+                    "sound": "",
+                    "effectOffset": {
+                        "x": 0.0,
+                        "y": 1.0,
+                        "z": 0.0
+                    },
+                    "effectScale": 0.30000001192092898,
+                    "effectLifetime": 2.0
+                }
+            ]
+        },
+        {
+            "id": "reaction",
+            "steps": [
+                {
+                    "clip": "asset:7299b5daf393b424eb48be524d921731:7400000",
+                    "speed": 1.0,
+                    "loop": false,
+                    "vfx": "",
+                    "sound": "",
+                    "effectOffset": {
+                        "x": 0.0,
+                        "y": 1.0,
+                        "z": 0.0
+                    },
+                    "effectScale": 0.30000001192092898,
+                    "effectLifetime": 2.0
+                }
+            ]
+        },
+        {
+            "id": "victory",
+            "steps": [
+                {
+                    "clip": "asset:a496f14f74dc2ec47afa7a3c317da22a:7400000",
+                    "speed": 1.0,
+                    "loop": true,
+                    "vfx": "",
+                    "sound": "",
+                    "effectOffset": {
+                        "x": 0.0,
+                        "y": 1.0,
+                        "z": 0.0
+                    },
+                    "effectScale": 0.30000001192092898,
+                    "effectLifetime": 2.0
+                }
+            ]
+        }
+    ]
+}

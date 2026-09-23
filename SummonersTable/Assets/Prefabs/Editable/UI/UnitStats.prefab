@@ -239,6 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 480432367337824095}
   - component: {fileID: 5154530685285047300}
+  - component: {fileID: 2594089907514317788}
   m_Layer: 0
   m_Name: UnitStats
   m_TagString: Untagged
@@ -285,3 +286,16 @@ MonoBehaviour:
     widget: {fileID: 3591253943009934480}
   - id: group
     widget: {fileID: 5511715512330065716}
+--- !u!114 &2594089907514317788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7079250295076140433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e1c0cf1608d9b4fb7ebf977eea2a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.PrefabConfigBinding
+  configId: UnitStats

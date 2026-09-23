@@ -9,6 +9,6 @@ namespace SummonersTable
         public GameObject cardBackPrefab;
         public CardView Find(string id){return cards?.FirstOrDefault(c=>c!=null&&c.definition.id==id);}
         public void Apply(Catalog catalog){if(cards==null||cards.Length!=catalog.cards.Count)return;catalog.cards=cards.Select(c=>JsonUtility.FromJson<CardDef>(JsonUtility.ToJson(c.definition))).ToList();catalog.Validate();}
-        public static Catalog LoadCatalog(){var c=JsonUtility.FromJson<Catalog>(Resources.Load<TextAsset>("Data/catalog").text);Resources.Load<CardLibrary>("CardLibrary")?.Apply(c);return c;}
+        public static Catalog LoadCatalog(){if(ConfigRuntime.Available)return ConfigBundle.Clone(ConfigRuntime.ActiveCatalog);if(System.IO.Directory.Exists(ConfigRuntime.DirectoryPath))return ConfigBundle.Read(ConfigRuntime.DirectoryPath).Catalog();return JsonUtility.FromJson<Catalog>(Resources.Load<TextAsset>("Data/catalog").text);}
     }
 }

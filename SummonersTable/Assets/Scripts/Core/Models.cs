@@ -6,7 +6,8 @@ namespace SummonersTable
 {
     [Serializable] public sealed class CardDef
     {
-        public string id, name, kind, faction, role, effect, target, rules, flavor, art;
+        public string id, name, kind, faction, role, effect, target, rules, flavor;
+        [AssetId("texture")]public string art;
         public int attack, health, qte, value;
     }
     [Serializable] public sealed class DeckEntry { public string cardId; public int count; }
@@ -16,14 +17,21 @@ namespace SummonersTable
         public List<DeckEntry> entries = new List<DeckEntry>();
     }
     [Serializable] public sealed class ColorDef { public string id, name, hex; }
+    [Serializable] public sealed class EffectLimit { public string effect;public int maximum;public EffectLimit(){} public EffectLimit(string id,int value){effect=id;maximum=value;} }
     [Serializable] public sealed class RulesDef
     {
         public int heroHp=30, deckSize=30, startingHand=5, handLimit=8, boardSlots=5,
             rounds=1, roundWinPoints=3, eliminationPoints=1, turnSeconds=45, revealSeconds=2, qteMistakes=3;
+        public int commandersQte=10,wizardSpells=3,wizardMixedSpells=1,wizardCreatures=1,qteMaxLength=11;
+        public float qteBaseSeconds=10,qteSecondsPerSymbol=3.3f,qteMinimumSeconds=6,qteMistakePenalty=2;
+        public EffectLimit[] effectLimits={new EffectLimit("guard",2),new EffectLimit("attackAura",2),new EffectLimit("openingPower",2),new EffectLimit("spellPower",2),new EffectLimit("thorns",2),new EffectLimit("lifesteal",2),new EffectLimit("spellDraw",2),new EffectLimit("turnDraw",2),new EffectLimit("failDraw",2),new EffectLimit("turnHeal",4),new EffectLimit("forgive",1),new EffectLimit("qteExtra",2),new EffectLimit("timeBonus",4),new EffectLimit("timeTax",4),new EffectLimit("spellTax",2)};
+        public RulesDef Copy(){var r=(RulesDef)MemberwiseClone();r.effectLimits=effectLimits?.Select(e=>new EffectLimit(e.effect,e.maximum)).ToArray();return r;}
+        public int Limit(string effect,int fallback){return effectLimits?.FirstOrDefault(e=>e.effect==effect)?.maximum??fallback;}
     }
     [Serializable] public sealed class Catalog
     {
-        public string version, title;
+        public string version, title, configHash;
+        public LocationConfig world;public EventsConfig events;
         public RulesDef rules;
         public List<CardDef> cards;
         public List<DeckDef> decks;
@@ -47,6 +55,7 @@ namespace SummonersTable
         public string heroId="badger";public int outfit,palette;
         public bool ready;
         public string readyMatch="";
+        public string readyRules="";
     }
     [Serializable] public sealed class HandCard
     {
@@ -139,7 +148,11 @@ namespace SummonersTable
     [Serializable] public sealed class MatchState
     {
         public string version="0.3.0", phase="lobby", result="", lastEvent="", matchId;
-        public int revision, round, turnNumber, activeSeat, creaturePlayed, spellsPlayed, riskBonus;
+        public int revision, round, turnNumber, activeSeat, creaturePlayed, spellsPlayed, riskBonus,qteSpent;
+        public string locationName="";public double matchDeadline;
+        public List<ActiveWorldEvent> worldEvents=new List<ActiveWorldEvent>();public List<WorldEventNotice> worldNotices=new List<WorldEventNotice>();
+        public MatchOptions options=new MatchOptions();
+        public RulesDef rules=new RulesDef();
         public bool qteAttempted;
         public double serverTime, deadline;
         public List<PlayerState> players=new List<PlayerState>();
@@ -154,6 +167,7 @@ namespace SummonersTable
         public MatchState View(int seat,double now)
         {
             var v=(MatchState)MemberwiseClone();
+            v.options=options.Copy();v.rules=rules.Copy();v.worldEvents=worldEvents.Select(e=>e.Copy()).ToList();v.worldNotices=worldNotices.Select(e=>e.Copy()).ToList();
             v.players=players.Select(p=>p.View(p.seat==seat)).ToList();
             v.log=new List<string>(log);v.winners=new List<int>(winners);
             v.history=history.Select(e=>e.Copy()).ToList();
@@ -186,7 +200,7 @@ namespace SummonersTable
     }
     [Serializable] public sealed class WireMessage
     {
-        public const int CurrentProtocol=6;
+        public const int CurrentProtocol=9;
         public int protocol=CurrentProtocol;
         public string kind, text, matchId;
         public string previousMatchId="";

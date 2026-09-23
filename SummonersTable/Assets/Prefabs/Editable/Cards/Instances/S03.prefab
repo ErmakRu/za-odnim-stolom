@@ -146,8 +146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6140666943963998782, guid: 530e1546ce8a5f2459e7347ba6fbfee9, type: 3}
       propertyPath: definition.art
-      value: A mischievous enchanted pie bursting into several little glowing crumbs
-        flying in different directions, playful magical explosion
+      value: art:S03
       objectReference: {fileID: 0}
     - target: {fileID: 6140666943963998782, guid: 530e1546ce8a5f2459e7347ba6fbfee9, type: 3}
       propertyPath: definition.qte

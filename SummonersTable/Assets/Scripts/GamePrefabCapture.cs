@@ -16,7 +16,7 @@ namespace SummonersTable
             float originalMaster=AudioSettings.Master,originalEffects=AudioSettings.Effects;
             ui.hud.Get<Button>("settings").onClick.Invoke();ui.settings.Get<Slider>("master").value=.55f;ui.settings.Get<Slider>("effects").value=0;
             yield return Shot(directory,"17-master-and-effects-settings");
-            if(!settingsOpen||Mathf.Abs(AudioListener.volume-.55f)>.001f||ui.GetComponent<AudioSource>().volume!=0)throw new Exception("Audio sliders not applied");
+            if(!settingsOpen||!ui.settings.gameObject.activeInHierarchy||Mathf.Abs(AudioListener.volume-.55f)>.001f||ui.GetComponent<AudioSource>().volume!=0)throw new Exception("Audio sliders not applied");
             ui.settings.Get<Slider>("master").value=originalMaster;ui.settings.Get<Slider>("effects").value=originalEffects;ui.settings.Get<Button>("resume").onClick.Invoke();
             for(int i=1;i<=8;i++)
             {

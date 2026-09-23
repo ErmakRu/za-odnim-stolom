@@ -304,6 +304,7 @@ GameObject:
   - component: {fileID: 1385899144961684627}
   - component: {fileID: 1608479087884508896}
   - component: {fileID: 1759336350003610980}
+  - component: {fileID: 7715355919901225712}
   m_Layer: 0
   m_Name: HistoryPanel
   m_TagString: Untagged
@@ -410,6 +411,19 @@ MonoBehaviour:
   gap: 5
   window: {fileID: 6833055360521421822}
   close: {fileID: 782529380473258857}
+--- !u!114 &7715355919901225712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4430015768875779608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e1c0cf1608d9b4fb7ebf977eea2a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.PrefabConfigBinding
+  configId: HistoryPanel
 --- !u!1 &4867240294483630285
 GameObject:
   m_ObjectHideFlags: 0

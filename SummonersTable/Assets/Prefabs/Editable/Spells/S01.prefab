@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4496858321403442511}
   - component: {fileID: 6924070052526708805}
   - component: {fileID: 8554256573649483804}
+  - component: {fileID: 384168145643349836}
   m_Layer: 0
   m_Name: S01
   m_TagString: Untagged
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.SpellEffect
   motion: 0
+  configId: S01
   travelPrefab: {fileID: 237099526826154970, guid: c1b089cd69be38a478350cf07ffdafeb, type: 3}
   impactPrefab: {fileID: 980573640993047689, guid: c462771765132ac4d9747f83645adb3b, type: 3}
   cardBackPrefab: {fileID: 2499461834380709269, guid: 44b9f50849d1ee54e980fa67e6be7254, type: 3}
@@ -172,3 +174,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.EffectsVolume
   baseVolume: 0.18
+--- !u!114 &384168145643349836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802774260234626589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e1c0cf1608d9b4fb7ebf977eea2a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.PrefabConfigBinding
+  configId: S01

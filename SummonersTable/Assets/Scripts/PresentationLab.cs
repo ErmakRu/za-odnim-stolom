@@ -18,12 +18,27 @@ namespace SummonersTable
             controls.Click("animation",()=>board.Actor(1)?.Play(animations[previewAnimation],3));controls.Click("title",()=>FindFirstObjectByType<MotionAnnouncements>()?.Preview("ВАШ ХОД"));
             controls.Click("nextSpell",()=>previewSpell=(previewSpell+1)%8);controls.Click("spell",()=>board.PreviewSpell("S"+(previewSpell+1).ToString("00")));
             controls.Click("music",()=>{if(musicSource.isPlaying)musicSource.Stop();else musicSource.Play();});
-            controls.Click("save",()=>{status=Path.Combine(Application.persistentDataPath,"presentation.json");File.WriteAllText(status,JsonUtility.ToJson(board.CameraRig.Data,true));});
-            controls.Click("load",()=>{try{board.CameraRig.Apply(JsonUtility.FromJson<PresentationData>(File.ReadAllText(Path.Combine(Application.persistentDataPath,"presentation.json"))));status="Настройки загружены";}catch(System.Exception e){status=e.Message;}});
+            controls.Click("save",SaveCamera);
+            controls.Click("load",()=>{ConfigRuntime.Reload();status=ConfigRuntime.Message;});
             controls.Get<Slider>("sensitivity").onValueChanged.AddListener(v=>board.CameraRig.Data.lookSensitivity=v);
             controls.Get<Slider>("height").onValueChanged.AddListener(v=>board.CameraRig.Data.cameraModes[board.CameraRig.Mode].height=v);
             controls.Get<Slider>("distance").onValueChanged.AddListener(v=>board.CameraRig.Data.cameraModes[board.CameraRig.Mode].distance=v);
             controls.Get<Slider>("fov").onValueChanged.AddListener(v=>board.CameraRig.Data.cameraModes[board.CameraRig.Mode].fieldOfView=v);
+        }
+        void SaveCamera()
+        {
+            string temp=null;
+            try
+            {
+                string path=Path.Combine(ConfigRuntime.DirectoryPath,"presentation.json");var data=ConfigBundle.Clone(ConfigRuntime.Current.presentation);data.camera=ConfigBundle.Clone(board.CameraRig.Data);
+                string text=JsonUtility.ToJson(data,true);ConfigBundle.Read(ConfigRuntime.DirectoryPath,"presentation.json",text);
+                temp=path+".tmp";File.WriteAllText(temp,text);File.Replace(temp,path,null);ConfigRuntime.Reload();status="Сохранено: Config/presentation.json";
+#if UNITY_EDITOR
+                UnityEditor.AssetDatabase.Refresh();
+#endif
+            }
+            catch(System.Exception e){status=e.Message;}
+            finally{if(temp!=null&&File.Exists(temp))File.Delete(temp);}
         }
         void Update()
         {

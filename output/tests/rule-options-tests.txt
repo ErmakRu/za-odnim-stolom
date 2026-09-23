@@ -1,0 +1,1 @@
+PASS commanders 4+4+2, mixed spending, rejection without charge, failure/return charging, free reactions, reset, wizard routes, capped/uncapped protection/attack/spell power/interference/forgiveness/tax, immutable lobby snapshots, protocol 9 privacy copy, no in-match mutation, dynamic descriptions, 30 inherited depth variants and compiled shaders.

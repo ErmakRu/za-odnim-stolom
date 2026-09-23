@@ -24,7 +24,7 @@ namespace SummonersTable
         public void ClearMatchVisuals()
         {
             foreach(var o in projectiles.Values)if(o!=null)Destroy(o);projectiles.Clear();
-            previousHp.Clear();displayedHp.Clear();hpChangedAt.Clear();observedImpacts.Clear();
+            worldNoticeSerial=0;previousHp.Clear();displayedHp.Clear();hpChangedAt.Clear();observedImpacts.Clear();
             ClearSpells();
         }
         void TintUnit(GameObject obj,UnitState unit,int owner,int viewer)
@@ -45,10 +45,10 @@ namespace SummonersTable
         {
             if(eventMatch!=state.matchId){ClearMatchVisuals();eventMatch=state.matchId;}
             SyncOrbs(state);
-            SyncSpells(state,clock);
+            SyncSpells(state,clock);SyncWorldEvents(state);
             var hover=inputEnabled?Pick(Input.mousePosition):null;
             string hoverId=hover!=null&&hover.kind=="unit"?hover.uid:"";
-            if(hoverId!=""&&hoverId!=hoveredUnit)PlaySound(CameraRig.settings?.cardHover,640*Random.Range(.94f,1.06f),.045f);
+            if(hoverId!=""&&hoverId!=hoveredUnit)ConfigAudio.Play("card.hover");
             hoveredUnit=hoverId;
             if(units.TryGetValue(hoverId,out var hoverObj))
             {
@@ -69,7 +69,7 @@ namespace SummonersTable
                     {
                         var prefab=CameraRig.settings?.attackEffect;
                         projectile=prefab!=null?Instantiate(prefab,transform):Sphere("Attack preview",.18f,SeatColors[e.source]);if(prefab!=null)projectile.transform.localScale*=CameraRig.settings.attackEffectScale;projectiles[e.id]=projectile;
-                        PlaySound(CameraRig.settings?.attack,420,.075f);
+                        ConfigAudio.Play("creature.attack");
                     }
                     projectile.transform.position=Vector3.Lerp(from,to,t/.4f)+Vector3.up*Mathf.Sin(t/.4f*Mathf.PI)*.45f;
                     if(units.TryGetValue(e.unitUid,out var card))card.transform.position+=(to-from).normalized*(Mathf.Sin(t/.4f*Mathf.PI)*.32f);
@@ -78,7 +78,7 @@ namespace SummonersTable
                 {
                     SpawnImpact(to,e.damage);
                     if(e.targetUnit!="")Invalid(e.targetUnit);
-                    PlaySound(CameraRig.settings?.hit,190,.09f);
+                    ConfigAudio.Play("damage.hit");
                 }
             }
             foreach(var id in projectiles.Keys.Where(id=>!activeProjectiles.Contains(id)).ToList()){Destroy(projectiles[id]);projectiles.Remove(id);}
@@ -128,13 +128,13 @@ namespace SummonersTable
                 foreach(var orb in orbs)Destroy(orb);orbs.Clear();orbLit.Clear();orbCast=cast.id;orbMistakes=0;
                 for(int i=0;i<length+3;i++){orbs.Add(QteOrb(i>=length,i>=length));orbLit.Add(i>=length);}
             }
-            if(cast.qteMistakes>orbMistakes){errorPulseUntil=Time.unscaledTime+.45f;orbMistakes=cast.qteMistakes;PlaySound(CameraRig.settings?.qteError,150,.1f);}
-            var away=Away(cast.owner,count);var right=Vector3.Cross(Vector3.up,-away);Vector3 start=away*3.1f+Vector3.up*2.75f;
+            if(cast.qteMistakes>orbMistakes){errorPulseUntil=Time.unscaledTime+.45f;orbMistakes=cast.qteMistakes;ConfigAudio.Play("qte.error");}
+            var away=Away(cast.owner,count);var right=Vector3.Cross(Vector3.up,-away);Vector3 start=away*3.1f+Vector3.up*(TableTop+1.75f);
             Color color=cast.cardId.StartsWith("C")?new Color(.25f,.79f,.69f):new Color(.97f,.74f,.36f);
             for(int i=0;i<orbs.Count;i++)
             {
                 bool main=i<length,lit=main?i<cast.qteProgress:i-length<3-cast.qteMistakes;
-                if(orbLit[i]!=lit){Destroy(orbs[i]);orbs[i]=QteOrb(lit,!main);orbLit[i]=lit;if(main&&lit)PlaySound(CameraRig.settings?.qteSuccess,640,.045f);}
+                if(orbLit[i]!=lit){Destroy(orbs[i]);orbs[i]=QteOrb(lit,!main);orbLit[i]=lit;if(main&&lit)ConfigAudio.Play("qte.correct");}
                 var orb=orbs[i];orb.transform.position=start+right*(main?(i-(length-1)*.5f)*.36f:(length*.18f+(i-length)*.2f))+Vector3.up*(main?0:.4f);
                 bool pulse=main&&i==cast.qteProgress&&Time.unscaledTime<errorPulseUntil;
                 bool effects=CameraRig.settings?.qteFire!=null;

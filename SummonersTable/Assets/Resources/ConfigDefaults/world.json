@@ -1,0 +1,31 @@
+{
+    "schemaVersion": 1,
+    "id": 0,
+    "name": "Таверна",
+    "timeChanges": false,
+    "playersTurnTime": -1.0,
+    "qte": -1.0,
+    "revealTime": -1.0,
+    "gameTimer": -1.0,
+    "playerRange": {
+        "x": 2,
+        "y": 4
+    },
+    "scale": 1.0,
+    "scene": "asset:de410e4042c165e4880349e7e965be9d",
+    "events": [
+        {
+            "id": 0,
+            "enabled": false,
+            "eventId": 3,
+            "chance": 30.0,
+            "everyTurns": 1,
+            "randomDuration": false,
+            "duration": 2,
+            "durationRange": {
+                "x": 1,
+                "y": 3
+            }
+        }
+    ]
+}

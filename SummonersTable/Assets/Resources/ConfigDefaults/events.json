@@ -1,0 +1,17 @@
+{
+    "schemaVersion": 1,
+    "events": [
+        {
+            "id": 3,
+            "name": "Да не бомбит у меня!",
+            "description": "Каждый второй верный символ QTE наносит 1 урон случайному существу на столе.",
+            "mechanic": 0,
+            "everySymbols": 2,
+            "value": 1,
+            "vfx": "asset:20f44ec5f6606de49bb9cd293062373f",
+            "sound": "damage.hit",
+            "vfxScale": 0.25,
+            "lifetime": 1.5
+        }
+    ]
+}

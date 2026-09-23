@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7796556277517307167}
   - component: {fileID: 2892075514538206197}
   - component: {fileID: 8114109731763100406}
+  - component: {fileID: 4278990262349341471}
   m_Layer: 0
   m_Name: ExitConfirmation
   m_TagString: Untagged
@@ -104,6 +105,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4278990262349341471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2379887184282884731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e1c0cf1608d9b4fb7ebf977eea2a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.PrefabConfigBinding
+  configId: ExitConfirmation
 --- !u!1 &4315148875111127432
 GameObject:
   m_ObjectHideFlags: 0

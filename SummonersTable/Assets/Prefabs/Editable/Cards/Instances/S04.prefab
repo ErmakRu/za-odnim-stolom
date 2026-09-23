@@ -148,8 +148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6140666943963998782, guid: 530e1546ce8a5f2459e7347ba6fbfee9, type: 3}
       propertyPath: definition.art
-      value: An enchanted battle helmet resting on a tiny deckchair beside a steaming
-        mug, an abstract magical pause symbol formed from two glowing bars
+      value: art:S04
       objectReference: {fileID: 0}
     - target: {fileID: 6140666943963998782, guid: 530e1546ce8a5f2459e7347ba6fbfee9, type: 3}
       propertyPath: definition.qte
