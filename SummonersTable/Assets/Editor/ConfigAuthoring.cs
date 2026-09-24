@@ -150,7 +150,7 @@ namespace SummonersTable.Editor
             return new WorldConfig{table=TransformConfig.Read(board.authoredEnvironment.Find("Imported table")),chair=TransformConfig.Read(seat.chair),avatar=TransformConfig.Read(seat.avatar.transform),heroTarget=TransformConfig.Read(seat.heroTarget),slots=seat.slots.Select(TransformConfig.Read).ToArray(),unitsPerMetre=p.unitsPerMetre,tableHeight=p.tableHeight,tableDiameter=p.tableDiameter,avatarHipHeight=seat.avatar.seatedHipHeight,layouts=board.layouts.Select(l=>new LayoutConfig{players=l.playerCount,seats=l.GetComponentsInChildren<PlayerSeatView>(true).Select(v=>new SeatConfig{root=TransformConfig.Read(v.transform)}).ToArray()}).ToArray()};
         }
         static IEnumerable<string> PrefabPaths()=>AssetDatabase.FindAssets("t:Prefab",new[]{"Assets/Prefabs"}).Select(AssetDatabase.GUIDToAssetPath).OrderBy(p=>p.Count(c=>c=='/')).ThenBy(p=>p);
-        static void BindPrefabs()
+        public static void BindPrefabs()
         {
             foreach(var path in PrefabPaths())
             {

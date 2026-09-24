@@ -50,6 +50,8 @@ namespace SummonersTable.Editor
                     seat.avatar.Animator?.Rebind();seat.avatar.Animator?.Update(0);seat.avatar.EditorPose();
                     if(seat.status!=null){seat.status.nickname.text="Игрок "+(Array.IndexOf(layout.Seats,seat)+1);seat.status.healthNumber.text="30 / 30";seat.status.healthFill.fillAmount=1;seat.status.PreviewPose(manager.table.tableCamera);}
                 }
+                var presConfig = ConfigBundle.Read(ConfigAuthoring.Folder).presentation.camera;
+                manager.table.PreviewCamera(presConfig, 0, manager.previewPlayers);
                 SceneView.RepaintAll();
             }
             else if(manager.section==ManagerSection.Interface&&manager.table!=null)

@@ -23,13 +23,14 @@ namespace SummonersTable
                 PlaySpell(e.cardId,from,points);
             }
             spellInstances.RemoveAll(f=>f==null);
-            var active=new HashSet<string>();var stun=cardLibrary.Find("S04").spellEffect;
+            if(cardLibrary==null)cardLibrary=Resources.Load<CardLibrary>("CardLibrary");
+            var active=new HashSet<string>();var stun=cardLibrary?.Find("S04")?.spellEffect;
             foreach(var p in state.players)foreach(var u in p.units.Where(u=>u.skipAttacks>0))
-            {active.Add(u.uid);if(!stunned.ContainsKey(u.uid))stunned[u.uid]=ConfiguredPersistent(stun,SlotPosition(p.seat,u.slot,count)+Vector3.up*.4f,transform);}
+            {active.Add(u.uid);if(!stunned.ContainsKey(u.uid)&&stun!=null)stunned[u.uid]=ConfiguredPersistent(stun,SlotPosition(p.seat,u.slot,count)+Vector3.up*.4f,transform);}
             foreach(var id in stunned.Keys.Where(id=>!active.Contains(id)).ToList()){Destroy(stunned[id]);stunned.Remove(id);}
         }
         GameObject ConfiguredPersistent(SpellEffect prefab,Vector3 position,Transform parent)
-        {var settings=ConfigRuntime.Current?.vfx.effects.FirstOrDefault(e=>e.id=="S04");if(settings==null)return prefab.Persistent(position,parent);var source=ConfigRuntime.Assets.Get<GameObject>(settings.persistent);if(source==null)return null;var obj=Instantiate(source,position,Quaternion.identity,parent);obj.transform.localScale*=settings.persistentScale;return obj;}
+        {var settings=ConfigRuntime.Current?.vfx.effects.FirstOrDefault(e=>e.id=="S04");if(settings==null)return prefab!=null?prefab.Persistent(position,parent):null;var source=ConfigRuntime.Assets.Get<GameObject>(settings.persistent);if(source==null)return prefab!=null?prefab.Persistent(position,parent):null;var obj=Instantiate(source,position,Quaternion.identity,parent);obj.transform.localScale*=settings.persistentScale;return obj;}
         void PlaySpell(string id,Vector3 from,List<Vector3> targets)
         {var prefab=cardLibrary.Find(id)?.spellEffect;if(prefab==null)return;var fx=Instantiate(prefab,transform);ConfigRuntime.ConfigureSpell(fx,id);spellInstances.Add(fx);fx.Play(from,targets,ViewCamera);}
         public void PreviewSpell(string id)

@@ -24,4 +24,4 @@ PASS playability highlight follows limits, slots, targets and reaction window
 PASS rematch votes, changed decks and ordered match transitions
 PASS full matches for 2, 3, 4 players across 24 deterministic seeds
 Assertions: 38739
-UTC: 2026-09-23T13:54:33.7895241Z
+UTC: 2026-09-24T10:04:16.2636903Z

@@ -48,6 +48,8 @@ namespace SummonersTable
             var eventSystems=FindObjectsByType<UnityEngine.EventSystems.EventSystem>(FindObjectsSortMode.InstanceID);
             for(int i=1;i<eventSystems.Length;i++)eventSystems[i].gameObject.SetActive(false);
             captureMode=Environment.GetCommandLineArgs().Contains("--capture-preview")||Environment.GetCommandLineArgs().Contains("--capture-lab")||Environment.GetCommandLineArgs().Contains("--capture-shaders")||Environment.GetCommandLineArgs().Contains("--capture-options")||Environment.GetCommandLineArgs().Contains("--capture-config");
+            var listeners=FindObjectsByType<AudioListener>(FindObjectsSortMode.None);
+            for(int i=1;i<listeners.Length;i++)Destroy(listeners[i]);
             steam=new SteamSession(catalog);if(!captureMode&&FindFirstObjectByType<PresentationLab>()==null)steam.Initialize();
             BindPrefabInterface();ConfigRuntime.ApplyScene();
             tickTone=Tone(680,.045f);failTone=Tone(160,.12f);successTone=Tone(980,.14f);

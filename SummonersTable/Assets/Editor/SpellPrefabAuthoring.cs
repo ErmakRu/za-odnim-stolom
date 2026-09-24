@@ -25,11 +25,17 @@ namespace SummonersTable.Editor
             var hits=new[]{"Abilities_Pop_Big_01","Abilities_Wind_Shimmer_01","Abilities_Pop_Big_02","UI_Notification_Ding_01","Abilities_Air_03","UI_Notification_Ding_02","Abilities_Wind_Shimmer_02","Abilities_Poof_01"};
             for(int i=0;i<8;i++)
             {
-                string id="S"+(i+1).ToString("00"),path=folder+id+".prefab";if(File.Exists(path))continue;
-                var obj=new GameObject(id+" — "+library.Find(id).definition.name);var fx=obj.AddComponent<SpellEffect>();fx.motion=modes[i];fx.travelPrefab=travel[i];fx.impactPrefab=impact[i];fx.cardBackPrefab=library.cardBackPrefab;
-                fx.travelScale=i==2?.11f:.2f;fx.impactScale=i==0?.24f:i==1?.55f:.35f;fx.persistentPrefab=i==3?stars:null;fx.persistentScale=.13f;
-                fx.launchSound=FindSound(launches[i]);fx.impactSound=FindSound(hits[i]);fx.sound=obj.AddComponent<AudioSource>();fx.sound.playOnAwake=false;obj.AddComponent<EffectsVolume>().baseVolume=.18f;
-                var asset=Save(obj,path).GetComponent<SpellEffect>();string cardPath=AssetDatabase.GetAssetPath(library.Find(id));var card=PrefabUtility.LoadPrefabContents(cardPath);card.GetComponent<CardView>().spellEffect=asset;PrefabUtility.SaveAsPrefabAsset(card,cardPath);PrefabUtility.UnloadPrefabContents(card);
+                string id="S"+(i+1).ToString("00"),path=folder+id+".prefab";
+                SpellEffect asset=null;
+                if(!File.Exists(path))
+                {
+                    var obj=new GameObject(id+" — "+library.Find(id).definition.name);var fx=obj.AddComponent<SpellEffect>();fx.motion=modes[i];fx.travelPrefab=travel[i];fx.impactPrefab=impact[i];fx.cardBackPrefab=library.cardBackPrefab;
+                    fx.travelScale=i==2?.11f:.2f;fx.impactScale=i==0?.24f:i==1?.55f:.35f;fx.persistentPrefab=i==3?stars:null;fx.persistentScale=.13f;
+                    fx.launchSound=FindSound(launches[i]);fx.impactSound=FindSound(hits[i]);fx.sound=obj.AddComponent<AudioSource>();fx.sound.playOnAwake=false;obj.AddComponent<EffectsVolume>().baseVolume=.18f;
+                    asset=Save(obj,path).GetComponent<SpellEffect>();
+                }
+                else asset=AssetDatabase.LoadAssetAtPath<SpellEffect>(path);
+                string cardPath=AssetDatabase.GetAssetPath(library.Find(id));var card=PrefabUtility.LoadPrefabContents(cardPath);card.GetComponent<CardView>().spellEffect=asset;PrefabUtility.SaveAsPrefabAsset(card,cardPath);PrefabUtility.UnloadPrefabContents(card);
             }
         }
         static AudioClip FindSound(string suffix)

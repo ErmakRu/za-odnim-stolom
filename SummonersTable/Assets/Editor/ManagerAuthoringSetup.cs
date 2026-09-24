@@ -13,6 +13,7 @@ namespace SummonersTable.Editor
     {
         const string Root="Assets/Prefabs/Editable/",Folder="Assets/StreamingAssets/Config";
         static GameObject Asset(string path)=>AssetDatabase.LoadAssetAtPath<GameObject>(path);
+        [MenuItem("Summoners Table/Setup Manager Authoring Labs")]
         public static void Run()
         {
             Backup();MigrateAudio();MigrateLocation();CreateAnimationDefaults();CreateInterfaceDefaults();
@@ -140,7 +141,7 @@ namespace SummonersTable.Editor
             Directory.CreateDirectory("Assets/Scenes/Authoring");AssetDatabase.Refresh();
             void Scene(string name,params ManagerSection[] sections)
             {
-                string path="Assets/Scenes/Authoring/"+name+".unity";if(File.Exists(path))return;
+                string path="Assets/Scenes/Authoring/"+name+".unity";
                 var scene=EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);
                 new GameObject("Инструкция — выбирайте Manager").AddComponent<AuthoringLab>();
                 var world=((GameObject)PrefabUtility.InstantiatePrefab(Asset(ConfigAuthoring.WorldPath))).GetComponent<TableBoard>();world.gameObject.SetActive(true);
@@ -151,7 +152,7 @@ namespace SummonersTable.Editor
                 }
                 EditorSceneManager.SaveScene(scene,path);
             }
-            Scene("LocationLab",ManagerSection.Events,ManagerSection.Rules);
+            Scene("LocationLab",ManagerSection.World,ManagerSection.Events,ManagerSection.Rules);
             Scene("EffectsLab",ManagerSection.Vfx,ManagerSection.Audio,ManagerSection.Events);
             Scene("AnimationLab",ManagerSection.PlayerAnimations,ManagerSection.Audio);
             Scene("CardsLab",ManagerSection.Cards,ManagerSection.Decks,ManagerSection.Interface,ManagerSection.Presentation);

@@ -10,7 +10,6 @@ using Object=UnityEngine.Object;
 
 namespace SummonersTable.Editor
 {
-    // One-time migration / creation of missing assets. Existing authored assets are preserved.
     public static partial class PrefabAuthoring
     {
         const string Root="Assets/Prefabs/Editable/";
@@ -32,7 +31,11 @@ namespace SummonersTable.Editor
                     EditorSceneManager.SaveScene(scene);
                 }
             }
-            CreateSpellEffects();FinalizeInterface();CreateLab();
+            CreateSpellEffects();
+            var catalog=JsonUtility.FromJson<Catalog>(Resources.Load<TextAsset>("Data/catalog").text);
+            library.cards=catalog.cards.Select(c=>Load(Root+"Cards/Instances/"+c.id+".prefab").GetComponent<CardView>()).ToArray();
+            EditorUtility.SetDirty(library);
+            FinalizeInterface();CreateLab();ConfigAuthoring.BindPrefabs();
             AssetDatabase.SaveAssets();AssetDatabase.Refresh();
         }
         static GameObject Load(string path){return AssetDatabase.LoadAssetAtPath<GameObject>(path);}
@@ -46,7 +49,7 @@ namespace SummonersTable.Editor
         {
             var t=R(name,parent,r).gameObject.AddComponent<Text>();t.font=font;t.text=value;t.fontSize=size;t.color=Color.white;t.alignment=align;t.raycastTarget=false;t.supportRichText=false;t.horizontalOverflow=HorizontalWrapMode.Wrap;return t;
         }
-        static GameObject Save(GameObject obj,string path){var asset=PrefabUtility.SaveAsPrefabAsset(obj,path);Object.DestroyImmediate(obj);return asset;}
+        static GameObject Save(GameObject obj,string path){if(obj.GetComponent<PrefabConfigBinding>()==null)obj.AddComponent<PrefabConfigBinding>().configId=Path.GetFileNameWithoutExtension(path);var asset=PrefabUtility.SaveAsPrefabAsset(obj,path);Object.DestroyImmediate(obj);return asset;}
         static Material Mat(string name,Color color,Texture texture=null)
         {
             string path=Root+"World/"+name+".mat";var old=AssetDatabase.LoadAssetAtPath<Material>(path);if(old!=null)return old;
@@ -60,40 +63,65 @@ namespace SummonersTable.Editor
         {
             var catalog=JsonUtility.FromJson<Catalog>(Resources.Load<TextAsset>("Data/catalog").text);
             string path=Root+"Cards/CardBase.prefab";
-            if(!File.Exists(path))
+            if(File.Exists(path))File.Delete(path);
             {
                 var root=Center("CardBase",null,new Vector2(270,480));var v=root.gameObject.AddComponent<CardView>();
-                v.playableGlow=I("Playable glow",root,new Rect(55,130,160,220),teal);v.selectionFrame=I("Selected border",root,new Rect(57,132,156,216),gold);
+                v.playableGlow=I("Playable glow",root,new Rect(-4,-4,278,488),new Color(0.22f,0.96f,0.56f,0.65f));
+                v.selectionFrame=I("Selected border",root,new Rect(-5,-5,280,490),new Color(1f,0.85f,0.35f,0.95f));
                 v.fullFace=Center("Full face",root,new Vector2(270,480)).gameObject;var f=v.fullFace.transform;
-                I("Background",f,new Rect(0,0,270,480),ink,true);v.fullType=I("Type band",f,new Rect(0,0,270,32),teal);v.fullTypeText=T("Type",f,new Rect(9,0,252,32),"КАРТА",16,TextAnchor.MiddleCenter);
-                v.fullArtwork=R("Artwork",f,new Rect(8,40,254,155)).gameObject.AddComponent<RawImage>();v.fullArtwork.raycastTarget=false;
-                v.fullRole=I("Creature group color",f,new Rect(8,199,254,25),teal);v.fullRoleText=T("Faction and group",f,new Rect(12,199,246,25),"",14,TextAnchor.MiddleCenter);
-                v.fullName=T("Name",f,new Rect(12,232,246,54),"Название",22,TextAnchor.MiddleCenter);v.fullName.fontStyle=FontStyle.Bold;
-                v.fullStats=T("Stats",f,new Rect(12,290,246,32),"",16,TextAnchor.MiddleCenter);
-                v.fullRules=T("Rules",f,new Rect(14,329,242,139),"",18,TextAnchor.UpperLeft);v.fullRules.resizeTextForBestFit=true;v.fullRules.resizeTextMinSize=13;v.fullRules.resizeTextMaxSize=18;
+                I("Background",f,new Rect(0,0,270,480),ink,true);
+                v.fullBorder=I("Border",f,new Rect(0,0,270,480),teal);
+                var innerBg=I("Inner Card",f,new Rect(2,2,266,476),ink);
+                v.fullType=I("Type band",f,new Rect(3,3,264,34),teal);
+                v.fullTypeText=T("Type",v.fullType.transform,new Rect(0,0,264,34),"СУЩЕСТВО",16,TextAnchor.MiddleCenter);v.fullTypeText.fontStyle=FontStyle.Bold;v.fullTypeText.color=new Color(0.04f,0.08f,0.1f,1f);
+                v.fullArtwork=R("Artwork",f,new Rect(6,40,258,180)).gameObject.AddComponent<RawImage>();v.fullArtwork.raycastTarget=false;
+                v.fullQteContainer=R("QTE indicators",f,new Rect(12,46,160,20));
+                var statsBadge=I("Stats badge",f,new Rect(130,176,128,38),new Color(0.04f,0.08f,0.12f,0.92f));
+                v.fullStatsBadge=statsBadge.gameObject;
+                v.fullStats=T("Stats",statsBadge.transform,new Rect(0,0,128,38),"АТК 3   HP 4",17,TextAnchor.MiddleCenter);v.fullStats.color=new Color(0.22f,0.96f,0.56f,1f);v.fullStats.fontStyle=FontStyle.Bold;
+                v.fullName=T("Name",f,new Rect(10,224,250,34),"Название",21,TextAnchor.MiddleLeft);v.fullName.fontStyle=FontStyle.Bold;
+                v.fullRole=I("Creature group color",f,new Rect(10,260,250,22),new Color(0.08f,0.16f,0.2f,0.85f));
+                v.fullRoleText=T("Faction and group",v.fullRole.transform,new Rect(6,0,238,22),"",13,TextAnchor.MiddleLeft);
+                v.fullRules=T("Rules",f,new Rect(10,286,250,186),"",15,TextAnchor.UpperLeft);v.fullRules.resizeTextForBestFit=true;v.fullRules.resizeTextMinSize=11;v.fullRules.resizeTextMaxSize=15;v.fullRules.color=new Color(0.82f,0.88f,0.91f,1f);
+                
                 v.compactFace=Center("Compact face",root,new Vector2(150,210)).gameObject;f=v.compactFace.transform;
-                I("Background",f,new Rect(0,0,150,210),ink,true);v.compactType=I("Type band",f,new Rect(0,0,150,25),teal);v.compactTypeText=T("Type",f,new Rect(3,0,144,25),"",12,TextAnchor.MiddleCenter);
-                v.compactArtwork=R("Artwork",f,new Rect(4,29,142,102)).gameObject.AddComponent<RawImage>();v.compactArtwork.raycastTarget=false;
-                v.compactRole=I("Group color",f,new Rect(4,131,142,5),teal);v.compactName=T("Name",f,new Rect(7,140,136,43),"Название",16);v.compactName.fontStyle=FontStyle.Bold;v.compactStats=T("Stats",f,new Rect(7,185,136,23),"",14);
+                I("Background",f,new Rect(0,0,150,210),ink,true);
+                v.compactBorder=I("Border",f,new Rect(0,0,150,210),teal);
+                var innerCompact=I("Inner Card",f,new Rect(2,2,146,206),ink);
+                v.compactType=I("Type band",f,new Rect(2,2,146,22),teal);
+                v.compactTypeText=T("Type",v.compactType.transform,new Rect(0,0,146,22),"СУЩЕСТВО",11,TextAnchor.MiddleCenter);v.compactTypeText.fontStyle=FontStyle.Bold;v.compactTypeText.color=new Color(0.04f,0.08f,0.1f,1f);
+                v.compactArtwork=R("Artwork",f,new Rect(4,26,142,95)).gameObject.AddComponent<RawImage>();v.compactArtwork.raycastTarget=false;
+                v.compactQteContainer=R("QTE indicators",f,new Rect(8,30,90,14));
+                var compactBadge=I("Stats badge",f,new Rect(72,94,70,24),new Color(0.04f,0.08f,0.12f,0.92f));
+                v.compactStatsBadge=compactBadge.gameObject;
+                v.compactStats=T("Stats",compactBadge.transform,new Rect(0,0,70,24),"3 / 4",12,TextAnchor.MiddleCenter);v.compactStats.color=new Color(0.22f,0.96f,0.56f,1f);v.compactStats.fontStyle=FontStyle.Bold;
+                v.compactName=T("Name",f,new Rect(6,124,138,24),"Название",13);v.compactName.fontStyle=FontStyle.Bold;
+                v.compactRole=I("Group color",f,new Rect(6,149,138,16),new Color(0.08f,0.16f,0.2f,0.85f));
+                v.compactRoleText=T("Group",v.compactRole.transform,new Rect(4,0,130,16),"",10);
+                var compactRules=T("Compact rules",f,new Rect(6,168,138,38),"",10,TextAnchor.UpperLeft);compactRules.resizeTextForBestFit=true;compactRules.resizeTextMinSize=8;compactRules.resizeTextMaxSize=11;compactRules.color=new Color(0.75f,0.82f,0.85f,1f);
+                
                 v.worldFace=new GameObject("Tabletop face");v.worldFace.transform.SetParent(root,false);
                 v.worldArtwork=Plane("Artwork",v.worldFace.transform,Vector3.zero,Vector3.one,Mat("Card neutral",Color.white));
                 v.worldType=Plane("Type edge",v.worldFace.transform,new Vector3(0,.47f,-.01f),new Vector3(1,.06f,1),Mat("Creature type",teal));
                 v.worldRole=Plane("Creature group edge",v.worldFace.transform,new Vector3(0,-.47f,-.01f),new Vector3(1,.06f,1),Mat("Role neutral",Color.white));
                 var outline=new GameObject("Readiness outline");outline.transform.SetParent(v.worldFace.transform,false);v.worldOutline=outline.AddComponent<LineRenderer>();v.worldOutline.sharedMaterial=Mat("Outline",Color.white);v.worldOutline.useWorldSpace=false;v.worldOutline.loop=true;v.worldOutline.positionCount=4;v.worldOutline.SetPositions(new[]{new Vector3(-.52f,-.52f,-.02f),new Vector3(.52f,-.52f,-.02f),new Vector3(.52f,.52f,-.02f),new Vector3(-.52f,.52f,-.02f)});v.worldOutline.startWidth=v.worldOutline.endWidth=.025f;
+                var depth=root.gameObject.AddComponent<CardDepthVisual>();depth.uiMaterial=DepthMaterial("CardWindowUI");depth.worldMaterial=DepthMaterial("CardWindowWorld");
                 v.Mode("full");v.Highlight(false,false);Save(root.gameObject,path);
             }
             foreach(string type in new[]{"creature","spell","reaction"})
             {
                 string name=type=="creature"?"Creature":type=="spell"?"Spell":"Reaction";string file=Root+"Cards/Types/"+name+"Card.prefab";
-                if(!File.Exists(file)){var instance=(GameObject)PrefabUtility.InstantiatePrefab(Load(path));instance.name=name+"Card";var v=instance.GetComponent<CardView>();v.definition.kind=type;var c=catalog.typeColors.Find(x=>x.id==type);ColorUtility.TryParseHtmlString(c.hex,out var tint);v.fullType.color=v.compactType.color=tint;Save(instance,file);}
+                if(File.Exists(file))File.Delete(file);
+                {var instance=(GameObject)PrefabUtility.InstantiatePrefab(Load(path));instance.name=name+"Card";var v=instance.GetComponent<CardView>();v.definition.kind=type;var c=catalog.typeColors.Find(x=>x.id==type);ColorUtility.TryParseHtmlString(c.hex,out var tint);if(v.fullType!=null)v.fullType.color=tint;if(v.compactType!=null)v.compactType.color=tint;if(v.fullBorder!=null)v.fullBorder.color=tint;if(v.compactBorder!=null)v.compactBorder.color=tint;Save(instance,file);}
             }
             foreach(var card in catalog.cards)
             {
-                string file=Root+"Cards/Instances/"+card.id+".prefab";if(File.Exists(file))continue;
+                string file=Root+"Cards/Instances/"+card.id+".prefab";
+                if(File.Exists(file))File.Delete(file);
                 string type=card.kind=="creature"?"Creature":card.kind=="spell"?"Spell":"Reaction";
                 var instance=(GameObject)PrefabUtility.InstantiatePrefab(Load(Root+"Cards/Types/"+type+"Card.prefab"));instance.name=card.id+" — "+card.name;var v=instance.GetComponent<CardView>();v.Import(card,catalog);
                 v.worldArtwork.sharedMaterial=Mat(card.id+" art",Color.white,Resources.Load<Texture2D>("Art/"+card.id));
-                v.worldType.sharedMaterial=Mat(type+" edge",v.fullType.color);if(card.kind=="creature")v.worldRole.sharedMaterial=Mat(card.role+" edge",v.fullRole.color);
+                v.worldType.sharedMaterial=Mat(type+" edge",v.fullType!=null?v.fullType.color:Color.white);if(card.kind=="creature")v.worldRole.sharedMaterial=Mat(card.role+" edge",v.fullRole!=null?v.fullRole.color:Color.white);
                 Save(instance,file);
             }
             if(!File.Exists(Root+"World/CardBack.prefab")){var obj=new GameObject("Card back");Plane("Back",obj.transform,Vector3.zero,Vector3.one,Mat("Card back",Color.white,Resources.Load<Texture2D>("Art/card_back")));Save(obj,Root+"World/CardBack.prefab");}

@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-#if ENABLE_INPUT_SYSTEM
+using UnityEngine;
+#if ENABLE_INPUT_SYSTEM && PACKAGE_INPUT_SYSTEM
 using UnityEngine.InputSystem.UI;
 #else
 using UnityEngine.EventSystems;
@@ -11,7 +11,7 @@ namespace Michsky.UI.MTP
     {
         void Awake()
         {
-#if ENABLE_INPUT_SYSTEM
+#if ENABLE_INPUT_SYSTEM && PACKAGE_INPUT_SYSTEM
             if (!gameObject.TryGetComponent<InputSystemUIInputModule>(out var _))
             {
                 gameObject.AddComponent<InputSystemUIInputModule>();
