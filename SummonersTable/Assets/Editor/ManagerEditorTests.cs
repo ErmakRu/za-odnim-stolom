@@ -98,7 +98,7 @@ namespace SummonersTable.Editor
             engine.Submit(0,new GameCommand{kind="key",seq=++sequence,phaseId=q.id,key=wrong},1);Check(creature.hp==8,"mistake no event damage");
             engine.Submit(0,new GameCommand{kind="key",seq=++sequence,phaseId=q.id,key=q.sequence[q.index].ToString()},1);Check(creature.hp==7&&engine.State.worldNotices.Count==1,"second correct symbol damages once");
             var wire=JsonUtility.FromJson<WireMessage>(JsonUtility.ToJson(new WireMessage{state=engine.View(1,1)}));wire.state.RestoreViewPrivacy(1);
-            Check(wire.protocol==9&&wire.state.qte==null&&wire.state.worldEvents.Count==1&&wire.state.worldNotices.Count==1,"world state shared, QTE private");
+            Check(wire.protocol==10&&wire.state.qte==null&&wire.state.worldEvents.Count==1&&wire.state.worldNotices.Count==1,"world state shared, QTE private");
             wire.state.worldEvents[0].expiresTurn=99;Check(engine.State.worldEvents[0].expiresTurn==3,"world views independent");
             while(engine.State.qte!=null){q=engine.State.qte;engine.Submit(0,new GameCommand{kind="key",seq=++sequence,phaseId=q.id,key=q.sequence[q.index].ToString()},1);}
             Advance(engine,ref sequence);Check(engine.State.turnNumber==2&&engine.State.worldEvents.Count==1,"duration includes next player's turn");

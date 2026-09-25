@@ -2550,6 +2550,511 @@
         "a": 1
       }
     },
+    "bots": {
+      "schemaVersion": 1,
+      "defaultLocalBotSeats": [
+        1,
+        2,
+        3
+      ],
+      "autoRematch": true,
+      "profiles": [
+        {
+          "mode": "wizards",
+          "root": "root",
+          "timing": {
+            "thinkMin": 0.45,
+            "thinkMax": 0.9,
+            "reactionMin": 0.55,
+            "reactionMax": 1.1,
+            "qteMin": 0.24,
+            "qteMax": 0.48,
+            "qteCorrectChance": 0.97,
+            "retrySeconds": 1
+          },
+          "weights": {
+            "creatureBase": 2,
+            "attack": 1.3,
+            "health": 0.45,
+            "permanentEffect": 1,
+            "spellMultiplier": 1.15,
+            "damage": 1.5,
+            "heal": 1.3,
+            "draw": 2.4,
+            "stun": 0.7,
+            "bounce": 0.85,
+            "swap": 0.35,
+            "risk": 1.5,
+            "killHero": 90,
+            "killUnit": 4,
+            "heroPressure": 4,
+            "unitThreat": 0.45,
+            "healthUrgency": 1.5,
+            "thornsPenalty": 1,
+            "costPenalty": 0.15,
+            "budgetEfficiency": 0.0,
+            "followupWeight": 0.7,
+            "randomJitter": 0.3,
+            "minPlayScore": 0.2,
+            "reactionCopy": 1,
+            "reactionReturn": 0.8,
+            "reactionDefense": 2,
+            "minReactionScore": 1,
+            "randomTargetChance": 0.03
+          },
+          "effects": [
+            {
+              "effect": "spellDraw",
+              "weight": 2.8
+            },
+            {
+              "effect": "guard",
+              "weight": 3.2
+            },
+            {
+              "effect": "attackAura",
+              "weight": 2.7
+            },
+            {
+              "effect": "openingPower",
+              "weight": 2.0
+            },
+            {
+              "effect": "spellPower",
+              "weight": 2.4
+            },
+            {
+              "effect": "thorns",
+              "weight": 2.0
+            },
+            {
+              "effect": "lifesteal",
+              "weight": 1.8
+            },
+            {
+              "effect": "turnDraw",
+              "weight": 3.2
+            },
+            {
+              "effect": "failDraw",
+              "weight": 1.0
+            },
+            {
+              "effect": "turnHeal",
+              "weight": 2.0
+            },
+            {
+              "effect": "forgive",
+              "weight": 1.0
+            },
+            {
+              "effect": "qteExtra",
+              "weight": 1.1
+            },
+            {
+              "effect": "timeBonus",
+              "weight": 0.5
+            },
+            {
+              "effect": "timeTax",
+              "weight": 0.7
+            },
+            {
+              "effect": "spellTax",
+              "weight": 1.2
+            }
+          ],
+          "nodes": [
+            {
+              "id": "root",
+              "type": "selector",
+              "operation": "",
+              "children": [
+                "finish",
+                "round",
+                "qte",
+                "reaction",
+                "turn"
+              ]
+            },
+            {
+              "id": "finish",
+              "type": "sequence",
+              "operation": "",
+              "children": [
+                "finish.check",
+                "finish.do"
+              ]
+            },
+            {
+              "id": "finish.check",
+              "type": "condition",
+              "operation": "matchEnded",
+              "children": []
+            },
+            {
+              "id": "finish.do",
+              "type": "action",
+              "operation": "rematch",
+              "children": []
+            },
+            {
+              "id": "round",
+              "type": "sequence",
+              "operation": "",
+              "children": [
+                "round.check",
+                "round.do"
+              ]
+            },
+            {
+              "id": "round.check",
+              "type": "condition",
+              "operation": "roundEnded",
+              "children": []
+            },
+            {
+              "id": "round.do",
+              "type": "action",
+              "operation": "nextRound",
+              "children": []
+            },
+            {
+              "id": "qte",
+              "type": "sequence",
+              "operation": "",
+              "children": [
+                "qte.check",
+                "qte.do"
+              ]
+            },
+            {
+              "id": "qte.check",
+              "type": "condition",
+              "operation": "ownQte",
+              "children": []
+            },
+            {
+              "id": "qte.do",
+              "type": "action",
+              "operation": "qteKey",
+              "children": []
+            },
+            {
+              "id": "reaction",
+              "type": "sequence",
+              "operation": "",
+              "children": [
+                "reaction.check",
+                "reaction.do"
+              ]
+            },
+            {
+              "id": "reaction.check",
+              "type": "condition",
+              "operation": "reactionWindow",
+              "children": []
+            },
+            {
+              "id": "reaction.do",
+              "type": "action",
+              "operation": "reactOrPass",
+              "children": []
+            },
+            {
+              "id": "turn",
+              "type": "sequence",
+              "operation": "",
+              "children": [
+                "turn.check",
+                "turn.options"
+              ]
+            },
+            {
+              "id": "turn.check",
+              "type": "condition",
+              "operation": "myAction",
+              "children": []
+            },
+            {
+              "id": "turn.options",
+              "type": "selector",
+              "operation": "",
+              "children": [
+                "play",
+                "aim",
+                "end"
+              ]
+            },
+            {
+              "id": "play",
+              "type": "action",
+              "operation": "playBest",
+              "children": []
+            },
+            {
+              "id": "aim",
+              "type": "action",
+              "operation": "assignAttack",
+              "children": []
+            },
+            {
+              "id": "end",
+              "type": "action",
+              "operation": "endTurn",
+              "children": []
+            }
+          ]
+        },
+        {
+          "mode": "commanders",
+          "root": "root",
+          "timing": {
+            "thinkMin": 0.45,
+            "thinkMax": 0.9,
+            "reactionMin": 0.55,
+            "reactionMax": 1.1,
+            "qteMin": 0.24,
+            "qteMax": 0.48,
+            "qteCorrectChance": 0.97,
+            "retrySeconds": 1
+          },
+          "weights": {
+            "creatureBase": 2,
+            "attack": 1.3,
+            "health": 0.45,
+            "permanentEffect": 1,
+            "spellMultiplier": 1,
+            "damage": 1.5,
+            "heal": 1.3,
+            "draw": 2.4,
+            "stun": 0.7,
+            "bounce": 0.85,
+            "swap": 0.35,
+            "risk": 1.5,
+            "killHero": 90,
+            "killUnit": 4,
+            "heroPressure": 4,
+            "unitThreat": 0.45,
+            "healthUrgency": 1.5,
+            "thornsPenalty": 1,
+            "costPenalty": 0.15,
+            "budgetEfficiency": 0.08,
+            "followupWeight": 0.7,
+            "randomJitter": 0.3,
+            "minPlayScore": 0.2,
+            "reactionCopy": 1,
+            "reactionReturn": 0.8,
+            "reactionDefense": 2,
+            "minReactionScore": 1,
+            "randomTargetChance": 0.03
+          },
+          "effects": [
+            {
+              "effect": "spellDraw",
+              "weight": 2.8
+            },
+            {
+              "effect": "guard",
+              "weight": 3.2
+            },
+            {
+              "effect": "attackAura",
+              "weight": 2.7
+            },
+            {
+              "effect": "openingPower",
+              "weight": 2.0
+            },
+            {
+              "effect": "spellPower",
+              "weight": 2.4
+            },
+            {
+              "effect": "thorns",
+              "weight": 2.0
+            },
+            {
+              "effect": "lifesteal",
+              "weight": 1.8
+            },
+            {
+              "effect": "turnDraw",
+              "weight": 3.2
+            },
+            {
+              "effect": "failDraw",
+              "weight": 1.0
+            },
+            {
+              "effect": "turnHeal",
+              "weight": 2.0
+            },
+            {
+              "effect": "forgive",
+              "weight": 1.0
+            },
+            {
+              "effect": "qteExtra",
+              "weight": 1.1
+            },
+            {
+              "effect": "timeBonus",
+              "weight": 0.5
+            },
+            {
+              "effect": "timeTax",
+              "weight": 0.7
+            },
+            {
+              "effect": "spellTax",
+              "weight": 1.2
+            }
+          ],
+          "nodes": [
+            {
+              "id": "root",
+              "type": "selector",
+              "operation": "",
+              "children": [
+                "finish",
+                "round",
+                "qte",
+                "reaction",
+                "turn"
+              ]
+            },
+            {
+              "id": "finish",
+              "type": "sequence",
+              "operation": "",
+              "children": [
+                "finish.check",
+                "finish.do"
+              ]
+            },
+            {
+              "id": "finish.check",
+              "type": "condition",
+              "operation": "matchEnded",
+              "children": []
+            },
+            {
+              "id": "finish.do",
+              "type": "action",
+              "operation": "rematch",
+              "children": []
+            },
+            {
+              "id": "round",
+              "type": "sequence",
+              "operation": "",
+              "children": [
+                "round.check",
+                "round.do"
+              ]
+            },
+            {
+              "id": "round.check",
+              "type": "condition",
+              "operation": "roundEnded",
+              "children": []
+            },
+            {
+              "id": "round.do",
+              "type": "action",
+              "operation": "nextRound",
+              "children": []
+            },
+            {
+              "id": "qte",
+              "type": "sequence",
+              "operation": "",
+              "children": [
+                "qte.check",
+                "qte.do"
+              ]
+            },
+            {
+              "id": "qte.check",
+              "type": "condition",
+              "operation": "ownQte",
+              "children": []
+            },
+            {
+              "id": "qte.do",
+              "type": "action",
+              "operation": "qteKey",
+              "children": []
+            },
+            {
+              "id": "reaction",
+              "type": "sequence",
+              "operation": "",
+              "children": [
+                "reaction.check",
+                "reaction.do"
+              ]
+            },
+            {
+              "id": "reaction.check",
+              "type": "condition",
+              "operation": "reactionWindow",
+              "children": []
+            },
+            {
+              "id": "reaction.do",
+              "type": "action",
+              "operation": "reactOrPass",
+              "children": []
+            },
+            {
+              "id": "turn",
+              "type": "sequence",
+              "operation": "",
+              "children": [
+                "turn.check",
+                "turn.options"
+              ]
+            },
+            {
+              "id": "turn.check",
+              "type": "condition",
+              "operation": "myAction",
+              "children": []
+            },
+            {
+              "id": "turn.options",
+              "type": "selector",
+              "operation": "",
+              "children": [
+                "play",
+                "aim",
+                "end"
+              ]
+            },
+            {
+              "id": "play",
+              "type": "action",
+              "operation": "playBest",
+              "children": []
+            },
+            {
+              "id": "aim",
+              "type": "action",
+              "operation": "assignAttack",
+              "children": []
+            },
+            {
+              "id": "end",
+              "type": "action",
+              "operation": "endTurn",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
     "layered-cards": {
       "schemaVersion": 2,
       "cards": [

@@ -1,0 +1,1 @@
+PASS Editor Play result routes: loss/retry, win/checkpoint/next chapter, deck hub/change/resume, final victory/ending/completion/replay, menu exit and normal-game isolation. Terminal results injected; combat itself tested separately.

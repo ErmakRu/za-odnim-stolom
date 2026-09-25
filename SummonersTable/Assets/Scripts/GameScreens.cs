@@ -29,12 +29,13 @@ namespace SummonersTable
         }
         void FrontEndAction(string action)
         {
+            if(HandleCampaignAction(action))return;
             if(!string.IsNullOrEmpty(ConfigRuntime.Error)&&(action=="local"||action=="steam"||action=="start"||action=="ready")){error=ConfigRuntime.Message;return;}
             if(HandleLobbyChoice(action))return;
             switch(action)
             {
                 case "steam":page="steam";steam.Search();break;
-                case "local":page="local";break;
+                case "local":page="local";if(!botDefaultsApplied){foreach(int botSeat in ConfigRuntime.Current.bots.defaultLocalBotSeats)localBots[botSeat]=true;botDefaultsApplied=true;}break;
                 case "cards":returnPage="menu";page="cards";break;
                 case "rules":modal="rules";break;
                 case "quit":Application.Quit();break;
@@ -56,11 +57,13 @@ namespace SummonersTable
             lobbyCanvas.Visible((localLobby||page=="steam"&&steam.InRoom)&&visible);
             if(localLobby)lobbyCanvas.PresentLobby(LocalLobbyMembers(),"",true,true,localCount>=catalog.world.playerRange.x&&localCount<=catalog.world.playerRange.y,catalog,"ЗА ОДНИМ ПК · "+localCount+" ИГРОКА","Локация: "+catalog.world.name+" · "+catalog.world.playerRange.x+"–"+catalog.world.playerRange.y+" места; матч 2–4 игрока. "+error);
             else if(steam.InRoom)lobbyCanvas.PresentLobby(steam.Members,steam.UserId.ToString(),false,steam.IsHost,steam.CanStart,catalog,steam.RoomName+" · КОД "+steam.RoomId,steam.Error);
+            var botControls=lobbyCanvas.GetComponentInChildren<BotLobbyControls>(true);
+            if(botControls!=null){botControls.changed=index=>{if(page=="local"){if(index>0&&index<localCount)localBots[index]=!localBots[index];}else steam.ToggleBot(index);};botControls.Present(localLobby?LocalLobbyMembers():steam.Members,localLobby,localLobby||steam.IsHost,localLobby?localCount:steam.Capacity);}
             lobbyCanvas.GetComponentInChildren<MatchOptionsView>(true).Present(localLobby?localOptions:steam.Options,localLobby||steam.IsHost&&(steam.View==null||steam.View.phase=="matchEnd"));
         }
         System.Collections.Generic.List<LobbyMember> LocalLobbyMembers()
         {
-            return Enumerable.Range(0,localCount).Select(i=>new LobbyMember{id="local-"+i,name=localNames[i],deckId=catalog.decks[localDecks[i]].id,heroId=localHeroes[i],outfit=localOutfits[i],palette=localPalettes[i],ready=true}).ToList();
+            return Enumerable.Range(0,localCount).Select(i=>new LobbyMember{id="local-"+i,name=localBots[i]?"Бот "+(i+1):localNames[i],isBot=localBots[i],deckId=catalog.decks[localDecks[i]].id,heroId=localHeroes[i],outfit=localOutfits[i],palette=localPalettes[i],ready=true}).ToList();
         }
         bool HandleLobbyChoice(string action)
         {
@@ -71,7 +74,7 @@ namespace SummonersTable
             if(!new[]{"deck-prev","deck-next","hero-prev","hero-next","customize","outfit-prev","outfit-next","palette"}.Contains(kind))return false;
             int seatIndex=kind.StartsWith("outfit")||kind=="palette"?lobbyCanvas.AppearanceSeat:int.Parse(action.Substring(split+1));
             var list=localLobby?LocalLobbyMembers():steam.Members;
-            if(seatIndex<0||seatIndex>=list.Count||!localLobby&&list[seatIndex].id!=steam.UserId.ToString())return true;
+            if(seatIndex<0||seatIndex>=list.Count||!localLobby&&list[seatIndex].id!=steam.UserId.ToString()&&!(steam.IsHost&&list[seatIndex].isBot))return true;
             var member=list[seatIndex];if(kind=="customize"){lobbyCanvas.OpenAppearance(seatIndex);return true;}
             int deck=catalog.decks.FindIndex(d=>d.id==member.deckId),hero=System.Array.IndexOf(HeroOptions.Ids,member.heroId),outfit=member.outfit,palette=member.palette;
             if(kind.StartsWith("deck"))deck=(deck+(kind.EndsWith("next")?1:catalog.decks.Count-1))%catalog.decks.Count;
@@ -79,6 +82,7 @@ namespace SummonersTable
             if(kind.StartsWith("outfit"))outfit=(outfit+(kind.EndsWith("next")?1:7))%8;
             if(kind=="palette")palette=int.Parse(action.Substring(split+1));
             if(localLobby){localDecks[seatIndex]=deck;localHeroes[seatIndex]=HeroOptions.Ids[hero];localOutfits[seatIndex]=outfit;localPalettes[seatIndex]=palette;}
+            else if(member.isBot)steam.SetBotAppearance(member.id,catalog.decks[deck].id,HeroOptions.Ids[hero],outfit,palette);
             else if(kind.StartsWith("deck"))steam.SetMember(catalog.decks[deck].id,false);
             else steam.SetAppearance(HeroOptions.Ids[hero],outfit,palette);
             return true;

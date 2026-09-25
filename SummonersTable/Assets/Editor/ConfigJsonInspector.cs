@@ -11,11 +11,13 @@ namespace SummonersTable.Editor
     {
         string text,original,status="";Vector2 scroll;bool assets;string filter="";
         readonly LayeredCardsJsonEditor layered=new LayeredCardsJsonEditor();
+        readonly CampaignJsonEditor campaign=new CampaignJsonEditor();
         [UnityEditor.Callbacks.OnOpenAsset(0)]
-        static bool OpenJson(int id,int line){var item=EditorUtility.InstanceIDToObject(id);string path=AssetDatabase.GetAssetPath(item);if(!path.StartsWith(ConfigAuthoring.Folder+"/")||!path.EndsWith(".json"))return false;Selection.activeObject=item;EditorApplication.ExecuteMenuItem("Window/General/Inspector");return true;}
+        static bool OpenJson(int id,int line){var item=EditorUtility.InstanceIDToObject(id);string path=AssetDatabase.GetAssetPath(item);if(path!=CampaignJsonEditor.PathName&&(!path.StartsWith(ConfigAuthoring.Folder+"/")||!path.EndsWith(".json")))return false;Selection.activeObject=item;EditorApplication.ExecuteMenuItem("Window/General/Inspector");return true;}
         void OnEnable(){string path=AssetDatabase.GetAssetPath(target);if(path.StartsWith(ConfigAuthoring.Folder+"/")&&path.EndsWith(".json")&&File.Exists(path))text=original=File.ReadAllText(path);}
         public override void OnInspectorGUI()
         {
+            if(AssetDatabase.GetAssetPath(target)==CampaignJsonEditor.PathName){campaign.Draw();return;}
             string path=AssetDatabase.GetAssetPath(target);if(!path.StartsWith(ConfigAuthoring.Folder+"/")||!path.EndsWith(".json")){DrawDefaultInspector();return;}
             string file=Path.GetFileName(path);
             if(file==LayeredCardsJsonEditor.FileName){layered.Draw(path);return;}

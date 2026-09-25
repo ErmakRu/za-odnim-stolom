@@ -50,7 +50,7 @@ namespace SummonersTable.Editor
             var options=new MatchOptions{mode=MatchOptions.Commanders,cards3D=true,limitPower=false};
             g=new GameEngine(catalog,new[]{new LobbyMember{id="a"},new LobbyMember{id="b"}},1,0,options);options.limitPower=true;Check(!g.State.options.limitPower,"start snapshots lobby rules");
             var view=g.View(1,0);view.options.mode=MatchOptions.Wizards;Check(g.State.options.IsCommanders,"view cannot mutate host rules");
-            var wire=JsonUtility.FromJson<WireMessage>(JsonUtility.ToJson(new WireMessage{state=g.View(1,0)}));Check(wire.protocol==9&&wire.state.options.IsCommanders&&wire.state.options.cards3D&&!wire.state.options.limitPower,"options survive private wire JSON");
+            var wire=JsonUtility.FromJson<WireMessage>(JsonUtility.ToJson(new WireMessage{state=g.View(1,0)}));Check(wire.protocol==10&&wire.state.options.IsCommanders&&wire.state.options.cards3D&&!wire.state.options.limitPower,"options survive private wire JSON");
             Check(!Send(g,0,new GameCommand{kind="options",choice="wizards"}).ok,"no in-match settings command");
             foreach(var card in catalog.cards)
             {

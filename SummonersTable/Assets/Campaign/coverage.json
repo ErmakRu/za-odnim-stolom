@@ -1,0 +1,36 @@
+{
+  "chapters": 17,
+  "lines": 111,
+  "source": "Assets/StreamingAssets/Config/story.json",
+  "sourceBranch": "script&chars",
+  "adaptedTutorial": [
+    "1.4",
+    "1.9",
+    "1.10"
+  ],
+  "placeholderPortraits": {
+    "Бальтазар": "C09",
+    "ЖабаДушэс": "C05",
+    "Малфас": "C06",
+    "Валафара": "C04",
+    "Голиаф": "C10",
+    "Белиал": "C09",
+    "Бахрам": "C01",
+    "Гримвальд": "C18",
+    "Абаддон": "C15",
+    "Мальгис": "C07",
+    "Мортиция": "C16",
+    "Аспид": "C13",
+    "Вульгор": "C11",
+    "Геката": "C17",
+    "Астарот": "C08",
+    "Бастет": "C02",
+    "Кронос": "C12",
+    "Азазель": "S07",
+    "Собачка": "C03"
+  },
+  "unresolvedAudio": [
+    "Action_Wind_Blast_01.wav",
+    "Card_Game_Action_Tear_Fire_01.wav"
+  ]
+}

@@ -14,7 +14,7 @@ namespace SummonersTable
     }
 
     // Lobby membership authenticates the sender; all game rules run on the owner.
-    public sealed class SteamSession : IDisposable
+    public sealed partial class SteamSession : IDisposable
     {
         const string GameTag="gamejams.summoners-table.20260921";
         const int Channel=17423, MaxPacket=65536;
@@ -206,12 +206,13 @@ namespace SummonersTable
                     heroId=HeroOptions.Normalize(hero),outfit=HeroOptions.Outfit(outfit),palette=HeroOptions.Palette(palette),deckId=valid?deck:"noise",readyRules=SteamMatchmaking.GetLobbyMemberData(lobby,id,"readyRules"),readyMatch=SteamMatchmaking.GetLobbyMemberData(lobby,id,"readyFor"),ready=valid&&optionsValid&&SameConfig&&SteamMatchmaking.GetLobbyMemberData(lobby,id,"configHash")== (catalog.configHash??"")&&HeroOptions.Valid(hero)&&SteamMatchmaking.GetLobbyMemberData(lobby,id,"ready")=="1"&&SteamMatchmaking.GetLobbyMemberData(lobby,id,"readyRules")==Options.Signature&&(View==null||SteamMatchmaking.GetLobbyMemberData(lobby,id,"readyFor")==View.matchId)});
             }
             if(!SameConfig)Error="Разные Config баланса. Загрузите те же cards/decks/rules JSON, что у лидера.";
-            Members=next.OrderBy(m=>m.id==owner.m_SteamID.ToString()?0:1).ThenBy(m=>m.id).ToList();
+            AppendBots(next);
+            Members=next.OrderBy(m=>m.id==owner.m_SteamID.ToString()?0:1).ThenBy(m=>m.isBot?1:0).ThenBy(m=>m.id).ToList();
             if(View!=null&&owner!=matchHost){EndBrokenMatch("Хост покинул матч. Создайте новое лобби.");return;}
             if(Engine!=null)
                 foreach(var p in Engine.State.players.Where(p=>p.connected&&!Members.Any(m=>m.id==p.id)).ToList())Engine.Disconnect(p.seat,TimeNow);
         }
-        public bool CanStart {get {return IsHost&&!Busy&&optionsValid&&Members.Count>=Math.Max(2,catalog.world.playerRange.x)&&Members.Count<=Math.Min(4,catalog.world.playerRange.y)&&SameConfig&&Members.All(m=>SteamMatchmaking.GetLobbyMemberData(lobby,new CSteamID(ulong.Parse(m.id)),"configHash")==(catalog.configHash??""))&&(View==null?Members.Count>=2&&Members.All(m=>m.ready):RematchRules.CanRestart(View,Members)&&Members.All(m=>m.readyRules==Options.Signature||Options.Signature==View.options.Signature));}}
+        public bool CanStart {get {return IsHost&&!Busy&&optionsValid&&Members.Count>=Math.Max(2,catalog.world.playerRange.x)&&Members.Count<=Math.Min(4,catalog.world.playerRange.y)&&SameConfig&&Members.All(m=>m.isBot||SteamMatchmaking.GetLobbyMemberData(lobby,new CSteamID(ulong.Parse(m.id)),"configHash")==(catalog.configHash??""))&&(View==null?Members.Count>=2&&Members.All(m=>m.ready):RematchRules.CanRestart(View,Members)&&Members.All(m=>m.readyRules==Options.Signature||Options.Signature==View.options.Signature));}}
         public void ChooseAfterMatch(string choice){Submit(new GameCommand{kind="postMatch",choice=choice});SetMember(selectedDeck,choice=="again");}
         public void StartMatch()
         {
@@ -219,12 +220,13 @@ namespace SummonersTable
             previousMatchId=View?.matchId??"";matchHost=SteamUser.GetSteamID();commandSequence=0;
             SteamMatchmaking.SetLobbyJoinable(lobby,false);SteamMatchmaking.SetLobbyData(lobby,"state","playing");
             Engine=new GameEngine(catalog,Members,Environment.TickCount,TimeNow,Options);Seat=Engine.State.players.Find(p=>p.id==UserId.ToString()).seat;
-            foreach(var m in Members)lastSeen[ulong.Parse(m.id)]=TimeNow;
+            botDirector=new BotDirector(Engine,ConfigBundle.Clone(ConfigRuntime.Current.bots),Environment.TickCount);
+            foreach(var m in Members.Where(m=>!m.isBot))lastSeen[ulong.Parse(m.id)]=TimeNow;
             Publish();
         }
         bool AllowedPeer(ulong id)
         {
-            return Available&&InRoom&&id!=UserId&&Members.Any(m=>m.id==id.ToString())&&
+            return Available&&InRoom&&id!=UserId&&Members.Any(m=>!m.isBot&&m.id==id.ToString())&&
                 (IsHost||id==(matchHost.m_SteamID!=0?matchHost:SteamMatchmaking.GetLobbyOwner(lobby)).m_SteamID);
         }
         void Send(ulong id,WireMessage message)
@@ -252,7 +254,7 @@ namespace SummonersTable
         void Publish()
         {
             if(Engine==null)return;
-            foreach(var p in Engine.State.players.Where(p=>p.connected))
+            foreach(var p in Engine.State.players.Where(p=>p.connected&&!p.isBot))
             {
                 var view=Engine.View(p.seat,TimeNow);
                 if(p.id==UserId.ToString()){View=view;ReceivedAt=TimeNow;}
@@ -313,8 +315,8 @@ namespace SummonersTable
             Receive();
             if(Engine!=null)
             {
-                Engine.Tick(now);
-                foreach(var p in Engine.State.players.Where(p=>p.connected&&p.seat!=Seat).ToList())
+                Engine.Tick(now);botDirector?.Tick(Engine,now);
+                foreach(var p in Engine.State.players.Where(p=>p.connected&&!p.isBot&&p.seat!=Seat).ToList())
                     if(lastSeen.TryGetValue(ulong.Parse(p.id),out var seen)&&now-seen>45)Engine.Disconnect(p.seat,now);
                 if(now-lastPublish>.2)Publish();
                 if(Engine.State.phase=="matchEnd"&&CanStart)StartMatch();
@@ -332,11 +334,11 @@ namespace SummonersTable
             CancelSearch();
             if(Available&&InRoom)
             {
-                foreach(var m in Members.Where(m=>m.id!=UserId.ToString()))
+                foreach(var m in Members.Where(m=>!m.isBot&&m.id!=UserId.ToString()))
                 {var identity=new SteamNetworkingIdentity();identity.SetSteamID64(ulong.Parse(m.id));SteamNetworkingMessages.CloseSessionWithUser(ref identity);}
                 SteamMatchmaking.LeaveLobby(lobby);
             }
-            lobby=new CSteamID(0);matchHost=new CSteamID(0);Members.Clear();lastSeen.Clear();Engine=null;View=null;Seat=-1;
+            lobby=new CSteamID(0);matchHost=new CSteamID(0);Members.Clear();lastSeen.Clear();botDirector=null;Engine=null;View=null;Seat=-1;
             Options=new MatchOptions();optionsValid=true;
         }
         public void Dispose()

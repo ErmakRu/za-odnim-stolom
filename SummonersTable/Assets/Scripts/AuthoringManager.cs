@@ -2,14 +2,14 @@ using System;
 using UnityEngine;
 namespace SummonersTable
 {
-    public enum ManagerSection { World,Audio,Vfx,PlayerAnimations,Events,Cards,Decks,Rules,Presentation,Interface }
+    public enum ManagerSection { World,Audio,Vfx,PlayerAnimations,Events,Cards,Decks,Rules,Presentation,Interface,Bots }
     [ExecuteAlways] public sealed class AuthoringManager:MonoBehaviour
     {
         public ManagerSection section;
         public LocationConfig world;public new AudioConfig audio;public VfxConfig vfx;
         public PlayerAnimationsConfig playeranimations;public EventsConfig events;
         public CardsConfig cards;public DecksConfig decks;public RulesConfig rules;
-        public PresentationConfig presentation;public InterfaceConfig ui;
+        public PresentationConfig presentation;public InterfaceConfig ui;public BotsConfig bots;
         [Range(1,8)] public int previewPlayers=4;
         [Range(1,20)]public int previewCards=8;
         public int previewIndex;public string previewHero="badger";
@@ -17,7 +17,7 @@ namespace SummonersTable
         public TableBoard table;
         public static event Action<AuthoringManager> Edited;
         public string FileName=>section==ManagerSection.Interface?"interface.json":section.ToString().ToLowerInvariant()+".json";
-        public object Data=>section switch {ManagerSection.World=>world,ManagerSection.Audio=>audio,ManagerSection.Vfx=>vfx,ManagerSection.PlayerAnimations=>playeranimations,ManagerSection.Events=>events,ManagerSection.Cards=>cards,ManagerSection.Decks=>decks,ManagerSection.Rules=>rules,ManagerSection.Presentation=>presentation,_=>ui};
+        public object Data=>section switch {ManagerSection.World=>world,ManagerSection.Audio=>audio,ManagerSection.Vfx=>vfx,ManagerSection.PlayerAnimations=>playeranimations,ManagerSection.Events=>events,ManagerSection.Cards=>cards,ManagerSection.Decks=>decks,ManagerSection.Rules=>rules,ManagerSection.Presentation=>presentation,ManagerSection.Bots=>bots,_=>ui};
         public string Export()=>JsonUtility.ToJson(Data,true);
         public void Import(string json)
         {
@@ -32,6 +32,7 @@ namespace SummonersTable
                 case ManagerSection.Decks:decks=ConfigJson.Read<DecksConfig>(json);break;
                 case ManagerSection.Rules:rules=ConfigJson.Read<RulesConfig>(json);break;
                 case ManagerSection.Presentation:presentation=ConfigJson.Read<PresentationConfig>(json);break;
+                case ManagerSection.Bots:bots=ConfigJson.Read<BotsConfig>(json);break;
                 case ManagerSection.Interface:ui=ConfigJson.Read<InterfaceConfig>(json);break;
             }
             Edited?.Invoke(this);

@@ -31,7 +31,7 @@ namespace SummonersTable
             for(int i=0;i<members.Count;i++)
             {
                 var m=members[i];if(Catalog.Deck(m.deckId)==null)throw new ArgumentException("Unknown deck.");
-                State.players.Add(new PlayerState{seat=i,id=m.id,name=m.name,deckId=m.deckId,heroId=HeroOptions.Normalize(m.heroId),outfit=HeroOptions.Outfit(m.outfit),palette=HeroOptions.Palette(m.palette)});
+                State.players.Add(new PlayerState{seat=i,id=m.id,name=m.name,deckId=m.deckId,isBot=m.isBot,heroId=HeroOptions.Normalize(m.heroId),outfit=HeroOptions.Outfit(m.outfit),palette=HeroOptions.Palette(m.palette)});
                 sequences[i]=0;
             }
             InitializeLocation();State.round=1;StartRound();

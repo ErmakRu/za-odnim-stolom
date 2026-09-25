@@ -210,7 +210,7 @@ namespace SummonersTable.Editor
                     var view=g.View(n,g.State.serverTime);
                     var received=JsonUtility.FromJson<WireMessage>(JsonUtility.ToJson(new WireMessage{kind="state",state=view}));
                     received.state.RestoreViewPrivacy(n);
-                    Check(received.protocol==WireMessage.CurrentProtocol&&received.protocol==9,"new network protocol");
+                    Check(received.protocol==WireMessage.CurrentProtocol&&received.protocol==10,"new network protocol");
                     Check(received.state.cast.qteLength==q.sequence.Length,"public progress survives wire");
                     Check(n==0?received.state.qte.sequence==q.sequence:received.state.qte==null&&received.state.deadline==0,"wire QTE is private");
                 }

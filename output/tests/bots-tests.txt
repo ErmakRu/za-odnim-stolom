@@ -1,0 +1,1 @@
+PASS 178338 assertions; 24 complete 2/3/4-seat bot matches, both modes, power limits on/off; 7516 accepted bot commands, 0 rejected. Privacy, JSON tree reorder/validation, legal reactions, lethal/heal targeting, budgets, slots, rematch and Steam lobby metadata. No Player build.

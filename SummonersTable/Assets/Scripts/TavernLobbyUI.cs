@@ -78,7 +78,7 @@ namespace SummonersTable
             startButton.interactable=canStart;startButton.GetComponentInChildren<Text>().text=host?"НАЧАТЬ МАТЧ":"ЖДЁМ ХОСТА";
             for(int i=0;i<4;i++)
             {
-                var m=i<list.Count?list[i]:null;bool editable=m!=null&&(local||m.id==ownId);
+                var m=i<list.Count?list[i]:null;bool editable=m!=null&&(local||m.id==ownId||host&&m.isBot);
                 members[i].text=m==null?"СВОБОДНО":m.name+(m.id==ownId&&!local?" · ВЫ":"");
                 deckNames[i].text=m==null?"Присоединяйтесь":catalog.Deck(m.deckId).name;
                 heroNames[i].text=m==null?"Герой ещё не выбран":HeroOptions.Names[Array.IndexOf(HeroOptions.Ids,HeroOptions.Normalize(m.heroId))];
@@ -94,7 +94,7 @@ namespace SummonersTable
             var own=list.FirstOrDefault(m=>m.id==ownId);readyButton.interactable=own!=null;readyButton.GetComponentInChildren<Text>().text=own?.ready==true?"СНЯТЬ ГОТОВНОСТЬ":"Я ГОТОВ";
             if(appearanceSeat>=0)
             {
-                if(appearanceSeat>=list.Count||!local&&list[appearanceSeat].id!=ownId)CloseAppearance();
+                if(appearanceSeat>=list.Count||!local&&list[appearanceSeat].id!=ownId&&!(host&&list[appearanceSeat].isBot))CloseAppearance();
                 else{var m=list[appearanceSeat];appearanceTitle.text="ДОСПЕХ "+(m.outfit+1)+" / 8";}
             }
         }

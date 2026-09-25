@@ -29,17 +29,17 @@ namespace SummonersTable
             else if(online){online=false;page="steam";state=null;}
             if(page=="game"&&local!=null)
             {
-                var s=local.State;int next=s.activeSeat;
+                var s=local.State;int humans=s.players.Count(p=>!p.isBot&&p.connected);int next=s.players[s.activeSeat].isBot?seat:s.activeSeat;
                 // A shared keyboard cannot accept simultaneous private inputs: pause the caster's
                 // clock while the other local players privately choose one reaction or pass.
-                if(s.phase=="qte"&&s.cast!=null&&s.pending!=null)
+                if(humans>1&&s.phase=="qte"&&s.cast!=null&&s.pending!=null)
                 {
-                    var responder=s.players.FirstOrDefault(p=>p.alive&&p.connected&&!s.pending.responded.Contains(p.seat));
+                    var responder=s.players.FirstOrDefault(p=>!p.isBot&&p.alive&&p.connected&&!s.pending.responded.Contains(p.seat));
                     if(responder!=null)next=responder.seat;
                 }
                 if(s.phase!="roundEnd"&&s.phase!="matchEnd"&&next!=seat)
-                {seat=next;handoff=true;localReactionStarted=0;ClearSelection();}
-                bool localResponse=s.phase=="qte"&&s.cast!=null&&seat!=s.cast.owner;
+                {seat=next;handoff=humans>1;localReactionStarted=0;ClearSelection();}
+                bool localResponse=humans>1&&s.phase=="qte"&&s.cast!=null&&seat!=s.cast.owner&&s.pending!=null&&!s.pending.responded.Contains(seat);
                 if(!handoff&&modal==""&&!quitConfirm&&!settingsOpen)
                 {
                     if(localResponse)
@@ -50,7 +50,10 @@ namespace SummonersTable
                     }
                     else{localTime+=Time.unscaledDeltaTime;localReactionStarted=0;}
                 }
-                local.Tick(localTime);state=local.View(seat,localTime);
+                local.Tick(localTime);
+                if(!handoff&&modal==""&&!quitConfirm&&!settingsOpen)localBotDirector?.Tick(local,localTime);
+                if(local.State.phase=="matchEnd"&&local.State.players.Where(p=>p.connected).All(p=>p.postMatchChoice=="again")){StartLocal(local.State.players.Count);return;}
+                state=local.View(seat,localTime);
             }
             if(state==null||page!="game")return;
             if(seenTurn!=state.turnNumber){ClearSelection();seenTurn=state.turnNumber;if(!captureMode)ConfigAudio.Play("turn.start");}

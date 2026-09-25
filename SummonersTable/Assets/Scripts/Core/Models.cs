@@ -54,6 +54,7 @@ namespace SummonersTable
         public string id, name, deckId="noise";
         public string heroId="badger";public int outfit,palette;
         public bool ready;
+        public bool isBot;
         public string readyMatch="";
         public string readyRules="";
     }
@@ -78,6 +79,7 @@ namespace SummonersTable
         public float lookYaw,lookPitch;
         public int seat, hp, score, handCount, deckCount, fatigue;
         public bool alive=true, connected=true;
+        public bool isBot;
         public List<HandCard> hand=new List<HandCard>();
         public List<UnitState> units=new List<UnitState>();
         public PlayerState View(bool own)
@@ -200,7 +202,7 @@ namespace SummonersTable
     }
     [Serializable] public sealed class WireMessage
     {
-        public const int CurrentProtocol=9;
+        public const int CurrentProtocol=10;
         public int protocol=CurrentProtocol;
         public string kind, text, matchId;
         public string previousMatchId="";

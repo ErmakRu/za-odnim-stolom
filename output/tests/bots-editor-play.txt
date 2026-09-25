@@ -1,0 +1,1 @@
+PASS Unity Editor Play: prefab lobby buttons, default/toggled seats, 6 complete human+bot matches across both modes and 2/3/4 players, privacy, handoff, zero rejected bot commands, rematch and menu exit. No Player build.

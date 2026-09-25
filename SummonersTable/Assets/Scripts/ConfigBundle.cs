@@ -9,9 +9,9 @@ namespace SummonersTable
 {
     public sealed partial class ConfigBundle
     {
-        public static readonly string[] Files={"cards.json","decks.json","rules.json","audio.json","vfx.json","world.json","presentation.json","prefabs.json","playeranimations.json","events.json","interface.json","layered-cards.json"};
+        public static readonly string[] Files={"cards.json","decks.json","rules.json","audio.json","vfx.json","world.json","presentation.json","prefabs.json","playeranimations.json","events.json","interface.json","bots.json","layered-cards.json"};
         public LayeredCardsConfig layeredCards;
-        public CardsConfig cards;public DecksConfig decks;public RulesConfig rules;public AudioConfig audio;public VfxConfig vfx;public LocationConfig world;public PlayerAnimationsConfig animations;public EventsConfig events;public InterfaceConfig ui;public PresentationConfig presentation;
+        public BotsConfig bots;public CardsConfig cards;public DecksConfig decks;public RulesConfig rules;public AudioConfig audio;public VfxConfig vfx;public LocationConfig world;public PlayerAnimationsConfig animations;public EventsConfig events;public InterfaceConfig ui;public PresentationConfig presentation;
         public List<Dictionary<string,object>> prefabs;public string gameplayHash;
         public Catalog Catalog()=>new Catalog{version=rules.version,title=rules.title,configHash=gameplayHash,rules=Clone(rules.rules),world=Clone(world),events=Clone(events),cards=cards.cards.Select(Clone).ToList(),decks=decks.decks.Select(Clone).ToList(),typeColors=cards.typeColors.Select(Clone).ToList(),roleColors=cards.roleColors.Select(Clone).ToList()};
         public static T Clone<T>(T value)=>JsonUtility.FromJson<T>(JsonUtility.ToJson(value));
@@ -20,7 +20,7 @@ namespace SummonersTable
         public static ConfigBundle Read(Func<string,string> read)
         {
             var b=new ConfigBundle();T R<T>(string name){try{return ConfigJson.Read<T>(read(name));}catch(Exception e){throw new FormatException(name+": "+e.Message,e);}}
-            b.layeredCards=R<LayeredCardsConfig>("layered-cards.json");b.cards=R<CardsConfig>("cards.json");b.decks=R<DecksConfig>("decks.json");b.rules=R<RulesConfig>("rules.json");b.audio=R<AudioConfig>("audio.json");b.vfx=R<VfxConfig>("vfx.json");b.world=R<LocationConfig>("world.json");b.animations=R<PlayerAnimationsConfig>("playeranimations.json");b.events=R<EventsConfig>("events.json");b.ui=R<InterfaceConfig>("interface.json");b.presentation=R<PresentationConfig>("presentation.json");
+            b.layeredCards=R<LayeredCardsConfig>("layered-cards.json");b.bots=R<BotsConfig>("bots.json");b.cards=R<CardsConfig>("cards.json");b.decks=R<DecksConfig>("decks.json");b.rules=R<RulesConfig>("rules.json");b.audio=R<AudioConfig>("audio.json");b.vfx=R<VfxConfig>("vfx.json");b.world=R<LocationConfig>("world.json");b.animations=R<PlayerAnimationsConfig>("playeranimations.json");b.events=R<EventsConfig>("events.json");b.ui=R<InterfaceConfig>("interface.json");b.presentation=R<PresentationConfig>("presentation.json");
             var p=ConfigJson.Object(ConfigJson.Parse(read("prefabs.json")));if(p.Keys.Any(k=>k!="schemaVersion"&&k!="prefabs")||Convert.ToInt32(p["schemaVersion"])!=1)throw new FormatException("prefabs.json: invalid schema");
             b.prefabs=((List<object>)p["prefabs"]).Select(ConfigJson.Object).ToList();b.Validate();
             using(var hash=SHA256.Create())b.gameplayHash=BitConverter.ToString(hash.ComputeHash(Encoding.UTF8.GetBytes(b.GameplayJson()))).Replace("-","").ToLowerInvariant();
@@ -30,6 +30,7 @@ namespace SummonersTable
         static void Range(float n,float min,float max,string key){Check(float.IsFinite(n)&&n>=min&&n<=max,key+": expected "+min+"…"+max);}
         public void Validate()
         {
+            bots.Validate();
             Check(cards.schemaVersion==1&&decks.schemaVersion==1&&rules.schemaVersion==1&&audio.schemaVersion==1&&vfx.schemaVersion==1&&world.schemaVersion==1&&presentation.schemaVersion==1,"schemaVersion must be 1");
             Check(cards.cards!=null&&cards.typeColors!=null&&cards.roleColors!=null&&decks.decks!=null,"cards/decks arrays are required");
             var c=Catalog();c.Validate();layeredCards.Validate(c);rules.defaults.Validate();Check(!string.IsNullOrWhiteSpace(rules.version),"rules.version required");

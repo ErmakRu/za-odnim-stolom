@@ -19,6 +19,7 @@ namespace SummonersTable
         string[] localHeroes={"badger","deer","owl","lion"};int[] localOutfits={0,1,2,3},localPalettes={0,1,2,3};
         double nextLookSend;Vector2 lastSentLook=new Vector2(999,999);int lastSentMode=-1;
         int[] localDecks={0,1,2,0};int localCount=2,capacity=4,seat,selectedSlot=-1,catalogDeck=-1;
+        bool[] localBots=new bool[4];bool botDefaultsApplied;BotDirector localBotDirector;
         bool handoff,quitConfirm;double localTime;int[] seq=new int[4];
         float scale;Vector2 offset;bool online;
         string seenPhase="";int seenTurn=-1;
@@ -47,11 +48,11 @@ namespace SummonersTable
             {var events=new GameObject("UI Event System");events.AddComponent<UnityEngine.EventSystems.EventSystem>();events.AddComponent<UnityEngine.EventSystems.StandaloneInputModule>();}
             var eventSystems=FindObjectsByType<UnityEngine.EventSystems.EventSystem>(FindObjectsSortMode.InstanceID);
             for(int i=1;i<eventSystems.Length;i++)eventSystems[i].gameObject.SetActive(false);
-            captureMode=Environment.GetCommandLineArgs().Contains("--capture-preview")||Environment.GetCommandLineArgs().Contains("--capture-lab")||Environment.GetCommandLineArgs().Contains("--capture-shaders")||Environment.GetCommandLineArgs().Contains("--capture-options")||Environment.GetCommandLineArgs().Contains("--capture-config");
+            captureMode=Environment.GetCommandLineArgs().Contains("--bot-editor-test")||Environment.GetCommandLineArgs().Contains("--capture-preview")||Environment.GetCommandLineArgs().Contains("--capture-lab")||Environment.GetCommandLineArgs().Contains("--capture-shaders")||Environment.GetCommandLineArgs().Contains("--capture-options")||Environment.GetCommandLineArgs().Contains("--capture-config");
             var listeners=FindObjectsByType<AudioListener>(FindObjectsSortMode.None);
             for(int i=1;i<listeners.Length;i++)Destroy(listeners[i]);
             steam=new SteamSession(catalog);if(!captureMode&&FindFirstObjectByType<PresentationLab>()==null)steam.Initialize();
-            BindPrefabInterface();ConfigRuntime.ApplyScene();
+            BindPrefabInterface();ConfigRuntime.ApplyScene();InitializeCampaign();
             tickTone=Tone(680,.045f);failTone=Tone(160,.12f);successTone=Tone(980,.14f);
             var args=Environment.GetCommandLineArgs();
             if(args.Contains("--local-test"))StartLocal(4);
@@ -59,7 +60,7 @@ namespace SummonersTable
             else if(args.Contains("--capture-options"))StartCoroutine(CaptureOptionsPreview());
             else if(args.Contains("--capture-shaders"))StartCoroutine(CaptureShaderPreview());
             else if(args.Contains("--capture-lab"))StartCoroutine(CaptureLabPreview());
-            else if(captureMode)StartCoroutine(CapturePreview());
+            else if(captureMode&&!args.Contains("--bot-editor-test"))StartCoroutine(CapturePreview());
         }
         AudioClip Tone(float frequency,float duration)
         {
@@ -70,10 +71,11 @@ namespace SummonersTable
         void OnDestroy(){steam?.Dispose();}
         void StartLocal(int count)
         {
+            CloseCampaign();
             if(!string.IsNullOrEmpty(ConfigRuntime.Error)){error=ConfigRuntime.Message;return;}RefreshConfigBetweenMatches();if(count<Math.Max(2,catalog.world.playerRange.x)||count>Math.Min(4,catalog.world.playerRange.y)){error="Эта локация допускает "+catalog.world.playerRange.x+"–"+catalog.world.playerRange.y+" игроков. Матч поддерживает 2–4.";return;}steam.Leave();var members=new List<LobbyMember>();
-            for(int i=0;i<count;i++)members.Add(new LobbyMember{id="local-"+i,name=string.IsNullOrWhiteSpace(localNames[i])?"Игрок "+(i+1):localNames[i],deckId=catalog.decks[localDecks[i]].id,heroId=localHeroes[i],outfit=localOutfits[i],palette=localPalettes[i],ready=true});
-            localTime=0;local=new GameEngine(catalog,members,Environment.TickCount,0,localOptions);online=false;seq=new int[4];seat=0;
-            page="game";modal="";handoff=true;ClearSelection();seenTurn=-1;state=local.View(seat,localTime);
+            for(int i=0;i<count;i++)members.Add(new LobbyMember{id="local-"+i,name=localBots[i]?"Бот "+(i+1):string.IsNullOrWhiteSpace(localNames[i])?"Игрок "+(i+1):localNames[i],isBot=localBots[i],deckId=catalog.decks[localDecks[i]].id,heroId=localHeroes[i],outfit=localOutfits[i],palette=localPalettes[i],ready=true});
+            localTime=0;local=new GameEngine(catalog,members,Environment.TickCount,0,localOptions);online=false;seq=new int[4];seat=0;localBotDirector=new BotDirector(local,ConfigBundle.Clone(ConfigRuntime.Current.bots),Environment.TickCount);
+            page="game";modal="";handoff=members.Count(m=>!m.isBot)>1;ClearSelection();seenTurn=-1;state=local.View(seat,localTime);
         }
         void Update()
         {
@@ -105,6 +107,7 @@ namespace SummonersTable
             if(historyOpen)cardCanvas.CoverWithJournal();
             if(Input.GetKeyDown(KeyCode.Escape))
             {
+                CampaignEscape();
                 if(quitConfirm)quitConfirm=false;
                 else if(modal!="")modal="";
                 else if(historyOpen)historyOpen=false;
@@ -121,7 +124,7 @@ namespace SummonersTable
         }
         double Clock {get {return online?state.serverTime+Time.realtimeSinceStartupAsDouble-steam.ReceivedAt:localTime;}}
         void ClearSelection(){selectedCard="";selectedUnit="";selectedSlot=-1;mouseHeld=false;draggingCard=false;unitPointerHeld=false;unitDragMoved=false;error="";}
-        void ExitMatch(){steam.Leave();local=null;state=null;online=false;page="menu";quitConfirm=false;settingsOpen=false;postMatchLobby=false;historyOpen=false;ClearSelection();}
+        void ExitMatch(){CloseCampaign();steam.Leave();local=null;localBotDirector=null;state=null;online=false;page="menu";quitConfirm=false;settingsOpen=false;postMatchLobby=false;historyOpen=false;ClearSelection();}
         Color RoleColor(CardDef c){var role=catalog.roleColors.Find(r=>r.name==c.role);ColorUtility.TryParseHtmlString(role?.hex??"#FFFFFF",out var color);return color;}
     }
 }

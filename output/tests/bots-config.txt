@@ -1,0 +1,1 @@
+PASS Bots Manager and JSON Inspector; copy/rollback, save/main snapshot, section isolation, cyclic tree atomic rejection, authored manager/lobby prefab references.

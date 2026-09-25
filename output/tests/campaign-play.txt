@@ -1,0 +1,1 @@
+PASS Editor Play: hub/deck, new campaign, typewriter/next, skip intro, complete first pre-battle comic, real duel/QTE, hidden bot hand, 26 legal player inputs, 29 accepted bot commands, zero rejected. 1044 rendered frames.

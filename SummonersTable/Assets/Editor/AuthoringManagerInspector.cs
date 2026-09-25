@@ -8,8 +8,8 @@ namespace SummonersTable.Editor
     [CustomEditor(typeof(AuthoringManager))]
     public sealed class AuthoringManagerInspector:UnityEditor.Editor
     {
-        static readonly string[] Titles={"Локация","Звуки по событиям","Визуальные эффекты","Анимации персонажа","События локации","Карты","Колоды","Правила","Камера и параллакс","Интерфейс и стрелки"};
-        static readonly string[] Fields={"world","audio","vfx","playeranimations","events","cards","decks","rules","presentation","ui"};
+        static readonly string[] Titles={"Локация","Звуки по событиям","Визуальные эффекты","Анимации персонажа","События локации","Карты","Колоды","Правила","Камера и параллакс","Интерфейс и стрелки","Боты и дерево поведения"};
+        static readonly string[] Fields={"world","audio","vfx","playeranimations","events","cards","decks","rules","presentation","ui","bots"};
         string status="";bool details;
         public override void OnInspectorGUI()
         {
@@ -55,6 +55,7 @@ namespace SummonersTable.Editor
         }
         void Preview(AuthoringManager m)
         {
+            if(m.section==ManagerSection.Bots){EditorGUILayout.HelpBox("Для теста: MainMenu → Play → За одним ПК. Профиль выбирается режимом матча; изменения bots.json применяются при следующем старте.",MessageType.Info);return;}
             EditorGUILayout.Space();EditorGUILayout.LabelField("Предпросмотр",EditorStyles.boldLabel);
             if(m.section==ManagerSection.World)
             {

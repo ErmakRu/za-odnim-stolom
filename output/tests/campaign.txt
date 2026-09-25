@@ -1,0 +1,1 @@
+PASS: 17 complete campaign duels; 52 comic frames; 111 original source lines, no omissions/duplicates; every line fits; all assets resolve; click/typewriter; checkpoint reload; invalid deck rejection; 2223 legal bot commands, zero rejected.

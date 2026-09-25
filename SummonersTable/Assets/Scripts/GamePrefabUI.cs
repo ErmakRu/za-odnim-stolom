@@ -127,18 +127,20 @@ namespace SummonersTable
         void ChoosePostMatch(string choice)
         {
             if(state?.phase!="matchEnd")return;
+            if(CampaignResultChoice(choice))return;
             if(choice=="menu"){ExitMatch();return;}
             if(online){steam.ChooseAfterMatch(choice);if(choice=="deck"){postMatchLobby=true;page="steam";lobbyCanvas.CloseAppearance();}return;}
             if(choice=="deck"){postMatchLobby=true;page="local";lobbyCanvas.CloseAppearance();return;}
-            var p=local.State.players.FirstOrDefault(p=>p.connected&&p.postMatchChoice!="again");
+            var p=local.State.players.FirstOrDefault(p=>p.connected&&!p.isBot&&p.postMatchChoice!="again");
             if(p!=null)local.Submit(p.seat,new GameCommand{kind="postMatch",choice="again",seq=++seq[p.seat]},localTime);
             if(local.State.players.Where(p=>p.connected).All(p=>p.postMatchChoice=="again"))StartLocal(local.State.players.Count);else state=local.View(seat,localTime);
         }
         void PresentResults()
         {
+            if(CampaignResults())return;
             var ready=online?steam.Members.Where(m=>RematchRules.Ready(state.players.Find(p=>p.id==m.id),m,state.matchId)).Select(m=>m.id).ToList():state.players.Where(p=>p.postMatchChoice=="again").Select(p=>p.id).ToList();
             ui.results.Text("result",state.result);ui.results.Text("scores",string.Join("\n\n",state.players.OrderByDescending(p=>p.score).Select(p=>p.name+" — "+p.score+" оч.  "+(ready.Contains(p.id)?"✓ Ещё раз":p.postMatchChoice=="deck"?"Выбирает колоду":""))));
-            string voter=online?"":state.players.FirstOrDefault(p=>p.connected&&p.postMatchChoice!="again")?.name;
+            string voter=online?"":state.players.FirstOrDefault(p=>p.connected&&!p.isBot&&p.postMatchChoice!="again")?.name;
             ui.results.Text("votes","Готовы к новой игре: "+ready.Count+" / "+(online?steam.Members.Count:state.players.Count)+(voter!=""&&voter!=null?"\nПодтверждает: "+voter:""));
             ui.results.Enabled("again",!online||state.players[seat].postMatchChoice!="again");
         }

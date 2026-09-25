@@ -1,0 +1,2319 @@
+{
+  "schemaVersion": 1,
+  "title": "Пир Хохота",
+  "defaultDeck": "noise",
+  "charactersPerSecond": 65,
+  "ambienceVolume": 0.22,
+  "sfxVolume": 0.6,
+  "introduction": [
+    {
+      "id": "scene_00_prologue-f01",
+      "title": "Сцена 0. Пролог: Смертельный номер",
+      "background": "LayeredCards/Layers/C02/background",
+      "left": {
+        "art": "Art/Jester/jester_basic",
+        "label": "Йорик",
+        "portrait": false,
+        "scale": 1,
+        "offsetX": 0,
+        "offsetY": 0
+      },
+      "right": {
+        "art": "Art/Others/mainKing",
+        "label": "Малхорат",
+        "portrait": false,
+        "scale": 1,
+        "offsetX": 0,
+        "offsetY": 0
+      },
+      "lines": [
+        {
+          "sourceId": "0.1",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Тронный Зал Цитадели Бездны. Высокие стрельчатые своды из чёрного обсидиана тонут в багровом полумраке. Коптят столетние факелы на драконьем жире, а тяжёлые бархатные штандарты с золотыми черепами чуть колышутся от загробного сквозняка. Раз в сто лет здесь вершится величайшее таинство Преисподней — Пир Хохота.",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Achievement_Grand_01.wav",
+          "ambience": "Card_Game_Ambience_Dungeon.wav"
+        },
+        {
+          "sourceId": "0.2",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Семнадцать дуэлей высшей знати за трон Владыки. Семь кругов инфернального двора замерли в благоговейном трепете. Архидемоны в мантиях, генералы легионов пепла, суровые инквизиторы с пергаментными свитками — каждый жаждет урвать чужие владения. Ведь проигравшего ждёт худшая кара: его имя и самое унизительное прозвище навечно высекают на трёхметровой Стене Позора у трона, на потеху поколениям.",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "",
+          "ambience": ""
+        },
+        {
+          "sourceId": "0.3",
+          "speaker": "РАССКАЗЧИК",
+          "text": "На возвышение к базальтовому алтарю выступает сам Верховный Демон Малхорат — трёхметровый исполин в латах из закалённой лавы, с рогами размахом в добрую сажень. В его когтистых лапах шуршит священный манускрипт регламента, составленный лучшими крючкотворами адской канцелярии за прошедший век.",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Movement_Cycle_01.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "0.4",
+          "speaker": "МАЛХОРАТ",
+          "text": "Внемлите, князья Тьмы, лорды Бездны и послы Девятого Круга! Прежде чем колоды коснутся сукна, оглашаю священные статьи обновлённого Уложения о Пире! Статья третья: «О недопустимости птичьих провокаций»... Кхм...",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Effect_Wet_Silly_01.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "0.5",
+          "speaker": "МАЛХОРАТ",
+          "text": "«...Участникам дуэли строжайше возбраняется призывать в бой зачарованных боевых гусей в кованых шлемах. Ибо на прошлом Пире взвод пернатых вероломно захватил буфет лорда Вельзевула, четыре часа удерживал склад с медовухой и требовал признать их суверенным княжеством...»",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "",
+          "ambience": ""
+        },
+        {
+          "sourceId": "0.6",
+          "speaker": "МАЛХОРАТ",
+          "text": "Гуси... Пф-ф-ф... Гуси требовали... кхе... автономию и пенсионные выплаты овсом... Кхм! Молчать в зале! Я продолжаю государственную речь!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Effect_Bubble_01.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "0.7",
+          "speaker": "ШУТ",
+          "text": "(шёпотом из партера, тихонько звеня бубенцами) Ваше Темнейшество, держите величие лица! Архиепископ Серных Топей уже достал монокль и конспектирует каждое ваше дыхание!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Achievement_Chime_Light_01.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "0.8",
+          "speaker": "МАЛХОРАТ",
+          "text": "Статья седьмая: «О дипломатическом декоруме дуэлянтов»... «Категорически возбраняется являться на арену в семейных панталонах с начёсом, дабы вид коленей герцога Асмодея вновь не поверг судейскую коллегию в массовый летаргический сон... А на родовых щитах строжайше запрещено выводить девиз: «Шо, опять?!»...» Хы... Хы-хы-хы...",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Movement_Cycle_01.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "0.9",
+          "speaker": "МАЛХОРАТ",
+          "text": "Опять... ха-ха... Асмодей в рейтузах с начёсом верхом на пепельном драконе... ПФ-Ф-Ф-ХА-ХА! Ой, Создатель, кто... кто составлял этот свиток?! Кронос, старый ты буквоед, это твоя канцелярия строчила?!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Effect_Wet_Silly_01.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "0.10",
+          "speaker": "МАЛХОРАТ",
+          "text": "А вот... Статья тринадцатая! «Штрафные санкции»! Ой не могу... «В случае фальстарта при ритуале призыва виновный лорд обязан... ха-ха-ха... в полном парадном венце... лично вычесать блох у трёхголового Цербера гребешком из рыбьей кости... и спеть ему колыбельную про серенького козлика тонким дискантом»! АХА-ХА-ХА-ХА-ХА!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_UI_General_Crack_01.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "0.11",
+          "speaker": "МАЛХОРАТ",
+          "text": "ДИСКАНТОМ! КОЗЛИКА! ЦЕРБЕРУ! АХА-ХА-ХА-ХА! ОЙ, ПОЩАДИТЕ! ЖИВОТ РАЗРЫВАЕТ! ЛОРДЫ, ВЫ ПРЕДСТАВЬТЕ: ДВУХМЕТРОВЫЙ АБАДДОН В ЛАТАХ ПОЁТ «БАЮ-БАЮШКИ-БАЮ» ПСУ В УХО! АХА-ХА-ХА-ХА! КХЕ-КХЕ... ГУСИ-И-И! ВОЗДУХА-А-А!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_UI_General_Air_Rise_01.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "0.12",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Трёхметровый повелитель Тьмы колотил латной рукавицей по базальтовому алтарю так, что вековой камень трещал и пускал снопы искр. Его рога завибрировали, словно камертоны, из ушей повалил радужный дым, а лавовая броня на груди начала раздуваться, как паруса каравеллы в тайфун. Демоническое величие треснуло по всем швам!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "",
+          "ambience": ""
+        },
+        {
+          "sourceId": "0.13",
+          "speaker": "МАЛХОРАТ",
+          "text": "НЕ МОГУ-У-У! ЛОПНУ-У-У! ГУСЬ В ШЛЕМЕ-Е-Е! ХЛОП-ПОП-БАБАХ!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Abilities_Pop_Big_01.wav",
+          "ambience": ""
+        }
+      ]
+    },
+    {
+      "id": "scene_00_prologue-f02",
+      "title": "Сцена 0. Пролог: Смертельный номер",
+      "background": "LayeredCards/Layers/C02/background",
+      "left": {
+        "art": "Art/Jester/jester_basic",
+        "label": "Йорик",
+        "portrait": false,
+        "scale": 1,
+        "offsetX": 0,
+        "offsetY": 0
+      },
+      "right": {
+        "art": "",
+        "label": "",
+        "portrait": false,
+        "scale": 1,
+        "offsetX": 0,
+        "offsetY": 0
+      },
+      "lines": [
+        {
+          "sourceId": "0.14",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Звук был похож на одновременный залп сотни пушек, заряженных шампанским. Верховный Демон Преисподней в буквальном смысле лопнул от неудержимого хохота прямо на священном алтаре столетия! От владыки осталась лишь ароматная тучка серного конфетти и благоговейный ступор трёх тысяч генералов.",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_UI_General_Crack_01.wav",
+          "ambience": "Mute"
+        },
+        {
+          "sourceId": "0.15",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Взрывная волна взметнула к потолку священную тридцатикарточную колоду Владыки. Сделав в воздухе тройное сальто, карты веером спланировали точнёхонько в распахнутые ладони шута Йорика. Ведь шут на церемониях всегда топчется ближе всех к постаменту — из чисто профессионального любопытства.",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Movement_Deal_Multiple.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "0.16",
+          "speaker": "ШУТ",
+          "text": "Граждане архидемоны! Ваша светлость инквизиторы! Произошло трагическое недоразумение! Я просто ловил падающий инвентарь! Возьмите колоду обратно, у меня дома каша подгорает!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "",
+          "ambience": ""
+        },
+        {
+          "sourceId": "0.17",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Но древняя руническая магия непреклонна, как гранит: карты вспыхнули изумрудным пламенем, намертво связав ауру колоды с шутом. Закон Пира высечен в адаманте: кто держит карты — тот и участник схватки. Зал взорвался тысячеголосым рёвом изумления и ярости!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "",
+          "ambience": ""
+        }
+      ]
+    },
+    {
+      "id": "scene_00_prologue-f03",
+      "title": "Сцена 0. Пролог: Смертельный номер",
+      "background": "LayeredCards/Layers/C02/background",
+      "left": {
+        "art": "",
+        "label": "",
+        "portrait": false,
+        "scale": 1,
+        "offsetX": 0,
+        "offsetY": 0
+      },
+      "right": {
+        "art": "",
+        "label": "",
+        "portrait": false,
+        "scale": 1,
+        "offsetX": 0,
+        "offsetY": 0
+      },
+      "lines": [
+        {
+          "sourceId": "0.18",
+          "speaker": "РАССКАЗЧИК",
+          "text": "В глазах у новоиспечённого кандидата на трон Преисподней всё поплыло, и мир погрузился в спасительную темноту...",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_UI_General_Air_Rise_01.wav",
+          "ambience": ""
+        }
+      ]
+    },
+    {
+      "id": "scene_01_tutorial-f01",
+      "title": "Сцена 1. Сон: Детство за сараем (Интерактивное обучение)",
+      "background": "LayeredCards/Layers/S01/background",
+      "left": {
+        "art": "Art/Jester/jester_basic",
+        "label": "Йорик",
+        "portrait": false,
+        "scale": 1,
+        "offsetX": 0,
+        "offsetY": 0
+      },
+      "right": {
+        "art": "Art/C03",
+        "label": "Собачка",
+        "portrait": true,
+        "scale": 1,
+        "offsetX": 0,
+        "offsetY": 0
+      },
+      "lines": [
+        {
+          "sourceId": "1.1",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Темнота нехотя отступает. Пахнет нагретой на солнце сосновой щепой, сушёной полынью и речным илом. Сквозь щели в рассохшихся досках старого амбара золотыми спицами бьёт полуденное солнце. За сараем мельника — единственное убежище во всём графстве, где нет ни господ, ни слуг, ни податных книг.",
+          "leftArt": "Art/Jester/jester_happy",
+          "sfx": "Card_Game_UI_General_Air_Rise_01.wav",
+          "ambience": "Card_Game_Ambience_Pasture.wav"
+        },
+        {
+          "sourceId": "1.2",
+          "speaker": "ШУТ-МАЛЫШ",
+          "text": "Смотри, Собачка! Гляди скорей! Я на берестяных дощечках соком бузины нарисовал настоящую колоду! Точь-в-точь как у столичных грандов! У каждого из нас ровно по тридцать жизней. Кто первый опустится до нуля — тот до заката дежурит на пасеке и декламирует хвалебную оду сварливому мельнику прямо с крыши амбара!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "",
+          "ambience": ""
+        },
+        {
+          "sourceId": "1.3",
+          "speaker": "СОБАЧКА",
+          "text": "Йорик, почему у твоего Медведя-обнимателя такие непомерно длинные лапы? Он выглядит так, словно пытается одновременно ограбить прохожего и станцевать менуэт.",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Movement_Tap_01.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "1.4",
+          "speaker": "ШУТ-МАЛЫШ",
+          "text": "Ничего ты не понимаешь в боевой эстетике! Это элитный Медведь-обниматель! Он защищает твоего героя. В начале каждого твоего хода берёшь из колоды одну карту. Больше карт в руке — шире стратегический манёвр. Тяни!",
+          "leftArt": "Art/Jester/jester_happy",
+          "sfx": "Card_Game_Movement_Deal_Single_01.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "1.5",
+          "speaker": "ШУТ-МАЛЫШ",
+          "text": "Теперь выводим бойца на оперативный простор! На нашем столе ровно пять позиций для существ. Клади карту в свободную ячейку. Но помни святое правило: зверь подчинится твоей воле только в том случае, если ты безукоризненно проведёшь ритуал призыва!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "",
+          "ambience": ""
+        },
+        {
+          "sourceId": "1.6",
+          "speaker": "СОБАЧКА",
+          "text": "Ритуал? Опять старинные куплеты на латыни декламировать? Мельник на прошлой неделе от твоих латинских рулад полчаса гонялся за нами по крапиве с ухватом, решив, что мы навели порчу на его любимого хряка.",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "",
+          "ambience": ""
+        },
+        {
+          "sourceId": "1.7",
+          "speaker": "ШУТ-МАЛЫШ",
+          "text": "Символы нажимай! Быстро, чётко, в строгой гармонии! Ошибёшься в рунах трижды — призванный монстр оскорбится твоей дилетантской техникой, признает тебя недостойным полководцем и демонстративно перейдёт под знамена противника! Вместе со всей твоей картой!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "action: qte.correct",
+          "ambience": ""
+        },
+        {
+          "sourceId": "1.8",
+          "speaker": "СОБАЧКА",
+          "text": "Сурово... Вот такие вот превратности, собачка... А если мне не хочется возиться с медведями, а хочется немедленно испепелить твою линию обороны магическим вихрем?",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_UI_General_Deep_01.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "1.9",
+          "speaker": "ШУТ-МАЛЫШ",
+          "text": "Во время своего хода сам выбери существо на столе и потяни от него стрелку к цели. Стрелка в центр означает случайного противника. Если цель не назначена, при завершении хода существо тоже атакует случайного врага.",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "action: S01.launch",
+          "ambience": ""
+        },
+        {
+          "sourceId": "1.10",
+          "speaker": "ШУТ-МАЛЫШ",
+          "text": "Нажимаешь «Закончить ход» — и твои существа атакуют по очереди. Цель — выбранный враг или его существо; без назначения — случайный вражеский герой. Реакции разрешены во время розыгрыша карты, но не во время этих атак.",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "action: creature.attack",
+          "ambience": ""
+        },
+        {
+          "sourceId": "1.11",
+          "speaker": "СОБАЧКА",
+          "text": "А сколько карт вообще дозволяется держать в лапах? У меня, между прочим, анатомические ограничения.",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "",
+          "ambience": ""
+        },
+        {
+          "sourceId": "1.12",
+          "speaker": "ШУТ-МАЛЫШ",
+          "text": "Строго не более восьми! Девятая и любая последующая моментально охватывается лазурным огнём и обращается в невесомый пепел! Проверено экспериментальным путём на дедушкином сеновале. Проявляй государственную умеренность!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "",
+          "ambience": ""
+        },
+        {
+          "sourceId": "1.13",
+          "speaker": "ШУТ-МАЛЫШ",
+          "text": "Вот погоди, Собачка... Настанет день, я вырасту, овладею истинной демонической колодой Преисподней! Я явлюсь на Пир Хохота, одержу семнадцать блистательных викторий и заберу корону Владыки! И ни один вельможа больше не посмеет швырять в меня увядшими яблоками!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "",
+          "ambience": ""
+        },
+        {
+          "sourceId": "1.14",
+          "speaker": "СОБАЧКА",
+          "text": "Ты вчера запутался в подоле собственного парадного колпака и кувыркнулся в копну прошлогоднего клевера. Монарх из тебя, Йорик, выйдет в высшей степени эксцентричный. Вот такая вот судьба, собачка...",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "",
+          "ambience": ""
+        }
+      ]
+    },
+    {
+      "id": "scene_01_tutorial-f02",
+      "title": "Сцена 1. Сон: Детство за сараем (Интерактивное обучение)",
+      "background": "LayeredCards/Layers/C02/background",
+      "left": {
+        "art": "",
+        "label": "",
+        "portrait": false,
+        "scale": 1,
+        "offsetX": 0,
+        "offsetY": 0
+      },
+      "right": {
+        "art": "",
+        "label": "",
+        "portrait": false,
+        "scale": 1,
+        "offsetX": 0,
+        "offsetY": 0
+      },
+      "lines": [
+        {
+          "sourceId": "1.15",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Мечты обладают коварным свойством воплощаться в реальность в самый неподходящий и ошеломляющий момент. Пора просыпаться, новоиспечённый кандидат.",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Action_Bash_Metal_01.wav",
+          "ambience": "Mute"
+        }
+      ]
+    },
+    {
+      "id": "scene_02_tavern-f01",
+      "title": "Сцена 2. Таверна «У Лопнувшего» (Пробуждение и выбор колоды)",
+      "background": "LayeredCards/Layers/S01/background",
+      "left": {
+        "art": "Art/Jester/jester_basic",
+        "label": "Йорик",
+        "portrait": false,
+        "scale": 1,
+        "offsetX": 0,
+        "offsetY": 0
+      },
+      "right": {
+        "art": "Art/C09",
+        "label": "Бальтазар",
+        "portrait": true,
+        "scale": 1,
+        "offsetX": 0,
+        "offsetY": 0
+      },
+      "lines": [
+        {
+          "sourceId": "2.1",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Голова гудит так, будто внутри поселился кузнечный мех. В воздухе витает аромат хмеля, корицы и свежей стружки, а под ухом пульсирует магия чистейшей пробы.",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Action_Bash_Metal_01.wav",
+          "ambience": "Card_Game_Ambience_Pasture.wav"
+        },
+        {
+          "sourceId": "2.2",
+          "speaker": "БАЛЬТАЗАР",
+          "text": "Очнулся, маэстро! Лежи смирно, пока голова не прояснится. Сейчас закреплю вывеску — и угощу тебя выдержанным напитком из личных погребов. За счёт заведения! Первый и, клянусь Бездной, исключительный случай.",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Action_Bash_Metal_02.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "2.3",
+          "speaker": "ШУТ",
+          "text": "Бальтазар... где мы? Что это за размеренный стук? Меня уже заколачивают в саркофаг?",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "",
+          "ambience": ""
+        },
+        {
+          "sourceId": "2.4",
+          "speaker": "БАЛЬТАЗАР",
+          "text": "Какой саркофаг! Это смена концепции, друг мой! Я снял безнадёжно устаревшую вывеску «Три унылых вепря». Отныне наше благородное заведение именуется: «Таверна У Лопнувшего»! Оцени изящество замысла!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Action_Crack_01.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "2.5",
+          "speaker": "ШУТ",
+          "text": "Ты в своём уме? Владыка Малхорат лопнул во дворце! В столице! За тридцать верст по тракту!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "",
+          "ambience": ""
+        },
+        {
+          "sourceId": "2.6",
+          "speaker": "БАЛЬТАЗАР",
+          "text": "А свидетели? В суматохе все почтенные господа покинули зал! Кто теперь разберёт точные координаты исторического конфуза? Зато у меня — табличка с гильдейской печатью! Представь, сколько аристократов, странствующих рыцарей и любителей редкостей сюда устремится поглазеть на легендарное место! Коллекционные напитки разойдутся по высшему тарифу!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_UI_General_Click_Metal.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "2.7",
+          "speaker": "ШУТ",
+          "text": "Бальтазар, ты не слышишь меня! Карты у меня! Я теперь официальный участник Пира Хохота! Семнадцать поединков на выбывание! За мной явятся все грозные лорды и дуэлянты Преисподней!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Achievement_Shimmer_Long_01.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "2.8",
+          "speaker": "БАЛЬТАЗАР",
+          "text": "(внимательно смотрит на колоду, затем на Шута) ...Так. Значит, налью двойную порцию. За твой счёт — у землевладельцев кредит неограничен.",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Action_Bash_Metal_01.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "2.9",
+          "speaker": "ШУТ",
+          "text": "Какой из меня владыка?! Я шут, Бальтазар! Я умею лишь падать со сцены и сочинять едкие эпиграммы на совет министров! У меня даже цирковой колоды нет — набор «Цирк уехал, клоуны раздали карты» сгорел в прошлом месяце!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "",
+          "ambience": ""
+        },
+        {
+          "sourceId": "2.10",
+          "speaker": "БАЛЬТАЗАР",
+          "text": "Оставим былое прошлому! Колода Владыки — подлинный шедевр. Пока ты восстанавливал силы, я систематизировал карты по классическим канонам. Три изысканных стратегии редакции ноль-пять. Выбирай свой стиль, маэстро!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Movement_Deal_Multiple.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "2.11",
+          "speaker": "ШУТ",
+          "text": "Пусть будет эта. Спрячусь в погребе за бочками и запрусь на засов. Скажешь всем, что я удалился в обитель молчальников.",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Movement_Deal_Single_01.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "2.12",
+          "speaker": "БАЛЬТАЗАР",
+          "text": "Не выйдет, Йорик. Слышишь тяжёлую поступь за порогом? Первый соискатель уже изволил явиться. И, судя по звукам, его безжалостно терзает собственная жаба!",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Action_Stomp_01.wav",
+          "ambience": ""
+        }
+      ]
+    }
+  ],
+  "chapters": [
+    {
+      "id": "b01_zhabadushess",
+      "title": "ЖабаДушэс",
+      "opponentName": "ЖабаДушэс",
+      "opponentDeck": "tricks",
+      "opponentHero": "badger",
+      "mode": "wizards",
+      "seed": 1701,
+      "before": [
+        {
+          "id": "b01_zhabadushess-before-f01",
+          "title": "Сцена 3. Бой 1: Барон ЖабаДушэс",
+          "background": "LayeredCards/Layers/S01/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C05",
+            "label": "ЖабаДушэс",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "3.1",
+              "speaker": "ЖАБАДУШЭС",
+              "text": "КВА-А-АК ТАК?! Именем Казначейства и Податного Приказа Преисподней — оставаться на местах! Я — барон ЖабаДушэс, главный ревизор и сборщик податей седьмого округа!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Effect_Wet_Silly_01.wav",
+              "ambience": "Card_Game_Ambience_Swamp.wav"
+            },
+            {
+              "sourceId": "3.2",
+              "speaker": "ШУТ",
+              "text": "Доброго здравия, господин инспектор. А налог на содержание трактира у нас оплачен на два финансовых периода вперёд...",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "",
+              "ambience": ""
+            },
+            {
+              "sourceId": "3.3",
+              "speaker": "ЖАБАДУШЭС",
+              "text": "Оставьте ваши гроши! Мне донесли, что у бродячего артиста объявилась верховная колода самого Малхората! Государственное достояние! Без описи! Без гербового сбора! Меня... меня жаба душит наблюдать, как такое сокровище пылится в руках шута! КВА-А-А!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Crack_01.wav",
+              "ambience": ""
+            },
+            {
+              "sourceId": "3.4",
+              "speaker": "БАЛЬТАЗАР",
+              "text": "(на ухо Шуту) Обыграй его, Йорик! Этот чиновник облагал драконовской пошлиной каждую бочку в моём погребе! У него колода здешних топей — «Мелкие пакости». Отправь его обратно в трясину!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "",
+              "ambience": ""
+            },
+            {
+              "sourceId": "3.5",
+              "speaker": "ЖАБАДУШЭС",
+              "text": "По священному эдикту Пира Хохота: вызываю тебя на дуэль за титул и угодья седьмого округа! Выиграешь — спишу все недоимки округа на сто лет вперёд! Проиграешь — колода отойдёт казне, а твой шутовской лик высекут на Стене Позора с надписью «Податной Простак»! Ква-а!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Movement_Shuffle_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "b01_zhabadushess-after-f01",
+          "title": "Сцена 3. Бой 1: Барон ЖабаДушэс",
+          "background": "LayeredCards/Layers/S01/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C05",
+            "label": "ЖабаДушэс",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "3.6",
+              "speaker": "ЖАБАДУШЭС",
+              "text": "Ква-а-а... Меня... задушила... моя... собственная... безмерная жадность... Вот такие вот превратности, собачка... Ква-а-а...",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_UI_General_Collapse_01.wav",
+              "ambience": ""
+            }
+          ]
+        },
+        {
+          "id": "b01_zhabadushess-after-f02",
+          "title": "Сцена 3. Бой 1: Барон ЖабаДушэс",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "3.7",
+              "speaker": "РАССКАЗЧИК",
+              "text": "Багровый разряд расколол небо над цитаделью. На Стене Позора у трона невидимый резец высек первое клеймо: «Барон ЖабаДушэс — Задушенный Жадностью (Бой 1/17)». Земли седьмого округа перешли под юрисдикцию Шута.",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Bash_Metal_01.wav",
+              "ambience": ""
+            }
+          ]
+        },
+        {
+          "id": "b01_zhabadushess-after-f03",
+          "title": "Сцена 3. Бой 1: Барон ЖабаДушэс",
+          "background": "LayeredCards/Layers/S01/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C09",
+            "label": "Бальтазар",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "3.8",
+              "speaker": "БАЛЬТАЗАР",
+              "text": "Триумф! Мы отсудили болота! Мы теперь полноправные феодалы! Йорик, дорогой друг, ты гений! На этих топях я открою респектабельную гостиницу и факторию! Наполняй кубки победным напитком!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "",
+              "ambience": "Card_Game_Achievement_Grand_01.wav"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b02_malphas",
+      "title": "Малфас",
+      "opponentName": "Малфас",
+      "opponentDeck": "noise",
+      "opponentHero": "lion",
+      "mode": "wizards",
+      "seed": 1702,
+      "before": [
+        {
+          "id": "b02_malphas-before-f01",
+          "title": "Сцена 4. Бой 2: Малфас Неистовый (Фанатик господина)",
+          "background": "LayeredCards/Layers/S01/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C06",
+            "label": "Малфас",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "4.1",
+              "speaker": "МАЛФАС",
+              "text": "Трепещи, ярмарочный фигляр! Я — Малфас, верховный каноник Ордена Пепельного Престола! Мой повелитель, лорд Вельзевул, повелел искупить твой дерзкий вызов священным гневом!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Bash_Metal_02.wav",
+              "ambience": "Card_Game_Ambience_Dungeon.wav"
+            },
+            {
+              "sourceId": "4.2",
+              "speaker": "ШУТ",
+              "text": "Почтенный Малфас, вы сорвали с петель входную дверь. Бальтазар её только вчера бережно отреставрировал.",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "",
+              "ambience": ""
+            },
+            {
+              "sourceId": "4.3",
+              "speaker": "МАЛФАС",
+              "text": "Прах и суета! Повелитель удостоил меня высочайшего внимания! Он лично изволил сказать мне: «Ступай в тот придорожный трактир и не смей попадаться мне на глаза до скончания веков». Это же знак исключительного доверия! Ради благосклонности владыки я сокрушу твою колоду!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "",
+              "ambience": ""
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "b02_malphas-after-f01",
+          "title": "Сцена 4. Бой 2: Малфас Неистовый (Фанатик господина)",
+          "background": "LayeredCards/Layers/S01/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C06",
+            "label": "Малфас",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "4.4",
+              "speaker": "МАЛФАС",
+              "text": "Владыка... я не оправдал... вашего презрения... Моя жертва напрасна...",
+              "leftArt": "Art/Jester/jester_happy",
+              "sfx": "Card_Game_UI_General_Collapse_01.wav",
+              "ambience": ""
+            }
+          ]
+        },
+        {
+          "id": "b02_malphas-after-f02",
+          "title": "Сцена 4. Бой 2: Малфас Неистовый (Фанатик господина)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "4.5",
+              "speaker": "РАССКАЗЧИК",
+              "text": "Стена Позора в цитадели выбивает новое имя: «Малфас — Образцовый Послушник (2/17)».",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Crack_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b03_valafara",
+      "title": "Валафара",
+      "opponentName": "Валафара",
+      "opponentDeck": "cozy",
+      "opponentHero": "deer",
+      "mode": "wizards",
+      "seed": 1703,
+      "before": [
+        {
+          "id": "b03_valafara-before-f01",
+          "title": "Сцена 5. Бой 3: Леди Валафара (Честь благородного рода)",
+          "background": "LayeredCards/Layers/S01/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C04",
+            "label": "Валафара",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "5.1",
+              "speaker": "ВАЛАФАРА",
+              "text": "Так вот он каков... Жалкий шут, посмевший втоптать в болотную тину доброе имя моего кузена ЖабаДушэса! Я — леди Валафара из древнего аристократического дома фон Квак! Фамильная честь запятнана!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_UI_General_Shimmer_01.wav",
+              "ambience": "Card_Game_Ambience_Swamp.wav"
+            },
+            {
+              "sourceId": "5.2",
+              "speaker": "ШУТ",
+              "text": "Миледи, ЖабаДушэс был двухметровой жабой. А вы... весьма утончённая демоница. Где же фамильное сходство?",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "",
+              "ambience": ""
+            },
+            {
+              "sourceId": "5.3",
+              "speaker": "ВАЛАФАРА",
+              "text": "Довольно дерзостей! Это двоюродное родство по линии троюродной тётушки из трясины! Раскладывайте карты! И... не смейте столь пристально рассматривать мои туфли из кожи мантикоры, невоспитанный сударь!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Movement_Shuffle_02.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "b03_valafara-after-f01",
+          "title": "Сцена 5. Бой 3: Леди Валафара (Честь благородного рода)",
+          "background": "LayeredCards/Layers/S01/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C04",
+            "label": "Валафара",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "5.4",
+              "speaker": "ВАЛАФАРА",
+              "text": "Неслыханно! Дворянка чистейшей крови уступила... комедианту?! Виной тому сквозняки и несовершенство местной акустики! Негодую! Требую апелляции!",
+              "leftArt": "Art/Jester/jester_happy",
+              "sfx": "Card_Game_UI_General_Air_Rise_02.wav",
+              "ambience": ""
+            }
+          ]
+        },
+        {
+          "id": "b03_valafara-after-f02",
+          "title": "Сцена 5. Бой 3: Леди Валафара (Честь благородного рода)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "5.5",
+              "speaker": "РАССКАЗЧИК",
+              "text": "Резец выбивает клеймо: «Валафара — Оскорблённая Невинность (3/17)».",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Crack_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b04_goliath",
+      "title": "Голиаф",
+      "opponentName": "Голиаф",
+      "opponentDeck": "cozy",
+      "opponentHero": "dog",
+      "mode": "commanders",
+      "seed": 1704,
+      "before": [
+        {
+          "id": "b04_goliath-before-f01",
+          "title": "Сцена 6. Бой 4: Архидемон Голиаф (Ради супруги)",
+          "background": "LayeredCards/Layers/S01/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C10",
+            "label": "Голиаф",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "6.1",
+              "speaker": "ГОЛИАФ",
+              "text": "Приветствую собрание... Ты — мастер Йорик?",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Stomp_01.wav",
+              "ambience": "Card_Game_Ambience_Cave.wav"
+            },
+            {
+              "sourceId": "6.2",
+              "speaker": "ШУТ",
+              "text": "Я... Почтенный лорд Голиаф, присядьте к огню, не извольте беспокоиться...",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "",
+              "ambience": ""
+            },
+            {
+              "sourceId": "6.3",
+              "speaker": "ГОЛИАФ",
+              "text": "Благодарю, присяду... Ситуация деликатная, господа. Супруга моя, светлейшая герцогиня Моргиана, прознала про карты Владыки. Её ультиматум был краток: «Либо ты преподносишь колоду Шута в качестве подарка к серебряному юбилею нашего союза, либо отправляешься ночевать в псарню к церберам, а изысканное жаркое достанется кузине». Понимаете глубину моей драмы, господа?",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Bash_Metal_01.wav",
+              "ambience": ""
+            },
+            {
+              "sourceId": "6.4",
+              "speaker": "ГОЛИАФ",
+              "text": "Сыграем благородную партию. Если уступлю — доложу дома, что столкнулся с тайным магистром верховной коллегии.",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Movement_Shuffle_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "b04_goliath-after-f01",
+          "title": "Сцена 6. Бой 4: Архидемон Голиаф (Ради супруги)",
+          "background": "LayeredCards/Layers/S01/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C10",
+            "label": "Голиаф",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "6.5",
+              "speaker": "ГОЛИАФ",
+              "text": "Ну вот... Вот такие вот превратности, собачка... Пойду готовить постель в псарне. Благодарю за высокоинтеллектуальный поединок, сударь Йорик.",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Stomp_01.wav",
+              "ambience": ""
+            }
+          ]
+        },
+        {
+          "id": "b04_goliath-after-f02",
+          "title": "Сцена 6. Бой 4: Архидемон Голиаф (Ради супруги)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "6.6",
+              "speaker": "РАССКАЗЧИК",
+              "text": "На Стене высекается: «Голиаф — Рыцарь Семейного Очага (4/17)».",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Crack_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b05_belial",
+      "title": "Белиал",
+      "opponentName": "Белиал",
+      "opponentDeck": "noise",
+      "opponentHero": "owl",
+      "mode": "wizards",
+      "seed": 1705,
+      "before": [
+        {
+          "id": "b05_belial-before-f01",
+          "title": "Сцена 7. Бой 5: Лорд Белиал Дряхлый (Ветеран)",
+          "background": "LayeredCards/Layers/S01/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C09",
+            "label": "Белиал",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "7.1",
+              "speaker": "БЕЛИАЛ",
+              "text": "Подойди-ка к ветерану, юноша. Развели тут модернизм! Карты у них, ритуалы, изящные символы... Фи, легкомысленная молодёжь! В нашу славную эпоху дуэли велись основательно: сошлись на секирах, проломили латы — прямо, честно, без лишних сантиментов!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Movement_Tap_02.wav",
+              "ambience": "Card_Game_Ambience_Dungeon.wav"
+            },
+            {
+              "sourceId": "7.2",
+              "speaker": "БЕЛИАЛ",
+              "text": "Изящнее?! Пустые предрассудки! В ваши годы я на берестяных дощечках громил отборные когорты! Раскладывай свои карты, юноша! Старая гвардия продемонстрирует классическую школу стратегии!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Movement_Deal_Multiple.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "b05_belial-after-f01",
+          "title": "Сцена 7. Бой 5: Лорд Белиал Дряхлый (Ветеран)",
+          "background": "LayeredCards/Layers/S01/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C09",
+            "label": "Белиал",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "7.3",
+              "speaker": "БЕЛИАЛ",
+              "text": "Эх... Реакция уже не та, артрит донимает... Полагаю, колода требует тщательной академической экспертизы! Бальтазар, наполни бокал заслуженному ветерану...",
+              "leftArt": "Art/Jester/jester_happy",
+              "sfx": "Card_Game_UI_General_Collapse_01.wav",
+              "ambience": ""
+            }
+          ]
+        },
+        {
+          "id": "b05_belial-after-f02",
+          "title": "Сцена 7. Бой 5: Лорд Белиал Дряхлый (Ветеран)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "7.4",
+              "speaker": "РАССКАЗЧИК",
+              "text": "Стена Позора: «Белиал — Хранитель Былых Традиций (5/17)».",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Crack_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b06_bahram",
+      "title": "Бахрам",
+      "opponentName": "Бахрам",
+      "opponentDeck": "tricks",
+      "opponentHero": "lizard",
+      "mode": "wizards",
+      "seed": 1706,
+      "before": [
+        {
+          "id": "b06_bahram-before-f01",
+          "title": "Сцена 8. Похищение и Базар Серных Гейзеров (Бой 6)",
+          "background": "LayeredCards/Layers/S01/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "8.1",
+              "speaker": "ШУТ",
+              "text": "Бальтазара похитили! Послание от купеческой гильдии: требуют прибыть на Серный Базар для урегулирования споров за ломберным столом! Держись, старый друг, я иду на выручку!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_UI_General_Collapse_01.wav",
+              "ambience": "Card_Game_Ambience_Cave.wav"
+            }
+          ]
+        },
+        {
+          "id": "b06_bahram-before-f02",
+          "title": "Сцена 8. Похищение и Базар Серных Гейзеров (Бой 6)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C01",
+            "label": "Бахрам",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "8.2",
+              "speaker": "БАХРАМ",
+              "text": "О, приветствую почтенного гостя! Прошу продемонстрировать легендарную колоду! Извольте видеть вашего солидного компаньона — превосходный коммерческий залог! Но я джентльмен восточной торговли: превзойдите меня в искусстве расклада — и забирайте почтенного трактирщика вместе с тюком отборного шафрана!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Effect_Bubble_01.wav",
+              "ambience": "Card_Game_Ambience_Swamp.wav"
+            },
+            {
+              "sourceId": "8.3",
+              "speaker": "ШУТ",
+              "text": "Освободите Бальтазара, почтенный негоциант! Сдавайте карты!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Movement_Shuffle_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "b06_bahram-after-f01",
+          "title": "Сцена 8. Похищение и Базар Серных Гейзеров (Бой 6)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C01",
+            "label": "Бахрам",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "8.4",
+              "speaker": "БАХРАМ",
+              "text": "Браво! Блестящая тактика, признаю поражение! Забирайте вашего почтенного трактирщика, контракт расторгнут к обоюдному согласию!",
+              "leftArt": "Art/Jester/jester_happy",
+              "sfx": "Card_Game_Action_Bash_Metal_01.wav",
+              "ambience": ""
+            }
+          ]
+        },
+        {
+          "id": "b06_bahram-after-f02",
+          "title": "Сцена 8. Похищение и Базар Серных Гейзеров (Бой 6)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "8.5",
+              "speaker": "РАССКАЗЧИК",
+              "text": "Стена Позора: «Бахрам — Негоциант Без Прибыли (6/17)».",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Crack_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b07_grimwald",
+      "title": "Гримвальд",
+      "opponentName": "Гримвальд",
+      "opponentDeck": "tricks",
+      "opponentHero": "rabbit",
+      "mode": "wizards",
+      "seed": 1707,
+      "before": [
+        {
+          "id": "b07_grimwald-before-f01",
+          "title": "Сцена 9. Заброшенный Балаган: Гримвальд Печальный (Бой 7)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C18",
+            "label": "Гримвальд",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "9.1",
+              "speaker": "ГРИМВАЛЬД",
+              "text": "Здравствуй, Йорик... Давно не виделись. Ты теперь знаменитость, верно? Покоритель лордов? А я вот... несу вахту. Труппа распущена, а бродячие комедианты остались на пепелище.",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_UI_General_Air_Rise_01.wav",
+              "ambience": "Card_Game_Ambience_Pasture.wav"
+            },
+            {
+              "sourceId": "9.2",
+              "speaker": "ГРИМВАЛЬД",
+              "text": "Горькая ирония, Йорик. Почему именно тебе улыбнулась благосклонность Судьбы, а мне достался лишь ветхий реквизит и пыльные кулисы? Сыграй со мной. По старой театральной памяти. Пусть карты рассудят наше мастерство.",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Movement_Deal_Multiple.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "b07_grimwald-after-f01",
+          "title": "Сцена 9. Заброшенный Балаган: Гримвальд Печальный (Бой 7)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C18",
+            "label": "Гримвальд",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "9.3",
+              "speaker": "ГРИМВАЛЬД",
+              "text": "Занавес опущен... Публика безмолвствует. Благодарю за прекрасную партию, Йорик. Ты действительно лучший из нас. Ступай и покажи этим напыщенным грандам истинное искусство комедии.",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Achievement_Chime_Light_01.wav",
+              "ambience": ""
+            }
+          ]
+        },
+        {
+          "id": "b07_grimwald-after-f02",
+          "title": "Сцена 9. Заброшенный Балаган: Гримвальд Печальный (Бой 7)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "9.4",
+              "speaker": "РАССКАЗЧИК",
+              "text": "Стена Позора: «Гримвальд — Пьеро Печального Образа (7/17)».",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Crack_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b08_abaddon",
+      "title": "Абаддон",
+      "opponentName": "Абаддон",
+      "opponentDeck": "noise",
+      "opponentHero": "rat",
+      "mode": "commanders",
+      "seed": 1708,
+      "before": [
+        {
+          "id": "b08_abaddon-before-f01",
+          "title": "Сцена 10. Дорожный марафон претендентов (Бои 8–11)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C15",
+            "label": "Абаддон",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "10.1",
+              "speaker": "АБАДДОН",
+              "text": "Твой потенциал скован шутовским нарядом! Приобретай мой авторский манускрипт «Искусство триумфального призыва за три луны»! Условие аудиенции — победа в показательном поединке!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_UI_General_Air_Rise_01.wav",
+              "ambience": "Card_Game_Ambience_Swamp.wav"
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "b08_abaddon-after-f01",
+          "title": "Сцена 10. Дорожный марафон претендентов (Бои 8–11)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "10.2",
+              "speaker": "РАССКАЗЧИК",
+              "text": "Стена Позора: «Абаддон — Продавец Успеха (8/17)».",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Crack_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b09_malgis",
+      "title": "Мальгис",
+      "opponentName": "Мальгис",
+      "opponentDeck": "cozy",
+      "opponentHero": "badger",
+      "mode": "wizards",
+      "seed": 1709,
+      "before": [
+        {
+          "id": "b09_malgis-before-f01",
+          "title": "Сцена 10. Дорожный марафон претендентов (Бои 8–11)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C07",
+            "label": "Мальгис",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "10.3",
+              "speaker": "МАЛЬГИС",
+              "text": "Стоять! Согласно параграфу 12 Свода Законов Первого Пламени, ваш жест во время фазы ритуала классифицируется как умышленное затягивание регламента! Протестую!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Bash_Metal_01.wav",
+              "ambience": "Card_Game_Ambience_Dungeon.wav"
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "b09_malgis-after-f01",
+          "title": "Сцена 10. Дорожный марафон претендентов (Бои 8–11)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "10.4",
+              "speaker": "РАССКАЗЧИК",
+              "text": "Стена Позора: «Мальгис — Буквоед Преисподней (9/17)».",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Crack_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b10_morticia",
+      "title": "Мортиция",
+      "opponentName": "Мортиция",
+      "opponentDeck": "cozy",
+      "opponentHero": "lion",
+      "mode": "wizards",
+      "seed": 1710,
+      "before": [
+        {
+          "id": "b10_morticia-before-f01",
+          "title": "Сцена 10. Дорожный марафон претендентов (Бои 8–11)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C16",
+            "label": "Мортиция",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "10.5",
+              "speaker": "МОРТИЦИЯ",
+              "text": "К чему эти карты... К чему эта тщета... Бытие преисполнено светлой грусти и бренности, а моя колода соткана из элегий и несбывшихся надежд...",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_UI_General_Deep_01.wav",
+              "ambience": "Card_Game_Ambience_Cave.wav"
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "b10_morticia-after-f01",
+          "title": "Сцена 10. Дорожный марафон претендентов (Бои 8–11)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "10.6",
+              "speaker": "РАССКАЗЧИК",
+              "text": "Стена Позора: «Мортиция — Муза Меланхолии (10/17)».",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Crack_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b11_aspid",
+      "title": "Аспид",
+      "opponentName": "Аспид",
+      "opponentDeck": "noise",
+      "opponentHero": "deer",
+      "mode": "wizards",
+      "seed": 1711,
+      "before": [
+        {
+          "id": "b11_aspid-before-f01",
+          "title": "Сцена 10. Дорожный марафон претендентов (Бои 8–11)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C13",
+            "label": "Аспид",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "10.7",
+              "speaker": "АСПИД",
+              "text": "Истинный мудрец познаёт гармонию в безмолвии. Карты не терпят суетных речей. Сыграем сдержанно, вдумчиво и с достоинством.",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Blow_Wind_01.wav",
+              "ambience": "Card_Game_Ambience_Snowy_Mountain.wav"
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "b11_aspid-after-f01",
+          "title": "Сцена 10. Дорожный марафон претендентов (Бои 8–11)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "10.8",
+              "speaker": "РАССКАЗЧИК",
+              "text": "Стена Позора: «Аспид — Задумчивый Философ (11/17)».",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Crack_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b12_vulgor",
+      "title": "Вульгор",
+      "opponentName": "Вульгор",
+      "opponentDeck": "noise",
+      "opponentHero": "dog",
+      "mode": "commanders",
+      "seed": 1712,
+      "before": [
+        {
+          "id": "b12_vulgor-before-f01",
+          "title": "Сцена 11. Высшая знать (Бои 12–15)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C11",
+            "label": "Вульгор",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "11.1",
+              "speaker": "ВУЛЬГОР",
+              "text": "Моя генеральная диспозиция безупречна! Немедленная атака всеми двадцатью когортами без предварительных манёвров! Коррективы внесём по ходу виктории! В наступление!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Bash_Metal_02.wav",
+              "ambience": "Card_Game_Ambience_Dungeon.wav"
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "b12_vulgor-after-f01",
+          "title": "Сцена 11. Высшая знать (Бои 12–15)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "11.2",
+              "speaker": "РАССКАЗЧИК",
+              "text": "Стена Позора: «Вульгор — Теоретик Блицкрига (12/17)».",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Crack_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b13_hecate",
+      "title": "Геката",
+      "opponentName": "Геката",
+      "opponentDeck": "tricks",
+      "opponentHero": "owl",
+      "mode": "wizards",
+      "seed": 1713,
+      "before": [
+        {
+          "id": "b13_hecate-before-f01",
+          "title": "Сцена 11. Высшая знать (Бои 12–15)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C17",
+            "label": "Геката",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "11.3",
+              "speaker": "ГЕКАТА",
+              "text": "Позвольте, молодой человек! Ваш непрестанный звон бубенцов возмущает тонкие эфирные сферы! Сейчас я преподам вам показательный урок академической высшей магии!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Effect_Bubble_01.wav",
+              "ambience": "Card_Game_Ambience_Swamp.wav"
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "b13_hecate-after-f01",
+          "title": "Сцена 11. Высшая знать (Бои 12–15)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "11.4",
+              "speaker": "РАССКАЗЧИК",
+              "text": "Стена Позора: «Геката — Потомственная Прорицательница (13/17)».",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Crack_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b14_astaroth",
+      "title": "Астарот",
+      "opponentName": "Астарот",
+      "opponentDeck": "noise",
+      "opponentHero": "lizard",
+      "mode": "wizards",
+      "seed": 1714,
+      "before": [
+        {
+          "id": "b14_astaroth-before-f01",
+          "title": "Сцена 11. Высшая знать (Бои 12–15)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C08",
+            "label": "Астарот",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "11.5",
+              "speaker": "АСТАРОТ",
+              "text": "Почтенный Йорик! Взгляните на мой доспех из драконьей эмали и цепи червонного золота! Ваше скромное облачение глубоко ранит моё чувство прекрасного! Придётся преподать вам урок безупречного вкуса!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_UI_General_Click_Metal.wav",
+              "ambience": "Card_Game_Ambience_Dungeon.wav"
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "b14_astaroth-after-f01",
+          "title": "Сцена 11. Высшая знать (Бои 12–15)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "11.6",
+              "speaker": "РАССКАЗЧИК",
+              "text": "Стена Позора: «Астарот — Заложник Гардероба (14/17)».",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Crack_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b15_bastet",
+      "title": "Бастет",
+      "opponentName": "Бастет",
+      "opponentDeck": "cozy",
+      "opponentHero": "rabbit",
+      "mode": "wizards",
+      "seed": 1715,
+      "before": [
+        {
+          "id": "b15_bastet-before-f01",
+          "title": "Сцена 11. Высшая знать (Бои 12–15)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C02",
+            "label": "Бастет",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "11.7",
+              "speaker": "БАСТЕТ",
+              "text": "Мяу... Послушай, почтенный Йорик, быть может, мы отложим эти турнирные формальности, разделим чашу с молоком и предадимся созерцательной сиесте? Столько мирской суеты... Впрочем, сделаю один изящный ход лапой...",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Movement_Tap_01.wav",
+              "ambience": "Card_Game_Ambience_Pasture.wav"
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "b15_bastet-after-f01",
+          "title": "Сцена 11. Высшая знать (Бои 12–15)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "11.8",
+              "speaker": "РАССКАЗЧИК",
+              "text": "Стена Позора: «Бастет — Магистр Созерцания (15/17)».",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Crack_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b16_cronos",
+      "title": "Кронос",
+      "opponentName": "Кронос",
+      "opponentDeck": "tricks",
+      "opponentHero": "rat",
+      "mode": "commanders",
+      "seed": 1716,
+      "before": [
+        {
+          "id": "b16_cronos-before-f01",
+          "title": "Сцена 12. Полуфинал: Архивариус Кронос (Бой 16)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C12",
+            "label": "Кронос",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "12.1",
+              "speaker": "КРОНОС",
+              "text": "Невероятно. Простой придворный комедиант прошёл шестнадцать кругов элиты. Недопустимая статистическая аномалия.",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_UI_General_Air_Rise_01.wav",
+              "ambience": "Card_Game_Ambience_Dungeon.wav"
+            },
+            {
+              "sourceId": "12.2",
+              "speaker": "КРОНОС",
+              "text": "Я — главный составитель Уложения о Пире. Это я лично включил в свиток пункт о боевых гусях, от которого не сдержал смеха досточтимый Малхорат! Идеальная, безупречно рассчитанная смена династии! Трон по праву интеллекта принадлежит мне! Однако ваша легкомысленная шутовская рука перехватила реликвию! Верните карты законному автору!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Magic_Sword_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "b16_cronos-after-f01",
+          "title": "Сцена 12. Полуфинал: Архивариус Кронос (Бой 16)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/C12",
+            "label": "Кронос",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "12.3",
+              "speaker": "КРОНОС",
+              "text": "Невозможно... В моих уравнениях не было предусмотрено места... для экспромта уличного артиста... Вся система дала сбой...",
+              "leftArt": "Art/Jester/jester_happy",
+              "sfx": "Card_Game_Movement_Deal_Multiple.wav",
+              "ambience": ""
+            }
+          ]
+        },
+        {
+          "id": "b16_cronos-after-f02",
+          "title": "Сцена 12. Полуфинал: Архивариус Кронос (Бой 16)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "12.4",
+              "speaker": "РАССКАЗЧИК",
+              "text": "Стена Позора: «Кронос — Жертва Регламента (16/17)».",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Crack_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b17_azazel",
+      "title": "Азазель",
+      "opponentName": "Азазель",
+      "opponentDeck": "tricks",
+      "opponentHero": "badger",
+      "mode": "wizards",
+      "seed": 1717,
+      "before": [
+        {
+          "id": "b17_azazel-before-f01",
+          "title": "Сцена 13. Суперфинал: Азазель Первозданный (Бой 17)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/S07",
+            "label": "Азазель",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "13.1",
+              "speaker": "АЗАЗЕЛЬ",
+              "text": "ПРИВЕТСТВУЮ, ПРЕИСПОДНЯ-Я-Я! Наш вековой суперфинал достиг апогея! Шестнадцать именитых грандов уже навеки внесены в скрижали Стены Позора! И остался лишь один шаг до коронации нового Владыки!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Abilities_Pop_Big_01.wav",
+              "ambience": "Card_Game_Ambience_Dungeon.wav"
+            },
+            {
+              "sourceId": "13.2",
+              "speaker": "АЗАЗЕЛЬ",
+              "text": "Я — Азазель Первозданный! Бессмертный архи-церемониймейстер и верховный арбитр Пира Хохота! Тот, кто направляет этот турнир последние тридцать тысяч лет! Полагал ли ты, что корона достанется без труда? Чтобы взойти на Трон Хохота, ты обязан превзойти самого автора этих священных правил!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Achievement_Grand_01.wav",
+              "ambience": ""
+            },
+            {
+              "sourceId": "13.3",
+              "speaker": "ШУТ",
+              "text": "Владыки раздувают щёки от напускного величия, пока не станут жертвами собственной напыщенности! А шут... шут видит мир подлинным — парадоксальным, живым и свободным! Сдавайте карты, господин церемониймейстер! В детстве за сараем я был триумфатором — буду им и на троне!",
+              "leftArt": "Art/Jester/jester_happy",
+              "sfx": "Card_Game_Achievement_Chime_Light_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "b17_azazel-after-f01",
+          "title": "Сцена 13. Суперфинал: Азазель Первозданный (Бой 17)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "Art/Jester/jester_basic",
+            "label": "Йорик",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "Art/S07",
+            "label": "Азазель",
+            "portrait": true,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "13.4",
+              "speaker": "АЗАЗЕЛЬ",
+              "text": "БРАВО! Блестяще, маэстро! За тридцать тысячелетий никто столь элегантно не обыгрывал меня за ломберным столом! Преисподняя рукоплещет новому Владыке!",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Achievement_Grand_01.wav",
+              "ambience": ""
+            }
+          ]
+        },
+        {
+          "id": "b17_azazel-after-f02",
+          "title": "Сцена 13. Суперфинал: Азазель Первозданный (Бой 17)",
+          "background": "LayeredCards/Layers/C02/background",
+          "left": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "right": {
+            "art": "",
+            "label": "",
+            "portrait": false,
+            "scale": 1,
+            "offsetX": 0,
+            "offsetY": 0
+          },
+          "lines": [
+            {
+              "sourceId": "13.5",
+              "speaker": "РАССКАЗЧИК",
+              "text": "Стена Позора делает финальный вздох: «Азазель — Почётный Церемониймейстер (17/17)». Стена заполнена целиком.",
+              "leftArt": "Art/Jester/jester_basic",
+              "sfx": "Card_Game_Action_Magic_Sword_01.wav",
+              "ambience": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ending": [
+    {
+      "id": "ending-f01",
+      "title": "Сцена 14. Эпилог: Коронация по совести",
+      "background": "LayeredCards/Layers/C02/background",
+      "left": {
+        "art": "Art/Jester/jester_basic",
+        "label": "Йорик",
+        "portrait": false,
+        "scale": 1,
+        "offsetX": 0,
+        "offsetY": 0
+      },
+      "right": {
+        "art": "Art/C09",
+        "label": "Бальтазар",
+        "portrait": true,
+        "scale": 1,
+        "offsetX": 0,
+        "offsetY": 0
+      },
+      "lines": [
+        {
+          "sourceId": "14.1",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Семнадцать поединков завершились. Стена Позора была исписана до последнего дюйма. И впервые за бесчисленные эпохи на троне Преисподней сидел тот, кто не боялся показаться смешным.",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "",
+          "ambience": "Card_Game_Achievement_Grand_01.wav"
+        },
+        {
+          "sourceId": "14.2",
+          "speaker": "БАЛЬТАЗАР",
+          "text": "Ну что, Ваше Темнейшее Шутейшество? Какие первые эдикты издавать будем? Подати отменим? Трактиры освободим от акцизов?",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Movement_Tap_01.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "14.3",
+          "speaker": "ШУТ",
+          "text": "Первым эдиктом... Строжайше воспретить напыщенные физиономии на торжественных ассамблеях. А вторым — объявить «Таверну У Лопнувшего» генеральной резиденцией престола. Там напитки подают высочайшего качества и без обмана.",
+          "leftArt": "Art/Jester/jester_basic",
+          "sfx": "Card_Game_Action_Crack_01.wav",
+          "ambience": ""
+        },
+        {
+          "sourceId": "14.4",
+          "speaker": "БАЛЬТАЗАР",
+          "text": "Вот это я понимаю государственная мудрость! Вот такие вот дела, собачка! Эй, почтенная публика! Перетасовать колоды! Начинаем новую великую партию!",
+          "leftArt": "Art/Jester/jester_happy",
+          "sfx": "Card_Game_Action_Bash_Metal_01.wav",
+          "ambience": ""
+        }
+      ]
+    }
+  ]
+}
