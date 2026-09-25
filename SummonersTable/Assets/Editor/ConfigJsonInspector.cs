@@ -10,13 +10,16 @@ namespace SummonersTable.Editor
     public sealed class ConfigJsonInspector:UnityEditor.Editor
     {
         string text,original,status="";Vector2 scroll;bool assets;string filter="";
+        readonly LayeredCardsJsonEditor layered=new LayeredCardsJsonEditor();
         [UnityEditor.Callbacks.OnOpenAsset(0)]
         static bool OpenJson(int id,int line){var item=EditorUtility.InstanceIDToObject(id);string path=AssetDatabase.GetAssetPath(item);if(!path.StartsWith(ConfigAuthoring.Folder+"/")||!path.EndsWith(".json"))return false;Selection.activeObject=item;EditorApplication.ExecuteMenuItem("Window/General/Inspector");return true;}
         void OnEnable(){string path=AssetDatabase.GetAssetPath(target);if(path.StartsWith(ConfigAuthoring.Folder+"/")&&path.EndsWith(".json")&&File.Exists(path))text=original=File.ReadAllText(path);}
         public override void OnInspectorGUI()
         {
             string path=AssetDatabase.GetAssetPath(target);if(!path.StartsWith(ConfigAuthoring.Folder+"/")||!path.EndsWith(".json")){DrawDefaultInspector();return;}
-            string file=Path.GetFileName(path);EditorGUILayout.LabelField(file,EditorStyles.boldLabel);
+            string file=Path.GetFileName(path);
+            if(file==LayeredCardsJsonEditor.FileName){layered.Draw(path);return;}
+            EditorGUILayout.LabelField(file,EditorStyles.boldLabel);
             EditorGUILayout.HelpBox(file=="main.json"?"Общий снимок настроек. Изменяйте раздел через его Manager; «Сохранить» обновит main.json автоматически.":file=="assets.json"?"Справочник импортированных ассетов. Обновляется из Unity; для выбора скопируйте ID.":"Редактируйте JSON здесь. Сохранение проверит весь набор Config. Во время Play нажмите «Перезагрузить Config», чтобы обновить звук и оформление. Баланс - со следующего матча.",MessageType.Info);
             using(new EditorGUI.DisabledScope(file=="assets.json"||file=="main.json"||path.Contains("/History/")))
             {

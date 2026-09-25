@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 2,
+  "cards": [
+    {
+      "cardName": "Огненный чих",
+      "background": {
+        "texture": "LayeredCards/Layers/S01/background",
+        "fit": "cover",
+        "offsetX": 0,
+        "offsetY": 0,
+        "zoom": 1.3,
+        "depth": 0.085,
+        "foil": 0
+      },
+      "responsePower": 1.5,
+      "subject": {
+        "offsetX": 0,
+        "offsetY": 0,
+        "zoom": 1,
+        "depth": 0.006,
+        "foil": 0.24,
+        "rear": {
+          "texture": "LayeredCards/Layers/S01/rear",
+          "fit": "contain",
+          "offsetX": -0.1,
+          "offsetY": -0.025,
+          "zoom": 0.97,
+          "depth": 0,
+          "foil": 0
+        },
+        "foreground": {
+          "texture": "LayeredCards/Layers/S01/foreground",
+          "fit": "contain",
+          "offsetX": 0.06,
+          "offsetY": 0.23,
+          "zoom": 0.65,
+          "depth": 0,
+          "foil": 0
+        }
+      }
+    },
+    {
+      "cardName": "Медведь-обниматель",
+      "background": {
+        "texture": "LayeredCards/Layers/C02/background",
+        "fit": "cover",
+        "offsetX": 0,
+        "offsetY": 0,
+        "zoom": 1.3,
+        "depth": 0.085,
+        "foil": 0
+      },
+      "responsePower": 1.5,
+      "subject": {
+        "offsetX": 0,
+        "offsetY": 0,
+        "zoom": 1,
+        "depth": 0.006,
+        "foil": 0.24,
+        "rear": {
+          "texture": "LayeredCards/Layers/C02/rear",
+          "fit": "contain",
+          "offsetX": 0,
+          "offsetY": -0.02,
+          "zoom": 0.96,
+          "depth": 0,
+          "foil": 0
+        },
+        "foreground": {
+          "texture": "LayeredCards/Layers/C02/foreground",
+          "fit": "contain",
+          "offsetX": 0.01,
+          "offsetY": 0.035,
+          "zoom": 0.33,
+          "depth": 0,
+          "foil": 0
+        }
+      }
+    },
+    {
+      "cardName": "Вампир на диете",
+      "background": {
+        "texture": "LayeredCards/Layers/C02/background",
+        "fit": "cover",
+        "offsetX": 0,
+        "offsetY": 0,
+        "zoom": 1.3,
+        "depth": 0.085,
+        "foil": 0
+      },
+      "responsePower": 1.5,
+      "subject": {
+        "offsetX": 0,
+        "offsetY": 0,
+        "zoom": 1,
+        "depth": 0.006,
+        "foil": 0.24,
+        "rear": {
+          "texture": "LayeredCards/Layers/C08/subject",
+          "fit": "contain",
+          "offsetX": 0,
+          "offsetY": -0.15,
+          "zoom": 1,
+          "depth": 0,
+          "foil": 0
+        },
+        "foreground": {
+          "texture": "LayeredCards/Layers/C08/subject",
+          "fit": "contain",
+          "offsetX": 0,
+          "offsetY": -0.15,
+          "zoom": 1,
+          "depth": 0,
+          "foil": 0
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+PASS actual GPU shader readback: red/green source landmarks keep their relative position within 1px at multiple tilts; small-tilt subject shift <=1px at 512px; full-tilt subject shift <5px while background moves >35px.

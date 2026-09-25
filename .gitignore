@@ -23,6 +23,10 @@ output/*.zip
 output/captures*/
 output/editor*/
 output/backups/
+output/layered-cards/frames/
+output/layered-cards-v2/frames/
+output/layered-cards-v3/frames/
+output/campaign/frames/
 
 # Local credentials and editor/system files.
 .env
