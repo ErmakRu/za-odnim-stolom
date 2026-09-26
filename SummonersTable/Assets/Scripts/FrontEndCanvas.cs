@@ -48,8 +48,7 @@ namespace SummonersTable
         {var t=CardTableCanvas.Rect(name,transform,position,size).gameObject.AddComponent<Text>();t.text=text;t.fontSize=fontSize;t.color=Color.white;t.alignment=TextAnchor.MiddleCenter;t.raycastTarget=false;return t;}
         Button MakeButton(string label,Vector2 position,Vector2 size)
         {
-            var r=CardTableCanvas.Rect(label,transform,position,size);r.gameObject.AddComponent<Image>().color=new Color(.25f,.78f,.68f);
-            var button=r.gameObject.AddComponent<Button>();var text=CardTableCanvas.Rect("Label",r,Vector2.zero,size).gameObject.AddComponent<Text>();text.text=label;text.fontSize=23;text.color=new Color(.025f,.08f,.1f);text.alignment=TextAnchor.MiddleCenter;text.raycastTarget=false;return button;
+            return SharedButton.Create(transform,label,label,position,size);
         }
     }
 }

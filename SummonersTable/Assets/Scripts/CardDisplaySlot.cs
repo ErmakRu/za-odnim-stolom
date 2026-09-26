@@ -17,7 +17,7 @@ namespace SummonersTable
         {
             if(view==null)return;var holder=(RectTransform)transform;var rect=(RectTransform)view.transform;
             var face=(RectTransform)(presentation=="compact"?view.compactFace:view.fullFace).transform;
-            rect.anchoredPosition=Vector2.zero;rect.localRotation=Quaternion.identity;rect.localScale=new Vector3(holder.rect.width/face.rect.width,holder.rect.height/face.rect.height,1);
+            rect.anchoredPosition=Vector2.zero;rect.localRotation=Quaternion.identity;rect.localScale=Vector3.one*Mathf.Min(holder.rect.width/face.rect.width,holder.rect.height/face.rect.height);
         }
     }
 }

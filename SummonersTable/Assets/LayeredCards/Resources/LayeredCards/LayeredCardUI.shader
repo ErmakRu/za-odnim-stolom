@@ -7,6 +7,15 @@ Shader "SummonersTable/Layered Card UI"
         _RearTex("Rear",2D)="black" {}
         _ForegroundTex("Foreground",2D)="black" {}
         _WindowAspect("Window aspect",Float)=1
+        [HideInInspector] _Background("Background placement",Vector)=(0,0,1,0)
+        [HideInInspector] _Rear("Rear placement",Vector)=(0,0,1,0)
+        [HideInInspector] _Foreground("Foreground placement",Vector)=(0,0,1,0)
+        [HideInInspector] _BackgroundInfo("Background fit",Vector)=(1,1,0,0)
+        [HideInInspector] _RearInfo("Rear fit",Vector)=(1,1,0,0)
+        [HideInInspector] _ForegroundInfo("Foreground fit",Vector)=(1,1,0,0)
+        [HideInInspector] _Subject("Subject placement",Vector)=(0,0,1,0)
+        [HideInInspector] _SubjectFoil("Subject foil",Float)=0
+        [HideInInspector] _ResponsePower("Response power",Float)=1
         _ViewOffset("Look",Vector)=(0,0,0,0)
         _StencilComp("Stencil comparison",Float)=8
         _Stencil("Stencil ID",Float)=0

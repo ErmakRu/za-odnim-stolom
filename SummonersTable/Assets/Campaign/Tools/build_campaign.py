@@ -73,6 +73,18 @@ for scene in source['scenes'][3:-1]:
 ending=frame_lines(source['scenes'][-1]['steps'],source['scenes'][-1]['title'],'ending')
 book=dict(schemaVersion=1,title='Пир Хохота',defaultDeck='noise',charactersPerSecond=65,ambienceVolume=.22,sfxVolume=.6,introduction=intro,chapters=chapters,ending=ending)
 dest=ASSETS/'Campaign/Resources/Campaign/campaign.json';dest.parent.mkdir(parents=True,exist_ok=True)
+if dest.exists():
+    previous=json.loads(dest.read_text(encoding='utf-8-sig'))
+    if previous.get('schemaVersion',1)>=2:
+        for key in ['schemaVersion','characters','dialogueStyles','textPageLength']:
+            book[key]=previous[key]
+        old_frames=previous['introduction']+previous['ending']+[f for c in previous['chapters'] for f in c['before']+c['after']]
+        old_lines={l['sourceId']:l for f in old_frames for l in f['lines']}
+        for f in intro+ending+[f for c in chapters for f in c['before']+c['after']]:
+            for line in f['lines']:
+                old=old_lines.get(line['sourceId'],{})
+                for key in ['characterId','kind','artOverride','rewardIcon','rewardLabel']:
+                    if key in old:line[key]=old[key]
 dest.write_text(json.dumps(book,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 lines=[l for fs in [intro,ending]+[fs for c in chapters for fs in [c['before'],c['after']]] for f in fs for l in f['lines']]
 original=[s['id'] for scene in source['scenes'] for s in scene['steps']]

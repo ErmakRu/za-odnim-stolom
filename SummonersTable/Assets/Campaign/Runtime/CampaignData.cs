@@ -14,6 +14,7 @@ namespace SummonersTable
     [Serializable] public sealed class ComicLine
     {
         public string sourceId="",speaker="",text="",leftArt="",sfx="",ambience="";
+        public string characterId="",kind="dialogue",artOverride="",rewardIcon="",rewardLabel="";
     }
     [Serializable] public sealed class ComicFrame
     {
@@ -27,7 +28,7 @@ namespace SummonersTable
         public int seed=1701;
         public ComicFrame[] before=Array.Empty<ComicFrame>(),after=Array.Empty<ComicFrame>();
     }
-    [Serializable] public sealed class CampaignBook
+    [Serializable] public sealed partial class CampaignBook
     {
         public int schemaVersion=1;
         public string title="Пир Хохота",defaultDeck="noise";
@@ -44,7 +45,8 @@ namespace SummonersTable
         public void Validate(Catalog catalog)
         {
             void Check(bool ok,string message){if(!ok)throw new FormatException("campaign.json: "+message);}
-            Check(schemaVersion==1&&chapters!=null&&chapters.Length>0,"нужны schemaVersion 1 и главы");
+            Check((schemaVersion==1||schemaVersion==2)&&chapters!=null&&chapters.Length>0,"нужны schemaVersion 1/2 и главы");
+            ValidatePresentation();
             Check(chapters.All(c=>c!=null&&!string.IsNullOrWhiteSpace(c.id))&&chapters.Select(c=>c.id).Distinct().Count()==chapters.Length,"уникальные id глав");
             Check(catalog.Deck(defaultDeck)!=null,"неизвестная стартовая колода");
             Check(float.IsFinite(charactersPerSecond)&&charactersPerSecond>=0&&charactersPerSecond<=500,"charactersPerSecond: 0…500");
@@ -58,7 +60,7 @@ namespace SummonersTable
                     Check(f.lines!=null&&f.lines.Length>0&&f.lines.All(l=>l!=null&&!string.IsNullOrWhiteSpace(l.text)),"в кадре нужны реплики");
                     Texture(f.background,false);
                     foreach(var actor in new[]{f.left,f.right}){Check(actor!=null,"отсутствует слот персонажа");Texture(actor.art,true);Check(float.IsFinite(actor.scale)&&actor.scale>=.2f&&actor.scale<=3&&float.IsFinite(actor.offsetX)&&Math.Abs(actor.offsetX)<=800&&float.IsFinite(actor.offsetY)&&Math.Abs(actor.offsetY)<=600,"размер/смещение персонажа");}
-                    foreach(var line in f.lines)Texture(line.leftArt,true);
+                    foreach(var line in f.lines){Texture(line.leftArt,true);Texture(line.artOverride,true);Texture(line.rewardIcon,true);Check(new[]{"dialogue","narration","thought"}.Contains(line.kind),"тип реплики");if(!string.IsNullOrEmpty(line.characterId))Check(characters.Any(c=>c.id==line.characterId),"неизвестный персонаж "+line.characterId);}
                 }
             }
             void Texture(string id,bool optional){if(optional&&string.IsNullOrEmpty(id))return;Check(!string.IsNullOrEmpty(id)&&!id.Contains("..")&&Resources.Load<Texture2D>(id)!=null,"не найдена картинка "+id);}
@@ -68,7 +70,7 @@ namespace SummonersTable
     }
     [Serializable] public sealed class CampaignProgress
     {
-        public int schemaVersion=1,chapter,frame,line;
+        public int schemaVersion=1,chapter,frame,line,segment;
         public string phase="intro",deck="noise";
         public static string TestPath;
         public static string SavePath=>TestPath??Path.Combine(Application.persistentDataPath,"campaign-progress.json");

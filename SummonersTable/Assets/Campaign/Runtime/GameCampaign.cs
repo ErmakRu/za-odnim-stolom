@@ -25,8 +25,9 @@ namespace SummonersTable
                 campaign=CampaignBook.Load(catalog);campaignSave=CampaignProgress.Read(campaign);
                 if(catalog.Deck(campaignSave.deck)==null)campaignSave.deck=campaign.defaultDeck;
                 comic.Bind(campaign);comic.nextAction=CampaignNext;comic.previousAction=CampaignPrevious;comic.skipAction=CampaignSkip;
+                comic.segmentChanged=index=>{campaignSave.segment=index;campaignSave.Save();};
                 comic.menuAction=()=>{campaignActive=false;campaignMatch=false;comic.Hide();ExitMatch();};
-                comic.resumeAction=()=>{campaignActive=true;if(campaignSave.phase=="battle"){campaignSave.phase="before";campaignSave.frame=campaignSave.line=0;}if(campaignSave.phase=="done"){campaignSave.phase="ending";campaignSave.frame=campaignSave.line=0;}ShowCampaignLine();};
+                comic.resumeAction=()=>{campaignActive=true;if(campaignSave.phase=="battle"){campaignSave.phase="before";campaignSave.frame=campaignSave.line=campaignSave.segment=0;}if(campaignSave.phase=="done"){campaignSave.phase="ending";campaignSave.frame=campaignSave.line=campaignSave.segment=0;}ShowCampaignLine();};
                 comic.newAction=()=>{campaignSave=new CampaignProgress{deck=campaignSave.deck};campaignActive=true;campaignSave.Save();ShowCampaignLine();};
                 comic.deckPrevAction=()=>CampaignDeck(-1);comic.deckNextAction=()=>CampaignDeck(1);
                 campaignActive=true;CampaignHub();
@@ -49,23 +50,28 @@ namespace SummonersTable
             bool last=campaignSave.frame==frames.Length-1&&campaignSave.line==frame.lines.Length-1;
             string heading=campaignSave.phase=="intro"?"ПРОЛОГ · "+frame.title:campaignSave.phase=="ending"?"ЭПИЛОГ · ПИР ХОХОТА":$"ПОЕДИНОК {campaignSave.chapter+1} / {campaign.chapters.Length} · {campaign.chapters[campaignSave.chapter].title}";
             string finish=campaignSave.phase=="before"?"Начать поединок":campaignSave.phase=="ending"?"Завершить историю":"Продолжить путь";
+            int savedSegment=campaignSave.segment;
             comic.Present(frame,frame.lines[campaignSave.line],heading,$"Кадр {campaignSave.frame+1}/{frames.Length} · Реплика {campaignSave.line+1}/{frame.lines.Length}",campaignSave.frame>0||campaignSave.line>0,last,finish);
+            comic.UseSegment(savedSegment);
             comic.skip.GetComponentInChildren<Text>().text=campaignSave.phase=="before"?"К поединку":campaignSave.phase=="intro"?"Пропустить пролог":"Пропустить сцену";
             campaignSave.Save();
         }
         public void CampaignNext()
         {
+            campaignSave.segment=0;
             var frames=CurrentComic;if(++campaignSave.line>=frames[campaignSave.frame].lines.Length){campaignSave.line=0;campaignSave.frame++;}
             if(campaignSave.frame>=frames.Length)CampaignSectionFinished();else ShowCampaignLine();
         }
         void CampaignPrevious()
         {
+            campaignSave.segment=0;
             if(campaignSave.line>0)campaignSave.line--;else if(campaignSave.frame>0){campaignSave.frame--;campaignSave.line=CurrentComic[campaignSave.frame].lines.Length-1;}else return;ShowCampaignLine();
         }
         public void CampaignSkip(){CampaignSectionFinished();}
         void CampaignSectionFinished()
         {
-            campaignSave.frame=campaignSave.line=0;
+            campaignSave.segment=0;
+            campaignSave.frame=campaignSave.line=campaignSave.segment=0;
             if(campaignSave.phase=="before"){StartCampaignBattle();return;}
             if(campaignSave.phase=="intro")campaignSave.phase="before";
             else if(campaignSave.phase=="after")
@@ -92,7 +98,7 @@ namespace SummonersTable
             if(!campaignActive||!campaignMatch)return false;
             if(choice=="menu"){campaignActive=campaignMatch=false;comic.Hide();ExitMatch();}
             else if(choice=="deck")CampaignHub();
-            else if(CampaignWon){campaignSave.phase="after";campaignSave.frame=campaignSave.line=0;campaignSave.Save();ShowCampaignLine();}
+            else if(CampaignWon){campaignSave.phase="after";campaignSave.frame=campaignSave.line=campaignSave.segment=0;campaignSave.Save();ShowCampaignLine();}
             else StartCampaignBattle();
             return true;
         }
@@ -100,7 +106,7 @@ namespace SummonersTable
         {
             string ButtonLabel(string id,string text){ui.results.Get<Button>(id).GetComponentInChildren<Text>().text=text;return text;}
             if(!campaignActive||!campaignMatch){ButtonLabel("again","Сыграть ещё раз");ButtonLabel("deck","Выбрать другую колоду");return false;}
-            if(CampaignWon&&campaignSave.phase=="battle"){campaignSave.phase="after";campaignSave.frame=campaignSave.line=0;campaignSave.Save();}
+            if(CampaignWon&&campaignSave.phase=="battle"){campaignSave.phase="after";campaignSave.frame=campaignSave.line=campaignSave.segment=0;campaignSave.Save();}
             ui.results.Text("result",CampaignWon?"ПОБЕДА ЙОРИКА":"ЕЩЁ ОДНА ПОПЫТКА");
             ui.results.Text("scores",string.Join("\n\n",state.players.Select(p=>p.name+" — "+p.score+" оч.")));
             ui.results.Text("votes",$"Поединок {campaignSave.chapter+1} из {campaign.chapters.Length}\n"+(CampaignWon?"Продолжите историю или вернитесь к выбору колоды.":"Прогресс сохранён. Этот поединок можно повторить."));

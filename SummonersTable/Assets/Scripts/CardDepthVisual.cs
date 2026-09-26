@@ -10,10 +10,20 @@ namespace SummonersTable
         public static Vector2? PreviewView;
         CardView card;Material full,compact,world,originalWorld,originalFull,originalCompact;bool applied,layered;
         LayeredCardArt lastArt;float fullAspect,compactAspect;
-        void Awake(){card=GetComponent<CardView>();originalWorld=card.worldArtwork.sharedMaterial;originalFull=card.fullArtwork.material;originalCompact=card.compactArtwork.material;}
+        void Awake(){card=GetComponent<CardView>();if(card.sharedFull!=null)return;originalWorld=card.worldArtwork.sharedMaterial;originalFull=card.fullArtwork.material;originalCompact=card.compactArtwork.material;}
         void LateUpdate()
         {
             bool enabled=CardPresentationContext.Options.cards3D;
+            if(card.sharedFull!=null)
+            {
+                foreach(var face in new[]{card.sharedFull,card.sharedCompact,card.sharedWorld})if(face!=null&&face.gameObject.activeInHierarchy)
+                {
+                    Vector2 look=PreviewView??Vector2.zero;
+                    if(!PreviewView.HasValue){var r=face.artwork.rectTransform;RectTransformUtility.ScreenPointToLocalPointInRectangle(r,Input.mousePosition,null,out var p);look=new Vector2(Mathf.Clamp(p.x/r.rect.width*2,-1,1),Mathf.Clamp(p.y/r.rect.height*2,-1,1))*pointerInfluence;}
+                    face.SetGameArt(enabled,look,uiMaterial);
+                }
+                return;
+            }
             var art=ConfigRuntime.Current?.layeredCards?.Find(card.definition.name);
             if(full!=null&&layered!=(art!=null)){if(applied)Restore();ReleaseMaterials();}
             if(enabled&&!applied)

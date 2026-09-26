@@ -136,9 +136,7 @@ namespace SummonersTable
             keyButtons=new Button[7];
             for(int i=0;i<7;i++)
             {
-                var r=Rect("Key "+"ASDFGHJ"[i],qtePanel,new Vector2(-264+i*88,-89),new Vector2(70,46));
-                r.gameObject.AddComponent<Image>().color=new Color(.94f,.72f,.35f);var button=r.gameObject.AddComponent<Button>();
-                var text=Label("Key",r,new Rect(0,0,70,46),24);text.text="ASDFGHJ"[i].ToString();text.color=Color.black;keyButtons[i]=button;
+                keyButtons[i]=SharedButton.Create(qtePanel,"Key "+"ASDFGHJ"[i],"ASDFGHJ"[i].ToString(),new Vector2(-264+i*88,-89),new Vector2(70,46));
             }
         }
         CardDisplaySlot MakeSlot(string name,Vector2 position,Vector2 size)

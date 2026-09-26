@@ -174,7 +174,7 @@ namespace SummonersTable
         {
             GameObject root;
             if(cardId=="card_back"){root=Instantiate(cardLibrary.cardBackPrefab,transform);root.transform.GetChild(0).localScale=new Vector3(size.x,size.y,1);}
-            else {var view=Instantiate(cardLibrary.Find(cardId),transform);view.ApplyDefinition(catalog);view.Mode("world");view.Highlight(false,false);view.worldFace.transform.localScale=new Vector3(size.x,size.y,1);root=view.gameObject;}
+            else {var view=Instantiate(cardLibrary.Find(cardId),transform);view.ApplyDefinition(catalog);view.Mode("world");view.Highlight(false,false);float width=Mathf.Min(size.x,size.y*600f/940);view.worldFace.transform.localScale=new Vector3(width,width*940f/600,1);root=view.gameObject;}
             root.name=name;root.transform.position=position;root.transform.rotation=rotation;return root;
         }
         public void Sync(MatchState state,int viewer,double clock,int selectedSlot=-1)

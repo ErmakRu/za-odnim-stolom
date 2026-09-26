@@ -1,0 +1,1 @@
+PASS 111 lines/442 fragments, speaker visibility/role colours/narrator, quoted italic thoughts, double-click, reward icon, 30 cards with shared full/hand/world faces, visible descriptions, stats, type/name bands and styled corners; shared comic/lobby/menu buttons.

@@ -69,7 +69,7 @@ namespace SummonersTable
             hud.Text("phase",state.phase=="action"?(MyAction?"ВАШ ХОД":"ХОД: "+turn):state.phase=="reveal"?"КАРТА ОБЪЯВЛЕНА":state.phase=="qte"?"РОЗЫГРЫШ: "+turn:state.phase=="combat"?"АТАКИ СУЩЕСТВ":"МАТЧ ЗАВЕРШЁН");
             hud.Text("timer",state.phase=="action"?"Решение: "+Math.Max(0,Math.Ceiling(state.deadline-Clock))+" с":state.phase=="reveal"?"Общий показ: "+Math.Max(0,Math.Ceiling(state.cast.revealUntil-Clock))+" с":state.phase=="qte"?(state.qte!=null?"QTE видно только вам":"Буквы и таймер скрыты, прогресс виден на столе."):"");
             hud.Text("name",me.name);hud.Text("personal","HP "+me.hp+" · Очки "+me.score+" · Колода "+me.deckCount);
-            hud.Enabled("end",MyAction&&!InputBlocked);hud.Get<Image>("end").color=MatchRules.ReadyToEnd(catalog,state,seat)?gold:muted;
+            hud.Enabled("end",MyAction&&!InputBlocked);hud.Get<Button>("end").targetGraphic.color=MatchRules.ReadyToEnd(catalog,state,seat)?new Color(.50f,.32f,.09f):new Color(.27f,.13f,.05f);
             hud.Text("endhint",MyAction?"Можно закончить ход раньше":"Наблюдаем за столом");hud.GetComponentInChildren<TurnBudgetView>(true).Present(state,seat);hud.Visible("pass",!online&&Casting&&state.cast.owner!=seat);hud.Visible("cancel",selectedCard!=""||selectedUnit!="");
             hud.Text("journal",historyOpen?"▲ Скрыть журнал":"▼ Журнал действий");
             string feedback=online&&steam.Error!=""?steam.Error:error;hud.Text("feedback",feedback);
@@ -149,7 +149,7 @@ namespace SummonersTable
             var screen=ui.search;screen.Text("status",steam.Status);screen.Text("error",steam.Error);screen.Visible("unavailable",!steam.Available);screen.Visible("retry",!steam.Available);
             foreach(string id in new[]{"quick","refresh","joinlabel","code","join","createLabel","room","capacity2","capacity3","capacity4","create","roomsLabel","rooms","empty","cancel"})screen.Visible(id,steam.Available);
             foreach(string id in new[]{"quick","refresh","join","create"})screen.Enabled(id,!steam.Busy);
-            for(int n=2;n<=4;n++)screen.Get<Image>("capacity"+n).color=n==capacity?gold:teal;
+            for(int n=2;n<=4;n++)screen.Get<Button>("capacity"+n).targetGraphic.color=n==capacity?new Color(.50f,.32f,.09f):new Color(.27f,.13f,.05f);
             screen.Text("empty",steam.Rooms.Count==0?(steam.Busy?"Ищем подходящие лобби…":"Открытых столов пока нет. Создайте свой и передайте друзьям код."):"");
             var sc=screen.Get<ScrollRect>("rooms");string key=string.Join("|",steam.Rooms.Select(r=>r.id+":"+r.name+":"+r.count))+steam.Busy;
             if(key==roomsKey)return;roomsKey=key;foreach(var r in roomRows)Destroy(r);roomRows.Clear();int index=0;

@@ -64,7 +64,7 @@ namespace SummonersTable.Editor
             File.WriteAllText("Assets/Resources/Data/catalog.json",JsonUtility.ToJson(catalog,true));AssetDatabase.SaveAssets();AssetDatabase.Refresh();
             RuleOptionsTests.Run();
         }
-        static Button OptionButton(Transform parent,string text,Rect rect){var image=I(text,parent,rect,panel,true);var b=image.gameObject.AddComponent<Button>();T("Label",image.transform,new Rect(0,0,rect.width,rect.height),text,21,TextAnchor.MiddleCenter);return b;}
+        static Button OptionButton(Transform parent,string text,Rect rect)=>SharedButton.TopLeft(parent,text,text,rect);
         static Toggle OptionToggle(Transform parent,string label,Rect rect)
         {
             var r=R(label,parent,rect);var toggle=r.gameObject.AddComponent<Toggle>();var bg=I("Box",r,new Rect(0,8,26,26),new Color(.43f,.3f,.14f),true);var check=I("Checked",bg.transform,new Rect(5,5,16,16),teal);toggle.targetGraphic=bg;toggle.graphic=check;toggle.isOn=true;

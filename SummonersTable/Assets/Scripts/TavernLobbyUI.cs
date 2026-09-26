@@ -100,10 +100,7 @@ namespace SummonersTable
         }
         Button TButton(string action,string text,Transform parent,Vector2 position,Vector2 size,Color? tint=null)
         {
-            var rect=CardTableCanvas.Rect(action,parent,position,size);var panel=rect.gameObject.AddComponent<TavernPanel>();panel.color=tint??new Color(.27f,.13f,.05f);panel.corner=8;
-            var button=rect.gameObject.AddComponent<Button>();button.targetGraphic=panel;
-            var colors=button.colors;colors.highlightedColor=new Color(1.18f,1.12f,.95f);colors.pressedColor=new Color(.75f,.65f,.50f);colors.disabledColor=new Color(.50f,.45f,.40f,.65f);button.colors=colors;
-            TText("Label",rect,Vector2.zero,size,text,20,true);builtButtons.Add(button);builtActions.Add(action);return button;
+            var button=SharedButton.Create(parent,action,text,position,size);builtButtons.Add(button);builtActions.Add(action);return button;
         }
         static Graphic Panel(string name,Transform parent,Vector2 position,Vector2 size,Color color,bool decorated=true)
         {

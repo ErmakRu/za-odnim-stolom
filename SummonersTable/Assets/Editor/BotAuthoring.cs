@@ -24,9 +24,8 @@ namespace SummonersTable.Editor
                 ((RectTransform)root.transform).sizeDelta=new Vector2(1600,1000);view.seats=new Button[4];view.labels=new Text[4];
                 for(int i=0;i<4;i++)
                 {
-                    var r=CardTableCanvas.Rect("Seat "+i,root.transform,new Vector2(-558+372*i,-358),new Vector2(325,32));
-                    var image=r.gameObject.AddComponent<TavernPanel>();image.color=new Color(.15f,.20f,.18f);var button=r.gameObject.AddComponent<Button>();button.targetGraphic=image;view.seats[i]=button;
-                    var label=CardTableCanvas.Rect("Label",r,Vector2.zero,new Vector2(317,30)).gameObject.AddComponent<Text>();label.font=Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");label.fontSize=16;label.text="БОТ / ИГРОК";label.color=new Color(1,.9f,.7f);label.alignment=TextAnchor.MiddleCenter;label.raycastTarget=false;view.labels[i]=label;
+                    view.seats[i]=SharedButton.Create(root.transform,"Seat "+i,"БОТ / ИГРОК",new Vector2(-558+372*i,-358),new Vector2(325,32));
+                    view.labels[i]=view.seats[i].GetComponent<SharedButton>().label;view.labels[i].fontSize=16;
                 }
                 PrefabUtility.SaveAsPrefabAsset(root,path);Object.DestroyImmediate(root);
             }

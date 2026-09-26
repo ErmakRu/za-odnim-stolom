@@ -2,6 +2,16 @@ namespace SummonersTable
 {
     public static class CardRulesText
     {
+        public static void Split(CardDef card,MatchOptions options,out string main,out string limits)
+        {
+            var primary=new System.Collections.Generic.List<string>();var notes=new System.Collections.Generic.List<string>();
+            foreach(var part in System.Text.RegularExpressions.Regex.Split(For(card,options),@"(?<=[.!?;])\s+"))
+            {
+                bool restriction=System.Text.RegularExpressions.Regex.IsMatch(part,@"(?i)не более|не выше|максимум|ограничен|не складывается");
+                (restriction?notes:primary).Add(part.Trim());
+            }
+            main=string.Join(" ",primary);limits=string.Join("\n",notes);
+        }
         static readonly string[] caps={
             " Несколько таких эффектов дают не более 2 карт.",
             "Общая защита существ не выше 2; ","Общая защита существ не выше 3; ",

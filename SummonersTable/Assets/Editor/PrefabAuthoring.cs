@@ -142,7 +142,7 @@ namespace SummonersTable.Editor
             public Text Text(string id,Rect r,string text,int size=20,TextAnchor align=TextAnchor.MiddleLeft){return Bind(id,T(id,Parent,r,text,size,align));}
             public Button Button(string id,Rect r,string label,Color? color=null)
             {
-                var image=I(id,Parent,r,color??teal,true);var button=image.gameObject.AddComponent<Button>();T("Label",button.transform,new Rect(4,0,r.width-8,r.height),label,20,TextAnchor.MiddleCenter);return Bind(id,button);
+                return Bind(id,SharedButton.TopLeft(Parent,id,label,r));
             }
             public RectTransform Area(string id,Rect r){return Bind(id,R(id,Parent,r));}
             public Slider Slider(string id,Rect r)

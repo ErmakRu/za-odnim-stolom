@@ -8,7 +8,7 @@ namespace SummonersTable.Editor
     public sealed class CampaignJsonEditor
     {
         public const string PathName="Assets/Campaign/Resources/Campaign/campaign.json";
-        CampaignBook book;int part,frame,line;bool after,raw;string original,rawText,status="";Vector2 scroll;
+        CampaignBook book;int part,frame,line,character;bool after,raw,showCharacters;string original,rawText,status="";Vector2 scroll;
         public void Draw()
         {
             if(book==null)Read();if(book==null){EditorGUILayout.HelpBox(status,MessageType.Error);return;}
@@ -17,7 +17,17 @@ namespace SummonersTable.Editor
             var parts=new[]{"Пролог и обучение"}.Concat(book.chapters.Select((c,i)=>(i+1)+". "+c.title)).Concat(new[]{"Эпилог"}).ToArray();
             int selected=EditorGUILayout.Popup("Часть",part,parts);if(selected!=part){part=selected;frame=line=0;}
             EditorGUI.BeginChangeCheck();
-            book.charactersPerSecond=EditorGUILayout.Slider("Символов в секунду",book.charactersPerSecond,0,150);
+            book.charactersPerSecond=EditorGUILayout.Slider("Символов в секунду",book.charactersPerSecond,1,150);
+            book.textPageLength=EditorGUILayout.IntSlider("Символов во фрагменте",book.textPageLength,20,100);
+            showCharacters=EditorGUILayout.Foldout(showCharacters,"Персонажи и цвета диалога");
+            if(showCharacters&&book.characters.Length>0)
+            {
+                character=Mathf.Clamp(character,0,book.characters.Length-1);character=EditorGUILayout.Popup("Персонаж",character,book.characters.Select(c=>c.name).ToArray());var c=book.characters[character];
+                c.name=EditorGUILayout.TextField("Имя на плашке",c.name);
+                string[] kinds={"main","npc","important"};c.type=kinds[EditorGUILayout.Popup("Тип персонажа",Math.Max(0,Array.IndexOf(kinds,c.type)),new[]{"Главный герой · слева","Второстепенный · справа","Важный · справа"})];
+                c.art=Texture("Арт персонажа",c.art);c.scale=EditorGUILayout.Slider("Масштаб бюста",c.scale,.2f,3);c.offsetX=EditorGUILayout.Slider("Смещение X",c.offsetX,-800,800);c.offsetY=EditorGUILayout.Slider("Смещение Y",c.offsetY,-600,600);
+                foreach(var palette in book.dialogueStyles){EditorGUILayout.LabelField(palette.type,EditorStyles.boldLabel);palette.body=ColorField("Подложка текста",palette.body);palette.border=ColorField("Рамка",palette.border);palette.name=ColorField("Подложка имени",palette.name);}
+            }
             if(part>0&&part<=book.chapters.Length)
             {
                 var chapter=book.chapters[part-1];chapter.title=EditorGUILayout.TextField("Название главы",chapter.title);chapter.opponentName=EditorGUILayout.TextField("Имя противника",chapter.opponentName);
@@ -32,9 +42,15 @@ namespace SummonersTable.Editor
                 int next=EditorGUILayout.Popup("Кадр",frame,frames.Select(f=>f.id).ToArray());if(next!=frame){frame=next;line=0;}
                 var f=frames[frame];scroll=EditorGUILayout.BeginScrollView(scroll,GUILayout.MaxHeight(630));
                 f.id=EditorGUILayout.TextField("ID кадра",f.id);f.title=EditorGUILayout.TextField("Заголовок",f.title);f.background=Texture("Фон",f.background);
-                Actor("Главный герой слева",f.left);Actor("Персонаж справа",f.right);
+                EditorGUILayout.HelpBox("Показывается только говорящий из справочника персонажей. Его рисунок размещается за подложкой текста.",MessageType.Info);
                 line=Mathf.Clamp(line,0,f.lines.Length-1);line=EditorGUILayout.Popup("Реплика",line,f.lines.Select((l,i)=>(i+1)+" · "+l.speaker).ToArray());var l=f.lines[line];
-                l.speaker=EditorGUILayout.TextField("Говорящий",l.speaker);EditorGUILayout.LabelField("Текст");l.text=EditorGUILayout.TextArea(l.text,GUILayout.MinHeight(105));
+                string[] lineTypes={"dialogue","thought","narration"};l.kind=lineTypes[EditorGUILayout.Popup("Тип реплики",Math.Max(0,Array.IndexOf(lineTypes,l.kind)),new[]{"Речь","Мысли · курсив","Рассказчик · без имени"})];
+                var characters=new[]{"Рассказчик"}.Concat(book.characters.Select(c=>c.name)).ToArray();int speakerIndex=Array.FindIndex(book.characters,c=>c.id==l.characterId)+1;int chosen=EditorGUILayout.Popup("Говорящий",speakerIndex,characters);
+                if(chosen!=speakerIndex){l.characterId=chosen==0?"":book.characters[chosen-1].id;l.speaker=chosen==0?"РАССКАЗЧИК":book.characters[chosen-1].name;l.kind=chosen==0?"narration":"dialogue";}
+                EditorGUILayout.LabelField("Текст");l.text=EditorGUILayout.TextArea(l.text,GUILayout.MinHeight(105));
+                EditorGUILayout.LabelField("Фрагментов: "+ComicText.Split(l.text,book.textPageLength).Length);
+                l.rewardIcon=Texture("Полученный предмет",l.rewardIcon);l.rewardLabel=EditorGUILayout.TextField("Название предмета",l.rewardLabel);
+                l.artOverride=Texture("Арт / эмоция говорящего",l.artOverride);
                 l.leftArt=Texture("Эмоция Шута",l.leftArt);l.sfx=EditorGUILayout.TextField("SFX / action:id",l.sfx);l.ambience=EditorGUILayout.TextField("Эмбиент / Mute",l.ambience);
                 if(GUILayout.Button("Добавить реплику")){f.lines=f.lines.Concat(new[]{new ComicLine{speaker="ШУТ",text="Новая реплика"}}).ToArray();line=f.lines.Length-1;}
                 EditorGUILayout.EndScrollView();
@@ -60,6 +76,7 @@ namespace SummonersTable.Editor
         ComicFrame[] Frames()=>part==0?book.introduction:part>book.chapters.Length?book.ending:after?book.chapters[part-1].after:book.chapters[part-1].before;
         void SetFrames(ComicFrame[] frames){if(part==0)book.introduction=frames;else if(part>book.chapters.Length)book.ending=frames;else if(after)book.chapters[part-1].after=frames;else book.chapters[part-1].before=frames;}
         void Read(){try{original=rawText=File.ReadAllText(PathName);book=JsonUtility.FromJson<CampaignBook>(original);status="";}catch(Exception e){status=e.Message;}}
+        string ColorField(string label,string hex){ColorUtility.TryParseHtmlString(hex,out var color);return "#"+ColorUtility.ToHtmlStringRGBA(EditorGUILayout.ColorField(label,color));}
         string Texture(string label,string path)
         {
             var old=Resources.Load<Texture2D>(path);var chosen=(Texture2D)EditorGUILayout.ObjectField(label,old,typeof(Texture2D),false);

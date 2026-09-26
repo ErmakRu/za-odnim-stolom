@@ -1,0 +1,1 @@
+PASS Editor Play: double-click and saved fragment resume, shared hand/inspection/table faces, QTE, 12 legal player commands, no rejected bot commands, campaign result flow.

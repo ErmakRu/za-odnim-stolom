@@ -40,7 +40,7 @@ namespace SummonersTable.Editor
         static Text T(string name,Transform parent,float x,float y,float w,float h,string text,int size,TextAnchor align=TextAnchor.MiddleCenter)
         {var t=R(name,parent,x,y,w,h).gameObject.AddComponent<Text>();t.font=Font;t.fontSize=size;t.text=text;t.color=Paper;t.alignment=align;t.raycastTarget=false;t.horizontalOverflow=HorizontalWrapMode.Wrap;return t;}
         static Button B(string name,Transform parent,float x,float y,float w,float h,string label)
-        {var i=P(name,parent,x,y,w,h,Gold);i.raycastTarget=true;var b=i.gameObject.AddComponent<Button>();var t=T("Label",i.transform,0,0,w-12,h,label,23);t.color=Ink;return b;}
+        {var g=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(SharedPresentationMigration.ButtonPath),parent);g.name=name;SharedPresentationMigration.Place(g.transform,x,y,w,h);g.GetComponent<SharedButton>().label.text=label;return g.GetComponent<Button>();}
         static void BuildPrefab(CampaignMedia media)
         {
             var root=R("Campaign Comic",null,0,0,1600,1000);var canvas=root.gameObject.AddComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=25;

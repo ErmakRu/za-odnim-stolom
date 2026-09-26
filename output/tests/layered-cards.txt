@@ -1,1 +1,1 @@
-PASS 30 checks: base/type/card prefab inheritance; no CardDef on base; name lookup; dynamic text/stats/QTE; strict JSON; cosmetic hash; existing UI/world combined-plane integration and restoration.
+PASS 36 checks: base/type/card prefab inheritance; no CardDef on base; name lookup; dynamic text/stats/QTE; strict JSON; cosmetic hash; existing UI/world combined-plane integration and restoration.

@@ -18,7 +18,7 @@ namespace SummonersTable.Editor
         static Image Image(string name,Transform parent,float x,float y,float w,float h,Color color)
         {var image=Rect(name,parent,x,y,w,h).gameObject.AddComponent<Image>();image.color=color;return image;}
         static Button Button(string id,Transform parent,float x,float y,float w,float h,string label)
-        {var image=Image(id,parent,x,y,w,h,accent);var button=image.gameObject.AddComponent<Button>();button.targetGraphic=image;var t=Text(id+"Text",image.transform,8,0,w-16,h,label,21);t.color=panel;t.alignment=TextAnchor.MiddleCenter;Bind(id,button);return button;}
+        {var button=SharedButton.TopLeft(parent,id,label,new UnityEngine.Rect(x,y,w,h));Bind(id+"Text",button.GetComponent<SharedButton>().label);Bind(id,button);return button;}
         static Slider Slider(string id,Transform parent,float x,float y,float w)
         {
             var root=Rect(id,parent,x,y,w,30);var slider=root.gameObject.AddComponent<Slider>();var bg=Image("Track",root,0,10,w,10,new Color(.18f,.25f,.28f));var fill=Image("Fill",root,0,10,w,10,accent);var handle=Image("Handle",root,0,0,16,30,new Color(1,.8f,.35f));

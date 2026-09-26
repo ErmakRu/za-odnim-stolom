@@ -25,9 +25,13 @@ namespace SummonersTable.Editor
                 try
                 {
                     view.Apply(bundle);var card=bundle.Catalog().Card(id);
-                    Check(view.title.text==card.name&&view.description.text==card.rules&&view.flavor.text==card.flavor,"text comes from cards.json");
+                    CardRulesText.Split(card,CardPresentationContext.Options,out var rules,out var limits);
+                    Check(view.title.text==card.name&&view.description.text==rules&&view.restrictions.text==limits&&view.flavor.text==card.flavor,"text comes from cards.json");
                     Check(view.qteSymbols.Count(s=>s.gameObject.activeSelf)==card.qte,"QTE symbols count");
                     Check(view.ArtMaterial.shader.isSupported,"UI shader supported");
+                    view.SetLook(new Vector2(.2f,-.3f));var masked=view.artwork.materialForRendering;
+                    Check(masked.GetVector("_Subject").z>0&&masked.GetTexture("_RearTex")!=null,"styled corner mask preserves layer settings");
+                    Check(Mathf.Abs(masked.GetVector("_ViewOffset").x-.2f)<.001f,"masked art follows card movement");
                     var changed=ConfigBundle.Read(ConfigAuthoring.Folder);changed.cards.cards.First(c=>c.id==id).qte=7;
                     changed.cards.cards.First(c=>c.id==id).rules="Правило из JSON";view.Apply(changed);
                     Check(view.qteSymbols.Count(s=>s.gameObject.activeSelf)==7&&view.description.text=="Правило из JSON","data can change without prefab edits");
@@ -56,7 +60,7 @@ namespace SummonersTable.Editor
                     var view=legacy.GetComponent<CardView>();view.Import(bundle.Catalog().Card("S01"),bundle.Catalog());view.Mode("full");
                     var visual=legacy.GetComponent<CardDepthVisual>();visual.SendMessage("Awake");var old=view.fullArtwork.material;
                     visual.SendMessage("LateUpdate");Check(view.fullArtwork.material.shader.name=="SummonersTable/Layered Card UI","game full/hand uses combined planes");
-                    Check(view.worldArtwork.sharedMaterial.shader.name=="SummonersTable/Layered Card World","world uses combined planes");
+                    view.Mode("world");visual.SendMessage("LateUpdate");Check(view.sharedWorld.ArtMaterial.shader.name=="SummonersTable/Layered Card UI","world uses same face and combined planes");view.Mode("full");
                     CardPresentationContext.Apply(new MatchOptions{cards3D=false});visual.SendMessage("LateUpdate");Check(view.fullArtwork.material==old,"3D off restores original material");
                 }finally{Object.DestroyImmediate(legacy);}
             }finally{CardPresentationContext.Apply(oldOptions);}

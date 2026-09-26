@@ -18,18 +18,16 @@ namespace SummonersTable.Editor
             Check(all.SelectMany(f=>f.lines).Select(l=>l.sourceId).OrderBy(x=>x).SequenceEqual(source.scenes.SelectMany(s=>s.steps).Select(s=>s.id).OrderBy(x=>x)),"every source line exactly once");
             var invalid=ConfigBundle.Clone(book);invalid.chapters[0].opponentDeck="missing";bool rejected=false;try{invalid.Validate(catalog);}catch(FormatException){rejected=true;}Check(rejected,"unknown deck rejected");
             var prefab=AssetDatabase.LoadAssetAtPath<CampaignComicView>(CampaignAuthoring.Prefab);Check(prefab!=null&&prefab.left!=null&&prefab.right!=null&&prefab.next!=null&&prefab.media!=null,"reusable wired prefab");
-            var view=Object.Instantiate(prefab);int advances=0;book.charactersPerSecond=0;view.Bind(book);view.nextAction=()=>advances++;
+            var view=Object.Instantiate(prefab);int advances=0;view.Bind(book);view.nextAction=()=>advances++;
             try
             {
                 foreach(var frame in all)foreach(var line in frame.lines)
                 {
-                    view.Present(frame,line,frame.title,"",true,false,"Начать бой");Canvas.ForceUpdateCanvases();
-                    Check(view.body.text==line.text,"text presentation");
-                    float required=view.body.cachedTextGeneratorForLayout.GetPreferredHeight(line.text,view.body.GetGenerationSettings(view.body.rectTransform.rect.size))/view.body.pixelsPerUnit;
-                    Check(required<=view.body.rectTransform.rect.height+2,"text overflow at "+line.sourceId+": "+required);
+                    view.Present(frame,line,frame.title,"",true,false,"Начать бой");
+                    for(int i=0;i<view.SegmentCount;i++){view.UseSegment(i);view.Reveal();Canvas.ForceUpdateCanvases();Check(view.body.preferredHeight<=view.body.rectTransform.rect.height+2,"text overflow at "+line.sourceId);}
                 }
                 view.next.onClick.Invoke();Check(advances==1,"next button fires once");
-                book.charactersPerSecond=65;view.Present(all[0],all[0].lines[0],"","",false,false,"");view.next.onClick.Invoke();Check(advances==1&&!view.Typing,"first click reveals text");view.next.onClick.Invoke();Check(advances==2,"second click advances");
+                view.Present(all[0],new ComicLine{speaker="РАССКАЗЧИК",kind="narration",text="Одна строка."},"","",false,false,"");view.next.onClick.Invoke();Check(advances==1&&!view.Typing,"first click reveals text");view.next.onClick.Invoke();Check(advances==2,"second click advances");
             }finally{Object.DestroyImmediate(view.gameObject);}
             string old=CampaignProgress.TestPath;CampaignProgress.TestPath=Path.GetFullPath("../tmp/campaign-tests/save.json");
             try{var save=new CampaignProgress{chapter=7,phase="after",deck=catalog.decks[1].id,frame=0,line=0};save.Save();var loaded=CampaignProgress.Read(book);Check(loaded.chapter==7&&loaded.phase=="after"&&loaded.deck==save.deck,"checkpoint roundtrip");}

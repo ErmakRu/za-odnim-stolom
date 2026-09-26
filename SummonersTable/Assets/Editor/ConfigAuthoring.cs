@@ -198,9 +198,9 @@ namespace SummonersTable.Editor
             if(!File.Exists(path))
             {
                 var root=new GameObject("ConfigControls",typeof(RectTransform));var rect=(RectTransform)root.transform;rect.sizeDelta=new Vector2(760,120);var v=root.AddComponent<ConfigControlsView>();
-                var button=new GameObject("Reload",typeof(RectTransform),typeof(Image),typeof(Button));button.transform.SetParent(root.transform,false);var br=(RectTransform)button.transform;br.sizeDelta=new Vector2(390,42);br.anchoredPosition=new Vector2(0,35);button.GetComponent<Image>().color=new Color(.18f,.40f,.40f);v.reload=button.GetComponent<Button>();
+                v.reload=SharedButton.Create(root.transform,"Reload","Перезагрузить Config",new Vector2(0,35),new Vector2(390,42));v.reload.GetComponent<SharedButton>().label.fontSize=18;
                 Text Label(string name,Transform parent,Vector2 size,Vector2 position,int fontSize){var go=new GameObject(name,typeof(RectTransform),typeof(Text));go.transform.SetParent(parent,false);var r=(RectTransform)go.transform;r.sizeDelta=size;r.anchoredPosition=position;var text=go.GetComponent<Text>();text.font=Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");text.fontSize=fontSize;text.alignment=TextAnchor.MiddleCenter;text.color=Color.white;text.raycastTarget=false;return text;}
-                Label("Label",button.transform,new Vector2(380,40),Vector2.zero,18).text="Перезагрузить Config";v.status=Label("Status",root.transform,new Vector2(750,66),new Vector2(0,-26),16);Save(root,path);
+                v.status=Label("Status",root.transform,new Vector2(750,66),new Vector2(0,-26),16);Save(root,path);
             }
             foreach(string parent in new[]{"Assets/Prefabs/MainMenuCanvas.prefab",Root+"UI/SettingsPanel.prefab"})
             {

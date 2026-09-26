@@ -10,6 +10,7 @@ namespace SummonersTable
     public sealed class CardView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IDragHandler, IPointerUpHandler
     {
         public CardDef definition = new CardDef();
+        public LayeredCardView sharedFull,sharedCompact,sharedWorld;
         public SpellEffect spellEffect;
         public GameObject fullFace, compactFace, worldFace;
         public RawImage fullArtwork, compactArtwork;
@@ -53,6 +54,7 @@ namespace SummonersTable
 
         void LateUpdate()
         {
+            if(sharedFull!=null)return;
             bool limited = CardPresentationContext.Options.limitPower;
             if (rulesLimited != limited && fullRules != null)
             {
@@ -63,12 +65,13 @@ namespace SummonersTable
 
         public void Mode(string mode)
         {
+            if(sharedFull!=null)foreach(var holder in new[]{fullFace,compactFace})foreach(Transform child in holder.transform)if(child.name!="Shared card face")child.gameObject.SetActive(false);
             if (fullFace != null) fullFace.SetActive(mode == "full");
             if (compactFace != null) compactFace.SetActive(mode == "compact");
             if (worldFace != null) worldFace.SetActive(mode == "world");
             if (worldOutline != null) worldOutline.enabled = false;
 
-            Vector2 size = mode == "compact" ? new Vector2(150, 210) : new Vector2(270, 480);
+            Vector2 size = ((RectTransform)(mode=="compact"?compactFace:fullFace).transform).sizeDelta;
             float padGlow = mode == "compact" ? 3f : 4f;
             float padSel = mode == "compact" ? 4f : 5f;
 
@@ -113,6 +116,12 @@ namespace SummonersTable
         public void Import(CardDef card, Catalog catalog)
         {
             definition = JsonUtility.FromJson<CardDef>(JsonUtility.ToJson(card));
+            if(sharedFull!=null)
+            {
+                var layers=(ConfigRuntime.Current??LayeredCardData.Current).layeredCards.Find(card.name);
+                foreach(var face in new[]{sharedFull,sharedCompact,sharedWorld})if(face!=null)face.ApplyCard(definition,catalog,layers);
+                return;
+            }
             var type = catalog.typeColors.Find(c => c.id == card.kind);
             ColorUtility.TryParseHtmlString(type?.hex ?? "#38F58F", out var color);
 

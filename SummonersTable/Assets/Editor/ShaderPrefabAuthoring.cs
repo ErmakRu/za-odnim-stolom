@@ -28,7 +28,7 @@ namespace SummonersTable.Editor
                 var r=R("Shader choice",null,new Rect(0,0,660,95));var v=r.gameObject.AddComponent<ShaderChoiceView>();v.choices=new Button[3];
                 T("Title",r,new Rect(0,0,170,24),"ШЕЙДЕР",19);
                 v.description=T("Style description",r,new Rect(180,0,480,24),"",17,TextAnchor.MiddleRight);
-                for(int i=0;i<3;i++){var image=I("Option "+i,r,new Rect(i*222,37,216,45),panel,true);v.choices[i]=image.gameObject.AddComponent<Button>();T("Label",image.transform,new Rect(0,0,216,45),ShaderSettings.Names[i],20,TextAnchor.MiddleCenter);}
+                for(int i=0;i<3;i++)v.choices[i]=SharedButton.TopLeft(r,"Option "+i,ShaderSettings.Names[i],new Rect(i*222,37,216,45));
                 Save(r.gameObject,selector);
             }
             string file=Root+"UI/SettingsPanel.prefab";var root=PrefabUtility.LoadPrefabContents(file);
