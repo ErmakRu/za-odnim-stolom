@@ -36,6 +36,7 @@ namespace SummonersTable
         public List<CardDef> cards;
         public List<DeckDef> decks;
         public List<ColorDef> typeColors, roleColors;
+        public List<ColorDef> factionColors=new List<ColorDef>();
         public CardDef Card(string id) { return cards.Find(c=>c.id==id); }
         public DeckDef Deck(string id) { return decks.Find(d=>d.id==id); }
         public void Validate()

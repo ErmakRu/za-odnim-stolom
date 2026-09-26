@@ -17,7 +17,7 @@ namespace SummonersTable.Editor
         static readonly Color Paper=new Color(.045f,.07f,.10f),Gold=new Color(.86f,.71f,.43f),Ink=new Color(.91f,.90f,.85f);
         static Font Font=>Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         [MenuItem("Summoners Table/Layered Cards/Open preview scene")]
-        public static void Open(){if(!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())return;EditorSceneManager.OpenScene(Scene);Selection.activeGameObject=Object.FindFirstObjectByType<LayeredCardsManager>().gameObject;}
+        public static void Open(){if(!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())return;EditorSceneManager.OpenScene(File.Exists(LayeredCardsGalleryAuthoring.Scene)?LayeredCardsGalleryAuthoring.Scene:Scene);Selection.activeGameObject=Object.FindFirstObjectByType<LayeredCardsManager>().gameObject;}
 
         [MenuItem("Summoners Table/Layered Cards/Create or update prototypes")]
         public static void Create()

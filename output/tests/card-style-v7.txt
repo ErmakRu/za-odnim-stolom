@@ -1,0 +1,1 @@
+PASS 180 card faces, all 30 cards in full/hand/world and both limit modes; edge-to-edge title/art; JSON chips; vector stats; text fits; hidden flavor; QTE inset and colours; no cast/reaction slot backplates.

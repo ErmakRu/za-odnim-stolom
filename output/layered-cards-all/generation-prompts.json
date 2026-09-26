@@ -1,0 +1,488 @@
+[
+  {
+    "card": "C01",
+    "layer": "subject",
+    "prompt": "Extract original raccoon wizard with hat, cloak, tail, paws, satchel and held card on real transparent alpha, preserving canvas, identity and pose. Remove environment.",
+    "source": "Assets/Resources/Art/C01.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C01/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-8c6355cb-1a65-4008-bd92-3a0651bb35bf.png"
+  },
+  {
+    "card": "C01",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target: existing C01 game illustration. Remove the entire raccoon wizard including hat, cloak, tail, paws, bag and held glowing card and associated glow. Reconstruct tavern behind him; retain fireplace right, candles, wood, blue window left. This is a fully opaque background plate for a two-plane parallax card. Seamlessly inpaint every removed foreground region with plausible environment in the identical cozy painterly fantasy style. Preserve original perspective, square canvas, lighting and surrounding details. No central subject, ghost outline, flat fill, blur, text or frame. One square PNG.",
+    "source": "Assets/Resources/Art/C01.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C01/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-53bd6458-f13b-4f9d-9776-5092aafc9939.png"
+  },
+  {
+    "card": "C03",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target: existing C03 game illustration. Extract the complete white battle goose, helmet, red feather, cape, feet and raised wooden spoon as one silhouette. Remove all environment, furniture and unrelated bystanders. True transparent alpha around the silhouette and through gaps. Preserve exact identity, pose, expression, painterly style, warm lighting, original square canvas placement and scale. No recentering, no zoom, no new objects, no text, no drawn checkerboard, no cast shadow. One square PNG foreground plate.",
+    "source": "Assets/Resources/Art/C03.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C03/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-d71746ba-541a-4e1a-b008-222158232d45.png"
+  },
+  {
+    "card": "C03",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target: existing C03 game illustration. Remove the complete white goose including helmet, cape, feet, spoon and shadow. Reconstruct continuous tavern background and wooden tabletop beneath; keep fireplace and mugs. This is a fully opaque background plate for a two-plane parallax card. Seamlessly inpaint every removed foreground region with plausible environment in the identical cozy painterly fantasy style. Preserve original perspective, square canvas, lighting and surrounding details. No central subject, ghost outline, flat fill, blur, text or frame. One square PNG.",
+    "source": "Assets/Resources/Art/C03.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C03/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-9dc5a7f2-7903-4f85-9d1c-12a9bb700634.png"
+  },
+  {
+    "card": "C04",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original C04 game illustration. Extract ONLY this exact foreground group: purple tech-support demon with headset, wings, wrench and ALL floating glowing broken geometric runes. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/C04.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C04/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-ab57dcb4-e832-46bd-a8d7-4515ff2e73ce.png"
+  },
+  {
+    "card": "C04",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original C04 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: purple tech-support demon with headset, wings, wrench and ALL floating glowing broken geometric runes. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/C04.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C04/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-7256fceb-0f54-4ccd-8f86-37b5339968cf.png"
+  },
+  {
+    "card": "C05",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original C05 game illustration. Extract ONLY this exact foreground group: red bureaucrat imp with tail and huge wooden/brass stamp, stamp glow, central stamped paper stack directly underneath. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/C05.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C05/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-19531e9b-119a-4d93-90ab-b8f7653ad4b9.png"
+  },
+  {
+    "card": "C05",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original C05 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: red bureaucrat imp with tail and huge wooden/brass stamp, stamp glow, central stamped paper stack directly underneath. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/C05.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C05/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-8909734e-7fc2-400d-8e5f-487a868c353a.png"
+  },
+  {
+    "card": "C06",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original C06 game illustration. Extract ONLY this exact foreground group: orange firefighter demon, horned red helmet, hose, backpack tank, tail and ALL emitted gold star spray. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/C06.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C06/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-c68e698c-0ff4-4073-a31a-1288bdf5a3b4.png"
+  },
+  {
+    "card": "C06",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original C06 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: orange firefighter demon, horned red helmet, hose, backpack tank, tail and ALL emitted gold star spray. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/C06.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C06/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-48566b75-40bd-47b6-ae70-4f19f89650a0.png"
+  },
+  {
+    "card": "C07",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original C07 game illustration. Extract ONLY this exact foreground group: skeleton accountant wearing glasses and cape, both arms, held playing cards and entire abacus. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/C07.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C07/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-0dfe2246-505b-49c0-86d1-36de0de2b52c.png"
+  },
+  {
+    "card": "C07",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original C07 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: skeleton accountant wearing glasses and cape, both arms, held playing cards and entire abacus. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/C07.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C07/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-2d0f60a0-a5b7-4ba6-b665-8cdf7760f7f3.png"
+  },
+  {
+    "card": "C09",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original C09 game illustration. Extract ONLY this exact foreground group: sleeping skeleton knight, all armour, skull, red cape, huge sun shield and both boots. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/C09.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C09/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-c149dba8-c2ba-4b09-bc62-a199223bcebd.png"
+  },
+  {
+    "card": "C09",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original C09 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: sleeping skeleton knight, all armour, skull, red cape, huge sun shield and both boots. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/C09.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C09/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-39b1e5c6-4db0-474a-8483-e461a1afa6e4.png"
+  },
+  {
+    "card": "C10",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original C10 game illustration. Extract ONLY this exact foreground group: friendly stone golem including both extended hands, all pillows tied around body, nightcap and stone feet. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/C10.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C10/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-1fde84b2-bfd1-4a27-9167-9fbdfa64056d.png"
+  },
+  {
+    "card": "C10",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original C10 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: friendly stone golem including both extended hands, all pillows tied around body, nightcap and stone feet. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/C10.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C10/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-9e6e0267-823b-49b0-b1c4-cd4b399da225.png"
+  },
+  {
+    "card": "C11",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original C11 game illustration. Extract ONLY this exact foreground group: entire brass compliment turret with three legs, pink bow and ALL bright confetti and star spray. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/C11.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C11/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-2062f508-c988-4443-9d1c-433d56b71bc5.png"
+  },
+  {
+    "card": "C11",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original C11 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: entire brass compliment turret with three legs, pink bow and ALL bright confetti and star spray. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/C11.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C11/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-fc3cc80e-2bb6-44fc-9e16-6d3e56ca6c9d.png"
+  },
+  {
+    "card": "C12",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original C12 game illustration. Extract ONLY this exact foreground group: entire friendly brass magic printer including face, all rollers, crank, hat, glowing curling parchment sheets and blue cloth. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/C12.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C12/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-c63c47a2-e573-4e51-9037-b717e492ad51.png"
+  },
+  {
+    "card": "C12",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original C12 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: entire friendly brass magic printer including face, all rollers, crank, hat, glowing curling parchment sheets and blue cloth. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/C12.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C12/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-87f46345-894d-49ec-a5ba-2d4a7e45ebb7.png"
+  },
+  {
+    "card": "C13",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original C13 game illustration. Extract ONLY this exact foreground group: turquoise baby dragon apprentice in purple hat with wings and tail, breath flame and open partly burning notebook. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/C13.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C13/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-ed2f02f3-7fe4-494d-9141-069078cc453b.png"
+  },
+  {
+    "card": "C13",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original C13 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: turquoise baby dragon apprentice in purple hat with wings and tail, breath flame and open partly burning notebook. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/C13.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C13/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-54fa5e52-2334-4aaf-bd14-076e48d31103.png"
+  },
+  {
+    "card": "C14",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original C14 game illustration. Extract ONLY this exact foreground group: cozy orange dragon holding tea cup, knitted green blanket, visible wings and curled tail; keep cushions supporting him as part of silhouette. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/C14.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C14/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-5d9fe8df-42a8-4292-8884-fb9773d2b829.png"
+  },
+  {
+    "card": "C14",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original C14 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: cozy orange dragon holding tea cup, knitted green blanket, visible wings and curled tail; keep cushions supporting him as part of silhouette. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/C14.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C14/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-36b65bec-9830-4939-9959-495111fc9f78.png"
+  },
+  {
+    "card": "C15",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original C15 game illustration. Extract ONLY this exact foreground group: green cheering dragon, wings and tail, both red foam finger props and glowing gold rune circle below. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/C15.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C15/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-124ed84f-006f-431d-903f-77a93288f122.png"
+  },
+  {
+    "card": "C15",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original C15 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: green cheering dragon, wings and tail, both red foam finger props and glowing gold rune circle below. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/C15.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C15/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-b48ab2ea-8633-437e-8bb3-5219bfe84daf.png"
+  },
+  {
+    "card": "C16",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original C16 game illustration. Extract ONLY this exact foreground group: purple deadline ghost, pocket watch and chain, ENTIRE large hourglass and glowing sand; retain translucent ghost wisps. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/C16.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C16/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-139e9baa-14c9-4f1e-98f1-b0272441855d.png"
+  },
+  {
+    "card": "C16",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original C16 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: purple deadline ghost, pocket watch and chain, ENTIRE large hourglass and glowing sand; retain translucent ghost wisps. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/C16.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C16/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-1574f54a-3c04-4ea6-bfbd-b5e9e8bca6d7.png"
+  },
+  {
+    "card": "C17",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original C17 game illustration. Extract ONLY this exact foreground group: green first-aid ghost, both hands, bandages, medicine bag with rolls and herbs, glowing leaf; retain translucent wisps. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/C17.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C17/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-31dd5668-abb9-47c1-b27f-e6a7ed5fa5b7.png"
+  },
+  {
+    "card": "C17",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original C17 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: green first-aid ghost, both hands, bandages, medicine bag with rolls and herbs, glowing leaf; retain translucent wisps. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/C17.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C17/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-ab41a95a-3ef8-4cfa-8fec-656436a65c9e.png"
+  },
+  {
+    "card": "C18",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original C18 game illustration. Extract ONLY this exact foreground group: blue friendly hint ghost with hands, entire floating gold keyboard, gold glow and sparks; retain translucent wisps. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/C18.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C18/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-e9c640ea-756b-4f72-a0ee-93e81b0bb84b.png"
+  },
+  {
+    "card": "C18",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original C18 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: blue friendly hint ghost with hands, entire floating gold keyboard, gold glow and sparks; retain translucent wisps. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/C18.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/C18/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-9e54e2b7-a6c1-40aa-8c90-a945e7054d5f.png"
+  },
+  {
+    "card": "S02",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original S02 game illustration. Extract ONLY this exact foreground group: central glowing golden heart with smiling face and BOTH surrounding magical hands and all connected swirl wisps. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/S02.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/S02/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-9e580bfc-d8eb-4de5-be0e-0dc0bed6cd8b.png"
+  },
+  {
+    "card": "S02",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original S02 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: central glowing golden heart with smiling face and BOTH surrounding magical hands and all connected swirl wisps. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/S02.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/S02/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-e4041bc4-0c1e-472b-a0c2-1ef4b74847ec.png"
+  },
+  {
+    "card": "S03",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original S03 game illustration. Extract ONLY this exact foreground group: entire exploding smiling berry pie character, floating crust stars, berries, crumbs and magic sparks; exclude table and plate. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/S03.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/S03/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-c555cde5-8ce7-4820-bd40-e306fbdc80c4.png"
+  },
+  {
+    "card": "S03",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original S03 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: entire exploding smiling berry pie character, floating crust stars, berries, crumbs and magic sparks; exclude table and plate. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/S03.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/S03/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-37074887-3466-4756-83e6-1bfd10a0e3f8.png"
+  },
+  {
+    "card": "S04",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original S04 game illustration. Extract ONLY this exact foreground group: helmet resting on striped deck chair, entire chair, green sun towel, hovering golden pause symbol and its wisps; exclude beer mug and stump and surrounding tavern. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/S04.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/S04/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-db9fc330-c2f5-46c6-89c9-02e3348daa7e.png"
+  },
+  {
+    "card": "S04",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original S04 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: helmet resting on striped deck chair, entire chair, green sun towel, hovering golden pause symbol and its wisps; exclude beer mug and stump and surrounding tavern. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (outdoor sunset castle courtyard tavern terrace). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/S04.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/S04/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-782378a6-40d3-44df-a945-73ac589a0baf.png"
+  },
+  {
+    "card": "S05",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original S05 game illustration. Extract ONLY this exact foreground group: BOTH outstretched hands with sleeves, exchanged purple playing card, entire gold portal ring and purple castle view INSIDE portal; outside portal transparent. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/S05.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/S05/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-740953ea-3c72-4624-9691-e7f4df22bf64.png"
+  },
+  {
+    "card": "S05",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original S05 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: BOTH outstretched hands with sleeves, exchanged purple playing card, entire gold portal ring and purple castle view INSIDE portal; outside portal transparent. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/S05.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/S05/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-d4e9b34b-7c05-4495-b3dc-5da79693a04c.png"
+  },
+  {
+    "card": "S06",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original S06 game illustration. Extract ONLY this exact foreground group: excited cat wizard, entire open glowing spellbook, both floating blank golden cards and gold wisps; include small owl seated beside book as same foreground group. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/S06.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/S06/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-64ea2df1-764f-4468-8395-6c750f76f84b.png"
+  },
+  {
+    "card": "S06",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original S06 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: excited cat wizard, entire open glowing spellbook, both floating blank golden cards and gold wisps; include small owl seated beside book as same foreground group. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/S06.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/S06/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-a740eeee-c44b-4143-a72c-c81820ab2989.png"
+  },
+  {
+    "card": "S07",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original S07 game illustration. Extract ONLY this exact foreground group: entire precarious stack of hats, books, teacup, dice and gold glow, red-haired boy on left and green goblin on right together as one foreground group. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/S07.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/S07/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-af998b65-e14d-4628-b713-8a1ee1f9430a.png"
+  },
+  {
+    "card": "S07",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original S07 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: entire precarious stack of hats, books, teacup, dice and gold glow, red-haired boy on left and green goblin on right together as one foreground group. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/S07.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/S07/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-966ae3cf-c970-40e3-b7b4-dba85548d9cf.png"
+  },
+  {
+    "card": "S08",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original S08 game illustration. Extract ONLY this exact foreground group: surprised fluffy small creature holding wrong-table card, entire violet portal ring and purple swirl INSIDE portal; keep exact character and card pose. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/S08.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/S08/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-112df115-a7fd-4cd0-af4f-594b41309fcf.png"
+  },
+  {
+    "card": "S08",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original S08 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: surprised fluffy small creature holding wrong-table card, entire violet portal ring and purple swirl INSIDE portal; keep exact character and card pose. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/S08.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/S08/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-deea92b8-7a9b-4ef1-8bde-1829cd93c798.png"
+  },
+  {
+    "card": "R01",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original R01 game illustration. Extract ONLY this exact foreground group: empty animated blue wizard robe, starry pointed hat, gloves and running boots, floating orange fireball with its full trailing streak. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/R01.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/R01/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-9706c4ac-3d52-43fd-ab4c-6ef7d481b714.png"
+  },
+  {
+    "card": "R01",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original R01 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: empty animated blue wizard robe, starry pointed hat, gloves and running boots, floating orange fireball with its full trailing streak. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/R01.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/R01/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-21b8d50e-f373-4117-ba7d-4386cdc746cf.png"
+  },
+  {
+    "card": "R02",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original R02 game illustration. Extract ONLY this exact foreground group: red-haired elf mage with raised hand and clothes, miniature flying green-clad copy above right, golden magic ring and connecting gold sparks. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/R02.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/R02/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-19d48398-e634-4382-be16-537db0849e99.png"
+  },
+  {
+    "card": "R02",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original R02 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: red-haired elf mage with raised hand and clothes, miniature flying green-clad copy above right, golden magic ring and connecting gold sparks. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/R02.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/R02/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-d26aefbb-7f0e-4594-9fb3-828969559195.png"
+  },
+  {
+    "card": "R03",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original R03 game illustration. Extract ONLY this exact foreground group: entire expressive gilded standing mirror character with arms and legs, reflected face, incoming fireball and both pink deflection trails. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/R03.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/R03/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-06bdedcd-1c17-44a5-b552-f3be65ff6c44.png"
+  },
+  {
+    "card": "R03",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original R03 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: entire expressive gilded standing mirror character with arms and legs, reflected face, incoming fireball and both pink deflection trails. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/R03.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/R03/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-d078a1ca-3a55-4da7-a771-2a52a7b8c4db.png"
+  },
+  {
+    "card": "R04",
+    "layer": "subject",
+    "prompt": "Use case: background-extraction. Edit target is the supplied original R04 game illustration. Extract ONLY this exact foreground group: purple animated protective glove character with cape, entire gold shield circle and glowing playing card below, BOTH incoming human hands from right. Keep all these connected objects and effects as ONE coherent plane. Remove all other environment, furniture, floor and unrelated characters. Preserve exact identities, poses, expressions, painterly style, warm light, original SQUARE canvas coordinates and original scale. Do not recenter or zoom. Preserve any original edge crop. Output one square transparent PNG with REAL alpha around silhouettes and through gaps; soft translucent magic edges. No painted checkerboard, flat backdrop, drop shadow, text, labels or frame.",
+    "source": "Assets/Resources/Art/R04.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/R04/subject.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-1b48e884-597d-43cc-b371-e0ebb546d30b.png"
+  },
+  {
+    "card": "R04",
+    "layer": "background",
+    "prompt": "Use case: precise-object-edit. Edit target is the supplied original R04 game illustration. Create an opaque background plate by removing this ENTIRE foreground group: purple animated protective glove character with cape, entire gold shield circle and glowing playing card below, BOTH incoming human hands from right. Also remove their glow, cast shadows and any magical traces. Seamlessly reconstruct the environment in every removed area: continuous floor or tabletop, tavern walls, windows, beams, furniture as appropriate to the original image (warm fantasy tavern). Preserve exact square crop, perspective, original painterly style, lighting and environmental details. No remaining part of the removed subject, no ghost silhouette, no blur patch, no blank fill, no text, labels or frame. One square fully opaque PNG background, complete environment to all four edges.",
+    "source": "Assets/Resources/Art/R04.png",
+    "output": "Assets/LayeredCards/Resources/LayeredCards/Layers/R04/background.png",
+    "generator": "built-in image_gen",
+    "generatedFile": "C:\\Users\\User\\.codex\\generated_images\\01a0dea1-f69b-7413-9f77-85cd932224f8\\exec-f027e228-feae-475f-a952-c49e34b00106.png"
+  }
+]

@@ -1,0 +1,1 @@
+PASS: all three card rectangles remain inside the viewport and clear of controls at all four extreme manual tilts.

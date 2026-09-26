@@ -10,11 +10,12 @@ namespace SummonersTable.Editor
     public sealed class LayeredCardsJsonEditor
     {
         public const string FileName="layered-cards.json";
-        string path,original,status="";LayeredCardsConfig data;int selected;bool raw,sources;string rawText;Vector2 scroll;
+        string path,original,status="";LayeredCardsConfig data;int selected,framingSelected;bool raw,sources;string rawText;Vector2 scroll;
         public void Draw(string filePath)
         {
             if(path!=filePath||data==null){path=filePath;Read();}
             if(data==null){EditorGUILayout.HelpBox(status,MessageType.Error);return;}
+            DrawFraming();
             EditorGUILayout.LabelField("Фон и единый план",EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("Персонаж и передний план соединены: их взаимное положение не меняется при наклоне. Основное движение — у фона. Текст и характеристики по-прежнему берутся из cards.json.",MessageType.Info);
             selected=Mathf.Clamp(selected,0,Math.Max(0,data.cards.Length-1));
@@ -26,14 +27,15 @@ namespace SummonersTable.Editor
                 scroll=EditorGUILayout.BeginScrollView(scroll,GUILayout.MaxHeight(580));
                 art.responsePower=EditorGUILayout.Slider("Плавность у центра",art.responsePower,1,3);
                 Layer("Фон",art.background);art.background.depth=EditorGUILayout.Slider("Движение фона",art.background.depth,0,.2f);art.background.foil=0;
-                EditorGUILayout.Space();EditorGUILayout.LabelField("Единый план · персонаж и огонь",EditorStyles.boldLabel);
+                EditorGUILayout.Space();EditorGUILayout.LabelField("Единый план · персонаж и эффекты",EditorStyles.boldLabel);
+                art.subject.singleSource=EditorGUILayout.Toggle("Один PNG персонажа",art.subject.singleSource);
                 art.subject.offsetX=EditorGUILayout.Slider("По горизонтали",art.subject.offsetX,-1,1);
                 art.subject.offsetY=EditorGUILayout.Slider("По вертикали",art.subject.offsetY,-1,1);
                 art.subject.zoom=EditorGUILayout.Slider("Масштаб плана",art.subject.zoom,.25f,3);
                 art.subject.depth=EditorGUILayout.Slider("Движение плана",art.subject.depth,0,.03f);
                 art.subject.foil=EditorGUILayout.Slider("Перелив плана",art.subject.foil,0,1);
                 sources=EditorGUILayout.Foldout(sources,"Исходные изображения единого плана");
-                if(sources){Layer("Персонаж",art.subject.rear);Layer("Огонь / передний объект",art.subject.foreground);}
+                if(sources){Layer("Персонаж",art.subject.rear);if(!art.subject.singleSource)Layer("Огонь / передний объект",art.subject.foreground);}
                 EditorGUILayout.EndScrollView();
                 if(EditorGUI.EndChangeCheck()){rawText=JsonUtility.ToJson(data,true);Preview();}
             }
@@ -55,6 +57,32 @@ namespace SummonersTable.Editor
             if(!string.IsNullOrEmpty(status))EditorGUILayout.HelpBox(status,MessageType.Info);
         }
         void Read(){try{original=rawText=File.ReadAllText(path);data=ConfigJson.Read<LayeredCardsConfig>(original);status="";}catch(Exception e){status=e.Message;data=null;}}
+        void DrawFraming()
+        {
+            EditorGUILayout.LabelField("Центр композиции · обычные и учебные карты",EditorStyles.boldLabel);
+            var cards=LayeredCardData.Current.Catalog().cards;
+            framingSelected=EditorGUILayout.Popup("Иллюстрация",Mathf.Clamp(framingSelected,0,cards.Count-1),cards.Select(c=>c.name).ToArray());
+            var card=cards[framingSelected];var f=data.Frame(card.name);
+            EditorGUI.BeginChangeCheck();
+            f.focusX=EditorGUILayout.Slider("Центр X · слева направо",f.focusX,0,1);
+            f.focusY=EditorGUILayout.Slider("Центр Y · снизу вверх",f.focusY,0,1);
+            f.zoom=EditorGUILayout.Slider("Приближение",f.zoom,1,3);
+            if(EditorGUI.EndChangeCheck())
+            {
+                if(!data.framing.Contains(f))data.framing=data.framing.Concat(new[]{f}).ToArray();
+                rawText=JsonUtility.ToJson(data,true);Preview();
+            }
+            var texture=ConfigRuntime.Artwork(card);
+            if(texture!=null)
+            {
+                var rect=GUILayoutUtility.GetAspectRect(590f/374f,GUILayout.MaxWidth(400));
+                GUI.DrawTextureWithTexCoords(rect,texture,f.Crop(590f/374f,(float)texture.width/texture.height));
+                EditorGUI.DrawRect(new Rect(rect.center.x-7,rect.center.y-.5f,14,1),Color.yellow);
+                EditorGUI.DrawRect(new Rect(rect.center.x-.5f,rect.center.y-7,1,14),Color.yellow);
+            }
+            EditorGUILayout.HelpBox("Крестик — центр окна плоского оригинала. У переливающихся карт фон и единый план настраиваются отдельно ниже.",MessageType.Info);
+            EditorGUILayout.Space();
+        }
         void Layer(string title,CardArtLayer layer)
         {
             EditorGUILayout.Space();EditorGUILayout.LabelField(title,EditorStyles.boldLabel);

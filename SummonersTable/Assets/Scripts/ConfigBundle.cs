@@ -13,7 +13,7 @@ namespace SummonersTable
         public LayeredCardsConfig layeredCards;
         public BotsConfig bots;public CardsConfig cards;public DecksConfig decks;public RulesConfig rules;public AudioConfig audio;public VfxConfig vfx;public LocationConfig world;public PlayerAnimationsConfig animations;public EventsConfig events;public InterfaceConfig ui;public PresentationConfig presentation;
         public List<Dictionary<string,object>> prefabs;public string gameplayHash;
-        public Catalog Catalog()=>new Catalog{version=rules.version,title=rules.title,configHash=gameplayHash,rules=Clone(rules.rules),world=Clone(world),events=Clone(events),cards=cards.cards.Select(Clone).ToList(),decks=decks.decks.Select(Clone).ToList(),typeColors=cards.typeColors.Select(Clone).ToList(),roleColors=cards.roleColors.Select(Clone).ToList()};
+        public Catalog Catalog()=>new Catalog{version=rules.version,title=rules.title,configHash=gameplayHash,rules=Clone(rules.rules),world=Clone(world),events=Clone(events),cards=cards.cards.Select(Clone).ToList(),decks=decks.decks.Select(Clone).ToList(),typeColors=cards.typeColors.Select(Clone).ToList(),roleColors=cards.roleColors.Select(Clone).ToList(),factionColors=cards.factionColors.Select(Clone).ToList()};
         public static T Clone<T>(T value)=>JsonUtility.FromJson<T>(JsonUtility.ToJson(value));
         public static ConfigBundle Read(string directory,string replacementFile=null,string replacement=null)
         {return Read(name=>name==replacementFile?replacement:File.ReadAllText(Path.Combine(directory,name),Encoding.UTF8));}
@@ -32,7 +32,8 @@ namespace SummonersTable
         {
             bots.Validate();
             Check(cards.schemaVersion==1&&decks.schemaVersion==1&&rules.schemaVersion==1&&audio.schemaVersion==1&&vfx.schemaVersion==1&&world.schemaVersion==1&&presentation.schemaVersion==1,"schemaVersion must be 1");
-            Check(cards.cards!=null&&cards.typeColors!=null&&cards.roleColors!=null&&decks.decks!=null,"cards/decks arrays are required");
+            Check(cards.cards!=null&&cards.typeColors!=null&&cards.roleColors!=null&&cards.factionColors!=null&&decks.decks!=null,"cards/decks arrays and factionColors are required");
+            foreach(var palette in new[]{cards.roleColors,cards.factionColors})Check(palette.All(x=>x!=null&&!string.IsNullOrWhiteSpace(x.name))&&palette.Select(x=>x.name).Distinct().Count()==palette.Length,"Each class/species name must have exactly one colour");
             var c=Catalog();c.Validate();layeredCards.Validate(c);rules.defaults.Validate();Check(!string.IsNullOrWhiteSpace(rules.version),"rules.version required");
             var r=rules.rules;Range(r.commandersQte,2,100,"commandersQte");Range(r.wizardSpells,1,20,"wizardSpells");Range(r.wizardMixedSpells,0,r.wizardSpells,"wizardMixedSpells");Range(r.wizardCreatures,1,5,"wizardCreatures");Range(r.qteMaxLength,2,100,"qteMaxLength");Range(r.qteBaseSeconds,1,120,"qteBaseSeconds");Range(r.qteMinimumSeconds,1,120,"qteMinimumSeconds");Range(r.qteSecondsPerSymbol,0,30,"qteSecondsPerSymbol");Range(r.qteMistakePenalty,0,30,"qteMistakePenalty");Check(r.effectLimits!=null&&r.effectLimits.Select(x=>x.effect).Distinct().Count()==r.effectLimits.Length,"Unique effectLimits required");foreach(var limit in r.effectLimits){Check(new RulesDef().effectLimits.Any(x=>x.effect==limit.effect),"Unknown effect limit: "+limit.effect);Range(limit.maximum,0,100,limit.effect+".maximum");}Range(r.heroHp,1,999,"rules.heroHp");Range(r.deckSize,1,120,"rules.deckSize");Range(r.handLimit,1,20,"rules.handLimit");Range(r.startingHand,0,r.handLimit,"rules.startingHand");Check(r.boardSlots==5,"This scene requires boardSlots=5");Range(r.rounds,1,10,"rules.rounds");Range(r.turnSeconds,5,600,"rules.turnSeconds");Range(r.revealSeconds,0,30,"rules.revealSeconds");Range(r.qteMistakes,1,10,"rules.qteMistakes");Range(r.roundWinPoints,0,100,"rules.roundWinPoints");Range(r.eliminationPoints,0,100,"rules.eliminationPoints");
             Check(decks.decks.Length==3&&decks.decks.Select(d=>d.id).Distinct().Count()==3,"Three unique deck IDs required");
@@ -44,10 +45,10 @@ namespace SummonersTable
                 Check(!string.IsNullOrWhiteSpace(card.name)&&!string.IsNullOrWhiteSpace(card.rules),"Card name/rules required: "+card.id);
                 Check(baseline.cards.Any(x=>x.kind==card.kind&&x.effect==card.effect&&x.target==card.target),"Unsupported effect/target combination: "+card.id);
                 Range(card.qte,card.kind=="reaction"?0:2,card.kind=="reaction"?0:20,card.id+".qte");Range(card.value,0,100,card.id+".value");Range(card.attack,0,100,card.id+".attack");Range(card.health,card.kind=="creature"?1:0,100,card.id+".health");
-                Check(cards.typeColors.Any(x=>x.id==card.kind)&& (card.kind!="creature"||cards.roleColors.Any(x=>x.name==card.role)),"Missing card color: "+card.id);
+                Check(cards.typeColors.Any(x=>x.id==card.kind)&& (card.kind!="creature"||cards.roleColors.Any(x=>x.name==card.role)&&cards.factionColors.Any(x=>x.name==card.faction)),"Missing card class/species color: "+card.id);
                 if(assets!=null)Check(assets.Get<Texture2D>(card.art)!=null,"Unknown card art ID: "+card.art);
             }
-            foreach(var color in cards.typeColors.Concat(cards.roleColors))Check(ColorUtility.TryParseHtmlString(color.hex,out _),"Invalid color: "+color.hex);
+            foreach(var color in cards.typeColors.Concat(cards.roleColors).Concat(cards.factionColors))Check(ColorUtility.TryParseHtmlString(color.hex,out _),"Invalid color: "+color.hex);
             Check(audio.cues!=null&&audio.cues.Select(x=>x.action).Distinct().Count()==audio.cues.Length,"Audio action IDs must be unique");
             foreach(var cue in audio.cues)
             {

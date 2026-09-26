@@ -755,5 +755,37 @@
             "name": "Провокатор",
             "hex": "#EF7983"
         }
+    ],
+    "factionColors": [
+        {
+            "id": "beasts",
+            "name": "Звери",
+            "hex": "#8FDF73"
+        },
+        {
+            "id": "demons",
+            "name": "Демоны",
+            "hex": "#FF8D92"
+        },
+        {
+            "id": "undead",
+            "name": "Нежить",
+            "hex": "#C5A3FF"
+        },
+        {
+            "id": "machines",
+            "name": "Механоиды",
+            "hex": "#8FCCFF"
+        },
+        {
+            "id": "dragons",
+            "name": "Драконы",
+            "hex": "#FFC079"
+        },
+        {
+            "id": "spirits",
+            "name": "Духи",
+            "hex": "#8FF2E3"
+        }
     ]
 }

@@ -1,5 +1,11 @@
 Generated with the built-in image_gen tool from existing S01 and C02 illustrations. PNG alpha is preserved; layer scale/position are adjusted only by JSON at render time.
 
+## Complete catalogue / 2026-09-26
+
+27 additional original illustrations were each edited twice using the built-in image_gen tool: a transparent foreground group and an opaque reconstructed background. No external API/CLI or local segmentation/inpainting was used. All 54 new PNGs are saved under `Resources/LayeredCards/Layers/<ID>/subject.png` and `background.png`. Original art is untouched.
+
+The exact prompt set, source paths, generated file provenance, and final project paths are in `output/layered-cards-all/generation-prompts.json` at repository root. Foregrounds include essential props and attached effects so they move as one plane. Ghost/magic edges retain alpha. The three existing reference cards are reused. `tools/inspect_layered_plates.py` only reads the PNGs, checks their alpha, and creates QA contact sheets; it never changes source textures. Composition adjustments happen in JSON and Unity shaders.
+
 ## C08 / combined subject (v3)
 
 Built-in image_gen, source `Assets/Resources/Art/C08.png`, saved to `Resources/LayeredCards/Layers/C08/subject.png`.

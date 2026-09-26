@@ -1,0 +1,1 @@
+PASS 180 full/hand/world variants; all 30 visual landmarks centred; aspect-preserving crop stays inside source; QTE label and all 20 cubes overlay artwork; framing validation and unchanged gameplay hash.

@@ -1,0 +1,1 @@
+PASS 349 checks: all 30 separate layer sets, prefabs, JSON/default parity, shader support, masked parallax, single alpha compositing, flat fallback, all pages and filters, four inspection modes, standalone scene.

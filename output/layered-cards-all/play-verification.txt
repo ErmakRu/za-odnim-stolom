@@ -1,0 +1,1 @@
+PASS Unity Play: all 30 cards via actual bound navigation buttons; 4 layer modes; last page; filters; reload; pause/reset/resume; live rotation; no GameApp and no exceptions.

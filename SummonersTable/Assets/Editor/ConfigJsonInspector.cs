@@ -9,7 +9,7 @@ namespace SummonersTable.Editor
     [CustomEditor(typeof(DefaultAsset))]
     public sealed class ConfigJsonInspector:UnityEditor.Editor
     {
-        string text,original,status="";Vector2 scroll;bool assets;string filter="";
+        string text,original,status="";Vector2 scroll;bool assets,colours=true;string filter="";
         readonly LayeredCardsJsonEditor layered=new LayeredCardsJsonEditor();
         readonly CampaignJsonEditor campaign=new CampaignJsonEditor();
         [UnityEditor.Callbacks.OnOpenAsset(0)]
@@ -25,6 +25,7 @@ namespace SummonersTable.Editor
             EditorGUILayout.HelpBox(file=="main.json"?"Общий снимок настроек. Изменяйте раздел через его Manager; «Сохранить» обновит main.json автоматически.":file=="assets.json"?"Справочник импортированных ассетов. Обновляется из Unity; для выбора скопируйте ID.":"Редактируйте JSON здесь. Сохранение проверит весь набор Config. Во время Play нажмите «Перезагрузить Config», чтобы обновить звук и оформление. Баланс - со следующего матча.",MessageType.Info);
             using(new EditorGUI.DisabledScope(file=="assets.json"||file=="main.json"||path.Contains("/History/")))
             {
+                if(file=="cards.json")DrawCardColours();
                 scroll=EditorGUILayout.BeginScrollView(scroll,GUILayout.MinHeight(300),GUILayout.MaxHeight(650));text=EditorGUILayout.TextArea(text,GUILayout.ExpandHeight(true));EditorGUILayout.EndScrollView();
                 using(new EditorGUILayout.HorizontalScope())
                 {
@@ -48,6 +49,20 @@ namespace SummonersTable.Editor
         {
             try{if(File.ReadAllText(path)!=original)throw new IOException("Файл изменился на диске. Отмените изменения, чтобы перечитать его.");ManagerStorage.SaveSection(file,text);original=text;status="Сохранено. Проверка Config пройдена.";AssetDatabase.ImportAsset(path);}
             catch(Exception e){status="Не сохранено: "+e.Message;}
+        }
+        void DrawCardColours()
+        {
+            colours=EditorGUILayout.Foldout(colours,"Цвета типов, видов и классов",true);if(!colours)return;
+            CardsConfig data;try{data=ConfigJson.Read<CardsConfig>(text);}catch{return;}
+            EditorGUILayout.HelpBox("Один цвет на имя вида / класса во всех карточках. После выбора нажмите «Сохранить». Состав карт и их характеристики сохраняются.",MessageType.Info);
+            EditorGUI.BeginChangeCheck();
+            void Palette(string title,ColorDef[] list)
+            {
+                EditorGUILayout.LabelField(title,EditorStyles.boldLabel);if(list==null)return;
+                foreach(var entry in list){ColorUtility.TryParseHtmlString(entry.hex,out var old);var value=EditorGUILayout.ColorField(entry.name,old);if(value!=old)entry.hex="#"+ColorUtility.ToHtmlStringRGB(value);}
+            }
+            Palette("Тип — цвет названия",data.typeColors);Palette("Вид — Звери, Демоны…",data.factionColors);Palette("Класс — Снабженец, Защитник…",data.roleColors);
+            if(EditorGUI.EndChangeCheck())text=JsonUtility.ToJson(data,true);
         }
     }
 }

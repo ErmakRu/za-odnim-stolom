@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 namespace SummonersTable
 {
-    [Serializable] public sealed class CardsConfig { public int schemaVersion=1; public CardDef[] cards; public ColorDef[] typeColors,roleColors; }
+    [Serializable] public sealed class CardsConfig { public int schemaVersion=1; public CardDef[] cards; public ColorDef[] typeColors,roleColors,factionColors; }
     [Serializable] public sealed class DecksConfig { public int schemaVersion=1; public DeckDef[] decks; }
     [Serializable] public sealed class RulesConfig { public int schemaVersion=1; public string version="0.8.0",title="За одним столом"; public RulesDef rules=new RulesDef(); public MatchOptions defaults=new MatchOptions(); }
     [Serializable] public sealed class AudioCue { public string action; public AudioBus bus; public SoundVariant[] sounds=Array.Empty<SoundVariant>(); }

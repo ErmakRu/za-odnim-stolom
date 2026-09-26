@@ -45,7 +45,7 @@ namespace SummonersTable.Editor
                     foreach(var face in new[]{v.sharedFull,v.sharedCompact,v.sharedWorld})
                     {
                         Check(face!=null,"shared face "+card.id);Check(face.title.text==card.name,"name on top");
-                        Check(face.type.text==catalog.typeColors.First(t=>t.id==card.kind).name.ToUpperInvariant(),"visible type");
+                        Check(face.type.gameObject.activeSelf==(card.kind!="creature"),"type text for spells and reactions");
                         Check(face.accent.rectTransform.rect.width==face.titleFill.rectTransform.rect.width,"equal band widths");
                         Check(face.accent.rectTransform.rect.height<=face.titleFill.rectTransform.rect.height,"type band not taller");
                         Check(face.description.text.Length>0,"rules even in hand "+card.id);
@@ -53,7 +53,7 @@ namespace SummonersTable.Editor
                         Check(face.GetComponent<Mask>()!=null&&face.GetComponent<BeveledImage>()!=null,"styled card silhouette");
                         face.SetGameArt(false,Vector2.zero,null);var uv=face.artwork.uvRect;var texture=face.artwork.texture;
                         Check(Mathf.Abs(texture.width*uv.width/(texture.height*uv.height)-face.artwork.rectTransform.rect.width/face.artwork.rectTransform.rect.height)<.001f,"flat art preserves proportions "+card.id);
-                        float total=face.description.preferredHeight+(face.restrictions.gameObject.activeSelf?face.restrictions.preferredHeight+18:0);Check(total<=302,"rules fit "+card.id+" "+total);
+                        Check(face.description.rectTransform.anchoredPosition.y-face.RulesHeight>=face.rulesBottom-1,"rules fit "+card.id);
                     }
                     Check(v.sharedFull.title.text==v.sharedCompact.title.text&&v.sharedFull.description.text==v.sharedCompact.description.text,"same content in hand/inspection");cards++;
                 }finally{Object.DestroyImmediate(v.gameObject);}

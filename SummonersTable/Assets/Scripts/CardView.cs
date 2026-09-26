@@ -25,8 +25,9 @@ namespace SummonersTable
         public Color playableColor = new Color(.38f, .96f, .67f), reactionPlayableColor = new Color(.84f, .63f, 1);
 
         public static readonly Color QteEasyColor = new Color(0.22f, 0.96f, 0.56f, 1f);    // 1–3
-        public static readonly Color QteMediumColor = new Color(1f, 0.79f, 0.18f, 1f);     // 4–6
-        public static readonly Color QteHardColor = new Color(1f, 0.30f, 0.27f, 1f);       // 7–9 and higher modifiers
+        public static readonly Color QteMediumColor = new Color(1f, 0.79f, 0.18f, 1f);     // 4–5
+        public static readonly Color QteHardColor = new Color(1f, 0.30f, 0.27f, 1f);       // 6–7
+        public static readonly Color QteEpicColor = new Color(.76f, .43f, 1f, 1f);        // 8+
 
         [NonSerialized] public Action<PointerEventData> pressed, dragged, released, hovered, unhovered;
         [NonSerialized] public bool isHovered, isSelected;
@@ -109,8 +110,9 @@ namespace SummonersTable
         public static Color GetQteColor(int count)
         {
             if (count <= 3) return QteEasyColor;
-            if (count <= 6) return QteMediumColor;
-            return QteHardColor;
+            if (count <= 5) return QteMediumColor;
+            if (count <= 7) return QteHardColor;
+            return QteEpicColor;
         }
 
         public void Import(CardDef card, Catalog catalog)
@@ -118,8 +120,8 @@ namespace SummonersTable
             definition = JsonUtility.FromJson<CardDef>(JsonUtility.ToJson(card));
             if(sharedFull!=null)
             {
-                var layers=(ConfigRuntime.Current??LayeredCardData.Current).layeredCards.Find(card.name);
-                foreach(var face in new[]{sharedFull,sharedCompact,sharedWorld})if(face!=null)face.ApplyCard(definition,catalog,layers);
+                var visuals=(ConfigRuntime.Current??LayeredCardData.Current).layeredCards;
+                foreach(var face in new[]{sharedFull,sharedCompact,sharedWorld})if(face!=null)face.ApplyCard(definition,catalog,visuals.Find(card.name),visuals.Frame(card.name));
                 return;
             }
             var type = catalog.typeColors.Find(c => c.id == card.kind);

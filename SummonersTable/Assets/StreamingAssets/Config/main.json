@@ -538,6 +538,38 @@
           "name": "Провокатор",
           "hex": "#EF7983"
         }
+      ],
+      "factionColors": [
+        {
+          "id": "beasts",
+          "name": "Звери",
+          "hex": "#8FDF73"
+        },
+        {
+          "id": "demons",
+          "name": "Демоны",
+          "hex": "#FF8D92"
+        },
+        {
+          "id": "undead",
+          "name": "Нежить",
+          "hex": "#C5A3FF"
+        },
+        {
+          "id": "machines",
+          "name": "Механоиды",
+          "hex": "#8FCCFF"
+        },
+        {
+          "id": "dragons",
+          "name": "Драконы",
+          "hex": "#FFC079"
+        },
+        {
+          "id": "spirits",
+          "name": "Духи",
+          "hex": "#8FF2E3"
+        }
       ]
     },
     "decks": {
@@ -3059,9 +3091,10 @@
       "schemaVersion": 2,
       "cards": [
         {
-          "cardName": "Огненный чих",
+          "cardName": "Енот-карманник",
+          "responsePower": 1.5,
           "background": {
-            "texture": "LayeredCards/Layers/S01/background",
+            "texture": "LayeredCards/Layers/C01/background",
             "fit": "cover",
             "offsetX": 0,
             "offsetY": 0,
@@ -3069,28 +3102,28 @@
             "depth": 0.085,
             "foil": 0
           },
-          "responsePower": 1.5,
           "subject": {
+            "singleSource": true,
             "offsetX": 0,
             "offsetY": 0,
             "zoom": 1,
             "depth": 0.006,
             "foil": 0.24,
             "rear": {
-              "texture": "LayeredCards/Layers/S01/rear",
-              "fit": "contain",
-              "offsetX": -0.1,
-              "offsetY": -0.025,
-              "zoom": 0.97,
+              "texture": "LayeredCards/Layers/C01/subject",
+              "fit": "cover",
+              "offsetX": 0.0,
+              "offsetY": -0.11484,
+              "zoom": 1.04,
               "depth": 0,
               "foil": 0
             },
             "foreground": {
-              "texture": "LayeredCards/Layers/S01/foreground",
-              "fit": "contain",
-              "offsetX": 0.06,
-              "offsetY": 0.23,
-              "zoom": 0.65,
+              "texture": "LayeredCards/Layers/C01/subject",
+              "fit": "cover",
+              "offsetX": 0.0,
+              "offsetY": -0.11484,
+              "zoom": 1.04,
               "depth": 0,
               "foil": 0
             }
@@ -3109,9 +3142,9 @@
           },
           "responsePower": 1.5,
           "subject": {
-            "offsetX": 0,
-            "offsetY": 0,
-            "zoom": 1,
+            "offsetX": 0.015,
+            "offsetY": -0.2,
+            "zoom": 1.4,
             "depth": 0.006,
             "foil": 0.24,
             "rear": {
@@ -3135,6 +3168,201 @@
           }
         },
         {
+          "cardName": "Боевой гусь",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/C03/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/C03/subject",
+              "fit": "cover",
+              "offsetX": -0.0321,
+              "offsetY": -0.1688,
+              "zoom": 1.07,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/C03/subject",
+              "fit": "cover",
+              "offsetX": -0.0321,
+              "offsetY": -0.1688,
+              "zoom": 1.07,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Суккуб техподдержки",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/C04/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/C04/subject",
+              "fit": "cover",
+              "offsetX": 0.0103,
+              "offsetY": -0.16249,
+              "zoom": 1.03,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/C04/subject",
+              "fit": "cover",
+              "offsetX": 0.0103,
+              "offsetY": -0.16249,
+              "zoom": 1.03,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Бес-бюрократ",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/C05/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/C05/subject",
+              "fit": "cover",
+              "offsetX": -0.044,
+              "offsetY": -0.10412,
+              "zoom": 1.1,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/C05/subject",
+              "fit": "cover",
+              "offsetX": -0.044,
+              "offsetY": -0.10412,
+              "zoom": 1.1,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Демон-пожарник",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/C06/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/C06/subject",
+              "fit": "cover",
+              "offsetX": -0.044,
+              "offsetY": -0.17353,
+              "zoom": 1.1,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/C06/subject",
+              "fit": "cover",
+              "offsetX": -0.044,
+              "offsetY": -0.17353,
+              "zoom": 1.1,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Скелет-бухгалтер",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/C07/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/C07/subject",
+              "fit": "cover",
+              "offsetX": 0.0,
+              "offsetY": -0.20508,
+              "zoom": 1.0,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/C07/subject",
+              "fit": "cover",
+              "offsetX": 0.0,
+              "offsetY": -0.20508,
+              "zoom": 1.0,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
           "cardName": "Вампир на диете",
           "background": {
             "texture": "LayeredCards/Layers/C02/background",
@@ -3148,8 +3376,8 @@
           "responsePower": 1.5,
           "subject": {
             "offsetX": 0,
-            "offsetY": 0,
-            "zoom": 1,
+            "offsetY": 0.12,
+            "zoom": 1.3,
             "depth": 0.006,
             "foil": 0.24,
             "rear": {
@@ -3169,8 +3397,1048 @@
               "zoom": 1,
               "depth": 0,
               "foil": 0
+            },
+            "singleSource": true
+          }
+        },
+        {
+          "cardName": "Рыцарь последней смены",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/C09/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/C09/subject",
+              "fit": "cover",
+              "offsetX": -0.044,
+              "offsetY": -0.24294,
+              "zoom": 1.1,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/C09/subject",
+              "fit": "cover",
+              "offsetX": -0.044,
+              "offsetY": -0.24294,
+              "zoom": 1.1,
+              "depth": 0,
+              "foil": 0
             }
           }
+        },
+        {
+          "cardName": "Голем-подушка",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/C10/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/C10/subject",
+              "fit": "cover",
+              "offsetX": 0.0103,
+              "offsetY": -0.21123,
+              "zoom": 1.03,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/C10/subject",
+              "fit": "cover",
+              "offsetX": 0.0103,
+              "offsetY": -0.21123,
+              "zoom": 1.03,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Турель-комплиментатор",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/C11/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/C11/subject",
+              "fit": "cover",
+              "offsetX": -0.044,
+              "offsetY": -0.15618,
+              "zoom": 1.1,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/C11/subject",
+              "fit": "cover",
+              "offsetX": -0.044,
+              "offsetY": -0.15618,
+              "zoom": 1.1,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Принтер заклинаний",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/C12/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/C12/subject",
+              "fit": "cover",
+              "offsetX": 0.0,
+              "offsetY": -0.17353,
+              "zoom": 1.0,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/C12/subject",
+              "fit": "cover",
+              "offsetX": 0.0,
+              "offsetY": -0.17353,
+              "zoom": 1.0,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Дракон-стажёр",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/C13/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/C13/subject",
+              "fit": "cover",
+              "offsetX": 0.0103,
+              "offsetY": -0.09749,
+              "zoom": 1.03,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/C13/subject",
+              "fit": "cover",
+              "offsetX": 0.0103,
+              "offsetY": -0.09749,
+              "zoom": 1.03,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Дракон-грелка",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/C14/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/C14/subject",
+              "fit": "cover",
+              "offsetX": -0.021,
+              "offsetY": -0.19877,
+              "zoom": 1.05,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/C14/subject",
+              "fit": "cover",
+              "offsetX": -0.021,
+              "offsetY": -0.19877,
+              "zoom": 1.05,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Дракон-фанат",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/C15/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/C15/subject",
+              "fit": "cover",
+              "offsetX": 0.0,
+              "offsetY": -0.15775,
+              "zoom": 1.0,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/C15/subject",
+              "fit": "cover",
+              "offsetX": 0.0,
+              "offsetY": -0.15775,
+              "zoom": 1.0,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Дух дедлайна",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/C16/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/C16/subject",
+              "fit": "cover",
+              "offsetX": -0.021,
+              "offsetY": -0.28159,
+              "zoom": 1.05,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/C16/subject",
+              "fit": "cover",
+              "offsetX": -0.021,
+              "offsetY": -0.28159,
+              "zoom": 1.05,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Дух аптечки",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/C17/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/C17/subject",
+              "fit": "cover",
+              "offsetX": 0.0,
+              "offsetY": -0.17353,
+              "zoom": 1.0,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/C17/subject",
+              "fit": "cover",
+              "offsetX": 0.0,
+              "offsetY": -0.17353,
+              "zoom": 1.0,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Призрак подсказки",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/C18/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/C18/subject",
+              "fit": "cover",
+              "offsetX": -0.0103,
+              "offsetY": -0.11374,
+              "zoom": 1.03,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/C18/subject",
+              "fit": "cover",
+              "offsetX": -0.0103,
+              "offsetY": -0.11374,
+              "zoom": 1.03,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Огненный чих",
+          "background": {
+            "texture": "LayeredCards/Layers/S01/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "responsePower": 1.5,
+          "subject": {
+            "offsetX": 0.05,
+            "offsetY": -0.245,
+            "zoom": 1.25,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/S01/rear",
+              "fit": "contain",
+              "offsetX": -0.1,
+              "offsetY": -0.025,
+              "zoom": 0.97,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/S01/foreground",
+              "fit": "contain",
+              "offsetX": 0,
+              "offsetY": 0.18,
+              "zoom": 0.65,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Обнимашки по расписанию",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/S02/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/S02/subject",
+              "fit": "cover",
+              "offsetX": 0.0,
+              "offsetY": -0.09465,
+              "zoom": 1.0,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/S02/subject",
+              "fit": "cover",
+              "offsetX": 0.0,
+              "offsetY": -0.09465,
+              "zoom": 1.0,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Всем по крошке",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/S03/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/S03/subject",
+              "fit": "cover",
+              "offsetX": -0.021,
+              "offsetY": -0.11595,
+              "zoom": 1.05,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/S03/subject",
+              "fit": "cover",
+              "offsetX": -0.021,
+              "offsetY": -0.11595,
+              "zoom": 1.05,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Технический перерыв",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/S04/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/S04/subject",
+              "fit": "cover",
+              "offsetX": 0.021,
+              "offsetY": -0.04969,
+              "zoom": 1.05,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/S04/subject",
+              "fit": "cover",
+              "offsetX": 0.021,
+              "offsetY": -0.04969,
+              "zoom": 1.05,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Карманная перестановка",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/S05/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/S05/subject",
+              "fit": "cover",
+              "offsetX": 0.0103,
+              "offsetY": -0.08124,
+              "zoom": 1.03,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/S05/subject",
+              "fit": "cover",
+              "offsetX": 0.0103,
+              "offsetY": -0.08124,
+              "zoom": 1.03,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Чужой конспект",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/S06/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/S06/subject",
+              "fit": "cover",
+              "offsetX": 0.0,
+              "offsetY": -0.0631,
+              "zoom": 1.0,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/S06/subject",
+              "fit": "cover",
+              "offsetX": 0.0,
+              "offsetY": -0.0631,
+              "zoom": 1.0,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Слабо ещё две?",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/S07/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/S07/subject",
+              "fit": "contain",
+              "offsetX": 0,
+              "offsetY": 0,
+              "zoom": 1.02,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/S07/subject",
+              "fit": "contain",
+              "offsetX": 0,
+              "offsetY": 0,
+              "zoom": 1.02,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Вы ошиблись столиком",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/S08/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/S08/subject",
+              "fit": "cover",
+              "offsetX": -0.056,
+              "offsetY": -0.01767,
+              "zoom": 1.12,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/S08/subject",
+              "fit": "cover",
+              "offsetX": -0.056,
+              "offsetY": -0.01767,
+              "zoom": 1.12,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Я вообще мимо",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/R01/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/R01/subject",
+              "fit": "cover",
+              "offsetX": -0.021,
+              "offsetY": -0.2319,
+              "zoom": 1.05,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/R01/subject",
+              "fit": "cover",
+              "offsetX": -0.021,
+              "offsetY": -0.2319,
+              "zoom": 1.05,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Мне такого же!",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/R02/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/R02/subject",
+              "fit": "cover",
+              "offsetX": -0.0321,
+              "offsetY": -0.30383,
+              "zoom": 1.07,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/R02/subject",
+              "fit": "cover",
+              "offsetX": -0.0321,
+              "offsetY": -0.30383,
+              "zoom": 1.07,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Заходи в другой раз",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/R03/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/R03/subject",
+              "fit": "cover",
+              "offsetX": -0.0103,
+              "offsetY": -0.17874,
+              "zoom": 1.03,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/R03/subject",
+              "fit": "cover",
+              "offsetX": -0.0103,
+              "offsetY": -0.17874,
+              "zoom": 1.03,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        },
+        {
+          "cardName": "Руки прочь",
+          "responsePower": 1.5,
+          "background": {
+            "texture": "LayeredCards/Layers/R04/background",
+            "fit": "cover",
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1.3,
+            "depth": 0.085,
+            "foil": 0
+          },
+          "subject": {
+            "singleSource": true,
+            "offsetX": 0,
+            "offsetY": 0,
+            "zoom": 1,
+            "depth": 0.006,
+            "foil": 0.24,
+            "rear": {
+              "texture": "LayeredCards/Layers/R04/subject",
+              "fit": "cover",
+              "offsetX": 0.0,
+              "offsetY": -0.04733,
+              "zoom": 1.0,
+              "depth": 0,
+              "foil": 0
+            },
+            "foreground": {
+              "texture": "LayeredCards/Layers/R04/subject",
+              "fit": "cover",
+              "offsetX": 0.0,
+              "offsetY": -0.04733,
+              "zoom": 1.0,
+              "depth": 0,
+              "foil": 0
+            }
+          }
+        }
+      ],
+      "framing": [
+        {
+          "cardName": "Енот-карманник",
+          "focusX": 0.5,
+          "focusY": 0.57,
+          "zoom": 1.04
+        },
+        {
+          "cardName": "Медведь-обниматель",
+          "focusX": 0.5,
+          "focusY": 0.63,
+          "zoom": 1.0
+        },
+        {
+          "cardName": "Боевой гусь",
+          "focusX": 0.53,
+          "focusY": 0.6,
+          "zoom": 1.07
+        },
+        {
+          "cardName": "Суккуб техподдержки",
+          "focusX": 0.49,
+          "focusY": 0.6,
+          "zoom": 1.03
+        },
+        {
+          "cardName": "Бес-бюрократ",
+          "focusX": 0.54,
+          "focusY": 0.56,
+          "zoom": 1.1
+        },
+        {
+          "cardName": "Демон-пожарник",
+          "focusX": 0.54,
+          "focusY": 0.6,
+          "zoom": 1.1
+        },
+        {
+          "cardName": "Скелет-бухгалтер",
+          "focusX": 0.5,
+          "focusY": 0.63,
+          "zoom": 1.0
+        },
+        {
+          "cardName": "Вампир на диете",
+          "focusX": 0.5,
+          "focusY": 0.63,
+          "zoom": 1.0
+        },
+        {
+          "cardName": "Рыцарь последней смены",
+          "focusX": 0.54,
+          "focusY": 0.64,
+          "zoom": 1.1
+        },
+        {
+          "cardName": "Голем-подушка",
+          "focusX": 0.49,
+          "focusY": 0.63,
+          "zoom": 1.03
+        },
+        {
+          "cardName": "Турель-комплиментатор",
+          "focusX": 0.54,
+          "focusY": 0.59,
+          "zoom": 1.1
+        },
+        {
+          "cardName": "Принтер заклинаний",
+          "focusX": 0.5,
+          "focusY": 0.61,
+          "zoom": 1.0
+        },
+        {
+          "cardName": "Дракон-стажёр",
+          "focusX": 0.49,
+          "focusY": 0.56,
+          "zoom": 1.03
+        },
+        {
+          "cardName": "Дракон-грелка",
+          "focusX": 0.52,
+          "focusY": 0.62,
+          "zoom": 1.05
+        },
+        {
+          "cardName": "Дракон-фанат",
+          "focusX": 0.5,
+          "focusY": 0.6,
+          "zoom": 1.0
+        },
+        {
+          "cardName": "Дух дедлайна",
+          "focusX": 0.52,
+          "focusY": 0.67,
+          "zoom": 1.05
+        },
+        {
+          "cardName": "Дух аптечки",
+          "focusX": 0.5,
+          "focusY": 0.61,
+          "zoom": 1.0
+        },
+        {
+          "cardName": "Призрак подсказки",
+          "focusX": 0.51,
+          "focusY": 0.57,
+          "zoom": 1.03
+        },
+        {
+          "cardName": "Огненный чих",
+          "focusX": 0.5,
+          "focusY": 0.63,
+          "zoom": 1.0
+        },
+        {
+          "cardName": "Обнимашки по расписанию",
+          "focusX": 0.5,
+          "focusY": 0.56,
+          "zoom": 1.0
+        },
+        {
+          "cardName": "Всем по крошке",
+          "focusX": 0.52,
+          "focusY": 0.57,
+          "zoom": 1.05
+        },
+        {
+          "cardName": "Технический перерыв",
+          "focusX": 0.48,
+          "focusY": 0.53,
+          "zoom": 1.05
+        },
+        {
+          "cardName": "Карманная перестановка",
+          "focusX": 0.49,
+          "focusY": 0.55,
+          "zoom": 1.03
+        },
+        {
+          "cardName": "Чужой конспект",
+          "focusX": 0.5,
+          "focusY": 0.54,
+          "zoom": 1.0
+        },
+        {
+          "cardName": "Слабо ещё две?",
+          "focusX": 0.5,
+          "focusY": 0.68,
+          "zoom": 1.0
+        },
+        {
+          "cardName": "Вы ошиблись столиком",
+          "focusX": 0.55,
+          "focusY": 0.51,
+          "zoom": 1.12
+        },
+        {
+          "cardName": "Я вообще мимо",
+          "focusX": 0.52,
+          "focusY": 0.64,
+          "zoom": 1.05
+        },
+        {
+          "cardName": "Мне такого же!",
+          "focusX": 0.53,
+          "focusY": 0.68,
+          "zoom": 1.07
+        },
+        {
+          "cardName": "Заходи в другой раз",
+          "focusX": 0.51,
+          "focusY": 0.61,
+          "zoom": 1.03
+        },
+        {
+          "cardName": "Руки прочь",
+          "focusX": 0.5,
+          "focusY": 0.53,
+          "zoom": 1.0
         }
       ]
     }

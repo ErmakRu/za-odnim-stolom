@@ -38,6 +38,19 @@ namespace SummonersTable.Editor
                     if(Mathf.Abs(look.x)==1&&Mathf.Abs(tilted[2].x-neutral[2].x)<35)throw new Exception("Background depth is not visible");
                     if(Vector2.Distance(tilted[0],neutral[0])>5)throw new Exception("Combined subject movement exceeds intended bound");
                 }
+                // A single translucent cutout must retain 50% opacity, not become 75%
+                // because the legacy rear/foreground slots refer to the same PNG.
+                var half=Texture((x,y)=>new Color(1,0,0,.5f));
+                try
+                {
+                    Set("Background",Texture2D.blackTexture,1,0);Set("Rear",half,1,0);Set("Foreground",half,1,0);
+                    mat.SetVector("_ForegroundInfo",new Vector4(1,0,0,1));LayeredArtMaterial.View(mat,Vector2.zero);
+                    Graphics.Blit(Texture2D.whiteTexture,rt,mat);RenderTexture.active=rt;
+                    readback.ReadPixels(new Rect(0,0,size,size),0,0);readback.Apply();
+                    float red=readback.GetPixel(size/2,size/2).r;
+                    if(Mathf.Abs(red-.5f)>.02f)throw new Exception("Single-source cutout opacity changed: "+red);
+                }
+                finally{Object.DestroyImmediate(half);}
                 Directory.CreateDirectory("../output/tests");File.WriteAllText("../output/tests/layered-motion.txt","PASS actual GPU shader readback: red/green source landmarks keep their relative position within 1px at multiple tilts; small-tilt subject shift <=1px at 512px; full-tilt subject shift <5px while background moves >35px.\n");
                 Debug.Log("LAYERED_MOTION_GPU_PASS");
             }

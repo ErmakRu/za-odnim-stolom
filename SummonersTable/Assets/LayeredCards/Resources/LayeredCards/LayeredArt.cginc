@@ -5,6 +5,7 @@ float4 _ViewOffset;
 float _WindowAspect;
 float4 _Subject;
 float _SubjectFoil,_ResponsePower;
+float _PreviewLayer;
 
 float4 ArtLayer(sampler2D tex,float2 uv,float2 look,float4 settings,float4 info)
 {
@@ -28,6 +29,8 @@ float4 LayeredArt(float2 uv,float2 look)
     float2 subjectUv=(uv-.5-_Subject.xy-look*_Subject.w)/_Subject.z+.5;
     float4 r=ArtLayer(_RearTex,subjectUv,0,_Rear,_RearInfo);
     float4 f=ArtLayer(_ForegroundTex,subjectUv,0,_Foreground,_ForegroundInfo);
+    // Extracted single PNGs must be composited once, especially translucent ghosts.
+    f.a*=1-_ForegroundInfo.w;
     // Composite both sources before applying one shared foil highlight.
     float alpha=f.a+r.a*(1-f.a);
     float3 premultiplied=f.rgb*f.a+r.rgb*r.a*(1-f.a);
@@ -35,6 +38,12 @@ float4 LayeredArt(float2 uv,float2 look)
     float3 foil=.5+.5*cos(float3(0,2.1,4.2)+uv.x*4+uv.y*2+look.x*3-look.y*2);
     premultiplied+=foil*_SubjectFoil*sweep*.5*alpha;
     float3 color=lerp(float3(.035,.045,.065),b.rgb,b.a);
+    if(_PreviewLayer>.5&&_PreviewLayer<1.5)return float4(color,1);
+    if(_PreviewLayer>1.5)
+    {
+        float checker=fmod(floor(uv.x*20)+floor(uv.y*20/_WindowAspect),2);
+        color=lerp(float3(.10,.13,.16),float3(.18,.22,.26),checker);
+    }
     color=premultiplied+color*(1-alpha);
     return float4(color,1);
 }

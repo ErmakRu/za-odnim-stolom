@@ -4,6 +4,18 @@ using UnityEngine;
 
 namespace SummonersTable
 {
+    [Serializable] public sealed class CardArtFraming
+    {
+        public string cardName="";
+        [Range(0,1)] public float focusX=.5f,focusY=.5f;
+        [Range(1,3)] public float zoom=1;
+        public Rect Crop(float windowAspect,float sourceAspect)
+        {
+            float width=Mathf.Min(1,windowAspect/sourceAspect)/zoom,height=Mathf.Min(1,sourceAspect/windowAspect)/zoom;
+            // Keep the chosen landmark in the centre whenever the image boundaries allow it.
+            return new Rect(Mathf.Clamp(focusX-width*.5f,0,1-width),Mathf.Clamp(focusY-height*.5f,0,1-height),width,height);
+        }
+    }
     [Serializable] public sealed class CardArtLayer
     {
         public string texture="";
@@ -15,6 +27,8 @@ namespace SummonersTable
     }
     [Serializable] public sealed class CardSubjectPlane
     {
+        [Tooltip("One extracted PNG already contains the character and its props/effects.")]
+        public bool singleSource;
         [Range(-1,1)] public float offsetX,offsetY;
         [Range(.25f,3)] public float zoom=1;
         [Range(0,.03f)] public float depth=.006f;
@@ -34,11 +48,19 @@ namespace SummonersTable
     {
         public int schemaVersion=2;
         public LayeredCardArt[] cards=Array.Empty<LayeredCardArt>();
+        public CardArtFraming[] framing=Array.Empty<CardArtFraming>();
         public LayeredCardArt Find(string name)=>cards.FirstOrDefault(c=>string.Equals(c.cardName,name,StringComparison.Ordinal));
+        public CardArtFraming Frame(string name)=>framing?.FirstOrDefault(c=>string.Equals(c.cardName,name,StringComparison.Ordinal))??new CardArtFraming{cardName=name};
         public void Validate(Catalog catalog)
         {
             if(schemaVersion!=2||cards==null)throw new FormatException("layered-cards: schemaVersion 2 required (background + combined subject)");
             if(cards.Select(c=>c.cardName).Distinct(StringComparer.Ordinal).Count()!=cards.Length)throw new FormatException("layered-cards: duplicate card name");
+            if(framing==null||framing.Any(f=>f==null)||framing.Select(f=>f.cardName).Distinct(StringComparer.Ordinal).Count()!=framing.Length)throw new FormatException("layered-cards: unique framing names required");
+            foreach(var f in framing)
+            {
+                if(catalog.cards.Count(c=>c.name==f.cardName)!=1)throw new FormatException("layered-cards: unknown framing card "+f.cardName);
+                Range(f.focusX,0,1);Range(f.focusY,0,1);Range(f.zoom,1,3);
+            }
             foreach(var card in cards)
             {
                 if(catalog.cards.Count(c=>c.name==card.cardName)!=1)throw new FormatException("layered-cards: expected one card named "+card.cardName);
@@ -71,6 +93,7 @@ namespace SummonersTable
         {
             material.SetFloat("_WindowAspect",Mathf.Max(.01f,aspect));
             Apply("Background",art.background);Apply("Rear",art.subject.rear);Apply("Foreground",art.subject.foreground);
+            var info=material.GetVector("_ForegroundInfo");info.w=art.subject.singleSource?1:0;material.SetVector("_ForegroundInfo",info);
             material.SetVector("_Subject",new Vector4(art.subject.offsetX,art.subject.offsetY,art.subject.zoom,art.subject.depth));
             material.SetFloat("_SubjectFoil",art.subject.foil);material.SetFloat("_ResponsePower",art.responsePower);
             void Apply(string key,CardArtLayer layer)

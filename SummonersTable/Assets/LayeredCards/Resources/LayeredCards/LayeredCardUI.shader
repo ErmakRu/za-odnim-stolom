@@ -7,6 +7,7 @@ Shader "SummonersTable/Layered Card UI"
         _RearTex("Rear",2D)="black" {}
         _ForegroundTex("Foreground",2D)="black" {}
         _WindowAspect("Window aspect",Float)=1
+        [HideInInspector] _PreviewLayer("Preview layer",Float)=0
         [HideInInspector] _Background("Background placement",Vector)=(0,0,1,0)
         [HideInInspector] _Rear("Rear placement",Vector)=(0,0,1,0)
         [HideInInspector] _Foreground("Foreground placement",Vector)=(0,0,1,0)

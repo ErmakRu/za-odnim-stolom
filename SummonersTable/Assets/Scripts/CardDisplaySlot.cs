@@ -6,8 +6,11 @@ namespace SummonersTable
     {
         public CardLibrary library;public string presentation="full";public CardView view;string current="";
         public string CardId=>current;public Text statsLabel=>view==null?null:view.fullStats;
+        void Awake(){HideBackdrop();}
+        void HideBackdrop(){foreach(var graphic in GetComponents<Graphic>())graphic.enabled=false;}
         public void Show(CardDef card,Catalog catalog,Font font)
         {
+            HideBackdrop();
             gameObject.SetActive(card!=null);if(card==null)return;
             if(library==null)library=Resources.Load<CardLibrary>("CardLibrary");
             if(view==null||current!=card.id){if(view!=null)Destroy(view.gameObject);var prefab=library.Find(card.id);if(prefab==null)throw new System.InvalidOperationException("Missing card variant: "+card.id);view=Instantiate(prefab,transform,false);current=card.id;}
