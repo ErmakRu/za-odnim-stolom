@@ -1,0 +1,10 @@
+SUCCEEDED
+Unity 6000.3.6f1
+Bytes 770471289
+Seconds 43,2051573
+Warnings 8
+Scenes
+Assets/Scenes/MainMenu.unity
+Assets/Scenes/Lobby.unity
+Assets/Scenes/Match.unity
+Assets/Scenes/PresentationLab.unity

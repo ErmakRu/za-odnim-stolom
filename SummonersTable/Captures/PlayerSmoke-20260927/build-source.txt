@@ -1,0 +1,3 @@
+Source commit: ba64f10b977634d63ee7a8aef99f5d11a9a07c12
+Assembly-CSharp.dll SHA256: bb658f049a8b764e008cf8b8e3a097ce448075dfd054f5d7850fb4c25add1657
+Player exit code: 0
