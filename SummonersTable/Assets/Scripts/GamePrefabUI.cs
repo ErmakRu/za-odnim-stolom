@@ -47,6 +47,7 @@ namespace SummonersTable
             if(ui==null)return;
             scale=Mathf.Min(Screen.width/W,Screen.height/H);offset=new Vector2((Screen.width-W*scale)/2,(Screen.height-H*scale)/2);
             bool game=page=="game"&&state!=null&&!handoff;bool ended=game&&state.phase=="matchEnd";
+            if(ui.battleVignette!=null)ui.battleVignette.transform.parent.gameObject.SetActive(game&&tutorialLesson==""&&!ended);
             if(interfaceMatch!=(state?.matchId??"")){interfaceMatch=state?.matchId??"";localVoter=0;postMatchLobby=false;settingsOpen=false;}
             ui.hud.Show(game&&!ended);ui.results.Show(ended);ui.handoff.Show(page=="game"&&handoff);
             ui.settings.Show(settingsOpen);ui.rules.Show(modal=="rules");ui.quit.Show(quitConfirm);

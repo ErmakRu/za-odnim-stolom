@@ -76,7 +76,7 @@ namespace SummonersTable.Editor
             registry.entries=entries.ToArray();EditorUtility.SetDirty(registry);
             foreach(string directory in new[]{"Assets/StreamingAssets/Config","Assets/Resources/ConfigDefaults"})
             {
-                var p=directory+"/interface.json";var config=JsonUtility.FromJson<InterfaceConfig>(File.ReadAllText(p));config.arrow.worldMaterial=trail;config.arrow.uiMaterial=AssetDatabase.LoadAssetAtPath<Material>("Assets/Resources/Styles/TargetTrailUI.mat")!=null?Register("Assets/Resources/Styles/TargetTrailUI.mat","material"):trail;config.arrow.width=7;File.WriteAllText(p,JsonUtility.ToJson(config,true));
+                var p=directory+"/interface.json";var config=JsonUtility.FromJson<InterfaceConfig>(File.ReadAllText(p));config.arrow.worldMaterial=trail;config.arrow.uiMaterial=AssetDatabase.LoadAssetAtPath<Material>("Assets/Resources/Styles/TargetTrailUI.mat")!=null?Register("Assets/Resources/Styles/TargetTrailUI.mat","material"):trail;config.arrow.width=16;File.WriteAllText(p,JsonUtility.ToJson(config,true));
                 p=directory+"/audio.json";var audio=JsonUtility.FromJson<AudioConfig>(File.ReadAllText(p));var cue=audio.cues.First(c=>c.action=="qte.correct");cue.sounds=new[]{new SoundVariant{clip=success,volume=.13f,pitch=1.1f}};File.WriteAllText(p,JsonUtility.ToJson(audio,true));
             }
             var scenes=new List<Scene>();var opened=new List<Scene>();

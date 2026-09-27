@@ -16,12 +16,12 @@
     }
   },
   "arrow": {
-    "width": 7,
-    "headLength": 22.0,
-    "headWidth": 12.0,
-    "worldWidth": 0.04500000178813934,
-    "worldHeadLength": 0.25999999046325684,
-    "worldHeadWidth": 0.14000000059604645,
+    "width": 16,
+    "headLength": 30,
+    "headWidth": 19,
+    "worldWidth": 0.105,
+    "worldHeadLength": 0.36,
+    "worldHeadWidth": 0.22,
     "uiMaterial": "asset:2a057b7cb909af8429c9a079e069d863",
     "worldMaterial": "asset:b42521ad476565341b37518621b62de4",
     "beginEffect": "",

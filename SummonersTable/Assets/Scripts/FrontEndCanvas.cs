@@ -11,7 +11,7 @@ namespace SummonersTable
         public GameObject homePage,playPage,campaignPage;
         public Button continueCampaign;
         public void MenuPage(string section,bool hasSave)
-        {if(homePage==null)return;homePage.SetActive(section=="home");playPage.SetActive(section=="play");campaignPage.SetActive(section=="campaign");continueCampaign.gameObject.SetActive(hasSave);}
+        {if(homePage==null)return;homePage.SetActive(section=="home");playPage.SetActive(section=="play");campaignPage.SetActive(section=="campaign");continueCampaign.gameObject.SetActive(true);continueCampaign.interactable=hasSave;}
         void Awake(){if(Application.isPlaying)gameObject.SetActive(false);}
         public Text title,subtitle,status;
         public Text[] members;

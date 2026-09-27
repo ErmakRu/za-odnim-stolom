@@ -45,22 +45,62 @@ namespace SummonersTable
         void UpdateTutorial()
         {
             if(tutorialLesson==""||tutorialPanel==null||page!="game")return;
+            tutorialPanel.gameObject.SetActive(!settingsOpen&&modal==""&&!quitConfirm);
             if(tutorialLesson=="STEP_BOARD_SLOTS"&&state.cast!=null)tutorialComplete=true;
             if(tutorialLesson=="STEP_QTE_RITUAL"&&state.players[0].units.Any())tutorialComplete=true;
             if(tutorialLesson=="STEP_SPELL_CAST"&&state.players[1].hp<30)tutorialComplete=true;
             if(tutorialLesson=="STEP_COMBAT_PHASE"&&state.players[1].hp<30)tutorialComplete=true;
             string text=tutorialLesson switch{
-                "STEP_HP_BARS"=>"У вас с Лоскутом по 30 жизней. Ваша плашка — внизу слева, жизни соперника — над ним. Найдите обе плашки.",
-                "STEP_DRAW_CARD"=>"В начале хода приходит одна карта. Нажмите «Взять карту» и посмотрите, как она появится в руке.",
-                "STEP_BOARD_SLOTS"=>"Выберите Медведя-обнимателя в руке. Стрелкой укажите один из пяти подсвеченных свободных пазов и нажмите на него.",
-                "STEP_QTE_RITUAL"=>"Повторите буквы ритуала клавишами или кнопками на экране. После третьей ошибки карта уйдёт Лоскуту. Не получилось — нажмите «Повторить».",
-                "STEP_SPELL_CAST"=>"Выберите «Огненный чих», наведите стрелку на Лоскута и подтвердите цель. Затем выполните ритуал: жизни соперника уменьшатся.",
-                "STEP_COMBAT_PHASE"=>"Медведь готов к бою. Нажмите «Завершить ход»: он сам атакует Лоскута. Существа атакуют по порядку слева направо.",
-                _=>"В руке уже 8 карт. Нажмите «Взять девятую»: новая карта сгорит, а восемь останутся. Событие появится в журнале."};
+                "STEP_HP_BARS"=>"Ваши жизни. В начале боя — 30. Если они закончатся, вы проиграете.",
+                "STEP_DRAW_CARD"=>"Каждый ход вы получаете одну карту. Нажмите «Взять карту» — она появится здесь, в руке.",
+                "STEP_BOARD_SLOTS"=>"Нажмите на Медведя-обнимателя. Затем стрелкой выберите свободное место на столе.",
+                "STEP_QTE_RITUAL"=>"Нажимайте подсвеченные буквы по порядку — на клавиатуре или здесь. Три ошибки передадут карту Лоскуту.",
+                "STEP_SPELL_CAST"=>"Нажмите «Огненный чих», затем выберите Лоскута целью. Успешный ритуал нанесёт ему урон.",
+                "STEP_COMBAT_PHASE"=>"Завершите ход этой кнопкой. Медведь атакует сам. Существа сражаются по порядку слева направо.",
+                _=>"Здесь восемь карт — это предел руки. Возьмите девятую: она сгорит, а остальные останутся."};
             tutorialPanel.instruction.text=tutorialComplete?(tutorialLesson=="STEP_HAND_LIMIT_8"?"Девятая карта сгорела. В руке осталось восемь. Продолжим сон.":"Получилось! Продолжим сон Шута."):text;
             tutorialPanel.proceed.interactable=tutorialComplete||tutorialLesson=="STEP_HP_BARS"||tutorialLesson=="STEP_DRAW_CARD"||tutorialLesson=="STEP_HAND_LIMIT_8";
-            tutorialPanel.proceed.GetComponentInChildren<Text>().text=tutorialComplete?"Продолжить":tutorialLesson=="STEP_HP_BARS"?"Нашёл":tutorialLesson=="STEP_HAND_LIMIT_8"?"Взять девятую":"Взять карту";
-            tutorialPanel.highlight.gameObject.SetActive(tutorialLesson=="STEP_HP_BARS"&&!tutorialComplete);
+            tutorialPanel.proceed.GetComponentInChildren<Text>().text=tutorialComplete?"Продолжить":tutorialLesson=="STEP_HP_BARS"?"Понятно":tutorialLesson=="STEP_HAND_LIMIT_8"?"Взять девятую":"Взять карту";
+            UpdateTutorialFocus();
+        }
+        static Rect ScreenArea(RectTransform rect,float padding=14)
+        {
+            var corners=new Vector3[4];rect.GetWorldCorners(corners);Vector2 min=corners[0],max=corners[0];
+            foreach(var corner in corners){min=Vector2.Min(min,corner);max=Vector2.Max(max,corner);}
+            return Rect.MinMaxRect(min.x-padding,min.y-padding,max.x+padding,max.y+padding);
+        }
+        Rect WorldArea(params Transform[] targets)
+        {
+            Vector2 min=new Vector2(float.MaxValue,float.MaxValue),max=new Vector2(float.MinValue,float.MinValue);
+            foreach(var target in targets)
+            {
+                var renderers=target.GetComponentsInChildren<Renderer>().Where(r=>r.enabled&&r.gameObject.activeInHierarchy).ToArray();
+                foreach(var renderer in renderers)
+                {var b=renderer.bounds;for(int i=0;i<8;i++){var point=b.center+Vector3.Scale(b.extents,new Vector3((i&1)==0?-1:1,(i&2)==0?-1:1,(i&4)==0?-1:1));var p=board.ViewCamera.WorldToScreenPoint(point);if(p.z>0){min=Vector2.Min(min,p);max=Vector2.Max(max,p);}}}
+            }
+            if(min.x==float.MaxValue)return new Rect(Screen.width*.4f,Screen.height*.4f,Screen.width*.2f,Screen.height*.2f);
+            return Rect.MinMaxRect(Mathf.Max(0,min.x-16),Mathf.Max(0,min.y-16),Mathf.Min(Screen.width,max.x+16),Mathf.Min(Screen.height,max.y+16));
+        }
+        void UpdateTutorialFocus()
+        {
+            Rect hand=new Rect(Screen.width*.26f,0,Screen.width*.48f,Screen.height*.28f);
+            var cards=ui.hand.Slots.Where(x=>x.gameObject.activeInHierarchy).ToArray();
+            if(cards.Length>0){hand=ScreenArea((RectTransform)cards[0].transform);foreach(var card in cards.Skip(1)){var r=ScreenArea((RectTransform)card.transform);hand=Rect.MinMaxRect(Mathf.Min(hand.xMin,r.xMin),Mathf.Min(hand.yMin,r.yMin),Mathf.Max(hand.xMax,r.xMax),Mathf.Max(hand.yMax,r.yMax));}}
+            if(tutorialLesson=="STEP_HP_BARS")
+            {
+                var own=ui.hud.GetComponent<LocalHeroHud>();var enemy=board.Seat(1).status;
+                tutorialPanel.PointAt(ScreenArea(own.healthFill.rectTransform,18),ScreenArea(enemy.healthNumber.rectTransform,18),"Жизни Лоскута. Урон уменьшает их до нуля.");return;
+            }
+            if(state.qte!=null&&cardCanvas.qtePanel.gameObject.activeInHierarchy){tutorialPanel.PointAt(ScreenArea(cardCanvas.qtePanel));return;}
+            if(state.phase=="reveal"&&cardCanvas.centerSlot.gameObject.activeInHierarchy){tutorialPanel.PointAt(ScreenArea((RectTransform)cardCanvas.centerSlot.transform));return;}
+            if(tutorialLesson=="STEP_BOARD_SLOTS"&&(selectedCard!=""||tutorialComplete))
+            {tutorialPanel.PointAt(WorldArea(board.Seat(0).slots));if(!tutorialComplete)tutorialPanel.instruction.text="Пять мест для существ. Нажмите на свободный паз, куда хотите поставить Медведя.";return;}
+            if(tutorialLesson=="STEP_QTE_RITUAL"&&tutorialComplete){tutorialPanel.PointAt(WorldArea(board.Seat(0).slots[2]));return;}
+            if(tutorialLesson=="STEP_SPELL_CAST"&&selectedCard!="")
+            {tutorialPanel.PointAt(WorldArea(board.Actor(1).transform));tutorialPanel.instruction.text="Лоскут — цель заклинания. Нажмите на него, затем повторите знаки ритуала.";return;}
+            if(tutorialLesson=="STEP_COMBAT_PHASE")
+            {tutorialPanel.PointAt(ScreenArea((RectTransform)ui.hud.Item("end").transform),WorldArea(board.Seat(0).slots[2]),"Медведь готов атаковать.");return;}
+            tutorialPanel.PointAt(hand);
         }
     }
 }
