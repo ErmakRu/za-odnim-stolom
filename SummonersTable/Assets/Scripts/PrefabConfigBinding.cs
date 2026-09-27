@@ -9,10 +9,12 @@ namespace SummonersTable
     public sealed class PrefabConfigBinding:MonoBehaviour
     {
         public string configId;
+        [Tooltip("Opt in only for legacy JSON-driven previews. Scene/prefab values are the default source of truth.")]
+        public bool applyJsonOverrides;
         void Start(){Apply();}
         public void Apply()
         {
-            if(ConfigRuntime.Current==null)return;
+            if(!applyJsonOverrides||ConfigRuntime.Current==null)return;
             var entry=ConfigRuntime.Current.prefabs.FirstOrDefault(p=>(string)p["id"]==configId);if(entry==null)return;
             foreach(var node in (List<object>)entry["components"])
             {

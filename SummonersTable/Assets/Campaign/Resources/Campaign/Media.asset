@@ -1019,3 +1019,17 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: dd11be5f1a4084b4e8deadf0e148b58f, type: 3}
   - id: Card_Game_UI_Notification_Splash_02.wav
     clip: {fileID: 8300000, guid: 726a5f4da9291442d8d1e7a948d6ed69, type: 3}
+  - id: UI_General_Deep_01.wav
+    clip: {fileID: 8300000, guid: 9a7fbf8942e3d407c98f69e8096dd8f5, type: 3}
+  - id: Effect_Wet_Silly_01.wav
+    clip: {fileID: 8300000, guid: 13a622d470b694ce79c011f6ce5eb379, type: 3}
+  - id: Effect_Bubble_01.wav
+    clip: {fileID: 8300000, guid: 5bcf74f6f08264bbfa2012a8213e1566, type: 3}
+  - id: UI_General_Crack_01.wav
+    clip: {fileID: 8300000, guid: 8ef9516779842487e80f0abea4a27d89, type: 3}
+  - id: UI_General_Air_Rise_01.wav
+    clip: {fileID: 8300000, guid: b5a3d40df334a427c8231e588020e6ea, type: 3}
+  - id: UI_General_Click_Metal.wav
+    clip: {fileID: 8300000, guid: 1d70e108dd717408196d3d5970b0832a, type: 3}
+  - id: UI_General_Magic_01.wav
+    clip: {fileID: 8300000, guid: 67ea4f5ca691348469ad3f69e5ee39a0, type: 3}

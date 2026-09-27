@@ -1,0 +1,1435 @@
+{
+  "schemaVersion": 1,
+  "title": "За одним столом: Пир Хохота",
+  "scenes": [
+    {
+      "sceneId": "scene_00_prologue",
+      "title": "Сцена 0. Пролог: Церемония",
+      "defaultBackground": "bg_throne_hall",
+      "steps": [
+        {
+          "id": "0.1",
+          "background": "bg_throne_hall",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Раз в сто лет короли демонов и магических существ съезжаются на Пир Хохота - схватку за трон. Семнадцать поединков. На жизнь и на смех.",
+          "sprites": [],
+          "audio": {
+            "bgm": "Card_Game_Ambience_Dungeon.wav",
+            "sfx": "Card_Game_Achievement_Grand_01.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "0.2",
+          "background": "bg_throne_hall",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Схватка ещё не началась. Верховный Демон вышел зачитать правила схватки столетия.",
+          "sprites": [
+            {
+              "position": "C",
+              "character": "Владыка",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "Card_Game_Movement_Shuffle_01.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "0.3",
+          "background": "bg_throne_hall",
+          "speaker": "ВЛАДЫКА",
+          "text": "Правило первое! Участник Пира должен... должен... ха... ХА-ХА...",
+          "sprites": [
+            {
+              "position": "C",
+              "character": "Владыка",
+              "emotion": ""
+            },
+            {
+              "position": "L",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "Effect_Bubble_01.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "0.4",
+          "background": "bg_throne_hall",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Владыка лопнул от смеха. Прямо на церемонии. Прямо на первом правиле.",
+          "sprites": [],
+          "audio": {
+            "bgm": "Mute",
+            "sfx": "Card_Game_Abilities_Pop_Big_01.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "0.5",
+          "background": "bg_throne_hall",
+          "speaker": "ТОЛПА",
+          "text": "Лопнул... Сам Владыка... На собственном правиле...",
+          "sprites": [],
+          "audio": {
+            "bgm": "",
+            "sfx": "UI_General_Crack_01.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "0.6",
+          "background": "bg_throne_hall",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Взрывной волной колоду Владыки разметало по залу. Тридцать карт. И все тридцать - прямо в руки шуту, который стоял ближе всех. Потому что шут всегда стоит ближе всех. Такова работа.",
+          "sprites": [
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "Card_Game_Movement_Deal_Multiple.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "0.7",
+          "background": "bg_throne_hall",
+          "speaker": "ШУТ",
+          "text": "Это... не моё. Я просто подержать. Я вообще мим... то есть шут... то есть...",
+          "sprites": [
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "Card_Game_Achievement_Chime_Light_01.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "0.8",
+          "background": "bg_throne_hall",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Но закон мира прост: кто стал обладателем колоды демонических карт - тот становится участником Пира Хохота. Карты выбрали. Толпа замолчала. Шут побледнел.",
+          "sprites": [
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "Card_Game_Action_Wind_Blast_01.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "0.9",
+          "background": "bg_throne_hall",
+          "speaker": "ШУТ",
+          "text": "Мне... что-то нехорошо...",
+          "sprites": [
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "UI_General_Air_Rise_01.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        }
+      ]
+    },
+    {
+      "sceneId": "scene_01_tutorial",
+      "title": "Сцена 1. Сон: детство (обучение)",
+      "defaultBackground": "bg_barn_sepia",
+      "steps": [
+        {
+          "id": "1.1",
+          "background": "bg_barn_sepia",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Темнота пахнет пылью и старыми картами. Ему семь лет. За сараем. Лучшее место в мире.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Фантик",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "Card_Game_Ambience_Pasture.wav",
+            "sfx": "Card_Game_Achievement_Chime_Light_01.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "1.2",
+          "background": "bg_barn_sepia",
+          "speaker": "ШУТ-МАЛЫШ",
+          "text": "Смотри, Фантик! У каждого по тридцать жизней! Кто первый уронит другого до нуля - тот король сарая!",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Фантик",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "UI_TUTORIAL_TRIGGER",
+            "target": "STEP_HP_BARS",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "1.3",
+          "background": "bg_barn_sepia",
+          "speaker": "ФАНТИК",
+          "text": "А почему у тебя карты красивее?",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Фантик",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "1.4",
+          "background": "bg_barn_sepia",
+          "speaker": "ШУТ-МАЛЫШ",
+          "text": "Потому что я их сам разрисовал! Так. Слушай правила, они важные. Каждый ход тянешь карту. Вот так.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Фантик",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "Card_Game_Movement_Deal_Single_01.wav"
+          },
+          "action": {
+            "actionType": "UI_TUTORIAL_TRIGGER",
+            "target": "STEP_DRAW_CARD",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "1.5",
+          "background": "bg_barn_sepia",
+          "speaker": "ШУТ-МАЛЫШ",
+          "text": "Зверей - на стол, в свободные домики. Но зверь слушается, только если споёшь ритуал!",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Фантик",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "UI_TUTORIAL_TRIGGER",
+            "target": "STEP_BOARD_SLOTS",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "1.6",
+          "background": "bg_barn_sepia",
+          "speaker": "ФАНТИК",
+          "text": "Споёшь?",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Фантик",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "1.7",
+          "background": "bg_barn_sepia",
+          "speaker": "ШУТ-МАЛЫШ",
+          "text": "Повторишь знаки! Быстро и без ошибок! Три раза ошибся - зверь уходит к сопернику. Вместе с картой. Так честно.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Фантик",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "action: qte.correct"
+          },
+          "action": {
+            "actionType": "UI_TUTORIAL_TRIGGER",
+            "target": "STEP_QTE_RITUAL",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "1.8",
+          "background": "bg_barn_sepia",
+          "speaker": "ФАНТИК",
+          "text": "А если я специально ошибусь три раза и отдам тебе слабое?",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Фантик",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "1.9",
+          "background": "bg_barn_sepia",
+          "speaker": "ШУТ-МАЛЫШ",
+          "text": "Тогда ты проиграешь красиво. Магия тоже через ритуал, понял? Огнём чихать - это ответственно.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Фантик",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "action: S01.launch"
+          },
+          "action": {
+            "actionType": "UI_TUTORIAL_TRIGGER",
+            "target": "STEP_SPELL_CAST",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "1.10",
+          "background": "bg_barn_sepia",
+          "speaker": "ШУТ-МАЛЫШ",
+          "text": "В конце хода все звери дерутся сами, слева направо. Если зверь бьёт зверя - тот кусается в ответ. Учти.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Фантик",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "action: creature.attack"
+          },
+          "action": {
+            "actionType": "UI_TUTORIAL_TRIGGER",
+            "target": "STEP_COMBAT_PHASE",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "1.11",
+          "background": "bg_barn_sepia",
+          "speaker": "ФАНТИК",
+          "text": "А в руках сколько можно держать? У меня лапы маленькие.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Фантик",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "1.12",
+          "background": "bg_barn_sepia",
+          "speaker": "ШУТ-МАЛЫШ",
+          "text": "Восемь! Лишнее сгорает. Бумага горит быстро, проверено. Дедушкиной колодой. Ему не рассказывай.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Фантик",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "Card_Game_Abilities_Tear_Fire_01.wav"
+          },
+          "action": {
+            "actionType": "UI_TUTORIAL_TRIGGER",
+            "target": "STEP_HAND_LIMIT_8",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "1.13",
+          "background": "bg_barn_sepia",
+          "speaker": "ШУТ-МАЛЫШ",
+          "text": "Вот когда я стану большим - у меня будет настоящая колода. И я всех сражу. Всех!",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Фантик",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "1.14",
+          "background": "bg_barn_sepia",
+          "speaker": "ФАНТИК",
+          "text": "Ты и сейчас всех смешишь. Это считается?",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Фантик",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "1.15",
+          "background": "bg_barn_sepia",
+          "speaker": "ШУТ-МАЛЫШ",
+          "text": "Смех - это разминка. Погоди, вырасту - увидишь...",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Фантик",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "1.16",
+          "background": "bg_barn_sepia",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Он вырос. Колода - настоящая. Противники - тоже. Пора просыпаться.",
+          "sprites": [],
+          "audio": {
+            "bgm": "Mute",
+            "sfx": "Card_Game_Action_Bash_Metal_01.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        }
+      ]
+    },
+    {
+      "sceneId": "scene_02_tavern",
+      "title": "Сцена 2. Таверна «У лопнувшего» (пробуждение)",
+      "defaultBackground": "bg_tavern_day",
+      "steps": [
+        {
+          "id": "2.1",
+          "background": "bg_tavern_day",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Шут просыпается в таверне. На столе. Под головой вместо подушки - колода. Настоящая. Демоническая. Его.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Пробка",
+              "emotion": ""
+            },
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "Card_Game_Ambience_Pasture.wav",
+            "sfx": "Card_Game_Action_Bash_Metal_01.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "2.2",
+          "background": "bg_tavern_day",
+          "speaker": "ПРОБКА",
+          "text": "Проснулся! Лежи, лежи. Сейчас табличку доколочу - и налью. За счёт заведения. Первый и последний раз.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Пробка",
+              "emotion": ""
+            },
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "Card_Game_Action_Bash_Metal_02.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "2.3",
+          "background": "bg_tavern_day",
+          "speaker": "ШУТ",
+          "text": "Что за табличка?",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Пробка",
+              "emotion": ""
+            },
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "2.4",
+          "background": "bg_tavern_day",
+          "speaker": "ПРОБКА",
+          "text": "«Таверна у Лопнувшего»! Такой повод, ты представь! Никто же не знает, где именно лопнул Верховный Демон. А у меня будет табличка. Сколько посетителей соберётся в легендарном месте!",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Пробка",
+              "emotion": ""
+            },
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "UI_General_Click_Metal.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "2.5",
+          "background": "bg_tavern_day",
+          "speaker": "ШУТ",
+          "text": "Пробка. Меня выбрали карты. Я теперь участник Пира.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Пробка",
+              "emotion": ""
+            },
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "2.6",
+          "background": "bg_tavern_day",
+          "speaker": "ПРОБКА",
+          "text": "Налью двойную. За счёт заведения. Ладно, за твой счёт, ты теперь важная шишка.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Пробка",
+              "emotion": ""
+            },
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "Card_Game_Movement_Deal_Multiple.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "2.7",
+          "background": "bg_tavern_day",
+          "speaker": "ШУТ",
+          "text": "Какая из меня шишка. Я шут, Пробка. Я не король. Я даже в карты в последний раз играл в детстве. За сараем.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Пробка",
+              "emotion": ""
+            },
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "2.8",
+          "background": "bg_tavern_day",
+          "speaker": "ПРОБКА",
+          "text": "Слушай сюда, мебель придворная. Ты триста лет смешил того, кто правил миром. Если это не политика - то я трезвенник. Карты не ошибаются. Они упали тебе в руки, а не кому-то.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Пробка",
+              "emotion": ""
+            },
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "2.9",
+          "background": "bg_tavern_day",
+          "speaker": "ШУТ",
+          "text": "Они упали, потому что я стоял ближе всех.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Пробка",
+              "emotion": ""
+            },
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "2.10",
+          "background": "bg_tavern_day",
+          "speaker": "ПРОБКА",
+          "text": "Вот именно. Ты всегда стоишь ближе всех. Такова работа. А теперь выбирай, какими биться будешь, - колоду я тебе разложил по кучкам, как ты любишь.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Пробка",
+              "emotion": ""
+            },
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "Card_Game_Movement_Deal_Multiple.wav"
+          },
+          "action": {
+            "actionType": "UI_SHOW_DECK_SELECT",
+            "target": "deck_select",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "2.11",
+          "background": "bg_tavern_day",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Шут смотрит на три кучки. Первая орёт и давит. Вторая лечит и терпит. Третья хитрит и ворует. Как в жизни.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Пробка",
+              "emotion": ""
+            },
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "2.12",
+          "background": "bg_tavern_day",
+          "speaker": "ПРОБКА",
+          "text": "Хороший выбор. Жить будешь здесь, в кладовке. С противниками разберёмся: они сами к тебе придут. Ты теперь знаменитость. Знаменитостей всегда бьют первыми.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Пробка",
+              "emotion": ""
+            },
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        }
+      ]
+    },
+    {
+      "sceneId": "scene_03_battle_01",
+      "title": "Сцена 3. ЖабаДушэс (бой 1)",
+      "defaultBackground": "bg_tavern_day",
+      "steps": [
+        {
+          "id": "3.1",
+          "background": "bg_tavern_day",
+          "speaker": "ЖАБАДУШЭС",
+          "text": "Ква-а-акие люди! То есть... шут! Ква! Я - ЖабаДушэс! Сборщик этих земель! Ква!",
+          "sprites": [
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "ЖабаДушэс",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "Card_Game_Ambience_Swamp.wav",
+            "sfx": "Card_Game_Action_Bash_Metal_01.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "3.2",
+          "background": "bg_tavern_day",
+          "speaker": "ШУТ",
+          "text": "Звучит как диагноз.",
+          "sprites": [
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "ЖабаДушэс",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "3.3",
+          "background": "bg_tavern_day",
+          "speaker": "ЖАБАДУШЭС",
+          "text": "Это титул, ква! По праву земель требую: сразись со мной! Победишь - живи в таверне, так и быть! Проиграешь - колоду сюда, ква! Мне как раз не хватает! Меня душит... то есть...",
+          "sprites": [
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "ЖабаДушэс",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "Effect_Wet_Silly_01.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "3.4",
+          "background": "bg_tavern_day",
+          "speaker": "ПРОБКА",
+          "text": "Бей его, не стесняйся. Он мне за аренду трактира триста лет должен. Тоже квакает.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Пробка",
+              "emotion": ""
+            },
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "ЖабаДушэс",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "3.5",
+          "background": "bg_tavern_day",
+          "speaker": "ШУТ",
+          "text": "Ладно... За сараем я был королём. Посмотрим, что изменилось.",
+          "sprites": [
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "ЖабаДушэс",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "Card_Game_Action_Magic_Sword_01.wav"
+          },
+          "action": {
+            "actionType": "START_BATTLE",
+            "target": "b01_lizard",
+            "parameter": "0-3"
+          }
+        },
+        {
+          "id": "3.6",
+          "background": "bg_tavern_day",
+          "speaker": "ЖАБАДУШЭС",
+          "text": "Меня... душит... жаба... Ква... Какая ирония... ква...",
+          "sprites": [
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "ЖабаДушэс",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "UI_General_Crack_01.wav"
+          },
+          "action": {
+            "actionType": "WALL_OF_SHAME_WRITE",
+            "target": "1",
+            "parameter": "Барон ЖабаДушэс|Жаба Задушенная"
+          }
+        },
+        {
+          "id": "3.7",
+          "background": "bg_tavern_day",
+          "speaker": "ПРОБКА",
+          "text": "А ты говорил - «шут, а не король»! Видал, как он квакал? Так держать. А теперь спать. В кладовку. Завтра придут следующие - слава, она такая.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Пробка",
+              "emotion": ""
+            },
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "UI_General_Click_Metal.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        }
+      ]
+    },
+    {
+      "sceneId": "scene_04_battle_02",
+      "title": "Сцена 4. Послушник Малфас (бой 2)",
+      "defaultBackground": "bg_tavern_day",
+      "steps": [
+        {
+          "id": "4.1",
+          "background": "bg_tavern_day",
+          "speaker": "РАССКАЗЧИК",
+          "text": "Утро в таверне началось не с запаха свежего хлеба, а с едкого дыма серного кадила и безумного стука в дверь кладовки.",
+          "sprites": [
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "Card_Game_Ambience_Pasture.wav",
+            "sfx": "Card_Game_Action_Bash_Metal_01.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "4.2",
+          "background": "bg_tavern_day",
+          "speaker": "ПРОБКА",
+          "text": "Подъём, Ваше Шутейшество! У нас тут фанатский сектор ломится. Говорит, пришёл за трофеем во славу тьмы.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Пробка",
+              "emotion": ""
+            },
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "4.3",
+          "background": "bg_tavern_day",
+          "speaker": "ШУТ",
+          "text": "Скажи ему, что меня съела моль. Или что я ушёл в монастырь. Бессрочно.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Пробка",
+              "emotion": ""
+            },
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "4.4",
+          "background": "bg_tavern_day",
+          "speaker": "МАЛФАС",
+          "text": "Я чую трепет недостойного! Я - Послушник Малфас! Клинок Ордена Пепла! Отдай колоду законным жрецам, и великий Господин похвалит меня в титрах!",
+          "sprites": [
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Малфас",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "Card_Game_Action_Wind_Blast_01.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "4.5",
+          "background": "bg_tavern_day",
+          "speaker": "ШУТ",
+          "text": "В каких ещё титрах?! Ты бредишь, серый. Кадилом своим передышал?",
+          "sprites": [
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Малфас",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "4.6",
+          "background": "bg_tavern_day",
+          "speaker": "МАЛФАС",
+          "text": "Моя вера непоколебима! Карты на стол, фигляр! За честь и экранное время моего Владыки!",
+          "sprites": [
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Малфас",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "Card_Game_Movement_Deal_Single_01.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "4.7",
+          "background": "bg_tavern_day",
+          "speaker": "ПРОБКА",
+          "text": "У него колода 0-1, напирает числом. Не зевай на ритуалах, держи оборону!",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Пробка",
+              "emotion": ""
+            },
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Малфас",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": ""
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        },
+        {
+          "id": "4.8",
+          "background": "bg_tavern_day",
+          "speaker": "ШУТ",
+          "text": "Ладно, фанатик. Посмотрим, чему тебя учили в твоём Ордене!",
+          "sprites": [
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Малфас",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "Card_Game_Action_Magic_Sword_01.wav"
+          },
+          "action": {
+            "actionType": "START_BATTLE",
+            "target": "b02_rat",
+            "parameter": "0-1"
+          }
+        },
+        {
+          "id": "4.9",
+          "background": "bg_tavern_day",
+          "speaker": "МАЛФАС",
+          "text": "Невозможно... Моё превозмогание... Господин... вырежет меня из финального монтажа...",
+          "sprites": [
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            },
+            {
+              "position": "R",
+              "character": "Малфас",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "UI_General_Crack_01.wav"
+          },
+          "action": {
+            "actionType": "WALL_OF_SHAME_WRITE",
+            "target": "2",
+            "parameter": "Послушник Малфас|Мамин Воин"
+          }
+        },
+        {
+          "id": "4.10",
+          "background": "bg_tavern_day",
+          "speaker": "ПРОБКА",
+          "text": "Два из семнадцати. А ты трясся. Быстро смывай с него копоть - я слышу, по мостовой цокают чьи-то благородные копыта.",
+          "sprites": [
+            {
+              "position": "L",
+              "character": "Пробка",
+              "emotion": ""
+            },
+            {
+              "position": "C",
+              "character": "Шут",
+              "emotion": ""
+            }
+          ],
+          "audio": {
+            "bgm": "",
+            "sfx": "UI_General_Click_Metal.wav"
+          },
+          "action": {
+            "actionType": "",
+            "target": "",
+            "parameter": ""
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -9,6 +9,7 @@ namespace SummonersTable
     public sealed partial class TableBoard : MonoBehaviour
     {
         public GameObject tablePrefab,chairPrefab,avatarPrefab;
+        void Awake(){if(Application.isPlaying)gameObject.SetActive(false);}
         public Transform authoredEnvironment;
         public TableLayout[] layouts;
         public SeatingLayout seating;
@@ -29,6 +30,8 @@ namespace SummonersTable
         public TextMesh numberPrefab;
         public ManualTableCamera CameraRig {get;private set;}
         public bool inputEnabled=true;
+        [Header("Saved board zone colours")]
+        public Color zoneColor=new Color(.10f,.15f,.17f),zoneHoverColor=new Color(.38f,.64f,.57f),zoneSelectedColor=new Color(.87f,.68f,.30f);
         public string selectedUnit="";
         public string targetMode="enemy";
         public bool choosingTarget,placingCreature;
@@ -59,7 +62,7 @@ namespace SummonersTable
             ViewCamera.name="Table camera";ViewCamera.tag="MainCamera";ViewCamera.orthographic=false;
             ViewCamera.fieldOfView=48;ViewCamera.nearClipPlane=.1f;ViewCamera.farClipPlane=80;
             ViewCamera.clearFlags=CameraClearFlags.SolidColor;ViewCamera.backgroundColor=new Color(.085f,.10f,.12f);
-            var camData=ViewCamera.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>()??ViewCamera.gameObject.AddComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>();camData.renderPostProcessing=true;
+            var camData=ViewCamera.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>()??ViewCamera.gameObject.AddComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>();camData.renderPostProcessing=true;camData.requiresColorTexture=true;camData.requiresDepthTexture=true;
             CameraRig=ViewCamera.GetComponent<ManualTableCamera>()??ViewCamera.gameObject.AddComponent<ManualTableCamera>();CameraRig.Initialize(ViewCamera);
             gray=Solid(new Color(.40f,.42f,.44f));seatGray=Solid(new Color(.49f,.51f,.53f));darkGray=Solid(new Color(.19f,.21f,.24f));
             if(authoredEnvironment!=null)
@@ -80,7 +83,7 @@ namespace SummonersTable
                 keyLight.shadows=LightShadows.Soft;lightObject.transform.rotation=Quaternion.Euler(48,-32,0);
             }
             RenderSettings.ambientLight=new Color(.50f,.53f,.59f);RenderSettings.ambientMode=UnityEngine.Rendering.AmbientMode.Flat;
-            playersRoot=new GameObject("Seats and creature slot anchors");playersRoot.transform.SetParent(transform);
+            if(seating==null){playersRoot=new GameObject("Seats and creature slot anchors");playersRoot.transform.SetParent(transform);}
             gameObject.SetActive(false);
         }
         Material Solid(Color color)
@@ -215,9 +218,9 @@ namespace SummonersTable
             {
                 var marker=slot.GetComponent<BoardTarget>();
                 var renderer=slot.GetComponent<Renderer>();var props=new MaterialPropertyBlock();
-                Color color=marker.seat==viewer&&marker.slot==selectedSlot?new Color(.87f,.68f,.30f):new Color(.16f,.18f,.21f);
-                if(placingCreature&&marker.seat==viewer&&!state.players[viewer].units.Any(u=>u.slot==marker.slot))color=new Color(.7f,.88f,.8f);
-                props.SetColor("_Color",color);renderer.SetPropertyBlock(props);
+                Color color=marker.seat==viewer&&marker.slot==selectedSlot?zoneSelectedColor:zoneColor;
+                if(placingCreature&&marker.seat==viewer&&!state.players[viewer].units.Any(u=>u.slot==marker.slot)){var hovered=Pick(Input.mousePosition);color=hovered!=null&&hovered.kind=="slot"&&hovered.seat==viewer&&hovered.slot==marker.slot?zoneSelectedColor:zoneHoverColor;}
+                props.SetColor("_Color",color);props.SetColor("_BaseColor",color);renderer.SetPropertyBlock(props);
             }
             if(state.cast!=null)
             {
@@ -232,7 +235,7 @@ namespace SummonersTable
             CameraRig.Sync(viewer,count,inputEnabled,cameraSeat!=viewer);cameraSeat=viewer;
             SyncHeroes(state,viewer);
             SyncHandBacks(state,viewer);
-            if(activeLayout!=null)for(int i=0;i<activeLayout.avatars.Length;i++)Actor(i)?.SetVisible(!(i==viewer&&CameraRig.Mode==0));
+            if(activeLayout!=null)for(int i=0;i<activeLayout.avatars.Length;i++)Actor(i)?.SetVisible(!(i==viewer&&CameraRig.Mode<=1));
             SyncEffects(state,viewer,clock);
         }
         public void MoveCamera(int viewer,bool ownTurn,bool snap=false)

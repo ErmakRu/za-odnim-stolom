@@ -48,7 +48,7 @@ namespace SummonersTable
                         if(Time.realtimeSinceStartupAsDouble-localReactionStarted>=8)
                             Send(new GameCommand{kind="pass",phaseId=s.cast.id});
                     }
-                    else{localTime+=Time.unscaledDeltaTime;localReactionStarted=0;}
+                    else{if(tutorialLesson==""||!tutorialComplete&&(s.phase=="reveal"||s.phase=="qte"||s.phase=="combat"))localTime+=Time.unscaledDeltaTime;localReactionStarted=0;}
                 }
                 local.Tick(localTime);
                 if(!handoff&&modal==""&&!quitConfirm&&!settingsOpen)localBotDirector?.Tick(local,localTime);
@@ -65,7 +65,7 @@ namespace SummonersTable
             var q=state.qte;
             if(q==null){lastQte="";return;}
             if(lastQte!=q.id){lastQte=q.id;lastProgress=q.index;lastMistakes=q.mistakes;}
-            if(q.index>lastProgress)ConfigAudio.Play("qte.correct");
+
             if(q.mistakes>lastMistakes)ConfigAudio.Play("qte.error");
             lastProgress=q.index;lastMistakes=q.mistakes;
             if(q.owner!=seat||modal!=""||quitConfirm)return;
@@ -182,7 +182,7 @@ namespace SummonersTable
             yield return new WaitForSeconds(.4f);
             if(FindObjectsByType<TableBoard>(FindObjectsInactive.Include,FindObjectsSortMode.None).Length!=1||FindObjectsByType<CardTableCanvas>(FindObjectsInactive.Include,FindObjectsSortMode.None).Length!=1)throw new Exception("Duplicate match presentation objects after scene load");
             yield return Shot(directory,"01-menu");
-            menuCanvas.buttons[1].onClick.Invoke();if(page!="local")throw new Exception("Main menu local button is not connected");
+            menuCanvas.buttons[Array.IndexOf(menuCanvas.actions,"local")].onClick.Invoke();if(page!="local")throw new Exception("Main menu local button is not connected");
             previewLobby=true;page="local";localCount=4;menuCanvas.Visible(false);lobbyCanvas.Visible(true);
             lobbyCanvas.PresentLobby(LocalLobbyMembers(),"local-0",false,true,true,catalog,"ТЕСТОВЫЙ СТОЛ · 4 ИГРОКА","Предпросмотр без подключения к Steam");
             yield return Shot(directory,"01a-lobby-layout");

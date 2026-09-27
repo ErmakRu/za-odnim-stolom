@@ -9,6 +9,8 @@ namespace SummonersTable
     {
         IEnumerator CaptureEditableFeatures(string directory)
         {
+            // This fixture votes through four human seats; capture mode does not tick bots.
+            Array.Clear(localBots,0,localBots.Length);
             StartLocal(4);handoff=false;seat=0;state=local.View(seat,localTime);board.Sync(state,seat,Clock);board.SnapCamera(0,false);
             local.State.players[1].hp=16;state=local.View(seat,localTime);
             yield return Shot(directory,"16-persistent-names-and-health");

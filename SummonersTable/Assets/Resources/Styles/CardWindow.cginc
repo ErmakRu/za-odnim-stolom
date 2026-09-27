@@ -23,7 +23,7 @@ float4 CardWindow(float2 uv,float2 look)
     float rim=1-smoothstep(.035,.075,edge);
     float3 rainbow=.5+.5*cos(6.28318*(uv.x*.72+uv.y*.31+look.x*.55-look.y*.4+float3(0,.333,.667)));
     float etched=.5+.5*sin((uv.x+uv.y)*280+look.x*8);
-    float sheen=pow(saturate(1-abs((uv.x+uv.y-1)*.7+look.x*.55+look.y*.4)),12);
+    float sheen=pow(saturate(1-abs(uv.x+uv.y*.28-(frac(_Time.y/2.5)*2.5-.6+look.x*.12+look.y*.06))*4),4);
     art.rgb*=1-.28*rim;
     art.rgb+=rainbow*_Foil*(.12+.45*sheen+.18*etched*rim);
     float bevel=saturate(.6+dot(normalize(float2(uv.x-.5,uv.y-.5)+.0001),look)*.3);

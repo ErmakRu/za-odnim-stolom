@@ -16,13 +16,14 @@ namespace SummonersTable.Editor
             var target=new RenderTexture(width,height,24,RenderTextureFormat.ARGB32);target.Create();
             var overlays=Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None).Where(c=>c.isRootCanvas&&c.isActiveAndEnabled&&c.renderMode==RenderMode.ScreenSpaceOverlay).ToArray();
             var layers=new Dictionary<GameObject,int>();var cameraObject=new GameObject("Editor capture UI");var ui=cameraObject.AddComponent<Camera>();
-            ui.enabled=false;ui.clearFlags=CameraClearFlags.Depth;ui.cullingMask=1<<31;ui.nearClipPlane=.01f;ui.farClipPlane=50;ui.targetTexture=target;
+            ui.enabled=false;ui.clearFlags=CameraClearFlags.SolidColor;ui.backgroundColor=Color.clear;ui.cullingMask=1<<31;ui.nearClipPlane=.01f;ui.farClipPlane=50;ui.targetTexture=target;
             ui.transform.position=new Vector3(0,0,-10);var active=RenderTexture.active;
             try
             {
                 RenderTexture.active=target;GL.Clear(true,true,new Color(.06f,.09f,.12f));
                 foreach(var camera in Object.FindObjectsByType<Camera>(FindObjectsSortMode.None).Where(c=>c!=ui&&c.isActiveAndEnabled&&c.targetTexture==null).OrderBy(c=>c.depth))
                 {camera.targetTexture=target;try{camera.Render();}finally{camera.targetTexture=null;}}
+                var world=new Texture2D(width,height,TextureFormat.RGBA32,false);RenderTexture.active=target;world.ReadPixels(new Rect(0,0,width,height),0,0);world.Apply();var worldPixels=world.GetPixels32();Object.DestroyImmediate(world);
                 foreach(var canvas in overlays)
                 {
                     var objects=canvas.GetComponentsInChildren<Graphic>(true).Select(g=>g.gameObject).Concat(canvas.GetComponentsInChildren<Canvas>(true).Select(c=>c.gameObject));
@@ -30,7 +31,8 @@ namespace SummonersTable.Editor
                     canvas.renderMode=RenderMode.ScreenSpaceCamera;canvas.worldCamera=ui;canvas.planeDistance=1;
                 }
                 Canvas.ForceUpdateCanvases();ui.Render();RenderTexture.active=target;
-                var frame=new Texture2D(width,height,TextureFormat.RGB24,false);frame.ReadPixels(new Rect(0,0,width,height),0,0);frame.Apply();
+                var frame=new Texture2D(width,height,TextureFormat.RGBA32,false);frame.ReadPixels(new Rect(0,0,width,height),0,0);frame.Apply();
+                var uiPixels=frame.GetPixels32();for(int i=0;i<uiPixels.Length;i++){float a=uiPixels[i].a/255f;var c=Color.Lerp((Color)worldPixels[i],(Color)uiPixels[i],a);c.a=1;uiPixels[i]=c;}frame.SetPixels32(uiPixels);frame.Apply();
                 Directory.CreateDirectory(Path.GetDirectoryName(path));File.WriteAllBytes(path,frame.EncodeToPNG());Object.DestroyImmediate(frame);
             }
             finally

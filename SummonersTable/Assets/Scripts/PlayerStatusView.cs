@@ -16,7 +16,7 @@ namespace SummonersTable
         public float minimumNameGap=48;
         public float nameScreenPadding=32;
         public float nameCollisionPadding=6;
-        Vector3 nameScale,healthScale;bool scalesSaved;
+        [Min(.1f)] public float labelScale=1f;
         readonly Vector3[] corners=new Vector3[4];
         readonly List<Rect> labelObstacles=new List<Rect>();
         public void Present(PlayerState player,MatchState state,TableBoard board,int maxHp)
@@ -24,7 +24,7 @@ namespace SummonersTable
             nickname.text=player.name;nickname.color=TableBoard.SeatColors[player.seat];healthNumber.text=player.hp+" / "+maxHp;
             healthFill.fillAmount=player.hp/(float)maxHp;var style=ConfigRuntime.Current?.ui;healthFill.color=style!=null?(style.healthUsesPlayerColor?TableBoard.SeatColors[player.seat]:style.healthColor):healthColor;
             healthAnchor.sizeDelta=style?.healthSize??healthSize;if(style!=null)healthTrail.color=style.healthTrailColor;healthTrail.fillAmount=board.DisplayHp("hero-"+player.seat,player.hp)/maxHp;
-            if(seatOwned&&seatNamePoint!=null&&seatHealthPoint!=null){nameAnchor.position=seatNamePoint.position;healthAnchor.position=seatHealthPoint.position;nameAnchor.rotation=healthAnchor.rotation=board.ViewCamera.transform.rotation;ReadableScale(board.ViewCamera);return;}
+            if(seatOwned&&seatNamePoint!=null&&seatHealthPoint!=null){nameAnchor.position=seatNamePoint.position;healthAnchor.position=seatHealthPoint.position;nameAnchor.rotation=healthAnchor.rotation=board.ViewCamera.transform.rotation;ReadableScale(board.ViewCamera);KeepOnScreen(board.ViewCamera);return;}
             var hero=TableBoard.HeroPosition(player.seat,state.players.Count);var namePosition=hero+nameOffset;
             var actor=board.Actor(player.seat);if(actor!=null&&actor.NamePosition.y>namePosition.y)namePosition=actor.NamePosition;
             Place(nameAnchor,board.ViewCamera,namePosition);
@@ -40,10 +40,28 @@ namespace SummonersTable
             var clamped=new Vector2(Mathf.Clamp(screen.x,viewport.xMin+half.x,viewport.xMax-half.x),Mathf.Clamp(screen.y,viewport.yMin+half.y+4,viewport.yMax-half.y-4));
             nameAnchor.anchoredPosition+=(clamped-screen)/uiScale;
         }
+        void KeepOnScreen(Camera camera)
+        {
+            float scale=Mathf.Min(camera.pixelWidth/1600f,camera.pixelHeight/1000f);
+            var viewport=camera.pixelRect;
+            Clamp(nameAnchor,viewport.yMax-30*scale);
+            Clamp(healthAnchor,viewport.yMax-82*scale);
+            void Clamp(RectTransform anchor,float top)
+            {
+                anchor.GetWorldCorners(corners);var min=(Vector2)camera.WorldToScreenPoint(corners[0]);var max=min;
+                for(int i=1;i<4;i++){var q=(Vector2)camera.WorldToScreenPoint(corners[i]);min=Vector2.Min(min,q);max=Vector2.Max(max,q);}
+                Vector2 delta=Vector2.zero;
+                if(min.x<viewport.xMin+12*scale)delta.x=viewport.xMin+12*scale-min.x;
+                else if(max.x>viewport.xMax-12*scale)delta.x=viewport.xMax-12*scale-max.x;
+                if(max.y>top)delta.y=top-max.y;
+                else if(min.y<viewport.yMin+12*scale)delta.y=viewport.yMin+12*scale-min.y;
+                var p=camera.WorldToScreenPoint(anchor.position);p.x+=delta.x;p.y+=delta.y;anchor.position=camera.ScreenToWorldPoint(p);
+            }
+        }
         void ReadableScale(Camera camera)
         {
-            if(!scalesSaved){nameScale=nameAnchor.localScale;healthScale=healthAnchor.localScale;scalesSaved=true;}
-            Scale(nameAnchor,nameScale);Scale(healthAnchor,healthScale);
+            // PreviewPose can be saved in a scene: never reuse its computed scale as the authoring baseline.
+            Scale(nameAnchor,Vector3.one*labelScale);Scale(healthAnchor,Vector3.one*labelScale);
             var nameBounds=Projected(nameAnchor);var healthBounds=Projected(healthAnchor);
             if(nameBounds.Overlaps(healthBounds)){var p=camera.WorldToScreenPoint(nameAnchor.position);p.y+=healthBounds.yMax-nameBounds.yMin+6;nameAnchor.position=camera.ScreenToWorldPoint(p);}
             Rect Projected(RectTransform item){item.GetWorldCorners(corners);var a=(Vector2)camera.WorldToScreenPoint(corners[0]);var b=a;for(int i=1;i<4;i++){var p=(Vector2)camera.WorldToScreenPoint(corners[i]);a=Vector2.Min(a,p);b=Vector2.Max(b,p);}return Rect.MinMaxRect(a.x,a.y,b.x,b.y);}

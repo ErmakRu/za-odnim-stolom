@@ -11,6 +11,8 @@ namespace SummonersTable
         public CardDisplaySlot cardSlotPrefab;
         public Vector2 cardSize = new Vector2(150, 210);
         public float spacing = 132, maxSpread = 830, arc = 18, angle = 3.2f, hoverLift = 35;
+        [Tooltip("Lower the hand while choosing a target so the five board slots stay visible.")]
+        public float aimingDrop=105;
         public float autoTiltAmount = 1.5f, manualTiltAmount = 25f;
 
         readonly Dictionary<string, CardDisplaySlot> cards = new Dictionary<string, CardDisplaySlot>();
@@ -59,7 +61,8 @@ namespace SummonersTable
 
                 bool isHovered = h.uid == hover;
                 bool isSelected = h.uid == selected;
-                bool raised = isSelected || isHovered;
+                bool aiming=!string.IsNullOrEmpty(selected);
+                bool raised = !aiming && isHovered;
 
                 float targetScale = raised ? (settings != null ? settings.hoverScale : 1.1f) : 1f;
                 float curScale = currentScale.TryGetValue(h.uid, out var sc) ? sc : 1f;
@@ -85,6 +88,8 @@ namespace SummonersTable
                     rotZ = raised ? 0 : -normMiddle * angle;
                 }
 
+                if(aiming)targetPos.y-=aimingDrop;
+
                 // Shake punch on invalid action
                 if (h.uid == shake && Time.unscaledTime < shakeUntil)
                 {
@@ -109,7 +114,7 @@ namespace SummonersTable
                 rect.localRotation = Quaternion.Euler(tiltX + sine, tiltY + cosine, rotZ);
                 rect.localScale = Vector3.one * curScale;
                 slot.Fit();
-                rect.SetSiblingIndex(i);
+
 
                 if (slot.view != null)
                 {
@@ -119,6 +124,10 @@ namespace SummonersTable
                     slot.view.released = e => onRelease?.Invoke(h, e);
                 }
             }
+
+            // Draw from both outer edges toward the centre, then lift the hovered card.
+            foreach (var index in Enumerable.Range(0,count).OrderByDescending(i=>Mathf.Abs(i-middle)))
+                Slot(hand[index].uid).transform.SetAsLastSibling();
 
             var lifted = Slot(hover) ?? Slot(selected);
             if (lifted != null) lifted.transform.SetAsLastSibling();

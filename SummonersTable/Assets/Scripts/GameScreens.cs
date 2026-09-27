@@ -8,17 +8,12 @@ namespace SummonersTable
     public sealed partial class GameApp
     {
         FrontEndCanvas menuCanvas,lobbyCanvas;
+        string menuSection="home";
         System.Collections.IEnumerator LoadPresentationScenes()
         {
-            bool lab=SceneManager.GetActiveScene().name=="PresentationLab"||System.Environment.GetCommandLineArgs().Contains("--presentation-lab");
-            if(lab&&!SceneManager.GetSceneByName("PresentationLab").isLoaded)
-            {
-                foreach(var events in FindObjectsByType<UnityEngine.EventSystems.EventSystem>(FindObjectsSortMode.None))events.gameObject.SetActive(false);
-                yield return SceneManager.LoadSceneAsync("PresentationLab",LoadSceneMode.Additive);
-            }
-            if(!lab)
-                foreach(string name in new[]{"MainMenu","Lobby","Match"})
-                    if(!SceneManager.GetSceneByName(name).isLoaded&&Application.CanStreamedLevelBeLoaded(name))yield return SceneManager.LoadSceneAsync(name,LoadSceneMode.Additive);
+            if(FindFirstObjectByType<TableBoard>(FindObjectsInactive.Include)==null)
+                throw new System.InvalidOperationException("Entry scene is missing its authored TableWorld.");
+            yield break;
         }
         void BindFrontEnd()
         {
@@ -34,6 +29,8 @@ namespace SummonersTable
             if(HandleLobbyChoice(action))return;
             switch(action)
             {
+                case "play":menuSection="play";break;
+                case "home":menuSection="home";page="menu";break;
                 case "steam":page="steam";steam.Search();break;
                 case "local":page="local";if(!botDefaultsApplied){foreach(int botSeat in ConfigRuntime.Current.bots.defaultLocalBotSeats)localBots[botSeat]=true;botDefaultsApplied=true;}break;
                 case "cards":returnPage="menu";page="cards";break;
@@ -51,7 +48,7 @@ namespace SummonersTable
         {
             if(previewLobby)return;
             bool visible=modal==""&&!quitConfirm&&!settingsOpen;
-            if(menuCanvas!=null){menuCanvas.Visible(page=="menu"&&visible);menuCanvas.status.text=string.IsNullOrEmpty(ConfigRuntime.Error)?"ТЕСТ "+catalog.version+" · "+steam.Status:ConfigRuntime.Message;}
+            if(menuCanvas!=null){menuCanvas.Visible(page=="menu"&&visible);menuCanvas.MenuPage(menuSection,System.IO.File.Exists(CampaignProgress.SavePath));menuCanvas.status.text=string.IsNullOrEmpty(ConfigRuntime.Error)?"ТЕСТ "+catalog.version+" · "+steam.Status:ConfigRuntime.Message;}
             if(lobbyCanvas==null)return;
             bool localLobby=page=="local";
             lobbyCanvas.Visible((localLobby||page=="steam"&&steam.InRoom)&&visible);

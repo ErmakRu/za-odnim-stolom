@@ -74,10 +74,10 @@
             "bus": 0,
             "sounds": [
                 {
-                    "clip": "asset:9296ccb7ce15142418d69ac87cdc2ae4",
-                    "volume": 0.15000000596046449,
-                    "randomPitch": true,
-                    "pitch": 1.0,
+                    "clip": "asset:3c7c8ec337e194708b0e38a386fefb23",
+                    "volume": 0.12999999523162843,
+                    "randomPitch": false,
+                    "pitch": 1.100000023841858,
                     "pitchRange": {
                         "x": 0.9200000166893005,
                         "y": 1.0800000429153443

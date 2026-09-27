@@ -19,7 +19,7 @@
         "offsetY": 0
       },
       "right": {
-        "art": "Art/Others/mainKing",
+        "art": "Campaign/Portraits/mainKing",
         "label": "Малхорат",
         "portrait": false,
         "scale": 1,
@@ -691,7 +691,7 @@
       "title": "ЖабаДушэс",
       "opponentName": "ЖабаДушэс",
       "opponentDeck": "tricks",
-      "opponentHero": "badger",
+      "opponentHero": "lizard",
       "mode": "wizards",
       "seed": 1701,
       "before": [
@@ -892,7 +892,7 @@
       "title": "Малфас",
       "opponentName": "Малфас",
       "opponentDeck": "noise",
-      "opponentHero": "lion",
+      "opponentHero": "rat",
       "mode": "wizards",
       "seed": 1702,
       "before": [
@@ -1176,7 +1176,7 @@
       "title": "Голиаф",
       "opponentName": "Голиаф",
       "opponentDeck": "cozy",
-      "opponentHero": "dog",
+      "opponentHero": "lion",
       "mode": "commanders",
       "seed": 1704,
       "before": [
@@ -1330,7 +1330,7 @@
       "title": "Белиал",
       "opponentName": "Белиал",
       "opponentDeck": "noise",
-      "opponentHero": "owl",
+      "opponentHero": "badger",
       "mode": "wizards",
       "seed": 1705,
       "before": [
@@ -1460,7 +1460,7 @@
       "title": "Бахрам",
       "opponentName": "Бахрам",
       "opponentDeck": "tricks",
-      "opponentHero": "lizard",
+      "opponentHero": "owl",
       "mode": "wizards",
       "seed": 1706,
       "before": [
@@ -1755,7 +1755,7 @@
       "title": "Абаддон",
       "opponentName": "Абаддон",
       "opponentDeck": "noise",
-      "opponentHero": "rat",
+      "opponentHero": "lion",
       "mode": "commanders",
       "seed": 1708,
       "before": [
@@ -1838,7 +1838,7 @@
       "title": "Мальгис",
       "opponentName": "Мальгис",
       "opponentDeck": "cozy",
-      "opponentHero": "badger",
+      "opponentHero": "owl",
       "mode": "wizards",
       "seed": 1709,
       "before": [
@@ -1921,7 +1921,7 @@
       "title": "Мортиция",
       "opponentName": "Мортиция",
       "opponentDeck": "cozy",
-      "opponentHero": "lion",
+      "opponentHero": "deer",
       "mode": "wizards",
       "seed": 1710,
       "before": [
@@ -2004,7 +2004,7 @@
       "title": "Аспид",
       "opponentName": "Аспид",
       "opponentDeck": "noise",
-      "opponentHero": "deer",
+      "opponentHero": "dog",
       "mode": "wizards",
       "seed": 1711,
       "before": [
@@ -2087,7 +2087,7 @@
       "title": "Вульгор",
       "opponentName": "Вульгор",
       "opponentDeck": "noise",
-      "opponentHero": "dog",
+      "opponentHero": "badger",
       "mode": "commanders",
       "seed": 1712,
       "before": [
@@ -2253,7 +2253,7 @@
       "title": "Астарот",
       "opponentName": "Астарот",
       "opponentDeck": "noise",
-      "opponentHero": "lizard",
+      "opponentHero": "deer",
       "mode": "wizards",
       "seed": 1714,
       "before": [
@@ -2336,7 +2336,7 @@
       "title": "Бастет",
       "opponentName": "Бастет",
       "opponentDeck": "cozy",
-      "opponentHero": "rabbit",
+      "opponentHero": "dog",
       "mode": "wizards",
       "seed": 1715,
       "before": [
@@ -2549,7 +2549,7 @@
       "title": "Азазель",
       "opponentName": "Азазель",
       "opponentDeck": "tricks",
-      "opponentHero": "badger",
+      "opponentHero": "lion",
       "mode": "wizards",
       "seed": 1717,
       "before": [
@@ -2760,7 +2760,7 @@
       ]
     }
   ],
-  "textPageLength": 100,
+  "textPageLength": 200,
   "characters": [
     {
       "id": "абаддон",
@@ -2769,8 +2769,8 @@
       "aliases": [
         "АБАДДОН"
       ],
-      "art": "Art/C15",
-      "portrait": true,
+      "art": "Campaign/Portraits/Abaddon_Coach",
+      "portrait": false,
       "scale": 1,
       "offsetX": 0,
       "offsetY": 0
@@ -2821,8 +2821,8 @@
       "aliases": [
         "БАЛЬТАЗАР"
       ],
-      "art": "Art/C09",
-      "portrait": true,
+      "art": "Campaign/Portraits/Chop_Innkeeper",
+      "portrait": false,
       "scale": 1,
       "offsetX": 0,
       "offsetY": 0
@@ -2847,8 +2847,8 @@
       "aliases": [
         "БАХРАМ"
       ],
-      "art": "Art/C01",
-      "portrait": true,
+      "art": "Campaign/Portraits/Merchant_Bahram",
+      "portrait": false,
       "scale": 1,
       "offsetX": 0,
       "offsetY": 0
@@ -2860,8 +2860,8 @@
       "aliases": [
         "БЕЛИАЛ"
       ],
-      "art": "Art/C09",
-      "portrait": true,
+      "art": "Campaign/Portraits/General_Belial",
+      "portrait": false,
       "scale": 1,
       "offsetX": 0,
       "offsetY": 0
@@ -2873,8 +2873,8 @@
       "aliases": [
         "ВАЛАФАРА"
       ],
-      "art": "Art/C04",
-      "portrait": true,
+      "art": "Campaign/Portraits/Countess_Valafara",
+      "portrait": false,
       "scale": 1,
       "offsetX": 0,
       "offsetY": 0
@@ -2912,8 +2912,8 @@
       "aliases": [
         "ГОЛИАФ"
       ],
-      "art": "Art/C10",
-      "portrait": true,
+      "art": "Campaign/Portraits/Duke_Goliath",
+      "portrait": false,
       "scale": 1,
       "offsetX": 0,
       "offsetY": 0
@@ -2925,8 +2925,8 @@
       "aliases": [
         "ГРИМВАЛЬД"
       ],
-      "art": "Art/C18",
-      "portrait": true,
+      "art": "Campaign/Portraits/Grimwald_Mime",
+      "portrait": false,
       "scale": 1,
       "offsetX": 0,
       "offsetY": 0
@@ -2938,8 +2938,8 @@
       "aliases": [
         "ЖАБАДУШЭС"
       ],
-      "art": "Art/C05",
-      "portrait": true,
+      "art": "Campaign/Portraits/Baron_ZhabaDuches",
+      "portrait": false,
       "scale": 1,
       "offsetX": 0,
       "offsetY": 0
@@ -2964,20 +2964,21 @@
       "aliases": [
         "МАЛФАС"
       ],
-      "art": "Art/C06",
-      "portrait": true,
+      "art": "Campaign/Portraits/Malphas_Zealot",
+      "portrait": false,
       "scale": 1,
       "offsetX": 0,
       "offsetY": 0
     },
     {
       "id": "малхорат",
-      "name": "Малхорат",
+      "name": "Владыка",
       "type": "important",
       "aliases": [
+        "ВЛАДЫКА",
         "МАЛХОРАТ"
       ],
-      "art": "Art/Others/mainKing",
+      "art": "Campaign/Portraits/mainKing",
       "portrait": false,
       "scale": 1,
       "offsetX": 0,
@@ -2990,8 +2991,8 @@
       "aliases": [
         "МАЛЬГИС"
       ],
-      "art": "Art/C07",
-      "portrait": true,
+      "art": "Campaign/Portraits/Inquisitor_Malgis",
+      "portrait": false,
       "scale": 1,
       "offsetX": 0,
       "offsetY": 0
@@ -3024,10 +3025,11 @@
     },
     {
       "id": "jester",
-      "name": "Йорик",
+      "name": "Шут",
       "type": "main",
       "aliases": [
-        "ШУТ"
+        "ШУТ",
+        "ЙОРИК"
       ],
       "art": "Art/Jester/jester_basic",
       "portrait": false,
@@ -3043,6 +3045,32 @@
         "ШУТ-МАЛЫШ"
       ],
       "art": "Art/Jester/jester_basic",
+      "portrait": false,
+      "scale": 1,
+      "offsetX": 0,
+      "offsetY": 0
+    },
+    {
+      "id": "chop",
+      "name": "Чоп",
+      "type": "npc",
+      "art": "Campaign/Portraits/Chop_Innkeeper",
+      "aliases": [
+        "ЧОП"
+      ],
+      "portrait": false,
+      "scale": 1,
+      "offsetX": 0,
+      "offsetY": 0
+    },
+    {
+      "id": "loskut",
+      "name": "Лоскут",
+      "type": "npc",
+      "art": "",
+      "aliases": [
+        "ЛОСКУТ"
+      ],
       "portrait": false,
       "scale": 1,
       "offsetX": 0,

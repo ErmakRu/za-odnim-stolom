@@ -12,9 +12,9 @@ namespace SummonersTable
         protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear();var p=TargetArrowGeometry.Build(from,to);if(p.Length==0)return;
-            for(int i=0;i<p.Length-2;i+=2)Segment(vh,p[i],p[i+1]);var dir=(to-p[p.Length-2]).normalized;var side=new Vector2(-dir.y,dir.x);
+            for(int i=0;i<p.Length-2;i+=2)Segment(vh,p[i],p[i+1],i/(float)(p.Length-1),(i+1)/(float)(p.Length-1));var dir=(to-p[p.Length-2]).normalized;var side=new Vector2(-dir.y,dir.x);
             Segment(vh,to-dir*headLength+side*headWidth,to);Segment(vh,to-dir*headLength-side*headWidth,to);
         }
-        void Segment(VertexHelper vh,Vector2 a,Vector2 b){var d=(b-a).normalized;var n=new Vector2(-d.y,d.x)*width*.5f;int k=vh.currentVertCount;foreach(var p in new[]{a-n,a+n,b+n,b-n})vh.AddVert(p,color,Vector2.zero);vh.AddTriangle(k,k+1,k+2);vh.AddTriangle(k,k+2,k+3);}
+        void Segment(VertexHelper vh,Vector2 a,Vector2 b,float u0=0,float u1=1){var d=(b-a).normalized;var n=new Vector2(-d.y,d.x)*width*.5f;int k=vh.currentVertCount;var pts=new[]{a-n,a+n,b+n,b-n};for(int i=0;i<4;i++)vh.AddVert(pts[i],color,new Vector2(i>=2?u1:u0,i==1||i==2?1:0));vh.AddTriangle(k,k+1,k+2);vh.AddTriangle(k,k+2,k+3);}
     }
 }

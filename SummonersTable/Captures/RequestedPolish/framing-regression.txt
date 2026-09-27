@@ -1,0 +1,145 @@
+PASS 144
+PASS QTE hidden in fresh menu
+PASS original camera pitch 0
+PASS QTE hidden at battle start 2
+PASS slot corner visible above eight-card hand 2/0
+PASS slot corner visible above eight-card hand 2/0
+PASS slot corner visible above eight-card hand 2/0
+PASS slot corner visible above eight-card hand 2/0
+PASS slot corner visible above eight-card hand 2/1
+PASS slot corner visible above eight-card hand 2/1
+PASS slot corner visible above eight-card hand 2/1
+PASS slot corner visible above eight-card hand 2/1
+PASS slot corner visible above eight-card hand 2/2
+PASS slot corner visible above eight-card hand 2/2
+PASS slot corner visible above eight-card hand 2/2
+PASS slot corner visible above eight-card hand 2/2
+PASS slot corner visible above eight-card hand 2/3
+PASS slot corner visible above eight-card hand 2/3
+PASS slot corner visible above eight-card hand 2/3
+PASS slot corner visible above eight-card hand 2/3
+PASS slot corner visible above eight-card hand 2/4
+PASS slot corner visible above eight-card hand 2/4
+PASS slot corner visible above eight-card hand 2/4
+PASS slot corner visible above eight-card hand 2/4
+PASS local model does not cover field 2
+PASS original camera pitch 1
+PASS QTE hidden at battle start 2
+PASS slot corner visible above eight-card hand 2/0
+PASS slot corner visible above eight-card hand 2/0
+PASS slot corner visible above eight-card hand 2/0
+PASS slot corner visible above eight-card hand 2/0
+PASS slot corner visible above eight-card hand 2/1
+PASS slot corner visible above eight-card hand 2/1
+PASS slot corner visible above eight-card hand 2/1
+PASS slot corner visible above eight-card hand 2/1
+PASS slot corner visible above eight-card hand 2/2
+PASS slot corner visible above eight-card hand 2/2
+PASS slot corner visible above eight-card hand 2/2
+PASS slot corner visible above eight-card hand 2/2
+PASS slot corner visible above eight-card hand 2/3
+PASS slot corner visible above eight-card hand 2/3
+PASS slot corner visible above eight-card hand 2/3
+PASS slot corner visible above eight-card hand 2/3
+PASS slot corner visible above eight-card hand 2/4
+PASS slot corner visible above eight-card hand 2/4
+PASS slot corner visible above eight-card hand 2/4
+PASS slot corner visible above eight-card hand 2/4
+PASS local model does not cover field 2
+PASS original camera pitch 0
+PASS QTE hidden at battle start 3
+PASS slot corner visible above eight-card hand 3/0
+PASS slot corner visible above eight-card hand 3/0
+PASS slot corner visible above eight-card hand 3/0
+PASS slot corner visible above eight-card hand 3/0
+PASS slot corner visible above eight-card hand 3/1
+PASS slot corner visible above eight-card hand 3/1
+PASS slot corner visible above eight-card hand 3/1
+PASS slot corner visible above eight-card hand 3/1
+PASS slot corner visible above eight-card hand 3/2
+PASS slot corner visible above eight-card hand 3/2
+PASS slot corner visible above eight-card hand 3/2
+PASS slot corner visible above eight-card hand 3/2
+PASS slot corner visible above eight-card hand 3/3
+PASS slot corner visible above eight-card hand 3/3
+PASS slot corner visible above eight-card hand 3/3
+PASS slot corner visible above eight-card hand 3/3
+PASS slot corner visible above eight-card hand 3/4
+PASS slot corner visible above eight-card hand 3/4
+PASS slot corner visible above eight-card hand 3/4
+PASS slot corner visible above eight-card hand 3/4
+PASS local model does not cover field 3
+PASS original camera pitch 1
+PASS QTE hidden at battle start 3
+PASS slot corner visible above eight-card hand 3/0
+PASS slot corner visible above eight-card hand 3/0
+PASS slot corner visible above eight-card hand 3/0
+PASS slot corner visible above eight-card hand 3/0
+PASS slot corner visible above eight-card hand 3/1
+PASS slot corner visible above eight-card hand 3/1
+PASS slot corner visible above eight-card hand 3/1
+PASS slot corner visible above eight-card hand 3/1
+PASS slot corner visible above eight-card hand 3/2
+PASS slot corner visible above eight-card hand 3/2
+PASS slot corner visible above eight-card hand 3/2
+PASS slot corner visible above eight-card hand 3/2
+PASS slot corner visible above eight-card hand 3/3
+PASS slot corner visible above eight-card hand 3/3
+PASS slot corner visible above eight-card hand 3/3
+PASS slot corner visible above eight-card hand 3/3
+PASS slot corner visible above eight-card hand 3/4
+PASS slot corner visible above eight-card hand 3/4
+PASS slot corner visible above eight-card hand 3/4
+PASS slot corner visible above eight-card hand 3/4
+PASS local model does not cover field 3
+PASS original camera pitch 0
+PASS QTE hidden at battle start 4
+PASS slot corner visible above eight-card hand 4/0
+PASS slot corner visible above eight-card hand 4/0
+PASS slot corner visible above eight-card hand 4/0
+PASS slot corner visible above eight-card hand 4/0
+PASS slot corner visible above eight-card hand 4/1
+PASS slot corner visible above eight-card hand 4/1
+PASS slot corner visible above eight-card hand 4/1
+PASS slot corner visible above eight-card hand 4/1
+PASS slot corner visible above eight-card hand 4/2
+PASS slot corner visible above eight-card hand 4/2
+PASS slot corner visible above eight-card hand 4/2
+PASS slot corner visible above eight-card hand 4/2
+PASS slot corner visible above eight-card hand 4/3
+PASS slot corner visible above eight-card hand 4/3
+PASS slot corner visible above eight-card hand 4/3
+PASS slot corner visible above eight-card hand 4/3
+PASS slot corner visible above eight-card hand 4/4
+PASS slot corner visible above eight-card hand 4/4
+PASS slot corner visible above eight-card hand 4/4
+PASS slot corner visible above eight-card hand 4/4
+PASS local model does not cover field 4
+PASS original camera pitch 1
+PASS QTE hidden at battle start 4
+PASS slot corner visible above eight-card hand 4/0
+PASS slot corner visible above eight-card hand 4/0
+PASS slot corner visible above eight-card hand 4/0
+PASS slot corner visible above eight-card hand 4/0
+PASS slot corner visible above eight-card hand 4/1
+PASS slot corner visible above eight-card hand 4/1
+PASS slot corner visible above eight-card hand 4/1
+PASS slot corner visible above eight-card hand 4/1
+PASS slot corner visible above eight-card hand 4/2
+PASS slot corner visible above eight-card hand 4/2
+PASS slot corner visible above eight-card hand 4/2
+PASS slot corner visible above eight-card hand 4/2
+PASS slot corner visible above eight-card hand 4/3
+PASS slot corner visible above eight-card hand 4/3
+PASS slot corner visible above eight-card hand 4/3
+PASS slot corner visible above eight-card hand 4/3
+PASS slot corner visible above eight-card hand 4/4
+PASS slot corner visible above eight-card hand 4/4
+PASS slot corner visible above eight-card hand 4/4
+PASS slot corner visible above eight-card hand 4/4
+PASS local model does not cover field 4
+PASS legitimate QTE appears
+PASS QTE cleared while screen is hidden
+PASS legitimate QTE restored after hide
+PASS QTE closes after ritual
+PASS QTE stays closed on return to menu

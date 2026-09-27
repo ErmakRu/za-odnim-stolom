@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4113588387327598282}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.44721362, y: -0, z: -0, w: 0.8944272}
-  m_LocalPosition: {x: 0, y: 24, z: -12}
+  m_LocalRotation: {x: 0.41317147, y: 0.34228247, z: -0.17114124, w: 0.826343}
+  m_LocalPosition: {x: -8.485282, y: 24, z: -8.485281}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 898197867636948909}
   - component: {fileID: 7433175344347785311}
   m_Layer: 0
-  m_Name: Generated player places
+  m_Name: "Players \u2014 prefab spawning"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -143,13 +143,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c04830fda80bf4f95ec43bbb96428e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.SeatingLayout
-  seatPrefab: {fileID: 7097353923131282917, guid: 6b7116b585d482340a7decfa3b058efc, type: 3}
+  seatPrefab: {fileID: 5139591343373147452, guid: 11e7d05dcedc55643b7b6ca2246494ef, type: 3}
+  previewInEditor: 0
   previewCount: 4
   radius: 8.48
   startAngle: 45
   clockwise: 1
   bodyScale: 1
   layout: {fileID: 7433175344347785311}
+  authoredLayouts: []
 --- !u!114 &7433175344347785311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +232,9 @@ MonoBehaviour:
   arrowPrefab: {fileID: 1666102937430151849, guid: 9ab4ed9a11967f649ba9b4ef67eef420, type: 3}
   numberPrefab: {fileID: 8036774043475128793, guid: 245d851a77a99b548824c6e7aca5515d, type: 3}
   inputEnabled: 1
+  zoneColor: {r: 0.1, g: 0.15, b: 0.17, a: 1}
+  zoneHoverColor: {r: 0.38, g: 0.64, b: 0.57, a: 1}
+  zoneSelectedColor: {r: 0.87, g: 0.68, b: 0.3, a: 1}
   selectedUnit: 
   targetMode: enemy
   choosingTarget: 0
@@ -406,6 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.PrefabConfigBinding
   configId: TableWorld
+  applyJsonOverrides: 0
 --- !u!1001 &76200733867991194
 PrefabInstance:
   m_ObjectHideFlags: 0

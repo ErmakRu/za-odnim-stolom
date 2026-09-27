@@ -6,7 +6,7 @@ namespace SummonersTable
     public sealed class CampaignComicView:MonoBehaviour
     {
         public GameObject comic,hub;
-        public RawImage background,left,right,rewardIcon;
+        public RawImage background,left,right,center,rewardIcon;
         public Image rightBorder;
         public TavernPanel dialoguePanel,namePanel;
         public GameObject rewardRoot;
@@ -53,14 +53,14 @@ namespace SummonersTable
             if(IsThought)FullText="«"+FullText.Trim('«','»','“','”','"')+"»";
             body.fontStyle=IsThought?FontStyle.Italic:FontStyle.Normal;
             shown=0;body.text="";pendingClick=-1;
-            progress.text=counterText+$" · Фрагмент {Segment+1}/{pages.Length}";
+            progress.text="";progress.gameObject.SetActive(false);
             nextLabel.text=lastLine&&Segment==pages.Length-1?finalText:"Дальше  →";
             previous.interactable=canBack||Segment>0;segmentChanged?.Invoke(Segment);
         }
         public void Present(ComicFrame frame,ComicLine line,string heading,string counter,bool canGoBack,bool last,string finalLabel)
         {
             gameObject.SetActive(true);hub.SetActive(false);comic.SetActive(true);
-            background.texture=Resources.Load<Texture2D>(frame.background);title.text=heading;
+            background.texture=string.IsNullOrEmpty(frame.background)?null:Resources.Load<Texture2D>(frame.background);background.color=string.IsNullOrEmpty(frame.background)?Color.black:Color.white;title.text="";title.gameObject.SetActive(false);
             bool narrator=book.IsNarrator(line);var character=book.Character(line);
             bool hero=!narrator&&(character?.type=="main"||character==null&&line.speaker.StartsWith("ШУТ",StringComparison.OrdinalIgnoreCase));
             string kind=narrator?"narration":character?.type??"npc";var palette=book.Palette(kind);
@@ -68,7 +68,7 @@ namespace SummonersTable
             if(dialoguePanel!=null){dialoguePanel.color=fill;dialoguePanel.border=edge;dialoguePanel.SetVerticesDirty();}
             if(namePanel!=null){namePanel.gameObject.SetActive(!narrator);namePanel.color=name;namePanel.border=edge;namePanel.SetVerticesDirty();}
             speaker.gameObject.SetActive(!narrator);speaker.text=character?.name??line.speaker;
-            left.gameObject.SetActive(false);right.gameObject.SetActive(false);rightBorder.gameObject.SetActive(false);
+            left.gameObject.SetActive(false);right.gameObject.SetActive(false);if(center!=null)center.gameObject.SetActive(false);rightBorder.gameObject.SetActive(false);
             leftName.gameObject.SetActive(false);rightName.gameObject.SetActive(false);
             if(!narrator)
             {
@@ -87,7 +87,7 @@ namespace SummonersTable
         }
         void SetActor(RawImage image,ComicActor actor,string art,Vector2 origin)
         {
-            var texture=Resources.Load<Texture2D>(art);image.gameObject.SetActive(texture!=null);if(texture==null)return;
+            var texture=string.IsNullOrEmpty(art)?null:Resources.Load<Texture2D>(art);image.gameObject.SetActive(texture!=null);if(texture==null)return;
             image.texture=texture;var rect=image.rectTransform;
             float fit=Mathf.Min((actor.portrait?680:760)/(float)texture.width,900f/texture.height)*actor.scale;
             rect.sizeDelta=new Vector2(texture.width*fit,texture.height*fit);rect.anchoredPosition=origin+new Vector2(actor.offsetX,actor.offsetY);image.color=Color.white;

@@ -77,7 +77,7 @@ namespace SummonersTable
                 while(Height()>artTop-minimumArtHeight-row-12-rulesBottom&&description.fontSize>44)description.fontSize--;
                 RulesHeight=Height();float artHeight=Mathf.Clamp(artTop-row-12-rulesBottom-RulesHeight,minimumArtHeight,maximumArtHeight);
                 Place(artwork.rectTransform,0,artTop-artHeight*.5f,590,artHeight);
-                if(artFrame!=null)artFrame.gameObject.SetActive(false);
+                if(artFrame!=null){artFrame.gameObject.SetActive(true);Place(artFrame,0,artTop-artHeight*.5f,590,artHeight);}
                 if(artGrain==null)artGrain=transform.Find("Art paper grain") as RectTransform;
                 if(artGrain!=null)Place(artGrain,0,artTop-artHeight*.5f,590,artHeight);
                 Place(qteLabel.rectTransform,194,artTop-26,188,38);

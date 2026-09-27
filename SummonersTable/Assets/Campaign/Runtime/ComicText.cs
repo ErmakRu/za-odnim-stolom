@@ -5,24 +5,18 @@ namespace SummonersTable
 {
     public static class ComicText
     {
-        // Keep sentence punctuation with its sentence. Long sentences split at a word
-        // boundary; an unbroken token is the only case split inside a word.
-        public static string[] Split(string text,int limit=100)
+        // Pack complete sentences into pages, preserving sentences longer than the soft limit.
+        public static string[] Split(string text,int limit=200)
         {
             if(limit<10)throw new ArgumentOutOfRangeException(nameof(limit));
             var pages=new List<string>();text=Regex.Replace(text??"",@"\s+"," ").Trim();
             foreach(Match match in Regex.Matches(text,@".+?(?:[.!?…]+[»”\""')\]]*(?=\s|$)|$)"))
             {
                 string rest=match.Value.Trim();
-                while(rest.Length>limit)
-                {
-                    int cut=rest.LastIndexOf(' ',limit-1,limit);
-                    if(cut<1)cut=limit;
-                    // Closing punctuation is never orphaned onto the next page.
-                    while(cut<rest.Length&&".,!?…:;»”\"')]}".IndexOf(rest[cut])>=0)cut++;
-                    pages.Add(rest.Substring(0,cut).Trim());rest=rest.Substring(cut).TrimStart();
-                }
-                if(rest.Length>0)pages.Add(rest);
+                if(rest.Length==0)continue;
+                if(pages.Count>0&&pages[pages.Count-1].Length+1+rest.Length<=limit)
+                    pages[pages.Count-1]+=" "+rest;
+                else pages.Add(rest); // Preserve whole sentences beyond the soft limit.
             }
             return pages.Count==0?new[]{""}:pages.ToArray();
         }

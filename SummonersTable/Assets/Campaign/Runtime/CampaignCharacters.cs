@@ -17,7 +17,7 @@ namespace SummonersTable
     }
     public sealed partial class CampaignBook
     {
-        public int textPageLength=100;
+        public int textPageLength=200;
         public ComicCharacter[] characters=Array.Empty<ComicCharacter>();
         public ComicPalette[] dialogueStyles={
             new ComicPalette{type="main",body="#163A35FB",border="#68D4AC",name="#267361"},
@@ -34,9 +34,9 @@ namespace SummonersTable
         void ValidatePresentation()
         {
             void Check(bool ok,string why){if(!ok)throw new FormatException("campaign.json: "+why);}
-            Check(textPageLength>=20&&textPageLength<=100,"textPageLength: 20…100");
+            Check(textPageLength>=20&&textPageLength<=200,"textPageLength: 20…200");
             Check(characters!=null&&characters.All(c=>c!=null&&!string.IsNullOrWhiteSpace(c.id))&&characters.Select(c=>c.id).Distinct().Count()==characters.Length,"уникальные персонажи");
-            foreach(var c in characters){Check(new[]{"main","npc","important"}.Contains(c.type),"тип персонажа");Check(c.aliases!=null&&!string.IsNullOrWhiteSpace(c.name),"имя и aliases персонажа "+c.id);Check(Resources.Load<Texture2D>(c.art)!=null,"арт персонажа "+c.id);Check(float.IsFinite(c.scale)&&c.scale>=.2f&&c.scale<=3,"масштаб персонажа");Check(float.IsFinite(c.offsetX)&&float.IsFinite(c.offsetY),"смещение персонажа "+c.id);}
+            foreach(var c in characters){Check(new[]{"main","npc","important"}.Contains(c.type),"тип персонажа");Check(c.aliases!=null&&!string.IsNullOrWhiteSpace(c.name),"имя и aliases персонажа "+c.id);Check(string.IsNullOrEmpty(c.art)||Resources.Load<Texture2D>(c.art)!=null,"арт персонажа "+c.id);Check(float.IsFinite(c.scale)&&c.scale>=.2f&&c.scale<=3,"масштаб персонажа");Check(float.IsFinite(c.offsetX)&&float.IsFinite(c.offsetY),"смещение персонажа "+c.id);}
             Check(dialogueStyles!=null&&new[]{"main","npc","important","narration"}.All(t=>dialogueStyles.Count(p=>p.type==t)==1),"четыре палитры диалога");
             foreach(var p in dialogueStyles)Check(ColorUtility.TryParseHtmlString(p.body,out _)&&ColorUtility.TryParseHtmlString(p.border,out _)&&ColorUtility.TryParseHtmlString(p.name,out _),"цвет диалога");
         }

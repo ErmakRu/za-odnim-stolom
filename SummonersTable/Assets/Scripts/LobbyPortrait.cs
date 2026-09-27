@@ -2,18 +2,18 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace SummonersTable
 {
-    public sealed class LobbyPortrait : MonoBehaviour
+    [ExecuteAlways] public sealed class LobbyPortrait : MonoBehaviour
     {
         public Camera portraitCamera;public HeroActor actor;public RawImage image;
         RenderTexture texture;
         void OnEnable()
         {
             if(portraitCamera==null||image==null)return;
-            if(texture==null){texture=new RenderTexture(512,640,24,RenderTextureFormat.ARGB32);texture.antiAliasing=2;texture.Create();}
+            if(texture==null){texture=new RenderTexture(512,640,24,RenderTextureFormat.ARGB32);texture.antiAliasing=2;texture.hideFlags=HideFlags.DontSave;texture.Create();}
             image.texture=texture;portraitCamera.targetTexture=texture;portraitCamera.gameObject.SetActive(true);
         }
         void OnDisable(){if(portraitCamera!=null)portraitCamera.gameObject.SetActive(false);}
-        void OnDestroy(){if(texture!=null){texture.Release();Destroy(texture);}}
+        void OnDestroy(){if(texture!=null){if(portraitCamera!=null&&portraitCamera.targetTexture==texture)portraitCamera.targetTexture=null;if(image!=null)image.texture=null;texture.Release();if(Application.isPlaying)Destroy(texture);else DestroyImmediate(texture);}}
         public void Present(LobbyMember member)
         {
             actor.gameObject.SetActive(member!=null);image.color=member==null?Color.clear:Color.white;

@@ -29,19 +29,30 @@ namespace SummonersTable
         public bool IsReady {get{return steam!=null&&board!=null&&cardCanvas!=null;}}
         public Catalog Catalog {get {return catalog;}}
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-        static void Boot(){if(FindFirstObjectByType<AuthoringLab>()==null&&FindFirstObjectByType<GameApp>()==null)new GameObject("SummonersTable").AddComponent<GameApp>();}
+        public enum EntryScreen { Menu, Lobby, Match }
+        [Header("Scene entry — editable in Inspector")]
+        public EntryScreen entryScreen;
+        [Range(2,4)] public int previewPlayers=2;
+        static GameApp running;
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void ResetEntry(){running=null;}
+        void Awake()
+        {
+            if(running!=null&&running!=this){Destroy(this);return;}
+            running=this;
+        }
         IEnumerator Start()
         {
+            if(running!=this)yield break;
             yield return LoadPresentationScenes();
             Application.runInBackground=true;ConfigRuntime.LoadInitial();UserSettings.Load();UserSettings.Apply(false,true);
             catalog=ConfigRuntime.ActiveCatalog;catalog.Validate();localOptions=ConfigRuntime.Current.rules.defaults.Copy();
             font=Font.CreateDynamicFontFromOSFont("Arial",24);BindFrontEnd();
             board=FindFirstObjectByType<TableBoard>(FindObjectsInactive.Include);
-            if(board==null)board=new GameObject("3D Table").AddComponent<TableBoard>();
+            if(board==null)throw new InvalidOperationException("Place TableWorld in the Match scene.");
             board.Initialize(catalog);
             cardCanvas=FindFirstObjectByType<CardTableCanvas>(FindObjectsInactive.Include);
-            if(cardCanvas==null){cardCanvas=new GameObject("Card display Canvas").AddComponent<CardTableCanvas>();cardCanvas.Build();}
+            if(cardCanvas==null)throw new InvalidOperationException("Place CardTableCanvas in the Match scene.");
             cardCanvas.Initialize(font,key=>{if(state?.qte!=null)Send(new GameCommand{kind="key",phaseId=state.qte.id,key=key});});
             announcements=FindFirstObjectByType<MotionAnnouncements>(FindObjectsInactive.Include);
             if(FindFirstObjectByType<UnityEngine.EventSystems.EventSystem>()==null)
@@ -54,6 +65,9 @@ namespace SummonersTable
             steam=new SteamSession(catalog);if(!captureMode&&FindFirstObjectByType<PresentationLab>()==null)steam.Initialize();
             BindPrefabInterface();ConfigRuntime.ApplyScene();InitializeCampaign();
             tickTone=Tone(680,.045f);failTone=Tone(160,.12f);successTone=Tone(980,.14f);
+            if(entryScreen==EntryScreen.Lobby)page="local";
+            else if(entryScreen==EntryScreen.Match){StartLocal(previewPlayers);handoff=false;}
+            SyncFrontEnd();UpdateAuthoredInterface();
             var args=Environment.GetCommandLineArgs();
             if(args.Contains("--local-test"))StartLocal(4);
             if(args.Contains("--capture-config"))StartCoroutine(CaptureConfigPreview());
@@ -100,7 +114,7 @@ namespace SummonersTable
                 if(!captureMode&&!historyOpen&&!settingsOpen)ReadQteKeys();
             }
             else board.gameObject.SetActive(false);
-            UpdateAuthoredInterface();
+            UpdateAuthoredInterface();UpdateTutorial();
             var inspected=InspectionAt(Pointer);
             cardCanvas.Present(state,seat,state==null?0:Clock,inspected,catalog,board,page=="game"&&!handoff&&!settingsOpen&&modal==""&&!quitConfirm&&state.phase!="roundEnd"&&state.phase!="matchEnd");
             foreach(var key in cardCanvas.keyButtons)key.interactable=!historyOpen;
@@ -119,8 +133,11 @@ namespace SummonersTable
         }
         void Send(GameCommand command)
         {
+            if(!TutorialAllows(command))return;
+            bool correctKey=command.kind=="key"&&state?.qte!=null&&state.qte.owner==seat&&state.qte.index<state.qte.sequence.Length&&command.key==state.qte.sequence[state.qte.index].ToString();
             if(online){steam.Submit(command);error=steam.Error;state=steam.View;if(error==""&&(command.kind=="target"||command.kind=="play"))ui.arrow.SelectTarget();}
             else if(local!=null){command.seq=++seq[seat];var result=local.Submit(seat,command,localTime);error=result.ok?"":result.message;state=local.View(seat,localTime);if(result.ok&&(command.kind=="target"||command.kind=="play"))ui.arrow.SelectTarget();}
+            if(correctKey&&error=="")ConfigAudio.Play("qte.correct");
         }
         double Clock {get {return online?state.serverTime+Time.realtimeSinceStartupAsDouble-steam.ReceivedAt:localTime;}}
         void ClearSelection(){selectedCard="";selectedUnit="";selectedSlot=-1;mouseHeld=false;draggingCard=false;unitPointerHeld=false;unitDragMoved=false;error="";}

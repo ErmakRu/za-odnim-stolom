@@ -20,9 +20,17 @@ namespace SummonersTable
         Font font;
         readonly string[] reactionIds=new string[3];
         readonly float[] reactionStarted=new float[3];
+        void Awake(){GetComponent<Canvas>().enabled=false;HideTransient();}
+        void HideTransient()
+        {
+            if(qtePanel!=null)qtePanel.gameObject.SetActive(false);
+            foreach(var slot in new[]{leftSlot,centerSlot,rightSlot})if(slot!=null)slot.gameObject.SetActive(false);
+            if(reactionSlots!=null)foreach(var slot in reactionSlots)if(slot!=null)slot.gameObject.SetActive(false);
+            phaseId=null;
+        }
         public void Initialize(Font typeface,Action<string> input)
         {
-            if(centerSlot==null)Build();EnsureReactionSlots();font=typeface;sendKey=input;
+            if(centerSlot==null)Build();EnsureReactionSlots();HideTransient();GetComponent<Canvas>().enabled=false;font=typeface;sendKey=input;
             centerRest=((RectTransform)centerSlot.transform).anchoredPosition;
             GetComponent<CanvasScaler>().screenMatchMode=CanvasScaler.ScreenMatchMode.Expand;
             for(int i=0;i<keyButtons.Length;i++)
@@ -46,15 +54,16 @@ namespace SummonersTable
         }
         public void Present(MatchState state,int seat,double now,string inspection,Catalog catalog,TableBoard board,bool visible)
         {
+            var canvas=GetComponent<Canvas>();canvas.enabled=false;
+            visible=visible&&state!=null;
             gameObject.SetActive(visible);
-            if(state==null){announcedCard="";announcedMatch="";return;}
+            if(!visible){HideTransient();announcedCard="";announcedMatch="";return;}
             if(announcedMatch!=state.matchId||announcedRound!=state.round)
             {announcedCard="";announcedMatch=state.matchId;announcedRound=state.round;}
             var cast=state.cast;bool reveal=cast!=null&&state.phase=="reveal",qte=cast!=null&&state.phase=="qte";
             var card=cast==null?null:catalog.Card(cast.cardId);
             if(card!=null)announcedCard=card.id;
             else announcedCard="";
-            if(!visible)return;
             leftSlot.Show(reveal?null:catalog.Card(announcedCard),catalog,font);
             rightSlot.Show(catalog.Card(inspection),catalog,font);
             centerSlot.Show(reveal?card:null,catalog,font);
@@ -79,6 +88,7 @@ namespace SummonersTable
                 string keys="";for(int i=0;i<q.sequence.Length;i++)keys+="<color="+(i<q.index?"#3FC5AD":i==q.index?"#F0B354":"#80939A")+">"+q.sequence[i]+"</color> ";
                 qteKeys.text=keys;qteStatus.text=Math.Max(0,q.deadline-now).ToString("0.0")+" с · Попытки: "+(3-q.mistakes)+" / 3\nПри срыве → "+state.players[q.recipient].name;
             }
+            canvas.enabled=true;
         }
         CardDisplaySlot ReactionAt(Vector2 screenPoint)
         {

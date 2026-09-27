@@ -34,7 +34,7 @@ float4 LayeredArt(float2 uv,float2 look)
     // Composite both sources before applying one shared foil highlight.
     float alpha=f.a+r.a*(1-f.a);
     float3 premultiplied=f.rgb*f.a+r.rgb*r.a*(1-f.a);
-    float sweep=pow(saturate(1-abs((uv.x+uv.y*.28)-(.5+look.x*.6+look.y*.3))*3),5);
+    float sweep=pow(saturate(1-abs((uv.x+uv.y*.28)-(frac(_Time.y/2.5)*2.5-.6+look.x*.12+look.y*.06))*3),5);
     float3 foil=.5+.5*cos(float3(0,2.1,4.2)+uv.x*4+uv.y*2+look.x*3-look.y*2);
     premultiplied+=foil*_SubjectFoil*sweep*.5*alpha;
     float3 color=lerp(float3(.035,.045,.065),b.rgb,b.a);

@@ -14,12 +14,15 @@ namespace SummonersTable
     [Serializable] public sealed class ComicLine
     {
         public string sourceId="",speaker="",text="",leftArt="",sfx="",ambience="";
+        public string actionType="",actionTarget="",actionParameter="";
         public string characterId="",kind="dialogue",artOverride="",rewardIcon="",rewardLabel="";
     }
     [Serializable] public sealed class ComicFrame
     {
         public string id="",title="",background="Art/board";
         public ComicActor left=new ComicActor(),right=new ComicActor();
+        public bool scriptedStaging;
+        public SummonersTable.Story.StorySpriteSlot[] sprites=Array.Empty<SummonersTable.Story.StorySpriteSlot>();
         public ComicLine[] lines=Array.Empty<ComicLine>();
     }
     [Serializable] public sealed class CampaignChapter
@@ -33,6 +36,7 @@ namespace SummonersTable
         public int schemaVersion=1;
         public string title="Пир Хохота",defaultDeck="noise";
         public float charactersPerSecond=60,ambienceVolume=.25f,sfxVolume=.6f;
+        public ComicFrame[] tutorial=Array.Empty<ComicFrame>();
         public ComicFrame[] introduction=Array.Empty<ComicFrame>(),ending=Array.Empty<ComicFrame>();
         public CampaignChapter[] chapters=Array.Empty<CampaignChapter>();
         public static string FilePath=>Application.isEditor?Path.Combine(Application.dataPath,"Campaign/Resources/Campaign/campaign.json"):Path.Combine(ConfigRuntime.DirectoryPath,"campaign.json");
@@ -40,7 +44,7 @@ namespace SummonersTable
         {
             string json=File.Exists(FilePath)?File.ReadAllText(FilePath):Resources.Load<TextAsset>("Campaign/campaign")?.text;
             if(string.IsNullOrEmpty(json))throw new FormatException("campaign.json отсутствует");
-            var book=JsonUtility.FromJson<CampaignBook>(json);book.Validate(catalog);return book;
+            var book=JsonUtility.FromJson<CampaignBook>(json);ApprovedOpening.Apply(book);book.Validate(catalog);return book;
         }
         public void Validate(Catalog catalog)
         {
@@ -58,7 +62,7 @@ namespace SummonersTable
                 foreach(var f in frames)
                 {
                     Check(f.lines!=null&&f.lines.Length>0&&f.lines.All(l=>l!=null&&!string.IsNullOrWhiteSpace(l.text)),"в кадре нужны реплики");
-                    Texture(f.background,false);
+                    Texture(f.background,true);
                     foreach(var actor in new[]{f.left,f.right}){Check(actor!=null,"отсутствует слот персонажа");Texture(actor.art,true);Check(float.IsFinite(actor.scale)&&actor.scale>=.2f&&actor.scale<=3&&float.IsFinite(actor.offsetX)&&Math.Abs(actor.offsetX)<=800&&float.IsFinite(actor.offsetY)&&Math.Abs(actor.offsetY)<=600,"размер/смещение персонажа");}
                     foreach(var line in f.lines){Texture(line.leftArt,true);Texture(line.artOverride,true);Texture(line.rewardIcon,true);Check(new[]{"dialogue","narration","thought"}.Contains(line.kind),"тип реплики");if(!string.IsNullOrEmpty(line.characterId))Check(characters.Any(c=>c.id==line.characterId),"неизвестный персонаж "+line.characterId);}
                 }
@@ -72,6 +76,7 @@ namespace SummonersTable
     {
         public int schemaVersion=1,chapter,frame,line,segment;
         public string phase="intro",deck="noise";
+        public System.Collections.Generic.List<string> wallOfShame=new System.Collections.Generic.List<string>();
         public static string TestPath;
         public static string SavePath=>TestPath??Path.Combine(Application.persistentDataPath,"campaign-progress.json");
         public static CampaignProgress Read(CampaignBook book)

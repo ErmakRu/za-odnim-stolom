@@ -1,0 +1,17 @@
+b01_zhabadushess turns=13 winner=0 accepted=134 rejected=0
+b02_malphas turns=13 winner=0 accepted=131 rejected=0
+b03_valafara turns=9 winner=0 accepted=99 rejected=0
+b04_goliath turns=11 winner=0 accepted=132 rejected=0
+b05_belial turns=21 winner=0 accepted=200 rejected=0
+b06_bahram turns=7 winner=0 accepted=78 rejected=0
+b07_grimwald turns=13 winner=0 accepted=122 rejected=0
+b08_abaddon turns=10 winner=1 accepted=125 rejected=0
+b09_malgis turns=21 winner=0 accepted=202 rejected=0
+b10_morticia turns=11 winner=0 accepted=117 rejected=0
+b11_aspid turns=10 winner=1 accepted=105 rejected=0
+b12_vulgor turns=7 winner=0 accepted=92 rejected=0
+b13_hecate turns=9 winner=0 accepted=96 rejected=0
+b14_astaroth turns=19 winner=0 accepted=181 rejected=0
+b15_bastet turns=11 winner=0 accepted=133 rejected=0
+b16_cronos turns=7 winner=0 accepted=98 rejected=0
+b17_azazel turns=19 winner=0 accepted=178 rejected=0

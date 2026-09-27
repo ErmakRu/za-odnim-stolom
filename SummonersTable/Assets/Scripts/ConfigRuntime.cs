@@ -65,6 +65,7 @@ namespace SummonersTable
         public static void ApplyWorld(TableBoard board,LocationConfig world)
         {
             if(board==null)return;
+            if(board.authoredEnvironment!=null)return;
             if(board.seating!=null){board.seating.bodyScale=world.scale;if(Application.isPlaying){foreach(var seat in board.seating.Seats)if(seat.body!=null)seat.body.localScale=Vector3.one*world.scale;}else board.seating.Build(board.seating.previewCount,world.scale);}
             if(!string.IsNullOrEmpty(world.scene))board.ApplyInterior(world.scene);
         }

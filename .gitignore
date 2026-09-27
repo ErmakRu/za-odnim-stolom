@@ -34,3 +34,4 @@ output/campaign/frames/
 !.env.example
 .DS_Store
 Thumbs.db
+/projectMDs

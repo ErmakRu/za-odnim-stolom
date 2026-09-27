@@ -1,0 +1,28 @@
+PASS 27
+PASS one loaded entry scene
+PASS startup has a rendering camera
+PASS play menu
+PASS new campaign starts at approved prologue
+PASS no duel/frame counters
+PASS long sentence remains whole
+PASS short sentences share a page
+PASS all 17 campaign models match roster
+PASS interactive STEP_HP_BARS
+PASS interactive STEP_DRAW_CARD
+PASS player selects creature slot
+PASS interactive STEP_BOARD_SLOTS
+PASS interactive STEP_QTE_RITUAL
+PASS interactive STEP_SPELL_CAST
+PASS interactive STEP_COMBAT_PHASE
+PASS interactive STEP_HAND_LIMIT_8
+PASS ninth card actually burns in engine
+PASS deck selection follows waking scene
+PASS all seven lessons occur before first battle
+PASS first campaign battle is the baron
+PASS baron instantiated as lizard
+PASS loss retry clears result and starts a fresh duel
+PASS loss retry preserves chapter
+PASS victory resumes after battle story
+PASS wall of shame records victory
+PASS standalone tutorial starts in dream
+PASS standalone tutorial preserves campaign save

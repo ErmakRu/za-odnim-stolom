@@ -63,12 +63,13 @@ namespace SummonersTable
             if(ui.search.gameObject.activeSelf)PresentSearch();if(ui.browser.gameObject.activeSelf)PresentBrowser();
             if(ui.handoff.gameObject.activeSelf){ui.handoff.Text("name",state.players[seat].name);ui.handoff.Text("hint",Casting&&state.cast.owner!=seat?"Выберите реакцию или пропустите.\nQTE владельца приостановлен на время локального ответа.":"Сейчас появится ваша рука.\nОстальные игроки, отвернитесь от экрана.");}
             if(ended){PresentResults();return;}if(!game)return;
-            board.ViewCamera.rect=new Rect(offset.x/Screen.width,(Screen.height-offset.y-760*scale)/Screen.height,W*scale/Screen.width,650*scale/Screen.height);
+            board.ViewCamera.rect=new Rect(0,0,1,1);
             var me=state.players[seat];var hud=ui.hud;string turn=state.players[state.activeSeat].name;
             hud.Text("turn","Раунд "+state.round+" / "+catalog.rules.rounds+" · Ход "+state.turnNumber);
             hud.Text("phase",state.phase=="action"?(MyAction?"ВАШ ХОД":"ХОД: "+turn):state.phase=="reveal"?"КАРТА ОБЪЯВЛЕНА":state.phase=="qte"?"РОЗЫГРЫШ: "+turn:state.phase=="combat"?"АТАКИ СУЩЕСТВ":"МАТЧ ЗАВЕРШЁН");
             hud.Text("timer",state.phase=="action"?"Решение: "+Math.Max(0,Math.Ceiling(state.deadline-Clock))+" с":state.phase=="reveal"?"Общий показ: "+Math.Max(0,Math.Ceiling(state.cast.revealUntil-Clock))+" с":state.phase=="qte"?(state.qte!=null?"QTE видно только вам":"Буквы и таймер скрыты, прогресс виден на столе."):"");
             hud.Text("name",me.name);hud.Text("personal","HP "+me.hp+" · Очки "+me.score+" · Колода "+me.deckCount);
+            hud.GetComponent<LocalHeroHud>()?.Present(me,catalog.rules.heroHp);
             hud.Enabled("end",MyAction&&!InputBlocked);hud.Get<Button>("end").targetGraphic.color=MatchRules.ReadyToEnd(catalog,state,seat)?new Color(.50f,.32f,.09f):new Color(.27f,.13f,.05f);
             hud.Text("endhint",MyAction?"Можно закончить ход раньше":"Наблюдаем за столом");hud.GetComponentInChildren<TurnBudgetView>(true).Present(state,seat);hud.Visible("pass",!online&&Casting&&state.cast.owner!=seat);hud.Visible("cancel",selectedCard!=""||selectedUnit!="");
             hud.Text("journal",historyOpen?"▲ Скрыть журнал":"▼ Журнал действий");
@@ -79,19 +80,19 @@ namespace SummonersTable
             string hot=!InputBlocked&&!historyOpen?ui.hand.Hit(Pointer):"";
             if(hot!=""&&hot!=hoverHandUid&&!captureMode){audioSource.pitch=UnityEngine.Random.Range(.92f,1.08f);ConfigAudio.Play("card.hover");}
             hoverHandUid=hot;ui.hand.Present(state,seat,catalog,font,selectedCard,hot,shakeHand,shakeUntil,board.CameraRig.Data);
-            ui.arrow.gameObject.SetActive(!InputBlocked&&!placing&&(selectedCard!=""||selectedUnit!=""&&(unitDragMoved||previewAim)));
+            ui.arrow.gameObject.SetActive(!InputBlocked&&(selectedCard!=""||selectedUnit!=""&&(unitDragMoved||previewAim)));
             if(ui.arrow.gameObject.activeSelf){var from=selectedUnit!=""?board.ViewCamera.WorldToScreenPoint(board.TargetPosition(seat,selectedUnit,state)):new Vector3(aimStart.x*scale+offset.x,Screen.height-aimStart.y*scale-offset.y);var to=previewAim?new Vector2(previewAimEnd.x*scale+offset.x,Screen.height-previewAimEnd.y*scale-offset.y):Pointer;ui.arrow.Set(from,to);}
             PresentWorldLabels();if(!captureMode)PrefabWorldInput();
         }
         void PresentWorldLabels()
         {
-            for(int i=0;i<ui.playerStatus.Length;i++){var owned=board.Seat(i)?.status;if(owned!=null)ui.playerStatus[i]=owned;if(ui.playerStatus[i]==null)continue;bool visible=i<state.players.Count&&!(i==seat&&board.CameraRig.Mode==0);ui.playerStatus[i].gameObject.SetActive(visible);if(visible)ui.playerStatus[i].Present(state.players[i],state,board,catalog.rules.heroHp);}
+            for(int i=0;i<ui.playerStatus.Length;i++){var owned=board.Seat(i)?.status;if(owned!=null)ui.playerStatus[i]=owned;if(ui.playerStatus[i]==null)continue;bool visible=i<state.players.Count&&i!=seat;ui.playerStatus[i].gameObject.SetActive(visible);if(visible)ui.playerStatus[i].Present(state.players[i],state,board,catalog.rules.heroHp);}
             var active=new HashSet<string>();
             foreach(var p in state.players)foreach(var unit in p.units)
             {
                 active.Add(unit.uid);if(!unitBadges.TryGetValue(unit.uid,out var badge)){badge=Instantiate(ui.unitBadgePrefab,ui.worldOverlay,false);unitBadges[unit.uid]=badge;}
                 badge.Show(true);var d=catalog.Card(unit.cardId);int attack=d.attack+MatchRules.Stack(state,p.units.Where(u=>!u.deploying&&u.uid!=unit.uid&&catalog.Card(u.cardId).effect=="attackAura").Sum(u=>catalog.Card(u.cardId).value),state.rules.Limit("attackAura",2));badge.Text("stats",attack+"/"+unit.hp);badge.Get<Image>("group").color=RoleColor(d);
-                SetWorldRect((RectTransform)badge.transform,TableBoard.SlotPosition(p.seat,unit.slot,state.players.Count)+Vector3.up*.1f,new Vector2(-24,-35));
+                SetWorldRect((RectTransform)badge.transform,TableBoard.SlotPosition(p.seat,unit.slot,state.players.Count)+Vector3.up*.12f,Vector2.up*22);
             }
             foreach(var k in unitBadges.Keys.Where(k=>!active.Contains(k)).ToList()){Destroy(unitBadges[k].gameObject);unitBadges.Remove(k);}
             ui.hud.Visible("center",!Casting);SetWorldRect(ui.hud.Get<RectTransform>("center"),new Vector3(0,TableBoard.TableTop+.1f,0),new Vector2(-90,24));
@@ -101,7 +102,7 @@ namespace SummonersTable
             foreach(var status in ui.playerStatus)if(status!=null&&status.gameObject.activeInHierarchy)status.AvoidNameOverlap(nameBlockers,board.ViewCamera);
         }
         void SetWorldRect(RectTransform r,Vector3 world,Vector2 padding)
-        {var p=board.ViewCamera.WorldToScreenPoint(world);RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)r.parent,p,null,out var local);r.position=((RectTransform)r.parent).TransformPoint(local+padding);}
+        {var p=board.ViewCamera.WorldToScreenPoint(world);RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)r.parent,p,null,out var local);r.position=((RectTransform)r.parent).TransformPoint(local+padding);r.anchoredPosition-=Vector2.Scale(new Vector2(.5f,.5f)-r.pivot,r.rect.size);}
         bool OverInterface(Vector2 point)
         {
             if(EventSystem.current==null)return false;var hits=new List<RaycastResult>();EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current){position=point},hits);return hits.Count>0;

@@ -2323,3 +2323,19 @@ MonoBehaviour:
     path: Assets/ThirdParty/Audio/Card_Game/User_Interface/Buttons/Card_Game_UI_Button_Silly_Spring_03.wav
     kind: audio
     asset: {fileID: 8300000, guid: ff0cdaf9533bd48278c64806793d39d6, type: 3}
+  - id: asset:d495fd46a21a26a4ca25ac52dfb86a19
+    path: Assets/ThirdParty/VFX/Vefects/Trails VFX URP/VFX/Materials/M_VFX_URP_Trail_Nature_01.mat
+    kind: material
+    asset: {fileID: 2100000, guid: d495fd46a21a26a4ca25ac52dfb86a19, type: 2}
+  - id: asset:2a057b7cb909af8429c9a079e069d863
+    path: Assets/Resources/Styles/TargetTrailUI.mat
+    kind: material
+    asset: {fileID: 2100000, guid: 2a057b7cb909af8429c9a079e069d863, type: 2}
+  - id: asset:b42521ad476565341b37518621b62de4
+    path: Assets/ThirdParty/VFX/Vefects/Trails VFX URP/VFX/Materials/M_VFX_URP_Trail_Water_02.mat
+    kind: material
+    asset: {fileID: 2100000, guid: b42521ad476565341b37518621b62de4, type: 2}
+  - id: asset:ae6bdf3417a5d6047a559654858dac31
+    path: Assets/ThirdParty/VFX/Vefects/Trails VFX URP/VFX/Particles/VFX_Trail_Dark.prefab
+    kind: prefab
+    asset: {fileID: 8597731318025692521, guid: ae6bdf3417a5d6047a559654858dac31, type: 3}

@@ -15,7 +15,9 @@ namespace SummonersTable
         public Transform Head {get;private set;}
         Vector3 namePosition;bool posed;float crownAboveHead=.32f;
         public Vector3 NamePosition=>posed?namePosition:(Head!=null?Head.position:transform.position)+Vector3.up*(crownAboveHead*transform.lossyScale.y+.2f);
-        GameObject model;Transform hips,leftThigh,rightThigh,leftCalf,rightCalf,leftFoot,rightFoot;
+        [SerializeField] GameObject model;
+        [SerializeField] string authoredHeroId="";
+        Transform hips,leftThigh,rightThigh,leftCalf,rightCalf,leftFoot,rightFoot;
         int outfit=-1,palette=-1;string idle="Idle_Normal",queued="";
         HeroAnimationSequence sequence;
         float actionUntil,flashUntil;Vector2 look;
@@ -27,7 +29,11 @@ namespace SummonersTable
             seated=sit;id=HeroOptions.Normalize(id);
             if(HeroId!=id||model==null)
             {
-                if(model!=null){if(Application.isPlaying)Destroy(model);else DestroyImmediate(model);}HeroId=id;var definition=library.Find(id);crownAboveHead=definition.crownAboveHead;posed=false;model=Instantiate(definition.prefab,transform);model.name="Hero "+id;
+                bool reuse=model!=null&&authoredHeroId==id;
+                if(!reuse&&model!=null){if(Application.isPlaying)Destroy(model);else DestroyImmediate(model);}
+                HeroId=id;var definition=library.Find(id);crownAboveHead=definition.crownAboveHead;posed=false;
+                if(!reuse){model=Instantiate(definition.prefab,transform);model.name="Hero "+id;}
+                authoredHeroId=id;
                 model.transform.localPosition=Vector3.zero;model.transform.localRotation=Quaternion.identity;model.transform.localScale=Vector3.one;
                 foreach(var t in model.GetComponentsInChildren<Transform>(true))
                 {t.gameObject.layer=gameObject.layer;if(t.name=="Weapon"||t.name=="Shield")t.gameObject.SetActive(false);}
@@ -37,7 +43,7 @@ namespace SummonersTable
                 renderers=model.GetComponentsInChildren<Renderer>(true);
                 // Preserve the animals' natural fur colors; only their armor is tinted.
                 if(library.naturalMaterial!=null)foreach(var r in renderers.Where(r=>!r.name.StartsWith("Body")))r.sharedMaterial=library.naturalMaterial;
-                model.AddComponent<ShaderStyleTarget>().Configure(renderers);
+                (model.GetComponent<ShaderStyleTarget>()??model.AddComponent<ShaderStyleTarget>()).Configure(renderers);
                 outfit=palette=-1;AnimationName="";Play("Idle_Normal",0);
             }
             if(outfit!=costume||palette!=tint)

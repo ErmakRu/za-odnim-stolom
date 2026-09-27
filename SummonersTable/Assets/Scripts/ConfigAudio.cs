@@ -9,7 +9,7 @@ namespace SummonersTable
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]static void Reset(){host=null;}
         static ConfigAudio Host
         {
-            get{if(host==null){var prefab=Resources.Load<ConfigAudio>("AudioRig");host=prefab!=null?Instantiate(prefab):new GameObject("AudioRig").AddComponent<ConfigAudio>();DontDestroyOnLoad(host.gameObject);}return host;}
+            get{if(host==null)host=FindFirstObjectByType<ConfigAudio>(FindObjectsInactive.Include);if(host==null)throw new System.InvalidOperationException("Place AudioRig in the scene before playing audio.");return host;}
         }
         public static SoundVariant Select(AudioCue cue)=>cue?.sounds==null||cue.sounds.Length==0?null:cue.sounds[Random.Range(0,cue.sounds.Length)];
         public static float Pitch(SoundVariant sound)=>sound.randomPitch?Random.Range(sound.pitchRange.x,sound.pitchRange.y):sound.pitch;
@@ -22,7 +22,7 @@ namespace SummonersTable
         IEnumerator Cue(AudioBus bus,SoundVariant sound,AudioClip clip,string action)
         {
             if(sound.delay>0)yield return new WaitForSecondsRealtime(sound.delay);
-            var item=new GameObject("Audio "+action);item.transform.SetParent(Bus(bus));var source=item.AddComponent<AudioSource>();source.playOnAwake=false;source.clip=clip;source.pitch=Pitch(sound);
+            var item=new GameObject("Audio "+action);item.transform.SetParent(Bus(bus));var source=item.AddComponent<AudioSource>();source.playOnAwake=false;source.clip=clip;source.pitch=Pitch(sound);if(action=="qte.correct"){var lowPass=item.AddComponent<AudioLowPassFilter>();if(lowPass!=null)lowPass.cutoffFrequency=3200;}
             var volume=item.AddComponent<EffectsVolume>();volume.baseVolume=sound.volume;volume.bus=bus;source.volume=sound.volume*UserSettings.Volume(bus);source.Play();Destroy(item,clip.length/source.pitch+.15f);
         }
         public static void RefreshAmbience()

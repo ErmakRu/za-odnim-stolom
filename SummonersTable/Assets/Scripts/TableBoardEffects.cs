@@ -15,6 +15,7 @@ namespace SummonersTable
         readonly Dictionary<string,float> displayedHp=new Dictionary<string,float>();
         readonly Dictionary<string,double> hpChangedAt=new Dictionary<string,double>();
         readonly Dictionary<string,GameObject> projectiles=new Dictionary<string,GameObject>();
+        readonly List<GameObject> fadingProjectiles=new List<GameObject>();
         readonly Dictionary<string,LineRenderer> outlines=new Dictionary<string,LineRenderer>();
         string orbCast="",eventMatch="",hoveredUnit="";int orbMistakes;
         float errorPulseUntil;
@@ -24,6 +25,7 @@ namespace SummonersTable
         public void ClearMatchVisuals()
         {
             foreach(var o in projectiles.Values)if(o!=null)Destroy(o);projectiles.Clear();
+            foreach(var o in fadingProjectiles)if(o!=null)Destroy(o);fadingProjectiles.Clear();
             worldNoticeSerial=0;previousHp.Clear();displayedHp.Clear();hpChangedAt.Clear();observedImpacts.Clear();
             ClearSpells();
         }
@@ -68,12 +70,19 @@ namespace SummonersTable
                     if(!projectiles.TryGetValue(e.id,out var projectile))
                     {
                         var prefab=CameraRig.settings?.attackEffect;
-                        projectile=prefab!=null?Instantiate(prefab,transform):Sphere("Attack preview",.18f,SeatColors[e.source]);if(prefab!=null)projectile.transform.localScale*=CameraRig.settings.attackEffectScale;projectiles[e.id]=projectile;
+                        projectile=prefab!=null?Instantiate(prefab,from,Quaternion.identity,transform):Sphere("Attack preview",.18f,SeatColors[e.source]);
+                        projectile.transform.position=from;
+                        float scale=prefab!=null?CameraRig.settings.attackEffectScale:1;
+                        projectile.transform.localScale*=scale;
+                        foreach(var trail in projectile.GetComponentsInChildren<TrailRenderer>())
+                        {trail.widthMultiplier*=scale;trail.Clear();trail.emitting=true;}
+                        projectiles[e.id]=projectile;
                         ConfigAudio.Play("creature.attack");
                     }
-                    projectile.transform.position=Vector3.Lerp(from,to,t/.4f)+Vector3.up*Mathf.Sin(t/.4f*Mathf.PI)*.45f;
+                    projectile.transform.position=Vector3.Lerp(from,to,t/.4f)+Vector3.up*Mathf.Sin(t/.4f*Mathf.PI)*1.2f;
                     if(units.TryGetValue(e.unitUid,out var card))card.transform.position+=(to-from).normalized*(Mathf.Sin(t/.4f*Mathf.PI)*.32f);
                 }
+                if(t>=.4f&&projectiles.TryGetValue(e.id,out var arriving))arriving.transform.position=to;
                 if(t>=.4f&&observedImpacts.Add(e.id))
                 {
                     SpawnImpact(to,e.damage);
@@ -81,7 +90,16 @@ namespace SummonersTable
                     ConfigAudio.Play("damage.hit");
                 }
             }
-            foreach(var id in projectiles.Keys.Where(id=>!activeProjectiles.Contains(id)).ToList()){Destroy(projectiles[id]);projectiles.Remove(id);}
+            foreach(var id in projectiles.Keys.Where(id=>!activeProjectiles.Contains(id)).ToList())
+            {
+                var projectile=projectiles[id];float tail=0;
+                foreach(var trail in projectile.GetComponentsInChildren<TrailRenderer>())
+                {trail.emitting=false;tail=Mathf.Max(tail,trail.time);}
+                // Preserve the ribbon at the target; clearing or returning it makes a stripe across the table.
+                if(tail>0){fadingProjectiles.Add(projectile);Destroy(projectile,tail+.05f);}else Destroy(projectile);
+                projectiles.Remove(id);
+            }
+            fadingProjectiles.RemoveAll(o=>o==null);
             foreach(var p in state.players)
             {
                 TrackHp("hero-"+p.seat,p.hp,HeroPosition(p.seat,count)+Vector3.up);
@@ -134,7 +152,7 @@ namespace SummonersTable
             for(int i=0;i<orbs.Count;i++)
             {
                 bool main=i<length,lit=main?i<cast.qteProgress:i-length<3-cast.qteMistakes;
-                if(orbLit[i]!=lit){Destroy(orbs[i]);orbs[i]=QteOrb(lit,!main);orbLit[i]=lit;if(main&&lit)ConfigAudio.Play("qte.correct");}
+                if(orbLit[i]!=lit){Destroy(orbs[i]);orbs[i]=QteOrb(lit,!main);orbLit[i]=lit;}
                 var orb=orbs[i];orb.transform.position=start+right*(main?(i-(length-1)*.5f)*.36f:(length*.18f+(i-length)*.2f))+Vector3.up*(main?0:.4f);
                 bool pulse=main&&i==cast.qteProgress&&Time.unscaledTime<errorPulseUntil;
                 bool effects=CameraRig.settings?.qteFire!=null;
