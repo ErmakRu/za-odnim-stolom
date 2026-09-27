@@ -15,8 +15,21 @@ namespace SummonersTable
             try
             {
                 yield return null;
+                if(menuCanvas.status.text.Contains("ТЕСТ")||menuCanvas.status.text.Contains("App ID"))throw new Exception("Developer label in menu");
+                if(UnityEngine.SceneManagement.SceneUtility.GetBuildIndexByScenePath("Assets/Scenes/PresentationLab.unity")<0)
+                {
+                    if(Debug.isDebugBuild)throw new Exception("Development Player");
+                    if(Resources.Load<TextAsset>("PerformanceTestRunInfo")!=null||Resources.Load<TextAsset>("PerformanceTestRunSettings")!=null)throw new Exception("Test metadata embedded in release");
+                }
                 if(FindObjectsByType<TableBoard>(FindObjectsInactive.Include,FindObjectsSortMode.None).Length!=0)throw new Exception("Menu created battle world");
-                yield return Shot(directory,"01-menu");FrontEndAction("local");yield return Shot(directory,"02-lobby");
+                if(!string.IsNullOrEmpty(ConfigRuntime.Error))throw new Exception("Config blocked modes: "+ConfigRuntime.Error);
+                yield return Shot(directory,"01-menu");
+                menuCanvas.buttons[Array.IndexOf(menuCanvas.actions,"steam")].onClick.Invoke();yield return null;
+                if(page!="steam")throw new Exception("Online button did not open online page");
+                FrontEndAction("home");yield return null;
+                menuCanvas.buttons[Array.IndexOf(menuCanvas.actions,"local")].onClick.Invoke();yield return null;
+                yield return Shot(directory,"02-lobby");
+                if(page!="local"||!lobbyCanvas.gameObject.activeInHierarchy)throw new Exception("Local button did not open lobby: page="+page+", active="+lobbyCanvas.gameObject.activeInHierarchy);
                 StartLocal(2);handoff=false;yield return null;yield return null;
                 if(FindObjectsByType<TableBoard>(FindObjectsInactive.Include,FindObjectsSortMode.None).Length!=1)throw new Exception("Battle world count");
                 state.phase="action";state.activeSeat=seat;state.deadline=Clock+9;
@@ -35,7 +48,7 @@ namespace SummonersTable
                 if(countdown.number.text!="3"||!countdown.number.enabled)throw new Exception("QTE countdown missing");
                 passed=true;
             }
-            finally{File.WriteAllText(Path.Combine(directory,"player-smoke.txt"),passed?"PASS: menu without TableWorld; lobby; one battle world; countdown; Water02 arrow; QTE countdown; five nonblank screenshots without missing shaders.":"FAILED: inspect Player.log");Application.Quit(passed?0:2);}
+            finally{File.WriteAllText(Path.Combine(directory,"player-smoke.txt"),passed?"PASS: valid runtime Config; online and local button listeners; menu without TableWorld; lobby; one battle world; countdown; Water02 arrow; QTE countdown; five nonblank screenshots without missing shaders.":"FAILED: inspect Player.log");Application.Quit(passed?0:2);}
         }
     }
 }

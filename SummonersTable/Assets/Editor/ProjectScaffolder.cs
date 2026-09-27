@@ -11,7 +11,7 @@ namespace SummonersTable.Editor
     public static class ProjectScaffolder
     {
         static Material gray,dark;
-        public static readonly string[] ScenePaths={"Assets/Scenes/MainMenu.unity","Assets/Scenes/Lobby.unity","Assets/Scenes/Match.unity","Assets/Scenes/PresentationLab.unity"};
+        public static readonly string[] ScenePaths={"Assets/Scenes/MainMenu.unity","Assets/Scenes/Lobby.unity","Assets/Scenes/Match.unity","Assets/Scenes/PresentationLab.unity","Assets/Campaign/Scenes/Campaign.unity"};
         [MenuItem("Summoners Table/Create missing scenes and prefabs")]
         public static void Generate()
         {

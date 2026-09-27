@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PresentationLab.unity
     guid: 615b68c40b0cdd444bf6bd4f74750a92
+  - enabled: 1
+    path: Assets/Campaign/Scenes/Campaign.unity
+    guid: 79e4e09699f53c841a77e968232355f0
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

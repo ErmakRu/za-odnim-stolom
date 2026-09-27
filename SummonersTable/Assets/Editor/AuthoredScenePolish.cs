@@ -38,8 +38,6 @@ namespace SummonersTable.Editor
             {
                 var scene=SceneManager.GetSceneByPath("Assets/Scenes/"+name+".unity");bool opened=!scene.IsValid()||!scene.isLoaded;if(opened)scene=EditorSceneManager.OpenScene("Assets/Scenes/"+name+".unity",OpenSceneMode.Additive);
                 SceneManager.SetActiveScene(scene);
-                if(!scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<CampaignComicView>(true)).Any())
-                {var prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Campaign/Resources/Campaign/CampaignComic.prefab");var comic=(GameObject)PrefabUtility.InstantiatePrefab(prefab,scene);comic.name="CampaignComic — editable screen";comic.SetActive(false);}
                 if(!scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<ConfigAudio>(true)).Any())
                 {var audio=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/AudioRig.prefab"),scene);audio.name="AudioRig — scene audio buses";}
                 EditorSceneManager.SaveScene(scene);if(opened)EditorSceneManager.CloseScene(scene,true);

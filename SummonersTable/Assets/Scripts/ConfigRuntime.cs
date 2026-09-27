@@ -13,7 +13,17 @@ namespace SummonersTable
         public static string Message {get;private set;}="";
         public static ConfigAssets Assets=>Resources.Load<ConfigAssets>("ConfigAssets");
         public static string TestDirectory;
-        public static string DirectoryPath=>TestDirectory??(Application.isEditor?Path.Combine(Application.dataPath,"StreamingAssets/Config"):Path.GetFullPath(Path.Combine(Application.dataPath,"../Config")));
+        public static string DirectoryPath
+        {
+            get
+            {
+                if(TestDirectory!=null)return TestDirectory;
+                if(Application.isEditor)return Path.Combine(Application.dataPath,"StreamingAssets/Config");
+                string external=Path.GetFullPath(Path.Combine(Application.dataPath,"../Config"));
+                // A regular Unity build already contains StreamingAssets. External Config is optional.
+                return Directory.Exists(external)?external:Path.Combine(Application.streamingAssetsPath,"Config");
+            }
+        }
         public static bool Available=>Current!=null;
         public static string GameplaySummary(RulesDef r)=>"Раундов: "+r.rounds+". Победа +"+r.roundWinPoints+", устранение +"+r.eliminationPoints+".\n\nВолшебники: "+r.wizardSpells+" заклинаний либо "+r.wizardCreatures+" существ и "+r.wizardMixedSpells+" заклинаний. Полководцы: "+r.commandersQte+" QTE за ход.\n\nHP: "+r.heroHp+"; рука: "+r.handLimit+"; слоты: "+r.boardSlots+". QTE: "+r.qteMistakes+" ошибки или тайм-аут передают карту противнику.\n\nСущества атакуют в конце хода. Реакции доступны во время розыгрыша, до завершения QTE. Стоимость расходуется и при срыве.\n\nКамера: колесо и ПКМ. Центр стола означает случайного соперника.";
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]

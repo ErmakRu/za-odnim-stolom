@@ -57,7 +57,7 @@ namespace SummonersTable
         {
             if(previewLobby)return;
             bool visible=modal==""&&!quitConfirm&&!settingsOpen;
-            if(menuCanvas!=null){menuCanvas.Visible(page=="menu"&&visible);menuCanvas.MenuPage(menuSection,System.IO.File.Exists(CampaignProgress.SavePath));menuCanvas.status.text=string.IsNullOrEmpty(ConfigRuntime.Error)?"ТЕСТ "+catalog.version+" · "+steam.Status:ConfigRuntime.Message;}
+            if(menuCanvas!=null){menuCanvas.Visible(page=="menu"&&visible);menuCanvas.MenuPage(menuSection,System.IO.File.Exists(CampaignProgress.SavePath));menuCanvas.status.text=string.IsNullOrEmpty(ConfigRuntime.Error)?steam.Status:ConfigRuntime.Message;}
             if(lobbyCanvas==null)return;
             bool localLobby=page=="local";
             lobbyCanvas.Visible((localLobby||page=="steam"&&steam.InRoom)&&visible);

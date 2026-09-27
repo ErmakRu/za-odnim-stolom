@@ -29,15 +29,17 @@ namespace SummonersTable
         public bool IsReady {get{return steam!=null&&cardCanvas!=null;}}
         public Catalog Catalog {get {return catalog;}}
 
-        public enum EntryScreen { Menu, Lobby, Match }
+        public enum EntryScreen { Menu, Lobby, Match, Campaign }
         [Header("Scene entry — editable in Inspector")]
         public EntryScreen entryScreen;
         [Tooltip("Authored battle world, created only when a match or lesson starts.")]
         public TableBoard battleWorldPrefab;
         [Range(2,4)] public int previewPlayers=2;
         static GameApp running;
+        internal const string CampaignScenePath="Assets/Campaign/Scenes/Campaign.unity";
+        static string pendingCampaignAction;
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        static void ResetEntry(){running=null;}
+        static void ResetEntry(){running=null;pendingCampaignAction=null;}
         void Awake()
         {
             if(running!=null&&running!=this){Destroy(this);return;}
@@ -68,6 +70,7 @@ namespace SummonersTable
             tickTone=Tone(680,.045f);failTone=Tone(160,.12f);successTone=Tone(980,.14f);
             if(entryScreen==EntryScreen.Lobby)page="local";
             else if(entryScreen==EntryScreen.Match){StartLocal(previewPlayers);handoff=false;}
+            else if(entryScreen==EntryScreen.Campaign){string action=pendingCampaignAction??(System.IO.File.Exists(CampaignProgress.SavePath)?"campaign-continue":"campaign-new");pendingCampaignAction=null;HandleCampaignAction(action);}
             SyncFrontEnd();UpdateAuthoredInterface();
             var args=Environment.GetCommandLineArgs();
             if(args.Contains("--local-test"))StartLocal(4);
@@ -84,7 +87,7 @@ namespace SummonersTable
             for(int i=0;i<length;i++)samples[i]=Mathf.Sin(2*Mathf.PI*frequency*i/44100)*Mathf.Sin(Mathf.PI*i/length)*.3f;
             var clip=AudioClip.Create("QTE",length,1,44100,false);clip.SetData(samples,0);return clip;
         }
-        void OnDestroy(){steam?.Dispose();}
+        void OnDestroy(){steam?.Dispose();if(running==this)running=null;}
         void StartLocal(int count)
         {
             CloseCampaign();
@@ -148,7 +151,7 @@ namespace SummonersTable
         }
         double Clock {get {return online?state.serverTime+Time.realtimeSinceStartupAsDouble-steam.ReceivedAt:localTime;}}
         void ClearSelection(){selectedCard="";selectedUnit="";selectedSlot=-1;mouseHeld=false;draggingCard=false;unitPointerHeld=false;unitDragMoved=false;error="";}
-        void ExitMatch(){CloseCampaign();steam.Leave();local=null;localBotDirector=null;state=null;online=false;page="menu";quitConfirm=false;settingsOpen=false;postMatchLobby=false;historyOpen=false;ClearSelection();}
+        void ExitMatch(){CloseCampaign();steam.Leave();local=null;localBotDirector=null;state=null;online=false;page="menu";quitConfirm=false;settingsOpen=false;postMatchLobby=false;historyOpen=false;ClearSelection();if(entryScreen==EntryScreen.Campaign)UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/MainMenu.unity");}
         Color RoleColor(CardDef c){var role=catalog.roleColors.Find(r=>r.name==c.role);ColorUtility.TryParseHtmlString(role?.hex??"#FFFFFF",out var color);return color;}
     }
 }

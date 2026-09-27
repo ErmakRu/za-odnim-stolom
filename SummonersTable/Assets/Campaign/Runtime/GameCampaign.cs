@@ -14,13 +14,18 @@ namespace SummonersTable
         void InitializeCampaign()
         {
             comic=FindFirstObjectByType<CampaignComicView>(FindObjectsInactive.Include);
-            if(comic==null)throw new InvalidOperationException("Place the CampaignComic Canvas in the scene.");
-            comic.Hide();
-            if(FindFirstObjectByType<CampaignEntry>()!=null)OpenCampaign();
+            if(comic!=null)comic.Hide();
+            else if(entryScreen==EntryScreen.Campaign)throw new InvalidOperationException("Place CampaignComic in the Campaign scene.");
         }
         bool HandleCampaignAction(string action)
         {
-            if(action=="campaign"){OpenCampaign();return true;}
+            if(action=="campaign"){menuSection="campaign";return true;}
+            if((action=="campaign-new"||action=="campaign-continue"||action=="tutorial")&&entryScreen!=EntryScreen.Campaign)
+            {
+                pendingCampaignAction=action;
+                UnityEngine.SceneManagement.SceneManager.LoadScene(CampaignScenePath);
+                return true;
+            }
             if(action=="campaign-new"||action=="tutorial"){OpenCampaign();standaloneTutorial=action=="tutorial";campaignSave=new CampaignProgress{deck=campaign.defaultDeck,phase="intro",chapter=0,frame=0,line=0,segment=0};campaignActive=true;ShowCampaignLine();return true;}
             if(action=="campaign-continue"){OpenCampaign();comic.resumeAction();return true;}
             return false;
@@ -44,7 +49,7 @@ namespace SummonersTable
         {
             steam.Leave();online=false;local=null;localBotDirector=null;state=null;handoff=false;postMatchLobby=false;historyOpen=false;interfaceMatch="";ui.results.Show(false);page="campaign";settingsOpen=false;modal="";quitConfirm=false;ClearSelection();
         }
-        void CampaignHub(){ClearCampaignMatch();campaignActive=campaignMatch=false;comic.Hide();page="menu";menuSection="campaign";}
+        void CampaignHub(){ExitMatch();}
         void CampaignDeck(int direction)
         {
             int index=catalog.decks.FindIndex(d=>d.id==campaignSave.deck);campaignSave.deck=catalog.decks[(index+direction+catalog.decks.Count)%catalog.decks.Count].id;if(!standaloneTutorial)campaignSave.Save();comic.ShowHub(campaign,campaignSave,catalog);ConfigureDeckSelection();
@@ -113,7 +118,7 @@ namespace SummonersTable
         }
         void CampaignSectionFinished()
         {
-            if(standaloneTutorial){CloseCampaign();page="menu";menuSection="play";return;}
+            if(standaloneTutorial){ExitMatch();return;}
             campaignSave.segment=0;
             campaignSave.frame=campaignSave.line=campaignSave.segment=0;
             if(campaignSave.phase=="before"){StartCampaignBattle();return;}
@@ -156,7 +161,7 @@ namespace SummonersTable
             ui.results.Text("votes",(CampaignWon?"Продолжите историю или вернитесь к выбору колоды.":"Прогресс сохранён. Этот поединок можно повторить."));
             ButtonLabel("again",CampaignWon?"Продолжить историю":"Повторить поединок");ButtonLabel("deck","Кампания");ui.results.Enabled("again",true);return true;
         }
-        void CampaignEscape(){if(page!="campaign"||comic==null)return;CloseCampaign();page="menu";}
+        void CampaignEscape(){if(page!="campaign"||comic==null)return;ExitMatch();}
         void CloseCampaign(){EndDreamScene();standaloneTutorial=false;tutorialLesson="";if(tutorialPanel!=null)tutorialPanel.gameObject.SetActive(false);campaignActive=campaignMatch=false;if(comic!=null)comic.Hide();}
     }
 }

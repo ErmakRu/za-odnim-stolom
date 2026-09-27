@@ -69,7 +69,7 @@ namespace SummonersTable
             {
                 if(!SteamAPI.Init()){Status="Запустите Steam, войдите в аккаунт и нажмите «Повторить».";return;}
                 Available=true;UserId=SteamUser.GetSteamID().m_SteamID;Name=Clean(SteamFriends.GetPersonaName(),28);
-                Status="Steam: "+Name+" • тестовый App ID 480";Debug.Log("STEAM_INITIALIZED app=480");
+                Status="Steam: "+Name;Debug.Log("STEAM_INITIALIZED app=480");
                 SteamNetworkingUtils.InitRelayNetworkAccess();
                 callbacks.Add(Callback<LobbyDataUpdate_t>.Create(x=>{if(x.m_ulSteamIDLobby==RoomId)RefreshMembers();}));
                 callbacks.Add(Callback<LobbyChatUpdate_t>.Create(x=>{if(x.m_ulSteamIDLobby==RoomId)RefreshMembers();}));
