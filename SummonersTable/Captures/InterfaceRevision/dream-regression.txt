@@ -1,0 +1,22 @@
+PASS 21
+PASS dream dialogue retains battle table
+PASS no tavern or floor during dream
+PASS story art replaces skybox
+PASS no full screen backdrop over dream table
+PASS same world transitions to interactive lesson
+PASS both players use shared health prefab
+PASS identical health styling for both players
+PASS lower ordinary camera is initial view
+PASS chair and actor moved slightly as one group
+PASS own actor not hidden
+PASS normal environment restored after dream
+PASS slot in ordinary camera 0
+PASS slot not covered by full hand 0
+PASS slot in ordinary camera 1
+PASS slot not covered by full hand 1
+PASS slot in ordinary camera 2
+PASS slot not covered by full hand 2
+PASS slot in ordinary camera 3
+PASS slot not covered by full hand 3
+PASS slot in ordinary camera 4
+PASS slot not covered by full hand 4

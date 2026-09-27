@@ -37,7 +37,7 @@ namespace SummonersTable
                         var points=new[]{new Vector3(mesh.min.x,mesh.max.y,mesh.min.z),new Vector3(mesh.min.x,mesh.max.y,mesh.max.z),new Vector3(mesh.max.x,mesh.max.y,mesh.min.z),new Vector3(mesh.max.x,mesh.max.y,mesh.max.z)};
                         foreach(var localPoint in points){var p=board.ViewCamera.WorldToScreenPoint(anchor.TransformPoint(localPoint));Check(p.z>0&&p.x>0&&p.x<Screen.width&&p.y>0&&p.y<Screen.height&&!bounds.Any(r=>r.Contains(p)),"slot corner visible above eight-card hand "+count+"/"+i);}
                     }
-                    Check(board.Actor(0).GetComponentsInChildren<Renderer>().All(r=>!r.enabled),"local model does not cover field "+count);
+                    Check(board.Actor(0).GetComponentsInChildren<Renderer>().All(r=>r.enabled),"local model remains rendered "+count);
                     }
                 }
                 StartLocal(2);handoff=false;local.State.players[0].hand.Clear();local.State.players[0].hand.Add(new HandCard{uid="qte-check",cardId="C02"});state=local.View(0,0);

@@ -6,6 +6,8 @@ namespace SummonersTable
     public sealed class CampaignComicView:MonoBehaviour
     {
         public GameObject comic,hub;
+        public GameObject[] storyBackdropLayers=Array.Empty<GameObject>();
+        public void SetWorldDialogue(bool visible){background.gameObject.SetActive(!visible);foreach(var layer in storyBackdropLayers)if(layer!=null)layer.SetActive(!visible);}
         public RawImage background,left,right,center,rewardIcon;
         public Image rightBorder;
         public TavernPanel dialoguePanel,namePanel;

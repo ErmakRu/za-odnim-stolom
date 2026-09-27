@@ -58,7 +58,7 @@ namespace SummonersTable
             string heading=campaignSave.phase=="intro"?"ПРОЛОГ · "+frame.title:campaignSave.phase=="ending"?"ЭПИЛОГ · ПИР ХОХОТА":$"ПОЕДИНОК {campaignSave.chapter+1} / {campaign.chapters.Length} · {campaign.chapters[campaignSave.chapter].title}";
             string finish=campaignSave.phase=="before"?"Начать поединок":campaignSave.phase=="ending"?"Завершить историю":"Продолжить путь";
             var shownLine=frame.lines[campaignSave.line];
-            bool inDream=shownLine.sourceId!=null&&shownLine.sourceId.StartsWith("1.",StringComparison.Ordinal);
+            bool inDream=shownLine.sourceId!=null&&shownLine.sourceId.StartsWith("1.",StringComparison.Ordinal)&&frame.background=="Art/bg_barn_sepia";
             if(inDream){BeginDreamScene();dreamNarration=true;tutorialLesson="";if(tutorialPanel!=null)tutorialPanel.gameObject.SetActive(false);ClearSelection();}
             else {EndDreamScene();ClearCampaignMatch();}
             if(shownLine.actionType=="WALL_OF_SHAME_WRITE"&&!standaloneTutorial)
@@ -69,7 +69,7 @@ namespace SummonersTable
             }
             int savedSegment=campaignSave.segment;
             comic.Present(frame,frame.lines[campaignSave.line],heading,$"Кадр {campaignSave.frame+1}/{frames.Length} · Реплика {campaignSave.line+1}/{frame.lines.Length}",campaignSave.frame>0||campaignSave.line>0,last,finish);
-            comic.background.gameObject.SetActive(!inDream);
+            comic.SetWorldDialogue(inDream);
             comic.UseSegment(savedSegment);
             comic.skip.gameObject.SetActive(campaignSave.phase!="intro"&&!standaloneTutorial);
             comic.skip.GetComponentInChildren<Text>().text=campaignSave.phase=="before"?"К поединку":campaignSave.phase=="intro"?"Пропустить пролог":"Пропустить сцену";

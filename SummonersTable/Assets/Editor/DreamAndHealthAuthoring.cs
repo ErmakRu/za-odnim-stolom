@@ -25,6 +25,8 @@ namespace SummonersTable.Editor
         }
         static void ApplyRoot(GameObject root)
         {
+            foreach(var comic in root.GetComponentsInChildren<CampaignComicView>(true))
+                comic.storyBackdropLayers=new[]{comic.comic.transform.Find("Opaque backdrop"),comic.comic.transform.Find("Background shade")}.Where(t=>t!=null).Select(t=>t.gameObject).ToArray();
             foreach(var local in root.GetComponentsInChildren<LocalHeroHud>(true))
             {var bar=Replace((RectTransform)local.healthText.transform.parent);local.healthFill=bar.fill;local.healthText=bar.value;EditorUtility.SetDirty(local);}
             foreach(var status in root.GetComponentsInChildren<PlayerStatusView>(true))
@@ -35,7 +37,7 @@ namespace SummonersTable.Editor
             {
                 var backdrop=board.GetComponent<DreamTableBackdrop>();if(backdrop==null)backdrop=board.gameObject.AddComponent<DreamTableBackdrop>();
                 backdrop.view=board.tableCamera;backdrop.dreamSky=sky;
-                backdrop.surroundings=board.authoredEnvironment.Cast<Transform>().Where(t=>t.name=="Floor"||t.name.StartsWith("TavernEnvironment")).Select(t=>t.gameObject).ToArray();EditorUtility.SetDirty(backdrop);
+                backdrop.surroundings=board.authoredEnvironment.Cast<Transform>().Where(t=>t.name=="Floor"||t.name.StartsWith("TavernEnvironment")).Select(t=>t.gameObject).Concat(board.transform.Cast<Transform>().Where(t=>t.name=="GameObject").Select(t=>t.gameObject)).ToArray();EditorUtility.SetDirty(backdrop);
             }
         }
         public static string Apply()

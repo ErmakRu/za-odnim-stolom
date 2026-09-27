@@ -30,8 +30,14 @@ namespace SummonersTable
                 var ownedActor=board.Actor(player.seat);var camera=board.ViewCamera;
                 var ownedHead=camera.WorldToScreenPoint(ownedActor!=null&&ownedActor.Head!=null?ownedActor.Head.position:seatNamePoint.position);
                 float logical=Mathf.Min(camera.pixelWidth/1600f,camera.pixelHeight/1000f);
-                ownedHead.y+=100*logical;nameAnchor.position=camera.ScreenToWorldPoint(ownedHead);
-                ownedHead.y-=42*logical;healthAnchor.position=camera.ScreenToWorldPoint(ownedHead);
+                float top=ownedHead.y;
+                if(ownedActor!=null)foreach(var renderer in ownedActor.GetComponentsInChildren<Renderer>())
+                {
+                    if(!renderer.enabled)continue;var bounds=renderer.bounds;
+                    for(int i=0;i<8;i++){var corner=bounds.center+Vector3.Scale(bounds.extents,new Vector3((i&1)==0?-1:1,(i&2)==0?-1:1,(i&4)==0?-1:1));var point=camera.WorldToScreenPoint(corner);if(point.z>0)top=Mathf.Max(top,point.y);}
+                }
+                ownedHead.y=top+84*logical;nameAnchor.position=camera.ScreenToWorldPoint(ownedHead);
+                ownedHead.y=top+32*logical;healthAnchor.position=camera.ScreenToWorldPoint(ownedHead);
                 nameAnchor.rotation=healthAnchor.rotation=camera.transform.rotation;ReadableScale(camera);KeepOnScreen(camera);healthNumber.color=Color.black;return;
             }
             var hero=TableBoard.HeroPosition(player.seat,state.players.Count);var namePosition=hero+nameOffset;

@@ -24,7 +24,7 @@ namespace SummonersTable
                 int worldId=board.GetInstanceID();var backdrop=board.GetComponent<DreamTableBackdrop>();
                 Check(backdrop.Showing&&backdrop.surroundings.All(x=>!x.activeSelf),"no tavern or floor during dream");
                 Check(RenderSettings.skybox==backdrop.dreamSky&&board.ViewCamera.clearFlags==CameraClearFlags.Skybox,"story art replaces skybox");
-                Check(!comic.background.gameObject.activeSelf,"no full screen backdrop over dream table");CaptureInterface("dream-dialogue");
+                Check(!comic.background.gameObject.activeSelf&&comic.storyBackdropLayers.All(x=>!x.activeSelf),"no full screen backdrop over dream table");CaptureInterface("dream-dialogue");
                 CampaignNext();CampaignNext();yield return new WaitForSeconds(.5f);
                 Check(board.GetInstanceID()==worldId&&!dreamNarration&&tutorialLesson=="STEP_HP_BARS","same world transitions to interactive lesson");
                 var own=ui.hud.GetComponent<LocalHeroHud>().healthFill.GetComponentInParent<HeroHealthBar>();var other=board.Seat(1).status.healthAnchor.GetComponent<HeroHealthBar>();
@@ -35,9 +35,19 @@ namespace SummonersTable
                 Check(board.Actor(0).GetComponentsInChildren<Renderer>().All(x=>x.enabled),"own actor not hidden");CaptureInterface("dream-health");
                 tutorialLesson="";tutorialPanel.gameObject.SetActive(false);CloseCampaign();StartLocal(2);handoff=false;local.State.players[0].hand.Clear();
                 for(int i=0;i<8;i++)local.State.players[0].hand.Add(new HandCard{uid="framing-"+i,cardId="C02"});state=local.View(0,localTime);yield return new WaitForSeconds(.5f);
-                Check(!backdrop.Showing&&backdrop.surroundings.All(x=>x.activeSelf),"normal environment restored after dream");
-                var hand=ui.hand.GetComponentsInChildren<CardView>().Where(c=>c.gameObject.activeInHierarchy).Select(c=>ScreenArea((RectTransform)c.transform,0)).ToArray();
-                for(int i=0;i<5;i++){var point=board.ViewCamera.WorldToScreenPoint(board.Seat(0).slots[i].position);Check(point.z>0&&point.x>0&&point.x<Screen.width&&point.y>0&&point.y<Screen.height,"slot in ordinary camera "+i);Check(!hand.Any(r=>r.Contains(point)),"slot not covered by full hand "+i);}
+                Check(!backdrop.Showing&&backdrop.surroundings.Where(x=>x.name.StartsWith("TavernEnvironment")).All(x=>x.activeSelf),"normal environment restored after dream");
+                var hand=ui.hand.Slots.Where(c=>c.gameObject.activeInHierarchy).Select(c=>ScreenArea((RectTransform)c.transform,0)).ToArray();
+                for(int i=0;i<5;i++)
+                {
+                    var slot=board.Seat(0).slots[i];var bounds=slot.GetComponent<MeshFilter>().sharedMesh.bounds;
+                    for(int corner=0;corner<4;corner++)
+                    {
+                        var p=new Vector3((corner&1)==0?bounds.min.x:bounds.max.x,bounds.max.y,(corner&2)==0?bounds.min.z:bounds.max.z);
+                        var point=board.ViewCamera.WorldToScreenPoint(slot.TransformPoint(p));
+                        Check(point.z>0&&point.x>0&&point.x<Screen.width&&point.y>0&&point.y<Screen.height,"slot corner in ordinary camera "+i+"/"+corner);
+                        Check(!hand.Any(rect=>rect.Contains(point)),"slot corner not covered by full hand "+i+"/"+corner);
+                    }
+                }
                 CaptureInterface("ordinary-camera-full-hand");
                 previewAim=true;ChooseHand(state.players[0].hand[0],new Vector2(750,850));previewAimEnd=new Vector2(1050,450);yield return new WaitForSeconds(.3f);CaptureInterface("wide-water-arrow");ClearSelection();previewAim=false;
                 DreamPresentationStatus="PASS "+report.Count;

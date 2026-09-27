@@ -10,9 +10,9 @@
     "cameraModes": [
       {
         "name": "РћС‚ РїРµСЂРІРѕРіРѕ Р»РёС†Р°",
-        "distance": 8,
+        "distance": 9,
         "height": 8.4,
-        "focusHeight": 6.0,
+        "focusHeight": 5.7,
         "fieldOfView": 74,
         "yawLimit": 90.0,
         "downLimit": 45.0,

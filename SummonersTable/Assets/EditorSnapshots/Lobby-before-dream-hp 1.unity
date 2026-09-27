@@ -31802,9 +31802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.CampaignComicView
   comic: {fileID: 1421240826}
   hub: {fileID: 1150925529}
-  storyBackdropLayers:
-  - {fileID: 1736059325}
-  - {fileID: 900776917}
+  storyBackdropLayers: []
   background: {fileID: 1587135703}
   left: {fileID: 1973916091}
   right: {fileID: 803855890}
