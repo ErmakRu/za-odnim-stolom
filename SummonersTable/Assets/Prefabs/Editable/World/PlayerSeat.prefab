@@ -1,5 +1,41 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1090067453406779745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1920933343656710697}
+  m_Layer: 0
+  m_Name: Character placement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1920933343656710697
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090067453406779745}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8083213188847204662}
+  - {fileID: 7287362460446102009}
+  - {fileID: 9172702641913583971}
+  - {fileID: 1765227119133941995}
+  - {fileID: 2108287448447763768}
+  m_Father: {fileID: 3000613454709716579}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3156700999800756904
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,12 +66,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8083213188847204662}
-  - {fileID: 7287362460446102009}
   - {fileID: 5415141943263262276}
-  - {fileID: 1765227119133941995}
-  - {fileID: 2108287448447763768}
   - {fileID: 5226688908775058674}
+  - {fileID: 1920933343656710697}
   m_Father: {fileID: 7651449657960832304}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3223655515097299438
@@ -62,12 +95,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3223655515097299438}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 6.28, z: 2.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3000613454709716579}
+  m_Father: {fileID: 1920933343656710697}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4414819326610040556
 GameObject:
@@ -154,7 +187,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9172702641913583971}
   - {fileID: 3048006679593770789}
   - {fileID: 3723624911215928390}
   - {fileID: 3507502429720424077}
@@ -203,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.PrefabConfigBinding
   configId: PlayerSeat
+  applyJsonOverrides: 0
 --- !u!1 &6382834071897311429
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,12 +260,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6382834071897311429}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 12.8, z: -0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3000613454709716579}
+  m_Father: {fileID: 1920933343656710697}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7502426166316546365
 GameObject:
@@ -576,7 +609,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3000613454709716579}
+    m_TransformParent: {fileID: 1920933343656710697}
     m_Modifications:
     - target: {fileID: 8492889854087400942, guid: fcc5597c57437f04d8565d222ff011da, type: 3}
       propertyPath: m_Name
@@ -657,7 +690,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 7651449657960832304}
+    m_TransformParent: {fileID: 1920933343656710697}
     m_Modifications:
     - target: {fileID: 2147101796095799909, guid: 08bd9f99ea8a5b2439dbb17e723ffa31, type: 3}
       propertyPath: m_Name
@@ -764,6 +797,22 @@ PrefabInstance:
     - target: {fileID: 3616930269191064081, guid: 1aecf4448b14504469d6047b3e446e40, type: 3}
       propertyPath: m_Name
       value: PlayerStatus
+      objectReference: {fileID: 0}
+    - target: {fileID: 4246546905497137434, guid: 1aecf4448b14504469d6047b3e446e40, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4246546905497137434, guid: 1aecf4448b14504469d6047b3e446e40, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4246546905497137434, guid: 1aecf4448b14504469d6047b3e446e40, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609064892842863996, guid: 1aecf4448b14504469d6047b3e446e40, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5811053215352272294, guid: 1aecf4448b14504469d6047b3e446e40, type: 3}
       propertyPath: m_Pivot.x
@@ -900,8 +949,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 268485333814405173, guid: 1aecf4448b14504469d6047b3e446e40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6593726274462058742}
   m_SourcePrefab: {fileID: 100100000, guid: 1aecf4448b14504469d6047b3e446e40, type: 3}
+--- !u!1 &4482806677213153156 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 268485333814405173, guid: 1aecf4448b14504469d6047b3e446e40, type: 3}
+  m_PrefabInstance: {fileID: 4436038009886011313}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6593726274462058742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4482806677213153156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0.08, g: 0.035, b: 0.012, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!224 &7866375734331464215 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5811053215352272294, guid: 1aecf4448b14504469d6047b3e446e40, type: 3}
@@ -924,7 +996,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3000613454709716579}
+    m_TransformParent: {fileID: 1920933343656710697}
     m_Modifications:
     - target: {fileID: 1231166017945709133, guid: 0d1a1ef0e19145547a2a6644238375f4, type: 3}
       propertyPath: m_LocalScale.z

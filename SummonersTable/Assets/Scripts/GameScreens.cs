@@ -11,9 +11,18 @@ namespace SummonersTable
         string menuSection="home";
         System.Collections.IEnumerator LoadPresentationScenes()
         {
-            if(FindFirstObjectByType<TableBoard>(FindObjectsInactive.Include)==null)
-                throw new System.InvalidOperationException("Entry scene is missing its authored TableWorld.");
+            // Menus do not preload battle locations. Match scenes may contain an authored world.
             yield break;
+        }
+        void EnsureBattleWorld()
+        {
+            if(board!=null)return;
+            if(battleWorldPrefab==null)throw new System.InvalidOperationException("Assign the authored battle world prefab on GameApp.");
+            board=Instantiate(battleWorldPrefab);
+            board.name="TableWorld";
+            board.Initialize(catalog);
+            ConfigRuntime.ApplyScene();
+            foreach(var backdrop in FindObjectsByType<MenuBackdropCamera>(FindObjectsInactive.Include,FindObjectsSortMode.None))backdrop.board=board;
         }
         void BindFrontEnd()
         {

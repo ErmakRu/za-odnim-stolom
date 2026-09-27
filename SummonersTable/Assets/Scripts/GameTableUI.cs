@@ -48,7 +48,7 @@ namespace SummonersTable
                         if(Time.realtimeSinceStartupAsDouble-localReactionStarted>=8)
                             Send(new GameCommand{kind="pass",phaseId=s.cast.id});
                     }
-                    else{if(tutorialLesson==""||!tutorialComplete&&(s.phase=="reveal"||s.phase=="qte"||s.phase=="combat"))localTime+=Time.unscaledDeltaTime;localReactionStarted=0;}
+                    else{if(!dreamNarration&&(tutorialLesson==""||!tutorialComplete&&(s.phase=="reveal"||s.phase=="qte"||s.phase=="combat")))localTime+=Time.unscaledDeltaTime;localReactionStarted=0;}
                 }
                 local.Tick(localTime);
                 if(!handoff&&modal==""&&!quitConfirm&&!settingsOpen)localBotDirector?.Tick(local,localTime);

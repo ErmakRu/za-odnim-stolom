@@ -4236,6 +4236,8 @@ GameObject:
   - component: {fileID: 397193189867353449}
   - component: {fileID: 3573002195722716324}
   - component: {fileID: 5729988187983315754}
+  - component: {fileID: 1658759147078222706}
+  - component: {fileID: 9201446695436357187}
   m_Layer: 0
   m_Name: SettingsPanel
   m_TagString: Untagged
@@ -4507,6 +4509,32 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
+--- !u!225 &1658759147078222706
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4912287622230270393}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &9201446695436357187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4912287622230270393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6652524aa4135ca48bfb9da68aa37699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SummonersTable.UiEntrance
+  duration: 0.24
+  offset: 18
 --- !u!1 &4926356617187448213
 GameObject:
   m_ObjectHideFlags: 0

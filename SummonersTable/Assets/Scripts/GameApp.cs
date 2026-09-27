@@ -26,12 +26,14 @@ namespace SummonersTable
         AudioSource audioSource;AudioClip tickTone,failTone,successTone;string lastQte="";int lastProgress,lastMistakes;
         CardTableCanvas cardCanvas;
         MotionAnnouncements announcements;
-        public bool IsReady {get{return steam!=null&&board!=null&&cardCanvas!=null;}}
+        public bool IsReady {get{return steam!=null&&cardCanvas!=null;}}
         public Catalog Catalog {get {return catalog;}}
 
         public enum EntryScreen { Menu, Lobby, Match }
         [Header("Scene entry — editable in Inspector")]
         public EntryScreen entryScreen;
+        [Tooltip("Authored battle world, created only when a match or lesson starts.")]
+        public TableBoard battleWorldPrefab;
         [Range(2,4)] public int previewPlayers=2;
         static GameApp running;
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
@@ -49,8 +51,7 @@ namespace SummonersTable
             catalog=ConfigRuntime.ActiveCatalog;catalog.Validate();localOptions=ConfigRuntime.Current.rules.defaults.Copy();
             font=Font.CreateDynamicFontFromOSFont("Arial",24);BindFrontEnd();
             board=FindFirstObjectByType<TableBoard>(FindObjectsInactive.Include);
-            if(board==null)throw new InvalidOperationException("Place TableWorld in the Match scene.");
-            board.Initialize(catalog);
+            if(board!=null)board.Initialize(catalog);
             cardCanvas=FindFirstObjectByType<CardTableCanvas>(FindObjectsInactive.Include);
             if(cardCanvas==null)throw new InvalidOperationException("Place CardTableCanvas in the Match scene.");
             cardCanvas.Initialize(font,key=>{if(state?.qte!=null)Send(new GameCommand{kind="key",phaseId=state.qte.id,key=key});});
@@ -86,6 +87,7 @@ namespace SummonersTable
         void StartLocal(int count)
         {
             CloseCampaign();
+            EnsureBattleWorld();
             if(!string.IsNullOrEmpty(ConfigRuntime.Error)){error=ConfigRuntime.Message;return;}RefreshConfigBetweenMatches();if(count<Math.Max(2,catalog.world.playerRange.x)||count>Math.Min(4,catalog.world.playerRange.y)){error="Эта локация допускает "+catalog.world.playerRange.x+"–"+catalog.world.playerRange.y+" игроков. Матч поддерживает 2–4.";return;}steam.Leave();var members=new List<LobbyMember>();
             for(int i=0;i<count;i++)members.Add(new LobbyMember{id="local-"+i,name=localBots[i]?"Бот "+(i+1):string.IsNullOrWhiteSpace(localNames[i])?"Игрок "+(i+1):localNames[i],isBot=localBots[i],deckId=catalog.decks[localDecks[i]].id,heroId=localHeroes[i],outfit=localOutfits[i],palette=localPalettes[i],ready=true});
             localTime=0;local=new GameEngine(catalog,members,Environment.TickCount,0,localOptions);online=false;seq=new int[4];seat=0;localBotDirector=new BotDirector(local,ConfigBundle.Clone(ConfigRuntime.Current.bots),Environment.TickCount);
@@ -102,6 +104,7 @@ namespace SummonersTable
             if(!captureMode&&announcements!=null)announcements.Present(handoff?"handoff":page,state,page=="local"?localCount:steam.Members.Count);
             if(page=="game"&&state!=null&&!handoff)
             {
+                EnsureBattleWorld();
                 board.inputEnabled=!captureMode&&!InputBlocked&&!historyOpen&&!OverInterface(Input.mousePosition);
                 board.selectedUnit=selectedUnit;board.choosingTarget=selectedUnit!=""||(selectedCard!=""&&catalog.Card(state.players[seat].hand.Find(h=>h.uid==selectedCard)?.cardId)?.kind=="spell");
                 var selectedDefinition=catalog.Card(state.players[seat].hand.Find(h=>h.uid==selectedCard)?.cardId);
@@ -115,10 +118,10 @@ namespace SummonersTable
                 }
                 if(!captureMode&&!historyOpen&&!settingsOpen)ReadQteKeys();
             }
-            else board.gameObject.SetActive(false);
+            else if(board!=null)board.gameObject.SetActive(false);
             UpdateAuthoredInterface();UpdateTutorial();
             var inspected=InspectionAt(Pointer);
-            cardCanvas.Present(state,seat,state==null?0:Clock,inspected,catalog,board,page=="game"&&!handoff&&!settingsOpen&&modal==""&&!quitConfirm&&state.phase!="roundEnd"&&state.phase!="matchEnd");
+            cardCanvas.Present(state,seat,state==null?0:Clock,inspected,catalog,board,page=="game"&&!dreamNarration&&!handoff&&!settingsOpen&&modal==""&&!quitConfirm&&state.phase!="roundEnd"&&state.phase!="matchEnd");
             foreach(var key in cardCanvas.keyButtons)key.interactable=!historyOpen;
             if(historyOpen)cardCanvas.CoverWithJournal();
             if(!cancelledSelection&&Input.GetKeyDown(KeyCode.Escape))

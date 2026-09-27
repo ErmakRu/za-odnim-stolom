@@ -22,8 +22,9 @@ namespace SummonersTable
         public void Present(PlayerState player,MatchState state,TableBoard board,int maxHp)
         {
             nickname.text=player.name;nickname.color=TableBoard.SeatColors[player.seat];healthNumber.text=player.hp+" / "+maxHp;
-            healthFill.fillAmount=player.hp/(float)maxHp;var style=ConfigRuntime.Current?.ui;healthFill.color=style!=null?(style.healthUsesPlayerColor?TableBoard.SeatColors[player.seat]:style.healthColor):healthColor;
-            healthAnchor.sizeDelta=style?.healthSize??healthSize;if(style!=null)healthTrail.color=style.healthTrailColor;healthTrail.fillAmount=board.DisplayHp("hero-"+player.seat,player.hp)/maxHp;
+            var shared=healthFill.GetComponentInParent<HeroHealthBar>();
+            if(shared!=null)shared.Present(player.hp,maxHp,board.DisplayHp("hero-"+player.seat,player.hp));
+            else {healthFill.fillAmount=player.hp/(float)maxHp;healthNumber.color=Color.black;}
             if(seatOwned&&seatNamePoint!=null&&seatHealthPoint!=null)
             {
                 var ownedActor=board.Actor(player.seat);var camera=board.ViewCamera;

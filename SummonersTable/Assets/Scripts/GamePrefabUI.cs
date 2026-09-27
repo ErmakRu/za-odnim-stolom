@@ -13,7 +13,7 @@ namespace SummonersTable
         readonly List<RectTransform> nameBlockers=new List<RectTransform>();
         readonly List<GameObject> browserCards=new List<GameObject>(),roomRows=new List<GameObject>();
         Vector2 Pointer=>captureMode?previewPointer??new Vector2(-100,-100):(Vector2)Input.mousePosition;
-        bool InputBlocked=>settingsOpen||modal!=""||quitConfirm||handoff||state==null||state.phase=="matchEnd";
+        bool InputBlocked=>dreamNarration||settingsOpen||modal!=""||quitConfirm||handoff||state==null||state.phase=="matchEnd";
         void BindPrefabInterface()
         {
             ui=FindFirstObjectByType<PrefabInterface>(FindObjectsInactive.Include);if(ui==null)throw new InvalidOperationException("GameInterface prefab is missing from the scene.");

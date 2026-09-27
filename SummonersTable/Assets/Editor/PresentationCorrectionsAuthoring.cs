@@ -57,7 +57,7 @@ namespace SummonersTable.Editor
                 string path=AssetDatabase.GUIDToAssetPath(id);var prefab=AssetDatabase.LoadAssetAtPath<GameObject>(path);
                 if(prefab.GetComponentInChildren<WorldArrowView>(true)!=null)Edit(path,root=>{foreach(var arrow in root.GetComponentsInChildren<WorldArrowView>(true))arrow.magicMaterial=dark;});
             }
-            foreach(var path in new[]{"Assets/Prefabs/Editable/World/PlayerSeat.prefab","Assets/Prefabs/Editable/UI/PlayerStatus.prefab","Assets/Prefabs/Editable/UI/LobbyPlayerPanel.prefab","Assets/Prefabs/LobbyCanvas.prefab","Assets/Prefabs/MainMenuCanvas.prefab","Assets/Prefabs/Editable/UI/SettingsPanel.prefab","Assets/Prefabs/Editable/UI/MatchHUD.prefab"})Edit(path,Polish);
+            foreach(var path in new[]{"Assets/Prefabs/MainMenuBattleWorld.prefab","Assets/Prefabs/TableWorld.prefab","Assets/Prefabs/Editable/World/Player.prefab","Assets/Prefabs/Editable/World/PlayerSeat.prefab","Assets/Prefabs/Editable/UI/PlayerStatus.prefab","Assets/Prefabs/Editable/UI/LobbyPlayerPanel.prefab","Assets/Prefabs/LobbyCanvas.prefab","Assets/Prefabs/MainMenuCanvas.prefab","Assets/Prefabs/Editable/UI/SettingsPanel.prefab","Assets/Prefabs/Editable/UI/MatchHUD.prefab"})Edit(path,Polish);
             var previous=SceneManager.GetActiveScene();
             foreach(var name in new[]{"MainMenu","Lobby","Match","PresentationLab"})
             {

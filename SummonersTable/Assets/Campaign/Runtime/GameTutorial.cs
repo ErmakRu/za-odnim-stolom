@@ -6,14 +6,26 @@ namespace SummonersTable
 {
     public sealed partial class GameApp
     {
-        bool standaloneTutorial,tutorialComplete;
+        bool standaloneTutorial,tutorialComplete,dreamNarration,dreamScene;
         string tutorialLesson="";
         TutorialPanel tutorialPanel;
+        void BeginDreamScene()
+        {
+            EnsureBattleWorld();dreamScene=true;
+            board.GetComponent<DreamTableBackdrop>()?.Show(true);
+            if(local==null){local=GameEngine.Tutorial(ConfigBundle.Clone(catalog),campaignSave.deck);localTime=0;seq=new int[4];seat=0;localBotDirector=null;state=local.View(0,0);}
+            page="game";handoff=false;online=false;campaignActive=true;campaignMatch=false;
+        }
+        void EndDreamScene()
+        {
+            dreamNarration=false;dreamScene=false;board?.GetComponent<DreamTableBackdrop>()?.Show(false);
+        }
         void StartTutorialLesson(string lesson)
         {
+            EnsureBattleWorld();
             tutorialPanel=FindFirstObjectByType<TutorialPanel>(FindObjectsInactive.Include);
             if(tutorialPanel==null)throw new InvalidOperationException("Place the authored TutorialPanel in the entry scene.");
-            comic.Hide();ClearCampaignMatch();tutorialLesson=lesson;tutorialComplete=false;
+            comic.Hide();ClearCampaignMatch();BeginDreamScene();dreamNarration=false;tutorialLesson=lesson;tutorialComplete=false;
             local=GameEngine.Tutorial(ConfigBundle.Clone(catalog),campaignSave.deck);localBotDirector=null;localTime=0;seq=new int[4];seat=0;
             foreach(var player in local.State.players){player.hand.Clear();player.units.Clear();}
             var me=local.State.players[0];

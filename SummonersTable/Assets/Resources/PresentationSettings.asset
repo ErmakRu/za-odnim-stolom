@@ -62,3 +62,5 @@ MonoBehaviour:
   attackEffectScale: 0.3
   impactEffectScale: 0.35
   qteEffectScale: 0.42
+  attackTrailWidthMultiplier: 8
+  attackDistortionWidthMultiplier: 12

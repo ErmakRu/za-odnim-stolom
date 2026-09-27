@@ -1,0 +1,7 @@
+FAILED
+PASS no extra Play button before modes
+PASS four illustrated mode cards
+PASS existing illustrations and card shader
+PASS horizontal mode row
+PASS campaign actions in one submenu
+PASS choices replace only campaign illustration

@@ -40,7 +40,8 @@ namespace SummonersTable
         public GameObject qteFire,qteSmoke,qteAttempt,motionTitle;
         public AudioClip qteSuccess,qteError,turnNotice;
         public float attackEffectScale=.3f,impactEffectScale=.35f,qteEffectScale=.17f;
-        [Min(1)]public float attackTrailWidthMultiplier=3;
+        [Min(1)]public float attackTrailWidthMultiplier=8;
+        [Min(1)]public float attackDistortionWidthMultiplier=12;
         public void ImportJson(string json){var next=JsonUtility.FromJson<PresentationData>(json);if(next==null)throw new ArgumentException("Empty settings.");next.Validate();data=next;}
         public string ToJson(){data.Validate();return JsonUtility.ToJson(data,true);}
     }

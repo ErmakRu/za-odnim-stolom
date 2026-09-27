@@ -38,7 +38,7 @@ namespace SummonersTable
                     for(int step=0;step<=8;step++)
                     {
                         localTime=e.startedAt+step*.05;state=local.View(0,localTime);board.Sync(state,0,localTime);
-                        if(step==0){trailObject=board.GetComponentsInChildren<TrailRenderer>().First(t=>t.name=="Distortion").transform.parent.gameObject;Check(trailObject.GetComponentsInChildren<TrailRenderer>().Length==3,"three trail layers "+target);}
+                        if(step==0){trailObject=board.GetComponentsInChildren<TrailRenderer>().First(t=>t.name=="Distortion").transform.parent.gameObject;Check(trailObject.GetComponentsInChildren<TrailRenderer>().Length==3,"three trail layers "+target);Check(trailObject.GetComponentsInChildren<TrailRenderer>().First(x=>x.name=="Distortion").widthMultiplier>=3.5f,"wide distortion ribbon "+target);Check(trailObject.GetComponentsInChildren<TrailRenderer>().Where(x=>x.name!="Distortion").All(x=>x.widthMultiplier>=2.3f),"wide visible attack ribbons "+target);}
                         if(step==4)
                         {
                             Vector3 from=TableBoard.SlotPosition(0,2,2)+Vector3.up*.65f;

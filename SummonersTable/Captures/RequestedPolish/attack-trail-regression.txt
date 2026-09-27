@@ -2,7 +2,7 @@ PASS 15
 PASS original Dark trail prefab assigned
 PASS camera provides opaque colour and depth
 PASS Water 02 on world and UI arrows
-PASS original arrow width
+PASS readable thicker arrow width
 PASS three trail layers 0
 PASS arc midpoint 0
 PASS card only twitches 0

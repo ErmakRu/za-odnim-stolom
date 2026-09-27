@@ -75,7 +75,9 @@ namespace SummonersTable
                         float scale=prefab!=null?CameraRig.settings.attackEffectScale:1;
                         projectile.transform.localScale*=scale;
                         foreach(var trail in projectile.GetComponentsInChildren<TrailRenderer>())
-                        {trail.widthMultiplier*=scale*(CameraRig.settings!=null?CameraRig.settings.attackTrailWidthMultiplier:3);trail.Clear();trail.emitting=true;}
+                        {bool distortion=trail.name.IndexOf("distortion",System.StringComparison.OrdinalIgnoreCase)>=0;
+                            float width=distortion?(CameraRig.settings!=null?CameraRig.settings.attackDistortionWidthMultiplier:12):(CameraRig.settings!=null?CameraRig.settings.attackTrailWidthMultiplier:8);
+                            trail.widthMultiplier*=scale*width;trail.Clear();trail.emitting=true;}
                         projectiles[e.id]=projectile;
                         ConfigAudio.Play("creature.attack");
                     }

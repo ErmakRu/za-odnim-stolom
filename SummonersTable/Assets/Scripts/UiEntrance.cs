@@ -9,7 +9,7 @@ namespace SummonersTable
         void Awake(){group=GetComponent<CanvasGroup>();rect=transform as RectTransform;if(rect!=null)origin=rect.anchoredPosition;}
         public void Replay(){if(!Application.isPlaying||group==null)return;elapsed=0;group.alpha=0;}
         void OnEnable(){Replay();}
-        void LateUpdate(){if(!Application.isPlaying||elapsed>=duration)return;elapsed+=Time.unscaledDeltaTime;float t=Mathf.Clamp01(elapsed/Mathf.Max(.01f,duration));float e=1-Mathf.Pow(1-t,3);group.alpha=e;if(rect!=null)rect.anchoredPosition=origin+Vector2.down*offset*(1-e);}
-        void OnDisable(){if(group!=null)group.alpha=1;if(rect!=null)rect.anchoredPosition=origin;}
+        void LateUpdate(){if(!Application.isPlaying||elapsed>=duration)return;elapsed+=Time.unscaledDeltaTime;float t=Mathf.Clamp01(elapsed/Mathf.Max(.01f,duration));float e=1-Mathf.Pow(1-t,3);group.alpha=e;if(rect!=null&&offset!=0)rect.anchoredPosition=origin+Vector2.down*offset*(1-e);}
+        void OnDisable(){if(group!=null)group.alpha=1;if(rect!=null&&offset!=0)rect.anchoredPosition=origin;}
     }
 }
