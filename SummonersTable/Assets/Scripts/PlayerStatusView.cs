@@ -28,14 +28,9 @@ namespace SummonersTable
             if(seatOwned&&seatNamePoint!=null&&seatHealthPoint!=null)
             {
                 var ownedActor=board.Actor(player.seat);var camera=board.ViewCamera;
-                var ownedHead=camera.WorldToScreenPoint(ownedActor!=null&&ownedActor.Head!=null?ownedActor.Head.position:seatNamePoint.position);
+                var ownedHead=camera.WorldToScreenPoint(ownedActor!=null?ownedActor.NamePosition:seatNamePoint.position);
                 float logical=Mathf.Min(camera.pixelWidth/1600f,camera.pixelHeight/1000f);
                 float top=ownedHead.y;
-                if(ownedActor!=null)foreach(var renderer in ownedActor.GetComponentsInChildren<Renderer>())
-                {
-                    if(!renderer.enabled)continue;var bounds=renderer.bounds;
-                    for(int i=0;i<8;i++){var corner=bounds.center+Vector3.Scale(bounds.extents,new Vector3((i&1)==0?-1:1,(i&2)==0?-1:1,(i&4)==0?-1:1));var point=camera.WorldToScreenPoint(corner);if(point.z>0)top=Mathf.Max(top,point.y);}
-                }
                 ownedHead.y=top+84*logical;nameAnchor.position=camera.ScreenToWorldPoint(ownedHead);
                 ownedHead.y=top+32*logical;healthAnchor.position=camera.ScreenToWorldPoint(ownedHead);
                 nameAnchor.rotation=healthAnchor.rotation=camera.transform.rotation;ReadableScale(camera);KeepOnScreen(camera);healthNumber.color=Color.black;return;
@@ -59,8 +54,8 @@ namespace SummonersTable
         {
             float scale=Mathf.Min(camera.pixelWidth/1600f,camera.pixelHeight/1000f);
             var viewport=camera.pixelRect;
-            Clamp(nameAnchor,viewport.yMax-30*scale);
-            Clamp(healthAnchor,viewport.yMax-82*scale);
+            Clamp(nameAnchor,viewport.yMax-12*scale);
+            Clamp(healthAnchor,viewport.yMax-52*scale);
             void Clamp(RectTransform anchor,float top)
             {
                 anchor.GetWorldCorners(corners);var min=(Vector2)camera.WorldToScreenPoint(corners[0]);var max=min;

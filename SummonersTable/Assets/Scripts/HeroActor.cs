@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace SummonersTable
 {
+    [DefaultExecutionOrder(-100)]
     public sealed class HeroActor : MonoBehaviour
     {
         public HeroLibrary library;

@@ -1,0 +1,14 @@
+PASS boundary 10
+PASS boundary 9,99
+PASS boundary 9
+PASS boundary 1
+PASS boundary 0,1
+PASS boundary 0
+PASS boundary -1
+PASS blocked and other turn hidden
+PASS QTE owner only
+PASS redacted QTE
+PASS actual HUD displays 9
+PASS animation preserves position
+PASS actual screen arrow shaft 3x; Water02 shader
+PASS QTE digit 3 lies fully below actual panel

@@ -194,7 +194,7 @@ MonoBehaviour:
   segments: 25
   headLength: 0.26
   headWidth: 0.14
-  widthMultiplier: 1
+  widthMultiplier: 3
   magicMaterial: {fileID: 2100000, guid: 088c6809f0a73924189bb1057f527f13, type: 2}
 --- !u!120 &7584759900069139724
 LineRenderer:

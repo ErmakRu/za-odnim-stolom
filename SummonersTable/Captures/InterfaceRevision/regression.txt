@@ -1,7 +1,45 @@
-FAILED
+PASS 44
 PASS no extra Play button before modes
 PASS four illustrated mode cards
 PASS existing illustrations and card shader
 PASS horizontal mode row
 PASS campaign actions in one submenu
 PASS choices replace only campaign illustration
+PASS dismiss restores illustration
+PASS new game always starts at first prologue line
+PASS throne hall backdrop in prologue
+PASS all fourteen prologue lines precede childhood
+PASS barn backdrop in childhood
+PASS historical lobby opens
+PASS historical red customization button
+PASS settings opens from front end
+PASS developer reload controls not in player settings
+PASS tutorial starts at health lesson
+PASS direct health explanation
+PASS both actual health bars spotlighted
+PASS spotlight does not eat clicks
+PASS tutorial darkening above game UI
+PASS spotlight follows opponent HP in camera 0
+PASS spotlight follows opponent HP in camera 1
+PASS slot lit 0
+PASS slot lit 1
+PASS slot lit 2
+PASS slot lit 3
+PASS slot lit 4
+PASS slot selection still works under tutorial overlay
+PASS QTE spotlight tracks real panel
+PASS QTE completes with overlay active
+PASS battle vignette visible
+PASS battle vignette below HUD
+PASS battle vignette never blocks input
+PASS thicker screen and world arrows
+PASS local actor rendered in camera 0
+PASS local actor rendered in camera 1
+PASS black health digits
+PASS name has no background
+PASS attack follows semicircle sample 0
+PASS attack follows semicircle sample 1
+PASS attack follows semicircle sample 2
+PASS attack follows semicircle sample 3
+PASS attack follows semicircle sample 4
+PASS continuous Water shader arrow

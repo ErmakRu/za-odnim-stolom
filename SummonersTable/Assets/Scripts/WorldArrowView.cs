@@ -31,7 +31,8 @@ namespace SummonersTable
             line.useWorldSpace=head.useWorldSpace=true;line.alignment=head.alignment=LineAlignment.View;
             line.textureMode=head.textureMode=LineTextureMode.Stretch;
             line.startColor=line.endColor=head.startColor=head.endColor=Color.white;
-            line.startWidth=line.endWidth=head.startWidth=head.endWidth=width;
+            line.startWidth=line.endWidth=width*widthMultiplier;
+            head.startWidth=head.endWidth=width;
             line.numCornerVertices=head.numCornerVertices=6;line.numCapVertices=head.numCapVertices=4;
             line.positionCount=TargetArrowGeometry.Samples+1;
             for(int i=0;i<line.positionCount;i++)line.SetPosition(i,TargetArrowGeometry.Point(a,b,bend,i/(float)(line.positionCount-1)));
@@ -42,7 +43,7 @@ namespace SummonersTable
         public void Set(Vector3 a,Vector3 b,float lift,float width,Color color,bool spell=false)
         {
             var style=previewStyle??ConfigRuntime.Current?.ui.arrow;
-            float w=width<=0?0:(style?.worldWidth??.105f)*widthMultiplier;
+            float w=width<=0?0:(style?.worldWidth??.105f);
             Draw(a,b,Vector3.up*lift*2,Vector3.up,w,style?.worldHeadLength??headLength,style?.worldHeadWidth??headWidth,spell);
         }
         public void SetScreen(Camera camera,Vector2 from,Vector2 to,bool spell)

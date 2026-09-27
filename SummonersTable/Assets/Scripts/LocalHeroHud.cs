@@ -5,6 +5,7 @@ namespace SummonersTable
     public sealed class LocalHeroHud : MonoBehaviour
     {
         public RawImage portrait;
+        public UrgentCountdown countdown;
         public Image healthFill;
         public Text healthText,scoreText;
         public void Present(PlayerState player,int maximumHp)

@@ -75,7 +75,12 @@ namespace SummonersTable
             tutorialPanel.proceed.GetComponentInChildren<Text>().text=tutorialComplete?"Продолжить":tutorialLesson=="STEP_HP_BARS"?"Понятно":tutorialLesson=="STEP_HAND_LIMIT_8"?"Взять девятую":"Взять карту";
 
         }
-        void LateUpdate(){if(tutorialLesson!=""&&tutorialPanel!=null&&tutorialPanel.gameObject.activeInHierarchy){Canvas.ForceUpdateCanvases();UpdateTutorialFocus();}}
+        void LateUpdate(){
+            // HeroActor has already applied its seated pose and head look.
+            if(page=="game"&&state!=null&&!handoff&&board!=null&&ui!=null)
+                for(int i=0;i<ui.playerStatus.Length&&i<state.players.Count;i++)
+                {var status=ui.playerStatus[i];if(status!=null&&status.gameObject.activeInHierarchy)status.Present(state.players[i],state,board,catalog.rules.heroHp);}
+            if(tutorialLesson!=""&&tutorialPanel!=null&&tutorialPanel.gameObject.activeInHierarchy){Canvas.ForceUpdateCanvases();UpdateTutorialFocus();}}
         static Rect ScreenArea(RectTransform rect,float padding=14)
         {
             var canvas=rect.GetComponentInParent<Canvas>();var camera=canvas!=null&&canvas.renderMode!=RenderMode.ScreenSpaceOverlay?(canvas.worldCamera!=null?canvas.worldCamera:Camera.main):null;

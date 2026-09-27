@@ -60,7 +60,7 @@ namespace SummonersTable
             {var events=new GameObject("UI Event System");events.AddComponent<UnityEngine.EventSystems.EventSystem>();events.AddComponent<UnityEngine.EventSystems.StandaloneInputModule>();}
             var eventSystems=FindObjectsByType<UnityEngine.EventSystems.EventSystem>(FindObjectsSortMode.InstanceID);
             for(int i=1;i<eventSystems.Length;i++)eventSystems[i].gameObject.SetActive(false);
-            captureMode=Environment.GetCommandLineArgs().Contains("--bot-editor-test")||Environment.GetCommandLineArgs().Contains("--capture-preview")||Environment.GetCommandLineArgs().Contains("--capture-lab")||Environment.GetCommandLineArgs().Contains("--capture-shaders")||Environment.GetCommandLineArgs().Contains("--capture-options")||Environment.GetCommandLineArgs().Contains("--capture-config");
+            captureMode=Environment.GetCommandLineArgs().Contains("--smoke-interface")||Environment.GetCommandLineArgs().Contains("--bot-editor-test")||Environment.GetCommandLineArgs().Contains("--capture-preview")||Environment.GetCommandLineArgs().Contains("--capture-lab")||Environment.GetCommandLineArgs().Contains("--capture-shaders")||Environment.GetCommandLineArgs().Contains("--capture-options")||Environment.GetCommandLineArgs().Contains("--capture-config");
             var listeners=FindObjectsByType<AudioListener>(FindObjectsSortMode.None);
             for(int i=1;i<listeners.Length;i++)Destroy(listeners[i]);
             steam=new SteamSession(catalog);if(!captureMode&&FindFirstObjectByType<PresentationLab>()==null)steam.Initialize();
@@ -71,7 +71,8 @@ namespace SummonersTable
             SyncFrontEnd();UpdateAuthoredInterface();
             var args=Environment.GetCommandLineArgs();
             if(args.Contains("--local-test"))StartLocal(4);
-            if(args.Contains("--capture-config"))StartCoroutine(CaptureConfigPreview());
+            if(args.Contains("--smoke-interface"))StartCoroutine(CapturePlayerInterfaceSmoke());
+            else if(args.Contains("--capture-config"))StartCoroutine(CaptureConfigPreview());
             else if(args.Contains("--capture-options"))StartCoroutine(CaptureOptionsPreview());
             else if(args.Contains("--capture-shaders"))StartCoroutine(CaptureShaderPreview());
             else if(args.Contains("--capture-lab"))StartCoroutine(CaptureLabPreview());
@@ -122,6 +123,7 @@ namespace SummonersTable
             UpdateAuthoredInterface();UpdateTutorial();
             var inspected=InspectionAt(Pointer);
             cardCanvas.Present(state,seat,state==null?0:Clock,inspected,catalog,board,page=="game"&&!dreamNarration&&!handoff&&!settingsOpen&&modal==""&&!quitConfirm&&state.phase!="roundEnd"&&state.phase!="matchEnd");
+            ui.hud.GetComponent<LocalHeroHud>()?.countdown?.PlaceBelowQte(cardCanvas.qtePanel,state?.phase=="qte");
             foreach(var key in cardCanvas.keyButtons)key.interactable=!historyOpen;
             if(historyOpen)cardCanvas.CoverWithJournal();
             if(!cancelledSelection&&Input.GetKeyDown(KeyCode.Escape))
