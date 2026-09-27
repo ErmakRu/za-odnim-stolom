@@ -19,9 +19,9 @@ namespace SummonersTable.Editor
         {
             foreach(var button in root.GetComponentsInChildren<Button>(true))
             {
-                var feel=button.GetComponent<ButtonFeel>()??button.gameObject.AddComponent<ButtonFeel>();
+                var feel=button.GetComponent<ButtonFeel>();if(feel==null)feel=button.gameObject.AddComponent<ButtonFeel>();
                 feel.clickSound=AssetDatabase.LoadAssetAtPath<AudioClip>(ButtonClip);feel.hoverSound=null;feel.soundVolume=.10f;
-                var source=button.GetComponent<AudioSource>()??button.gameObject.AddComponent<AudioSource>();source.playOnAwake=false;source.spatialBlend=0;
+                var source=button.GetComponent<AudioSource>();if(source==null)source=button.gameObject.AddComponent<AudioSource>();source.playOnAwake=false;source.spatialBlend=0;
                 var filter=button.GetComponent<AudioLowPassFilter>();if(filter==null)filter=button.gameObject.AddComponent<AudioLowPassFilter>();if(filter!=null)filter.cutoffFrequency=1700;
             }
         }

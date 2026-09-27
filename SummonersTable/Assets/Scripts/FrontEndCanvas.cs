@@ -11,7 +11,7 @@ namespace SummonersTable
         public GameObject homePage,playPage,campaignPage;
         public Button continueCampaign;
         public void MenuPage(string section,bool hasSave)
-        {if(homePage==null)return;homePage.SetActive(section=="home");playPage.SetActive(section=="play");campaignPage.SetActive(section=="campaign");continueCampaign.gameObject.SetActive(true);continueCampaign.interactable=hasSave;}
+        {if(homePage==null)return;homePage.SetActive(section=="home");playPage.SetActive(section=="play");campaignPage.SetActive(section=="campaign");continueCampaign.gameObject.SetActive(true);continueCampaign.interactable=hasSave;title.text=section=="play"?"Выберите режим":section=="campaign"?"Кампания":"За одним столом";subtitle.text=section=="home"?"Пир Хохота":section=="play"?"Каждая история начинается с первой карты":"История Шута";var hint=campaignPage.transform.Find("Save hint");if(hint!=null)hint.GetComponent<Text>().text=hasSave?"Вернитесь к своей истории или начните заново":"Начните новую историю";}
         void Awake(){if(Application.isPlaying)gameObject.SetActive(false);}
         public Text title,subtitle,status;
         public Text[] members;

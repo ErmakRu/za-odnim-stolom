@@ -26,7 +26,7 @@ namespace SummonersTable
                 var water=ConfigRuntime.Assets.Get<Material>(ConfigRuntime.Current.ui.arrow.worldMaterial);
                 var waterUI=ConfigRuntime.Assets.Get<Material>(ConfigRuntime.Current.ui.arrow.uiMaterial);
                 Check(water.name=="M_VFX_URP_Trail_Water_02"&&waterUI.shader==water.shader,"Water 02 on world and UI arrows");
-                Check(ConfigRuntime.Current.ui.arrow.width==7,"original arrow width");
+                Check(ConfigRuntime.Current.ui.arrow.width>=14,"readable thicker arrow width");
                 local.State.players[0].units.Add(new UnitState{uid="trail-source",cardId="C02",slot=2,hp=4});
                 state=local.View(0,localTime);yield return null;
                 for(int target=0;target<2;target++)

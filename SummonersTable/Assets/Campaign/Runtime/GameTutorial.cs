@@ -83,6 +83,7 @@ namespace SummonersTable
         }
         void UpdateTutorialFocus()
         {
+            if(board?.ViewCamera==null||board.Seat(0)==null||board.Seat(1)==null)return;
             Rect hand=new Rect(Screen.width*.26f,0,Screen.width*.48f,Screen.height*.28f);
             var cards=ui.hand.Slots.Where(x=>x.gameObject.activeInHierarchy).ToArray();
             if(cards.Length>0){hand=ScreenArea((RectTransform)cards[0].transform);foreach(var card in cards.Skip(1)){var r=ScreenArea((RectTransform)card.transform);hand=Rect.MinMaxRect(Mathf.Min(hand.xMin,r.xMin),Mathf.Min(hand.yMin,r.yMin),Mathf.Max(hand.xMax,r.xMax),Mathf.Max(hand.yMax,r.yMax));}}
@@ -96,6 +97,7 @@ namespace SummonersTable
             if(tutorialLesson=="STEP_BOARD_SLOTS"&&(selectedCard!=""||tutorialComplete))
             {tutorialPanel.PointAt(WorldArea(board.Seat(0).slots));if(!tutorialComplete)tutorialPanel.instruction.text="Пять мест для существ. Нажмите на свободный паз, куда хотите поставить Медведя.";return;}
             if(tutorialLesson=="STEP_QTE_RITUAL"&&tutorialComplete){tutorialPanel.PointAt(WorldArea(board.Seat(0).slots[2]));return;}
+            if(tutorialLesson=="STEP_SPELL_CAST"&&tutorialComplete){tutorialPanel.PointAt(ScreenArea(board.Seat(1).status.healthNumber.rectTransform,18));return;}
             if(tutorialLesson=="STEP_SPELL_CAST"&&selectedCard!="")
             {tutorialPanel.PointAt(WorldArea(board.Actor(1).transform));tutorialPanel.instruction.text="Лоскут — цель заклинания. Нажмите на него, затем повторите знаки ритуала.";return;}
             if(tutorialLesson=="STEP_COMBAT_PHASE")
