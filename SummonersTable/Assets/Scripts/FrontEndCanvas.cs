@@ -10,8 +10,17 @@ namespace SummonersTable
         public bool lobby;
         public GameObject homePage,playPage,campaignPage;
         public Button continueCampaign;
+        public CampaignCardChoice campaignChoice;
         public void MenuPage(string section,bool hasSave)
-        {if(homePage==null)return;homePage.SetActive(section=="home");playPage.SetActive(section=="play");campaignPage.SetActive(section=="campaign");continueCampaign.gameObject.SetActive(true);continueCampaign.interactable=hasSave;title.text=section=="play"?"Выберите режим":section=="campaign"?"Кампания":"За одним столом";subtitle.text=section=="home"?"Пир Хохота":section=="play"?"Каждая история начинается с первой карты":"История Шута";var hint=campaignPage.transform.Find("Save hint");if(hint!=null)hint.GetComponent<Text>().text=hasSave?"Вернитесь к своей истории или начните заново":"Начните новую историю";}
+        {
+            if(homePage==null)return;
+            // Older authored scenes remain usable until their card-choice references are migrated.
+            if(campaignChoice==null){homePage.SetActive(section=="home");playPage.SetActive(section=="play");campaignPage.SetActive(section=="campaign");continueCampaign.interactable=hasSave;return;}
+            homePage.SetActive(true);playPage.SetActive(true);
+            if(campaignChoice!=null)campaignChoice.SetOpen(section=="campaign");
+            continueCampaign.gameObject.SetActive(true);continueCampaign.interactable=hasSave;
+            title.text="За одним столом";subtitle.text="Пир Хохота";
+        }
         void Awake(){if(Application.isPlaying)gameObject.SetActive(false);}
         public Text title,subtitle,status;
         public Text[] members;
@@ -21,6 +30,7 @@ namespace SummonersTable
         {
             GetComponent<CanvasScaler>().screenMatchMode=CanvasScaler.ScreenMatchMode.Expand;
             foreach(var t in GetComponentsInChildren<Text>(true))if(t.font==null)t.font=font;
+            if(campaignChoice!=null)campaignChoice.dismiss=()=>click("play");
             for(int i=0;i<buttons.Length;i++){string action=actions[i];buttons[i].onClick.RemoveAllListeners();buttons[i].onClick.AddListener(()=>click(action));}
         }
         public void Visible(bool visible){gameObject.SetActive(visible);}

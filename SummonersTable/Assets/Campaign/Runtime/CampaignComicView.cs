@@ -49,6 +49,7 @@ namespace SummonersTable
         }
         public void UseSegment(int index)
         {
+            dialoguePanel?.GetComponent<UiEntrance>()?.Replay();
             Segment=Mathf.Clamp(index,0,pages.Length-1);FullText=pages[Segment];
             if(IsThought)FullText="«"+FullText.Trim('«','»','“','”','"')+"»";
             body.fontStyle=IsThought?FontStyle.Italic:FontStyle.Normal;

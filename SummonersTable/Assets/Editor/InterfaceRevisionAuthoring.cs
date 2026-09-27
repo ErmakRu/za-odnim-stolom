@@ -54,7 +54,19 @@ namespace SummonersTable.Editor
             SetButton(Button(f,"campaign-continue"),new Vector2(0,22),new Vector2(580,72),30);SetButton(Button(f,"campaign-new"),new Vector2(0,-77),new Vector2(580,72),30);
             Text("Save hint",f.campaignPage.transform,"",new Vector2(0,-154),new Vector2(620,36),20);
             var back=f.buttons.Select((b,i)=>new{b,a=f.actions[i]}).First(x=>x.a=="play"&&x.b.transform.IsChildOf(f.campaignPage.transform)).b;SetButton(back,new Vector2(0,-310),new Vector2(300,58),25);
-            f.homePage.SetActive(true);f.playPage.SetActive(false);f.campaignPage.SetActive(false);
+            play.gameObject.SetActive(false);Button(f,"home").gameObject.SetActive(false);back.gameObject.SetActive(false);
+            for(int i=0;i<3;i++)SetButton(Button(f,secondary[i]),new Vector2((i-1)*350,-350),new Vector2(322,62),25);
+            var campaignButton=Button(f,"campaign");
+            f.campaignPage.transform.SetParent(campaignButton.transform,false);
+            Place((RectTransform)f.campaignPage.transform,new Vector2(0,58),new Vector2(288,350));
+            Place(campaignPanel.rectTransform,Vector2.zero,new Vector2(288,350));
+            var heading=f.campaignPage.transform.Find("Campaign heading").GetComponent<Text>();Place(heading.rectTransform,new Vector2(0,116),new Vector2(265,62));heading.fontSize=24;
+            SetButton(Button(f,"campaign-continue"),new Vector2(0,33),new Vector2(254,64),24);
+            SetButton(Button(f,"campaign-new"),new Vector2(0,-50),new Vector2(254,64),24);
+            var hint=f.campaignPage.transform.Find("Save hint").GetComponent<Text>();hint.text="ПКМ или клик вне карты — назад";hint.fontSize=17;Place(hint.rectTransform,new Vector2(0,-132),new Vector2(258,56));
+            f.campaignChoice=Ensure<CampaignCardChoice>(campaignButton.gameObject);f.campaignChoice.illustration=(RectTransform)campaignButton.transform.Find("Mode illustration");f.campaignChoice.choices=(RectTransform)f.campaignPage.transform;
+            f.campaignPage.transform.SetAsLastSibling();
+            f.homePage.SetActive(true);f.playPage.SetActive(true);f.campaignPage.SetActive(false);
         }
         static void Settings(GameObject root)
         {

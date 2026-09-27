@@ -94,6 +94,8 @@ namespace SummonersTable
         void Update()
         {
             if(!IsReady)return;
+            bool cancelledSelection=false;
+            if(page=="game"&&!InputBlocked&&(selectedCard!=""||selectedUnit!="")&&(Input.GetMouseButtonDown(1)||Input.GetKeyDown(KeyCode.Escape))){ClearSelection();cancelledSelection=true;}
             RefreshConfigBetweenMatches();if(!captureMode)UpdateSession();SyncFrontEnd();
             CardPresentationContext.Apply(page=="game"?state?.options:page=="local"?localOptions:steam.InRoom?steam.Options:null);
             UpdateJournal();
@@ -119,7 +121,7 @@ namespace SummonersTable
             cardCanvas.Present(state,seat,state==null?0:Clock,inspected,catalog,board,page=="game"&&!handoff&&!settingsOpen&&modal==""&&!quitConfirm&&state.phase!="roundEnd"&&state.phase!="matchEnd");
             foreach(var key in cardCanvas.keyButtons)key.interactable=!historyOpen;
             if(historyOpen)cardCanvas.CoverWithJournal();
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if(!cancelledSelection&&Input.GetKeyDown(KeyCode.Escape))
             {
                 CampaignEscape();
                 if(quitConfirm)quitConfirm=false;

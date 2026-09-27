@@ -43,7 +43,7 @@ namespace SummonersTable
                         {
                             Vector3 from=TableBoard.SlotPosition(0,2,2)+Vector3.up*.65f;
                             Vector3 to=(target==0?TableBoard.SlotPosition(1,2,2):TableBoard.HeroPosition(1,2))+Vector3.up*.3f;
-                            Check(Vector3.Distance(trailObject.transform.position,Vector3.Lerp(from,to,.5f)+Vector3.up*1.2f)<.01f,"arc midpoint "+target);
+                            Check(Vector3.Distance(trailObject.transform.position,(from+to)*.5f+Vector3.ProjectOnPlane(Vector3.up,to-from).normalized*Vector3.Distance(from,to)*.5f)<.01f,"arc midpoint "+target);
                             var card=board.GetComponentsInChildren<CardView>().First(v=>v.name=="Unit trail-source");
                             Check(Vector3.Distance(card.transform.position,TableBoard.SlotPosition(0,2,2))<.5f,"card only twitches "+target);
                             if(target==0)AppDomain.CurrentDomain.GetAssemblies().Select(a=>a.GetType("SummonersTable.Editor.EditorFrameCapture")).First(t=>t!=null).GetMethod("Save").Invoke(null,new object[]{"Captures/RequestedPolish/attack-refraction.png"});

@@ -21,7 +21,7 @@ namespace SummonersTable
         bool HandleCampaignAction(string action)
         {
             if(action=="campaign"){OpenCampaign();return true;}
-            if(action=="campaign-new"||action=="tutorial"){OpenCampaign();standaloneTutorial=action=="tutorial";campaignSave=new CampaignProgress{deck=campaign.defaultDeck};campaignActive=true;ShowCampaignLine();return true;}
+            if(action=="campaign-new"||action=="tutorial"){OpenCampaign();standaloneTutorial=action=="tutorial";campaignSave=new CampaignProgress{deck=campaign.defaultDeck,phase="intro",chapter=0,frame=0,line=0,segment=0};campaignActive=true;ShowCampaignLine();return true;}
             if(action=="campaign-continue"){OpenCampaign();comic.resumeAction();return true;}
             return false;
         }
@@ -67,7 +67,7 @@ namespace SummonersTable
             int savedSegment=campaignSave.segment;
             comic.Present(frame,frame.lines[campaignSave.line],heading,$"Кадр {campaignSave.frame+1}/{frames.Length} · Реплика {campaignSave.line+1}/{frame.lines.Length}",campaignSave.frame>0||campaignSave.line>0,last,finish);
             comic.UseSegment(savedSegment);
-            comic.skip.gameObject.SetActive(true);
+            comic.skip.gameObject.SetActive(campaignSave.phase!="intro"&&!standaloneTutorial);
             comic.skip.GetComponentInChildren<Text>().text=campaignSave.phase=="before"?"К поединку":campaignSave.phase=="intro"?"Пропустить пролог":"Пропустить сцену";
             if(!standaloneTutorial)campaignSave.Save();
         }

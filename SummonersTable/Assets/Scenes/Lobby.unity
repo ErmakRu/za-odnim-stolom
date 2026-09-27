@@ -7684,6 +7684,7 @@ MonoBehaviour:
   playPage: {fileID: 650474397}
   campaignPage: {fileID: 1394378941}
   continueCampaign: {fileID: 1002779517}
+  campaignChoice: {fileID: 0}
   title: {fileID: 2068722177}
   subtitle: {fileID: 542413686}
   status: {fileID: 1355066655}
@@ -25857,6 +25858,7 @@ MonoBehaviour:
   width: 7
   headLength: 22
   headWidth: 12
+  arrowPrefab: {fileID: 0}
 --- !u!1 &1070063032
 GameObject:
   m_ObjectHideFlags: 0

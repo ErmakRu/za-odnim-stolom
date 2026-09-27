@@ -127,7 +127,7 @@ namespace SummonersTable
             var obj=Instantiate(prefab,parent);obj.name=name;obj.transform.localPosition=position;return obj;
         }
         public static Vector3 Away(int seat,int players)
-        {if(activeLayout!=null&&activeLayout.playerCount==players&&activeLayout.heroes[seat].parent.GetComponent<PlayerSeatView>()!=null)return -activeLayout.heroes[seat].parent.forward;return Quaternion.Euler(0,45+seat*360f/players,0)*Vector3.back;}
+        {if(activeLayout!=null&&activeLayout.playerCount==players&&activeLayout.heroes[seat].GetComponentInParent<PlayerSeatView>()!=null)return -activeLayout.heroes[seat].GetComponentInParent<PlayerSeatView>().transform.forward;return Quaternion.Euler(0,45+seat*360f/players,0)*Vector3.back;}
         public static Vector3 SlotPosition(int seat,int slot,int players)
         {
             if(activeLayout!=null&&activeLayout.playerCount==players&&activeLayout.slotAnchors.Length>seat*5+slot)return activeLayout.slotAnchors[seat*5+slot].position;
@@ -150,7 +150,7 @@ namespace SummonersTable
                 foreach(var l in layouts)if(l!=null)l.gameObject.SetActive(l.playerCount==n);
                 activeLayout=layouts.First(l=>l!=null&&l.playerCount==n);
                 seatRoots.Clear();slots.Clear();
-                foreach(var h in activeLayout.heroes)seatRoots.Add(h.parent.gameObject);
+                foreach(var h in activeLayout.heroes)seatRoots.Add(h.GetComponentInParent<PlayerSeatView>()?.gameObject??h.parent.gameObject);
                 foreach(var anchor in activeLayout.slotAnchors)slots.Add(anchor.gameObject);
                 foreach(var u in units.Values)Destroy(u);units.Clear();
                 foreach(var a in arrows.Values)a.Destroy();arrows.Clear();return;
@@ -226,7 +226,7 @@ namespace SummonersTable
             {
                 if(castArrow==null)castArrow=new Arrow(transform,arrowPrefab,new Color(1,.77f,.3f));
                 Vector3 from=state.cast.slot>=0?SlotPosition(state.cast.owner,state.cast.slot,count):HeroPosition(state.cast.owner,count);
-                castArrow.Set(from+Vector3.up*.2f,TargetPosition(state.cast.targetSeat,state.cast.targetUnit,state),.9f,state.cast.slot>=0?0:.07f);
+                castArrow.Set(from+Vector3.up*.2f,TargetPosition(state.cast.targetSeat,state.cast.targetUnit,state),.9f,state.cast.slot>=0?0:.07f,catalog.Card(state.cast.cardId)?.kind=="spell");
             }
             else
             {
@@ -235,7 +235,7 @@ namespace SummonersTable
             CameraRig.Sync(viewer,count,inputEnabled,cameraSeat!=viewer);cameraSeat=viewer;
             SyncHeroes(state,viewer);
             SyncHandBacks(state,viewer);
-            if(activeLayout!=null)for(int i=0;i<activeLayout.avatars.Length;i++)Actor(i)?.SetVisible(!(i==viewer&&CameraRig.Mode<=1));
+            if(activeLayout!=null)for(int i=0;i<activeLayout.avatars.Length;i++)Actor(i)?.SetVisible(true);
             SyncEffects(state,viewer,clock);
         }
         public void MoveCamera(int viewer,bool ownTurn,bool snap=false)
@@ -256,7 +256,7 @@ namespace SummonersTable
         {
             readonly WorldArrowView view;readonly Color color;
             public Arrow(Transform parent,WorldArrowView prefab,Color tint){view=UnityEngine.Object.Instantiate(prefab,parent);color=tint;}
-            public void Set(Vector3 a,Vector3 b,float lift,float width){view.Set(a,b,lift,width,color);}
+            public void Set(Vector3 a,Vector3 b,float lift,float width,bool magic=false){view.Set(a,b,lift,width,color,magic);}
             public void Destroy(){UnityEngine.Object.Destroy(view.gameObject);}
         }
     }

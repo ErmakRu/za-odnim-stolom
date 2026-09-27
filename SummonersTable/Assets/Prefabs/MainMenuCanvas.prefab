@@ -2682,6 +2682,7 @@ MonoBehaviour:
   playPage: {fileID: 4736122866651971164}
   campaignPage: {fileID: 968330178779634390}
   continueCampaign: {fileID: 8503391552815314269}
+  campaignChoice: {fileID: 0}
   title: {fileID: 8474312411060632663}
   subtitle: {fileID: 5938388836022378414}
   status: {fileID: 6599281579652942142}

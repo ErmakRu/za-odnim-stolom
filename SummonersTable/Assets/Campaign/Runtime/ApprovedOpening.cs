@@ -23,12 +23,13 @@ namespace SummonersTable
             }
             book.textPageLength=200;
         }
-        // Existing backgrounds are used until dedicated illustrations are authored.
+        // Resolve authored story locations explicitly; never substitute the playing field.
         static string Background(string key)
         {
             if(Resources.Load<Texture2D>("Art/"+key)!=null)return "Art/"+key;
             if(key=="bg_black")return "";
-            return key=="bg_throne_hall"?"Art/menu":"Art/board";
+            if(key=="bg_tavern_day")return "UI/LobbyBackdrop";
+            throw new InvalidOperationException("Missing story background: "+key);
         }
     }
 }

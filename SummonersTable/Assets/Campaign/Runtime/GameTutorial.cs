@@ -61,12 +61,14 @@ namespace SummonersTable
             tutorialPanel.instruction.text=tutorialComplete?(tutorialLesson=="STEP_HAND_LIMIT_8"?"Девятая карта сгорела. В руке осталось восемь. Продолжим сон.":"Получилось! Продолжим сон Шута."):text;
             tutorialPanel.proceed.interactable=tutorialComplete||tutorialLesson=="STEP_HP_BARS"||tutorialLesson=="STEP_DRAW_CARD"||tutorialLesson=="STEP_HAND_LIMIT_8";
             tutorialPanel.proceed.GetComponentInChildren<Text>().text=tutorialComplete?"Продолжить":tutorialLesson=="STEP_HP_BARS"?"Понятно":tutorialLesson=="STEP_HAND_LIMIT_8"?"Взять девятую":"Взять карту";
-            UpdateTutorialFocus();
+
         }
+        void LateUpdate(){if(tutorialLesson!=""&&tutorialPanel!=null&&tutorialPanel.gameObject.activeInHierarchy){Canvas.ForceUpdateCanvases();UpdateTutorialFocus();}}
         static Rect ScreenArea(RectTransform rect,float padding=14)
         {
-            var corners=new Vector3[4];rect.GetWorldCorners(corners);Vector2 min=corners[0],max=corners[0];
-            foreach(var corner in corners){min=Vector2.Min(min,corner);max=Vector2.Max(max,corner);}
+            var canvas=rect.GetComponentInParent<Canvas>();var camera=canvas!=null&&canvas.renderMode!=RenderMode.ScreenSpaceOverlay?(canvas.worldCamera!=null?canvas.worldCamera:Camera.main):null;
+            var corners=new Vector3[4];rect.GetWorldCorners(corners);Vector2 min=RectTransformUtility.WorldToScreenPoint(camera,corners[0]),max=min;
+            foreach(var corner in corners){var point=RectTransformUtility.WorldToScreenPoint(camera,corner);min=Vector2.Min(min,point);max=Vector2.Max(max,point);}
             return Rect.MinMaxRect(min.x-padding,min.y-padding,max.x+padding,max.y+padding);
         }
         Rect WorldArea(params Transform[] targets)
@@ -78,13 +80,13 @@ namespace SummonersTable
                 foreach(var renderer in renderers)
                 {var b=renderer.bounds;for(int i=0;i<8;i++){var point=b.center+Vector3.Scale(b.extents,new Vector3((i&1)==0?-1:1,(i&2)==0?-1:1,(i&4)==0?-1:1));var p=board.ViewCamera.WorldToScreenPoint(point);if(p.z>0){min=Vector2.Min(min,p);max=Vector2.Max(max,p);}}}
             }
-            if(min.x==float.MaxValue)return new Rect(Screen.width*.4f,Screen.height*.4f,Screen.width*.2f,Screen.height*.2f);
+            if(min.x==float.MaxValue){var p=board.ViewCamera.WorldToScreenPoint(targets[0].position);return new Rect(p.x-16,p.y-16,32,32);}
             return Rect.MinMaxRect(Mathf.Max(0,min.x-16),Mathf.Max(0,min.y-16),Mathf.Min(Screen.width,max.x+16),Mathf.Min(Screen.height,max.y+16));
         }
         void UpdateTutorialFocus()
         {
             if(board?.ViewCamera==null||board.Seat(0)==null||board.Seat(1)==null)return;
-            Rect hand=new Rect(Screen.width*.26f,0,Screen.width*.48f,Screen.height*.28f);
+            Rect hand=ScreenArea((RectTransform)ui.hand.transform);
             var cards=ui.hand.Slots.Where(x=>x.gameObject.activeInHierarchy).ToArray();
             if(cards.Length>0){hand=ScreenArea((RectTransform)cards[0].transform);foreach(var card in cards.Skip(1)){var r=ScreenArea((RectTransform)card.transform);hand=Rect.MinMaxRect(Mathf.Min(hand.xMin,r.xMin),Mathf.Min(hand.yMin,r.yMin),Mathf.Max(hand.xMax,r.xMax),Mathf.Max(hand.yMax,r.yMax));}}
             if(tutorialLesson=="STEP_HP_BARS")

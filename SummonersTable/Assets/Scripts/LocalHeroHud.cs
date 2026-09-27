@@ -10,7 +10,7 @@ namespace SummonersTable
         public void Present(PlayerState player,int maximumHp)
         {
             healthFill.fillAmount=Mathf.Clamp01(player.hp/(float)Mathf.Max(1,maximumHp));
-            healthText.text="HP  "+player.hp+" / "+maximumHp;
+            healthText.text="HP  "+player.hp+" / "+maximumHp;healthText.color=Color.black;
             scoreText.text=new string('●',Mathf.Clamp(player.score,0,12));
         }
     }

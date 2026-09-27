@@ -75,11 +75,11 @@ namespace SummonersTable
                         float scale=prefab!=null?CameraRig.settings.attackEffectScale:1;
                         projectile.transform.localScale*=scale;
                         foreach(var trail in projectile.GetComponentsInChildren<TrailRenderer>())
-                        {trail.widthMultiplier*=scale;trail.Clear();trail.emitting=true;}
+                        {trail.widthMultiplier*=scale*(CameraRig.settings!=null?CameraRig.settings.attackTrailWidthMultiplier:3);trail.Clear();trail.emitting=true;}
                         projectiles[e.id]=projectile;
                         ConfigAudio.Play("creature.attack");
                     }
-                    projectile.transform.position=Vector3.Lerp(from,to,t/.4f)+Vector3.up*Mathf.Sin(t/.4f*Mathf.PI)*1.2f;
+                    projectile.transform.position=AttackArcPoint(from,to,t/.4f);
                     if(units.TryGetValue(e.unitUid,out var card))card.transform.position+=(to-from).normalized*(Mathf.Sin(t/.4f*Mathf.PI)*.32f);
                 }
                 if(t>=.4f&&projectiles.TryGetValue(e.id,out var arriving))arriving.transform.position=to;
@@ -112,6 +112,13 @@ namespace SummonersTable
                     if(!p.alive&&previousHp.ContainsKey("hero-"+p.seat)&&observedImpacts.Add("death-"+state.round+"-"+p.seat))SpawnImpact(HeroPosition(p.seat,count),0);
                 }
             }
+        }
+        public static Vector3 AttackArcPoint(Vector3 from,Vector3 to,float progress)
+        {
+            var chord=to-from;var up=Vector3.ProjectOnPlane(Vector3.up,chord).normalized;
+            if(up.sqrMagnitude<.01f)up=Vector3.right;
+            float angle=Mathf.Clamp01(progress)*Mathf.PI;
+            return (from+to)*.5f-chord*(.5f*Mathf.Cos(angle))+up*(chord.magnitude*.5f*Mathf.Sin(angle));
         }
         bool Highlight(int owner,int viewer,string kind)
         {

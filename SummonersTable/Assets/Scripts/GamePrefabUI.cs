@@ -82,7 +82,7 @@ namespace SummonersTable
             if(hot!=""&&hot!=hoverHandUid&&!captureMode){audioSource.pitch=UnityEngine.Random.Range(.92f,1.08f);ConfigAudio.Play("card.hover");}
             hoverHandUid=hot;ui.hand.Present(state,seat,catalog,font,selectedCard,hot,shakeHand,shakeUntil,board.CameraRig.Data);
             ui.arrow.gameObject.SetActive(!InputBlocked&&(selectedCard!=""||selectedUnit!=""&&(unitDragMoved||previewAim)));
-            if(ui.arrow.gameObject.activeSelf){var from=selectedUnit!=""?board.ViewCamera.WorldToScreenPoint(board.TargetPosition(seat,selectedUnit,state)):new Vector3(aimStart.x*scale+offset.x,Screen.height-aimStart.y*scale-offset.y);var to=previewAim?new Vector2(previewAimEnd.x*scale+offset.x,Screen.height-previewAimEnd.y*scale-offset.y):Pointer;ui.arrow.Set(from,to);}
+            if(ui.arrow.gameObject.activeSelf){var from=selectedUnit!=""?board.ViewCamera.WorldToScreenPoint(board.TargetPosition(seat,selectedUnit,state)):new Vector3(aimStart.x*scale+offset.x,Screen.height-aimStart.y*scale-offset.y);var to=previewAim?new Vector2(previewAimEnd.x*scale+offset.x,Screen.height-previewAimEnd.y*scale-offset.y):Pointer;ui.arrow.Set(from,to,chosen?.kind=="spell");}
             PresentWorldLabels();if(!captureMode)PrefabWorldInput();
         }
         void PresentWorldLabels()

@@ -24,7 +24,15 @@ namespace SummonersTable
             nickname.text=player.name;nickname.color=TableBoard.SeatColors[player.seat];healthNumber.text=player.hp+" / "+maxHp;
             healthFill.fillAmount=player.hp/(float)maxHp;var style=ConfigRuntime.Current?.ui;healthFill.color=style!=null?(style.healthUsesPlayerColor?TableBoard.SeatColors[player.seat]:style.healthColor):healthColor;
             healthAnchor.sizeDelta=style?.healthSize??healthSize;if(style!=null)healthTrail.color=style.healthTrailColor;healthTrail.fillAmount=board.DisplayHp("hero-"+player.seat,player.hp)/maxHp;
-            if(seatOwned&&seatNamePoint!=null&&seatHealthPoint!=null){nameAnchor.position=seatNamePoint.position;healthAnchor.position=seatHealthPoint.position;nameAnchor.rotation=healthAnchor.rotation=board.ViewCamera.transform.rotation;ReadableScale(board.ViewCamera);KeepOnScreen(board.ViewCamera);return;}
+            if(seatOwned&&seatNamePoint!=null&&seatHealthPoint!=null)
+            {
+                var ownedActor=board.Actor(player.seat);var camera=board.ViewCamera;
+                var ownedHead=camera.WorldToScreenPoint(ownedActor!=null&&ownedActor.Head!=null?ownedActor.Head.position:seatNamePoint.position);
+                float logical=Mathf.Min(camera.pixelWidth/1600f,camera.pixelHeight/1000f);
+                ownedHead.y+=100*logical;nameAnchor.position=camera.ScreenToWorldPoint(ownedHead);
+                ownedHead.y-=42*logical;healthAnchor.position=camera.ScreenToWorldPoint(ownedHead);
+                nameAnchor.rotation=healthAnchor.rotation=camera.transform.rotation;ReadableScale(camera);KeepOnScreen(camera);healthNumber.color=Color.black;return;
+            }
             var hero=TableBoard.HeroPosition(player.seat,state.players.Count);var namePosition=hero+nameOffset;
             var actor=board.Actor(player.seat);if(actor!=null&&actor.NamePosition.y>namePosition.y)namePosition=actor.NamePosition;
             Place(nameAnchor,board.ViewCamera,namePosition);

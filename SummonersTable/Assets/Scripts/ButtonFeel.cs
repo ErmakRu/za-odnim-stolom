@@ -22,7 +22,7 @@ namespace SummonersTable
             current=Mathf.SmoothDamp(current,target,ref velocity,responseTime,Mathf.Infinity,Mathf.Min(Time.unscaledDeltaTime,.05f));
             transform.localScale=original*current;
         }
-        void OnDisable(){transform.localScale=original;pressed=hover=selected=false;current=1;velocity=0;pulseUntil=0;}
+        void OnDisable(){if(!Application.isPlaying)return;transform.localScale=original;pressed=hover=selected=false;current=1;velocity=0;pulseUntil=0;}
         void Play(AudioClip clip){if(clip!=null&&source!=null){source.pitch=1;source.PlayOneShot(clip,soundVolume*UserSettings.Volume(AudioBus.Effects));}}
         public void OnPointerEnter(PointerEventData e){hover=true;if(Usable)Play(hoverSound);}
         public void OnPointerExit(PointerEventData e){hover=false;pressed=false;}
